@@ -1,0 +1,50 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn init
+
+PATH: 
+  /Users/tg0825/Downloads/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/opt/yarn-0.21.3/bin
+
+Yarn version: 
+  0.21.3
+
+Node version: 
+  7.6.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "devDependencies": {
+      "browser-sync": "^2.18.13",
+      "gulp": "^3.9.1",
+      "gulp-connect-php": "^1.0.1",
+      "gulp-sass": "^3.1.0",
+      "gulp-sourcemaps": "^2.6.1",
+      "jquery": "^1.12.4"
+    },
+    "name": "dice",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://tg0825@bitbucket.org/tg0825/dice.git",
+    "author": "tg0825 <tg0825@backpack.kr>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EACCES: permission denied, open '/Users/tg0825/Library/Caches/Yarn/.roadrunner.json'
+      at Object.fs.openSync (fs.js:582:18)
+      at Object.fs.writeFileSync (fs.js:1301:33)
+      at /usr/local/Cellar/yarn/0.21.3/libexec/lib/node_modules/yarn/node_modules/roadrunner/index.js:25:6
+      at /usr/local/Cellar/yarn/0.21.3/libexec/lib/node_modules/yarn/node_modules/roadrunner/index.js:12:12
+      at emitOne (events.js:101:20)
+      at process.emit (events.js:189:7)
+      at processEmit [as emit] (/usr/local/Cellar/yarn/0.21.3/libexec/lib/node_modules/yarn/node_modules/signal-exit/index.js:149:35)
+      at process.exit (internal/process.js:147:15)
+      at exit (/usr/local/Cellar/yarn/0.21.3/libexec/lib/node_modules/yarn/lib/cli/index.js:432:13)

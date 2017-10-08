@@ -36,27 +36,32 @@
     width: 70px;
     height: 70px;
     font-size: 16px;
-    border-radius: 50%;
+    border-radius: 15px;
     text-align: center;
     line-height: 70px;;
     float: left;
     margin: 5px;
     position: relative;
+    cursor: pointer;
+}
+
+.member-list.member:hover {
+    background: #be3636;
 }
 
 .member-list.member:hover:after {
-    content: '삭제';
+    content: '\2715';
     position: absolute;
     top: -5px;
     right: -5px;
     text-align: center;
-    background: #000;
+    background: #333;
     border-radius: 50%;
     color: #fff;
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
-    line-height: 35px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
     z-index: 100;
 }
 
@@ -94,7 +99,7 @@
 </head>
 <body>
     <div class="dice wrap">
-        <h1 class="dice title">랜덤 조짜기</h1>
+        <h1 class="dice title">조 짜기</h1>
         <form id="frm" action="">
             <div class="member-list wrap">
                 <div class="member-list body"> </div>
@@ -202,13 +207,28 @@ $(function () {
         resultRender(memberNumber, groupNumber);
     });
 
+    function comparision(arr, str) {
+        if (vendors.some(function(e) e.name == 'Magenic')) {
+          /* vendors contains the element we're looking for */
+        }
+        
+        // return arr.indexOf(str) > -1;
+        // console.log(backpacker.indexOf(str));
+
+        // if (arr.indexOf(str) > -1) {
+        //     //In the array!
+        // } else {
+        //     //Not in the array
+        // }
+    }
+
     function addMem(v) {
-        backpacker.push({
+        return backpacker.push({
             name: v
         });
     }
 
-    function setMember(v) {
+    function _render(v) {
         var memberList = '';
         v = v || backpacker;
         for(var i = 0; i < v.length; i++) {
@@ -219,34 +239,48 @@ $(function () {
 
     function remove(v) {
         backpacker.splice(v, 1);
+
+        _render();
     }
 
     $(document).on('click', '.member-list.member', function () {
         var idx = $(this).index();
         remove(idx);
-        setMember();
     });
 
     $(document).on('click', '.reset', function () {
         backpacker = originBackpacker.slice();
-        setMember(originBackpacker);
+        _render(originBackpacker);
     });
 
     $('#frm').on('submit', function (e) {
-        e.preventDefault();
-
-        // 직원 이름
+        // 추가할 직원 이름
         var name;
 
-        name = $('#name').val();
-        $('#name').val('');
+        e.preventDefault();
 
-        addMem(name);
-        setMember();
+        name = $('#name').val();
+
+        if (name === '') {
+            return false;
+        }
+
+        var com = comparision(backpacker, name);
+        console.log(com);
+        if (com) {
+            console.log(com);
+            return;
+        }
+
+        if (addMem(name)) {
+            $('#name').val('');
+        }
+
+        _render();
     });
 
 
-    setMember();
+    _render();
 });
 </script>
 </body>
