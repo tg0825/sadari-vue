@@ -6,6 +6,24 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
 <style>
+*{
+    margin:0;
+    padding:0;
+}
+
+.f-error {
+    color: #960b0b;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.f-error:before {
+    content: '*';
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+}
+
 .dice.wrap {
     min-width: 320px;
     width: 100%;
@@ -26,8 +44,10 @@
     font-size: 18px;
 }
 
-.member-list.body {
-    overflow: hidden;
+.member-list.body:after {
+    clear: both;
+    display: block;
+    content: '';
 }
 
 .member-list.member {
@@ -43,6 +63,13 @@
     margin: 5px;
     position: relative;
     cursor: pointer;
+    transform: scale(1);
+    transition: all 150ms;
+}
+
+.member-list.member.highlight {
+    background: #df2525;
+    transform: scale(1.4);
 }
 
 .member-list.member:hover {
@@ -122,166 +149,6 @@
         <div class="result"> </div>
         <button class="reset">초기화</button>
     </div>
-<script>
-$(function () {
-    // 팀당 인원
-    var memberNumber = 3;
-
-    // 전체인원
-    var backpacker = [
-        {
-            name: '김동완'
-        },
-        {
-            name: '김동철'
-        },
-        {
-            name: '하동현'
-        },
-        {
-            name: '이재군'
-        },
-        {
-            name: '박정호'
-        },
-        {
-            name: '김경신',
-        },
-        {
-            name: '넘버식스'
-        },
-        {
-            name: '최재훈'
-        },
-        {
-            name: '윤태건'
-        },
-        {
-            name: '정성묵'
-        },
-        {
-            name: '박우현'
-        }
-    ];
-
-    var originBackpacker = backpacker.slice();
-
-    // 배열 섞기
-    function shuffle(a) {
-        var j, x, i;
-        for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
-        }
-    }
-
-    // resultRender
-    function resultRender(m, g) {
-        var html = '';
-        var i = 0;
-        var clonebackpacker = backpacker.slice();
-        while (i < g) {
-            var groupMember = clonebackpacker.splice(0, m);
-
-            html += '<div class="group item"><div class="group title">[' + i + '조]</div>';
-            for (var j = 0; j < groupMember.length; j++) {
-                html += '<div class="group member">' + groupMember[j].name + '</div>';
-            }
-            html += '</div>';
-            i+=1;
-        }
-        $('.result').html(html);
-    }
-
-    document.querySelector('.start').addEventListener('click', function () {
-        shuffle(backpacker);
-
-        // 한 조당 인원 수
-        memberNumber = $('#groupMember').val();
-
-        // 그룹 수
-        var groupNumber = Math.ceil(backpacker.length / memberNumber);
-
-        resultRender(memberNumber, groupNumber);
-    });
-
-    function comparision(arr, str) {
-        if (vendors.some(function(e) e.name == 'Magenic')) {
-          /* vendors contains the element we're looking for */
-        }
-        
-        // return arr.indexOf(str) > -1;
-        // console.log(backpacker.indexOf(str));
-
-        // if (arr.indexOf(str) > -1) {
-        //     //In the array!
-        // } else {
-        //     //Not in the array
-        // }
-    }
-
-    function addMem(v) {
-        return backpacker.push({
-            name: v
-        });
-    }
-
-    function _render(v) {
-        var memberList = '';
-        v = v || backpacker;
-        for(var i = 0; i < v.length; i++) {
-            memberList += '<div class="member-list member">' + v[i].name + '</div>';
-        }
-        $('.member-list.body').html(memberList);
-    }
-
-    function remove(v) {
-        backpacker.splice(v, 1);
-
-        _render();
-    }
-
-    $(document).on('click', '.member-list.member', function () {
-        var idx = $(this).index();
-        remove(idx);
-    });
-
-    $(document).on('click', '.reset', function () {
-        backpacker = originBackpacker.slice();
-        _render(originBackpacker);
-    });
-
-    $('#frm').on('submit', function (e) {
-        // 추가할 직원 이름
-        var name;
-
-        e.preventDefault();
-
-        name = $('#name').val();
-
-        if (name === '') {
-            return false;
-        }
-
-        var com = comparision(backpacker, name);
-        console.log(com);
-        if (com) {
-            console.log(com);
-            return;
-        }
-
-        if (addMem(name)) {
-            $('#name').val('');
-        }
-
-        _render();
-    });
-
-
-    _render();
-});
-</script>
+<script src="script.js"></script>
 </body>
 </html>
