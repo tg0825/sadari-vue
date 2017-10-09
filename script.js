@@ -36,6 +36,30 @@ $(function () {
         },
         {
             name: '박우현'
+        },
+        {
+            name: '김혜림'
+        },
+        {
+            name: '이원희'
+        },
+        {
+            name: '강혜지'
+        },
+        {
+            name: '박선재'
+        },
+        {
+            name: '최백호'
+        },
+        {
+            name: '박희균'
+        },
+        {
+            name: '나정귀'
+        },
+        {
+            name: '김경범'
         }
     ];
 
@@ -61,9 +85,12 @@ $(function () {
         while (i < g) {
             var groupMember = clonebackpacker.splice(0, m);
 
-            html += '<div class="group item"><div class="group title">[' + i + '조]</div>';
+            html += '<div class="group item">' +
+            '<div class="group title">' + (i+1) + '조</div>';
             for (var j = 0; j < groupMember.length; j++) {
-                html += '<div class="group member">' + groupMember[j].name + '</div>';
+                html += '<div class="group member"><span class="name">' +
+                groupMember[j].name +
+                '</span></div>';
             }
             html += '</div>';
             i+=1;
@@ -102,9 +129,14 @@ $(function () {
         var memberList = '';
         v = v || backpacker;
         for(var i = 0; i < v.length; i++) {
-            memberList += '<div class="member-list member">' + v[i].name + '</div>';
+            memberList += '<div class="member-list member">' +
+            '<span class="name">' +
+            v[i].name +
+            '</span>' +
+            '</div>';
         }
         $('.member-list.body').html(memberList);
+        $('.member-list.number').html(v.length);
     }
 
     function remove(v) {
@@ -113,16 +145,62 @@ $(function () {
         _render();
     }
 
+    function endEdit(v, i) {
+        backpacker[i].name = v;
+        $(this)
+            .removeClass('edit')
+            .text('')
+            .append('<span class="name">' +
+        backpacker[i].name +
+        '</span>');
+    }
+
+    // 이름 수정
+    $(document).on({
+        click: function () {
+            var self = this;
+            var idx = $(this).index();
+            var oldText = $(this).find('.name').text();
+            var $input = $('<input type="text">');
+
+            if ($(this).is('.edit')) {
+                return;
+            }
+
+            $input.val(oldText);
+            $(this).addClass('edit');
+            $(this).text('').append($input);
+            $(this).find($input).focus();
+
+            $(this).find('input').on({
+                focusout: function () {
+                    var text = $(this).val();
+                    endEdit.call(self, text, idx);
+                },
+                keypress: function (e) {
+                    if (e.keyCode == 13) {
+                        $(this).trigger('focusout');
+                    }
+                }
+            });
+        },
+        mouseenter: function () {
+            $(this).append('<span class="remove">x</span>');
+        }
+    }, '.member-list.member');
+
     // 삭제
-    $(document).on('click', '.member-list.member', function () {
+    $(document).on('click', '.member-list.member .remove', function () {
         var idx = $(this).index();
         remove(idx);
     });
 
     // 초기화
     $(document).on('click', '.reset', function () {
-        backpacker = originBackpacker.slice();
-        _render(originBackpacker);
+        if (confirm ('구성원을 초기화 시키겠습니까?')) {
+            backpacker = originBackpacker.slice();
+            _render(originBackpacker);
+        }
     });
 
     function alertMsg(msg) {
@@ -186,4 +264,6 @@ $(function () {
     });
 
     _render();
+
+    $('.start').click();
 });
