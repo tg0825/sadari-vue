@@ -7,6 +7,11 @@ input {
     box-sizing: border-box;
 }
 
+input:focus {
+    outline:0;
+    box-shadow: 0;
+}
+
 .f-error {
     color: #960b0b;
     font-size: 14px;
@@ -20,7 +25,12 @@ input {
     margin: 5px;
 }
 
-.setup {
+#groupMember {
+    width: 50px;
+    text-align: right;
+}
+
+/*.setup {
     position: fixed;
     top: 0;
     right: 0;
@@ -31,13 +41,13 @@ input {
     background: #f9f9f9;
     border-left: 1px solid #e5e5e5;
     box-sizing: border-box;
-}
+}*/
 
 .reset {
     padding: 4px;
 }
 
-.result {
+/*.result {
     background: #f3f3f3;
     overflow: hidden;
     position: fixed;
@@ -46,7 +56,7 @@ input {
     right: 350px;
     bottom: 0;
     overflow: auto;
-}
+}*/
 
 .form-block input {
     font-size: 16px;
@@ -86,21 +96,31 @@ input {
 }
 
 .member-list.wrap {
-    position: fixed;
+    /*position: fixed;
     top: 0;
     left: 0;
     bottom:55%;
-    right:350px;
+    right:350px;*/
+    position: relative;
 }
 
 .member-list.number {
-    font-size: 34px;
-    font-weight: bold;
+    font-size: 18px;
     font-style: italic;
     color: #262626;
     position: absolute;
-    bottom: 0;
-    right: 15px;
+    bottom: 100%;
+    right: 0;
+}
+
+.member-list.number:before {
+    content: '총인원: ';
+    font-size: 16px;
+}
+
+.member-list.number:after {
+    content: '명';
+    font-size: 16px;
 }
 
 .member-list.title {
@@ -129,22 +149,30 @@ input {
     transform: scale(1);
     transition: all 150ms;
     box-shadow: 0 0 10px rgba(0,0,0,0);
+    box-sizing: border-box;
 }
 
 .group.member .name,
-.member-list.member.member input,
-.member-list.member.member .name {
+.member-list.member input,
+.member-list.member .name {
     position: absolute;
     top:50%;
     left: 0;
-    width: 100%;
+    right: 0;
     text-align: center;
     transform: translate(0, -50%);
 }
 
-.member-list.member.member input {
+.member-list.member input {
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #333;
+    color: #333;
+    padding: 4px 0;
+    width: 100%;
 }
 
 .member-list.member.highlight {
@@ -152,11 +180,6 @@ input {
     transform: scale(1.4);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
     z-index: 100;
-}
-
-.member-list.member input {
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .member-list.member .remove {

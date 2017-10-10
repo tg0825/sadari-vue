@@ -5,6 +5,15 @@ $(function () {
     // 전체인원
     var backpacker = [
         {
+            name: '1'
+        },
+        {
+            name: '2'
+        },
+        {
+            name: '3'
+        },
+        {
             name: '김동완'
         },
         {
@@ -63,8 +72,7 @@ $(function () {
         }
     ];
 
-    // 깊은 복사
-    var originBackpacker = backpacker.slice();
+    var clonebackpacker = backpacker.slice();
 
     // 배열 섞기
     function shuffle(a) {
@@ -77,13 +85,13 @@ $(function () {
         }
     }
 
-    // resultRender
-    function resultRender(m, g) {
+    // 결과 출력
+    function result(m, g, tmpbp) {
         var html = '';
         var i = 0;
-        var clonebackpacker = backpacker.slice();
+
         while (i < g) {
-            var groupMember = clonebackpacker.splice(0, m);
+            var groupMember = tmpbp.splice(0, m);
 
             html += '<div class="group item">' +
             '<div class="group title">' + (i+1) + '조</div>';
@@ -101,7 +109,7 @@ $(function () {
     // 중복값 찾기
     function compare(arr, str) {
         var result;
-        arr = arr || backpacker;
+        arr = arr || clonebackpacker;
 
         arr.some(function (e, a) {
             if (e.name === str) {
@@ -120,88 +128,42 @@ $(function () {
     }
 
     function addMem(v) {
-        return backpacker.push({
+        return clonebackpacker.push({
             name: v
         });
     }
 
     function _render(v) {
         var memberList = '';
-        v = v || backpacker;
+        v = v || clonebackpacker;
+
         for(var i = 0; i < v.length; i++) {
             memberList += '<div class="member-list member">' +
             '<span class="name">' +
             v[i].name +
-            '</span>' +
-            '</div>';
+            '</span></div>';
         }
+
         $('.member-list.body').html(memberList);
         $('.member-list.number').html(v.length);
     }
 
     function remove(v) {
-        backpacker.splice(v, 1);
+        clonebackpacker.splice(v, 1);
 
         _render();
     }
 
     function endEdit(v, i) {
-        backpacker[i].name = v;
+        clonebackpacker[i].name = v;
+
         $(this)
             .removeClass('edit')
             .text('')
             .append('<span class="name">' +
-        backpacker[i].name +
+        clonebackpacker[i].name +
         '</span>');
     }
-
-    // 이름 수정
-    $(document).on({
-        click: function () {
-            var self = this;
-            var idx = $(this).index();
-            var oldText = $(this).find('.name').text();
-            var $input = $('<input type="text">');
-
-            if ($(this).is('.edit')) {
-                return;
-            }
-
-            $input.val(oldText);
-            $(this).addClass('edit');
-            $(this).text('').append($input);
-            $(this).find($input).focus();
-
-            $(this).find('input').on({
-                focusout: function () {
-                    var text = $(this).val();
-                    endEdit.call(self, text, idx);
-                },
-                keypress: function (e) {
-                    if (e.keyCode == 13) {
-                        $(this).trigger('focusout');
-                    }
-                }
-            });
-        },
-        mouseenter: function () {
-            $(this).append('<span class="remove">x</span>');
-        }
-    }, '.member-list.member');
-
-    // 삭제
-    $(document).on('click', '.member-list.member .remove', function () {
-        var idx = $(this).index();
-        remove(idx);
-    });
-
-    // 초기화
-    $(document).on('click', '.reset', function () {
-        if (confirm ('구성원을 초기화 시키겠습니까?')) {
-            backpacker = originBackpacker.slice();
-            _render(originBackpacker);
-        }
-    });
 
     function alertMsg(msg) {
         var $comment = $('<p class="f-error"></p>');
@@ -217,6 +179,57 @@ $(function () {
             });
     }
 
+    // 이름 수정
+    $(document).on({
+        click: function () {
+            var self = this;
+            var $self = $(self);
+            var idx = $self.index();
+            var oldText = $self.find('.name').text();
+            var $input = $('<input maxLength="10" type="text">');
+
+            if ($(this).is('.edit')) {
+                return;
+            }
+
+            $input.val(oldText);
+            $self
+                .text('')
+                .addClass('edit')
+                .append($input)
+                .find($input)
+                .focus()
+                .on({
+                    focusout: function () {
+                        var text = $(this).val();
+                        endEdit.call(self, text, idx);
+                    },
+                    keypress: function (e) {
+                        if (e.keyCode == 13) {
+                            $(this).trigger('focusout');
+                        }
+                    }
+                });
+        },
+        mouseenter: function () {
+            $(this).append('<span class="remove">x</span>');
+        }
+    }, '.member-list.member');
+
+    // 삭제
+    $(document).on('click', '.member-list.member .remove', function (e) {
+        e.stopPropagation();
+        var idx = $(this).parent().index();
+        remove(idx);
+    });
+
+    // 초기화
+    $(document).on('click', '.reset', function () {
+        if (confirm ('구성원을 초기화 시키겠습니까?')) {
+            _render(backpacker);
+        }
+    });
+
     // 인원 추가
     $('#frm').on('submit', function (e) {
         e.preventDefault();
@@ -226,7 +239,7 @@ $(function () {
         var name = $name.val();
 
         // 빈값, 중복 이름 여부 채크
-        var com = compare(backpacker, name);
+        var com = compare(clonebackpacker, name);
 
         if (name === '') {
             alertMsg('이름을 입력해 주세요.');
@@ -234,7 +247,7 @@ $(function () {
         }
 
         if (com) {
-            alertMsg('중복된 이름입니다.');
+            alertMsg('이미 등록된 이름 입니다.');
             $('.member-list.body .member')
                 .eq(com.idx)
                 .addClass('highlight')
@@ -251,19 +264,16 @@ $(function () {
     });
 
     // 시작
-    document.querySelector('.start').addEventListener('click', function () {
-        shuffle(backpacker);
+    $('.start').on('click', function () {
+        var tmpbackpacker = clonebackpacker.slice();
+        var groupNumber;
 
-        // 한 조당 인원 수
+        shuffle(tmpbackpacker);
         memberNumber = $('#groupMember').val();
+        groupNumber = Math.ceil(tmpbackpacker.length / memberNumber);
 
-        // 그룹 수
-        var groupNumber = Math.ceil(backpacker.length / memberNumber);
-
-        resultRender(memberNumber, groupNumber);
+        result(memberNumber, groupNumber, tmpbackpacker);
     });
 
     _render();
-
-    $('.start').click();
 });

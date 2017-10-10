@@ -159,7 +159,11 @@ gulp.task('default', ['browser-sync', 'devSCSS', 'devJS', 'devSprite'], function
 });
 
 gulp.task('bs', ['browser-sync'], function () {
-    gulp.watch(['./**/*.php', './**/*.js'], bs.reload);
+    gulp.watch([
+        './**/*.php',
+        './**/*.css',
+        './**/*.js'
+    ], bs.reload);
 });
 
 // PRODUCTION TASKS /////////////////////////////////////////////////////////////////////////
