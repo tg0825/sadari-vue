@@ -33,11 +33,18 @@
             </form>
 
             <div class="form-block">
-                <label for="">팀 인원</label>
+                <label for="">인원 기준</label>
                 <input id="groupMember" name="groupMember" type="number" value="3">
                 명
             </div>
-            <button class="start" type="submit">시작!</button>
+
+            <div class="form-block">
+                <label for="">조 기준</label>
+                <input id="groupCount" name="groupCount" type="number" value="5">
+                개 조
+            </div>
+            <button class="start" type="submit">인원수 기준 시작!</button>
+            <button class="start-group" type="submit">조 기준 시작!</button>
             <button class="reset">인원 초기화</button>
         </div>
 

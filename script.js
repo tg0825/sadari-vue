@@ -89,7 +89,6 @@ $(function () {
     function result(m, g, tmpbp) {
         var html = '';
         var i = 0;
-
         while (i < g) {
             var groupMember = tmpbp.splice(0, m);
 
@@ -101,7 +100,7 @@ $(function () {
                 '</span></div>';
             }
             html += '</div>';
-            i+=1;
+            i += 1;
         }
         $('.result').html(html);
     }
@@ -266,14 +265,23 @@ $(function () {
     // 시작
     $('.start').on('click', function () {
         var tmpbackpacker = clonebackpacker.slice();
-        var groupNumber;
+        var groupCount;
+
+        memberNumber = $('#groupMember').val();
+        groupCount = Math.ceil(tmpbackpacker.length / memberNumber);
 
         shuffle(tmpbackpacker);
-        memberNumber = $('#groupMember').val();
-        groupNumber = Math.ceil(tmpbackpacker.length / memberNumber);
-
-        result(memberNumber, groupNumber, tmpbackpacker);
+        result(memberNumber, groupCount, tmpbackpacker);
     });
 
+    // 조 기준 시작
+    $('.start-group').on('click', function () {
+        var tmpbackpacker = clonebackpacker.slice();
+        var count = $('#groupCount').val();
+        var groupCount = Math.floor(tmpbackpacker.length / count);
+
+        shuffle(tmpbackpacker);
+        result(groupCount, count, tmpbackpacker);
+    });
     _render();
 });
