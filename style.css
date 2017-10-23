@@ -12,6 +12,10 @@ input:focus {
     box-shadow: 0;
 }
 
+.ta-r {
+    text-align: right !important;
+}
+
 .f-error {
     color: #960b0b;
     font-size: 14px;
@@ -25,47 +29,23 @@ input:focus {
     margin: 5px;
 }
 
-#groupMember {
-    width: 50px;
-    text-align: right;
-}
-
-/*.setup {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 350px;
-    z-index: 10;
-    padding: 10px 20px;
-    background: #f9f9f9;
-    border-left: 1px solid #e5e5e5;
-    box-sizing: border-box;
-}*/
-
 .reset {
-    padding: 4px;
+    background: #ddd;
+    color: #777;
+    border: 0;
+    padding: 6px;
+    margin-top: 5px;
 }
-
-/*.result {
-    background: #f3f3f3;
-    overflow: hidden;
-    position: fixed;
-    top: 45%;
-    left: 0;
-    right: 350px;
-    bottom: 0;
-    overflow: auto;
-}*/
 
 .form-block input {
     font-size: 16px;
-    width: 100px;
+    width: 70px;
     height:40px;
     padding: 5px;
     vertical-align: middle;
     border-radius: 5px;
     border: 1px solid #aaa;
+    text-align: center;
 }
 
 .form-block #name {
@@ -75,7 +55,8 @@ input:focus {
 .form-block #name+button {
     height: 40px;
     border-radius: 5px;
-    width: 60px;
+    min-width: 60px;
+    padding: 5px 10px;
     font-size: 16px;
     border: 1px solid #eb4949;
     background: #eb4949;
@@ -85,14 +66,15 @@ input:focus {
 .dice.wrap {
     min-width: 320px;
     width: 100%;
-    max-width: 480px;
+    max-width: 465px;
     margin: 0 auto;
 }
 
 .dice.title {
     text-align: center;
     font-size: 24px;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .member-list.wrap {
@@ -110,21 +92,34 @@ input:focus {
     color: #262626;
     position: absolute;
     bottom: 100%;
-    right: 0;
+    right: 10px;
 }
 
 .member-list.number:before {
-    content: '총인원: ';
+    content: '총 ';
     font-size: 16px;
+    vertical-align: middle;
 }
 
 .member-list.number:after {
     content: '명';
     font-size: 16px;
+    vertical-align: middle;
 }
 
 .member-list.title {
-    font-size: 18px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.member-list.body {
+    margin: -5px 0 0 -5px;
+    padding: 10px;
+    /*display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;*/
 }
 
 .member-list.body:after {
@@ -138,9 +133,9 @@ input:focus {
     background: #eb4949;
     color: #fff;
     width: 70px;
-    height: 70px;
+    height: 35px;
     font-size: 16px;
-    border-radius: 15px;
+    border-radius: 10px;
     text-align: center;
     float: left;
     margin: 5px 0 0 5px;
@@ -221,10 +216,20 @@ input:focus {
     margin: 5px 0 0;
 }
 
-.form-block {
-    margin: 20px 0 0;
+.group.item.onegroup .member {
+    display: inline-block;
+    margin-left: 10px;
 }
 
+.group.item.onegroup .member:first-child {
+    margin-left: 0;
+}
+
+.form-block {
+    margin: 0;
+}
+
+.start-onlyone,
 .start-group,
 .start {
     width: 100%;
@@ -234,5 +239,86 @@ input:focus {
     font-size: 16px;
     border-radius: 10px;
     border: 0;
+    margin: 10px 0 0;
+    padding: 10px;
+}
+
+.tab {
+    clear: both;
+    text-align: center;
     margin: 20px 0;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    border: 1px solid #e73a3a;
+}
+
+.is_on {
+    background: #e73a3a !important;
+}
+
+.is_on:before {
+    content: '> ';
+}
+
+.is_on:after {
+    content: ' <';
+}
+
+.nab > [class^=tab] {
+    display: none;
+}
+
+.dice-select {
+    clear: both;
+    margin: 20px 0;
+}
+
+.dice-select div {
+    padding: 4px 0 0 0;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #cfcfcf;
+    background: #cfcfcf;
+    color: #fff;
+}
+
+.ju-add {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: left;
+}
+.ju-list li {
+    display: inline-block;
+    vertical-align: middle;
+    background: #eee;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+.ju-list li:hover:after {
+    content: 'x';
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    border-radius: 50px;
+    background: #333;
+    color: #fff;
+    width: 22px;
+    padding: 2px;
+    line-height: 20px;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 20;
 }
