@@ -5,34 +5,44 @@ $(function () {
     // 전체인원
     var backpacker = [
         {
-            name: '김동환'
+            name: '김동환',
+            position: '대표이사',
         },
         {
-            name: '김동철'
+            name: '김동철',
+            position: '기술이사',
         },
         {
-            name: '이재군'
+            name: '이재군',
+            position: '디자이너'
         },
         {
-            name: '박정호'
+            name: '박정호',
+            position: '안드로이드'
         },
         {
-            name: '하동현'
+            name: '하동현',
+            position: 'backend'
         },
         {
             name: '김태민',
+            position: '넘버식스',
         },
         {
-            name: '김경신'
+            name: '김경신',
+            position: '자메이카',
         },
         {
-            name: '윤태건'
+            name: '윤태건',
+            position: 'tg0825',
         },
         {
-            name: '최재훈'
+            name: '최재훈',
+            position: '작가영입'
         },
         {
-            name: '박우현'
+            name: '박우현',
+            position: '개발팀'
         },
         {
             name: '정성묵'
@@ -76,9 +86,10 @@ $(function () {
         {
             name: '이태욱'
         },
-        {
-            name: '나혜정'
-        },
+        // {
+        //     name: '나혜정',
+        //     date: '20171131'
+        // },
         {
             name: '김현우'
         },
@@ -92,6 +103,9 @@ $(function () {
             name: '박인정'
         },
         {
+            name: '허수정'
+        },
+        {
             name: '임은정'
         },
         {
@@ -99,6 +113,9 @@ $(function () {
         },
         {
             name: '이수민'
+        },
+        {
+            name: '한경구'
         },
     ];
 
@@ -144,7 +161,7 @@ $(function () {
         "jo-team": function () {
             var tmpbackpacker = clonebackpacker.slice();
             var count = $('#groupCount').val() || 3;
-            var groupCount = Math.floor(tmpbackpacker.length / count);
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
 
             shuffle(tmpbackpacker);
             result({
@@ -193,14 +210,17 @@ $(function () {
                 title = ju[i];
             }
             var groupMember = data.c.splice(0, data.a);
+            var groupMemberLength = data.jo ? 1 : groupMember.length;
 
+            if (!groupMemberLength) {
+                break;
+            }
             if (onegroup) {
                 html += '<div class="group item onegroup">';
             } else {
                 html += '<div class="group item">';
                 html += '<div class="group title">' + title + '</div>';
             }
-            var groupMemberLength = data.jo ? 1 : groupMember.length;
             for (var j = 0; j < groupMemberLength; j++) {
                 html += '<div class="group member"><span class="name">' +
                 groupMember[j].name +
@@ -282,8 +302,6 @@ $(function () {
 
         $('.member-list.body').html(memberList);
         $('.member-list.number').html(v.length);
-
-        console.log(v);
     }
 
     function renderJu(data) {
