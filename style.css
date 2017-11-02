@@ -1,6 +1,13 @@
 *{
     margin:0;
     padding:0;
+    font-family: apple SD gothic neo, Noto Sans KR, '맑은고딕', 'malgun gothic', '돋움', dotum, sans-serif;
+}
+
+body {
+    background-image:url('https://www.devicemart.co.kr/skin/goods/large/1158472.jpg');
+    background-repeat:no-repeat;
+    background-position: right bottom;
 }
 
 input {
@@ -72,9 +79,10 @@ input:focus {
 
 .dice.title {
     text-align: center;
-    font-size: 24px;
-    margin-top: 20px;
+    font-size: 34px;
+    margin-top: 40px;
     margin-bottom: 20px;
+    color: #630000;
 }
 
 .member-list.wrap {
