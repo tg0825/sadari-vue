@@ -7,115 +7,213 @@ $(function () {
         {
             name: '김동환',
             position: '대표이사',
+            team: 'ceo',
+            avatar: '',
         },
         {
             name: '김동철',
             position: '기술이사',
+            team: '개발팀',
+            avatar: '',
         },
         {
             name: '이재군',
-            position: '디자이너'
+            position: '디자이너',
+            team: '디자인팀',
+            avatar: '',
         },
         {
             name: '박정호',
-            position: '안드로이드'
+            position: '개발팀',
+            team: '개발팀',
+            avatar: '',
         },
         {
             name: '하동현',
-            position: 'backend'
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
             name: '김태민',
-            position: '넘버식스',
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
             name: '김경신',
-            position: '자메이카',
+            position: 'backend',
+            team: '운영팀',
+            avatar: '',
         },
         {
             name: '윤태건',
-            position: 'tg0825',
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
             name: '최재훈',
-            position: '작가영입'
+            position: 'backend',
+            team: '작가영입팀',
+            avatar: '',
         },
         {
             name: '박우현',
-            position: '개발팀'
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
-            name: '정성묵'
+            name: '정성묵',
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
-            name: '김경범'
+            name: '김경범',
+            position: 'backend',
+            team: '홍보팀',
+            avatar: '',
         },
         {
-            name: '임백호'
+            name: '임백호',
+            position: 'backend',
+            team: 'CEO staff',
+            avatar: '',
         },
         {
-            name: '강혜지'
+            name: '강혜지',
+            position: 'backend',
+            team: '운영팀',
+            avatar: '',
         },
         {
-            name: '이원희'
+            name: '이원희',
+            position: 'backend',
+            team: '운영팀',
+            avatar: '',
         },
         {
-            name: '김혜림'
+            name: '김혜림',
+            position: 'backend',
+            team: '작가영입팀',
+            avatar: '',
         },
         {
-            name: '박희균'
+            name: '박희균',
+            position: 'backend',
+            team: '디자인팀',
+            avatar: '',
         },
         {
-            name: '조동현'
+            name: '조동현',
+            position: 'backend',
+            team: '마케팅팀',
+            avatar: '',
         },
         {
-            name: '박선재'
+            name: '박선재',
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
-            name: '강지윤'
+            name: '강지윤',
+            position: 'backend',
+            team: '작가영입팀',
+            avatar: '',
         },
         {
-            name: '나정귀'
+            name: '나정귀',
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
-            name: '김은아'
+            name: '김은아',
+            position: 'backend',
+            team: '디자인팀',
+            avatar: '',
         },
         {
-            name: '강예솔'
+            name: '강예솔',
+            position: 'backend',
+            team: '운영팀',
+            avatar: '',
         },
         {
-            name: '이태욱'
-        },
-        // {
-        //     name: '나혜정',
-        //     date: '20171131'
-        // },
-        {
-            name: '김현우'
+            name: '이태욱',
+            position: 'backend',
+            team: '개발팀',
+            avatar: '',
         },
         {
-            name: '김유라'
+            name: '나혜정',
+            startDate: '20171001',
+            resign: '20171001',
         },
         {
-            name: '김상혜'
+            name: '김현우',
+            position: 'backend',
+            team: '수출입팀',
+            avatar: '',
+            startDate: '20160101',
+            resign: '20171010',
         },
         {
-            name: '박인정'
+            name: '김유라',
+            position: 'backend',
+            team: '디자인팀',
+            avatar: '',
         },
         {
-            name: '허수정'
+            name: '김상혜',
+            position: 'backend',
+            team: '마케팅팀',
+            avatar: '',
+            startDate: '20171101',
         },
         {
-            name: '임은정'
+            name: '박인정',
+            position: 'backend',
+            team: '마케팅팀',
+            avatar: '',
         },
         {
-            name: '이재은'
+            name: '허수정',
+            position: 'backend',
+            team: '마케팅팀',
+            avatar: '',
         },
         {
-            name: '이수민'
+            name: '임은정',
+            position: 'backend',
+            team: 'ceo',
+            avatar: '',
+            startDate: '20171201',
         },
         {
-            name: '한경구'
+            name: '이재은',
+            position: 'backend',
+            team: 'ceo',
+            avatar: '',
+            startDate: '20171201',
+        },
+        {
+            name: '이수민',
+            position: 'backend',
+            team: 'ceo',
+            avatar: '',
+            startDate: '20171201',
+        },
+        {
+            name: '한경구',
+            position: 'backend',
+            team: 'ceo',
+            avatar: '',
+            startDate: '20171101',
+            resign: '20171110',
         },
     ];
 
@@ -131,6 +229,64 @@ $(function () {
         "유리청소",
         "딱 걸림",
     ];
+
+    function joinMember(arg) {
+        var now = new Date().getTime();
+        var date;
+        var y;
+        var m;
+        var d;
+
+        function check(x) {
+            if (x === '') {
+                return true;
+            }
+            y = x.substr(0,4);
+            m = x.substr(4,2);
+            d = x.substr(6,2);
+
+            m -= 1;
+            date = Date.UTC(y, m, d);
+            return date;
+        }
+
+        var re = arg.filter(function (v) {
+            if (v.hasOwnProperty('startDate')) {
+                date = check(v.startDate);
+
+                if (now < date) {
+
+                    return false;
+                }
+            }
+
+            if (v.hasOwnProperty('resign')) {
+                date = check(v.resign);
+
+                if (now > date) {
+
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        return re;
+    }
+
+    var clonebackpacker = backpacker.slice();
+    clonebackpacker = joinMember(clonebackpacker);
+
+    // 주번 랜더링
+    (function () {
+        var html = '<ul class="ju-list">';
+        ju.map(function (v) {
+            return html += '<li>' + v + '</li>';
+        });
+        html += '</ul>';
+        $('.tab-item').last().find('.tab-item-result').html(html);
+    }())
 
     // 사다리 종류
     var game = {
@@ -184,18 +340,6 @@ $(function () {
             });
         }
     };
-
-    var clonebackpacker = backpacker.slice();
-
-    // 주번 자동 랜더링
-    (function () {
-        var html = '<ul class="ju-list">';
-        ju.map(function (v) {
-            return html += '<li>' + v + '</li>';
-        });
-        html += '</ul>';
-        $('.tab-item').last().find('.tab-item-result').html(html);
-    }())
 
     // 결과 출력
     function result(data) {
@@ -293,11 +437,13 @@ $(function () {
         var memberList = '';
         v = v || clonebackpacker;
 
-        for(var i = 0; i < v.length; i++) {
-            memberList += '<div class="member-list member">' +
-            '<span class="name">' +
-            v[i].name +
-            '</span></div>';
+        var i = 0;
+        for(; i < v.length; i++) {
+            memberList += '<div class="member-list member"' +
+            ' style="background-image:url(' + v[i].avatar + ')">' +
+            '<span class="name">' + v[i].name + '</span>' +
+            '<span class="team">' + v[i].team + '</span>' +
+            '</div>';
         }
 
         $('.member-list.body').html(memberList);
