@@ -36,12 +36,25 @@ input:focus {
     margin: 5px;
 }
 
+#frm {
+    width: 475px;
+    margin: 0 auto;
+    position: relative;
+}
+
 .reset {
+    position: absolute;
+    top: 0;
+    right: 0;
     background: #ddd;
     color: #777;
-    border: 0;
-    padding: 6px;
-    margin-top: 5px;
+
+    height: 40px;
+    border-radius: 5px;
+    min-width: 60px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
 }
 
 .form-block input {
@@ -72,8 +85,8 @@ input:focus {
 
 .dice.wrap {
     min-width: 320px;
-    width: 100%;
-    max-width: 465px;
+    width: 90%;
+    /*max-width: 475px;*/
     margin: 0 auto;
 }
 
@@ -95,24 +108,20 @@ input:focus {
 }
 
 .member-list.number {
-    font-size: 18px;
-    font-style: italic;
+    font-size: 20px;
     color: #262626;
     position: absolute;
     bottom: 100%;
-    right: 10px;
+    right: 0;
 }
 
 .member-list.number:before {
-    content: '총 ';
-    font-size: 16px;
-    vertical-align: middle;
-}
-
-.member-list.number:after {
-    content: '명';
-    font-size: 16px;
-    vertical-align: middle;
+    content: '\f183';
+    font-size: 20px;
+    display: inline-block;
+    font-family: FontAwesome;
+    vertical-align: baseline;
+    margin-right: 4px;
 }
 
 .member-list.title {
@@ -121,13 +130,8 @@ input:focus {
 }
 
 .member-list.body {
-    margin: -5px 0 0 -5px;
-    padding: 10px;
-    /*display: -webkit-flex;
-    display: -ms-flex;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;*/
+    width: 480px;
+    margin: -5px auto 20px;
 }
 
 .member-list.body:after {
@@ -140,13 +144,14 @@ input:focus {
 .member-list.member {
     background: #eb4949;
     color: #fff;
-    width: 70px;
+    width: 115px;
+    height: 62px;
     font-size: 16px;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     float: left;
     margin: 5px 0 0 5px;
-    padding: 10px 0;
+    padding: 10px 12px;
     position: relative;
     cursor: pointer;
     transform: scale(1);
@@ -155,11 +160,74 @@ input:focus {
     box-sizing: border-box;
 }
 
+.member-list.member:after{
+    font-size: 18px;
+    font-family: FontAwesome;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+}
+
+.member-list.member.engineer{
+    background: #838383;
+}
+
+.member-list.member.engineer:after{
+    content: '\f121';
+}
+
+.member-list.member.designer{
+    background: #57b8c9;
+}
+
+.member-list.member.designer:after{
+    content: '\f040';
+}
+
+.member-list.member.scouter{
+    background: #1b508e;
+}
+
+.member-list.member.scouter:after{
+    content: '\f2b5';
+}
+
+.member-list.member.marketer{
+    background: #e84747;
+}
+
+.member-list.member.marketer:after{
+    content: '\f080';
+}
+
+.member-list.member.ceo{
+    background: #383838;
+}
+
+.member-list.member.ceo:after{
+    content: '\f27e';
+}
+
+.member-list.member.manager{
+    background: #f4ab4a;
+}
+
+.member-list.member.manager:after{
+    content: '\f004';
+}
+
+.member-list.member.pr{
+    background: #b78ce3;
+}
+
+.member-list.member.pr:after{
+    content: '\f1ea';
+}
+
 .group.member .name,
 .member-list.member input,
 .member-list.member .name {
     display: block;
-    text-align: center;
 }
 
 .member-list.member input {
@@ -178,11 +246,10 @@ input:focus {
     display: inline-block;
     margin-top: 5px;
     font-size: 14px;
-    color: #ddd;
+    color: #eee;
 }
 
 .member-list.member.highlight {
-    background: #df2525;
     transform: scale(1.4);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
     z-index: 100;
@@ -209,7 +276,7 @@ input:focus {
 }
 
 .group.item {
-    float: left;
+    display: inline-block;
     margin: 20px 10px;
     padding: 10px;
     background: #dedede;
@@ -217,8 +284,10 @@ input:focus {
 }
 
 .group.title {
+    font-size: 18px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .group.member {
@@ -240,6 +309,10 @@ input:focus {
     margin: 0;
 }
 
+.start-root {
+    margin: 10px auto 10px;
+    width: 475px;
+}
 .start-onlyone,
 .start-group,
 .start {
@@ -250,18 +323,20 @@ input:focus {
     font-size: 16px;
     border-radius: 10px;
     border: 0;
-    margin: 10px 0 0;
     padding: 10px;
 }
 
 .tab {
+    width: 475px;
     clear: both;
     text-align: center;
-    margin: 20px 0;
+    margin: 20px auto;
     padding: 20px;
     background: #f8f8f8;
     border-radius: 5px;
     border: 1px solid #e73a3a;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .is_on {
@@ -281,21 +356,27 @@ input:focus {
 }
 
 .dice-select {
+    width: 475px;
     clear: both;
-    margin: 20px 0;
+    margin: 20px auto;
+    overflow: hidden;
 }
 
 .dice-select div {
-    padding: 4px 0 0 0;
+    width: calc(50% - 5px);
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .btn {
     width: 100%;
+    height: 50px;
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
-    border: 1px solid #cfcfcf;
-    background: #cfcfcf;
+    border: 0;
+    background: #bbb;
     color: #fff;
 }
 
@@ -332,4 +413,8 @@ input:focus {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     z-index: 20;
+}
+
+.result {
+    text-align: center;
 }

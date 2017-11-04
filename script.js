@@ -7,73 +7,73 @@ $(function () {
         {
             name: '김동환',
             position: '대표이사',
-            team: 'ceo',
+            team: 'CEO',
             avatar: '',
         },
         {
             name: '김동철',
             position: '기술이사',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '이재군',
             position: '디자이너',
-            team: '디자인팀',
+            team: 'designer',
             avatar: '',
         },
         {
             name: '박정호',
-            position: '개발팀',
-            team: '개발팀',
+            position: 'engineer',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '하동현',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '김태민',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '김경신',
             position: 'backend',
-            team: '운영팀',
+            team: 'manager',
             avatar: '',
         },
         {
             name: '윤태건',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '최재훈',
             position: 'backend',
-            team: '작가영입팀',
+            team: 'scouter',
             avatar: '',
         },
         {
             name: '박우현',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '정성묵',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '김경범',
             position: 'backend',
-            team: '홍보팀',
+            team: 'PR',
             avatar: '',
         },
         {
@@ -85,67 +85,67 @@ $(function () {
         {
             name: '강혜지',
             position: 'backend',
-            team: '운영팀',
+            team: 'manager',
             avatar: '',
         },
         {
             name: '이원희',
             position: 'backend',
-            team: '운영팀',
+            team: 'manager',
             avatar: '',
         },
         {
             name: '김혜림',
             position: 'backend',
-            team: '작가영입팀',
+            team: 'scouter',
             avatar: '',
         },
         {
             name: '박희균',
             position: 'backend',
-            team: '디자인팀',
+            team: 'designer',
             avatar: '',
         },
         {
             name: '조동현',
             position: 'backend',
-            team: '마케팅팀',
+            team: 'marketer',
             avatar: '',
         },
         {
             name: '박선재',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '강지윤',
             position: 'backend',
-            team: '작가영입팀',
+            team: 'scouter',
             avatar: '',
         },
         {
             name: '나정귀',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
             name: '김은아',
             position: 'backend',
-            team: '디자인팀',
+            team: 'designer',
             avatar: '',
         },
         {
             name: '강예솔',
             position: 'backend',
-            team: '운영팀',
+            team: 'manager',
             avatar: '',
         },
         {
             name: '이태욱',
             position: 'backend',
-            team: '개발팀',
+            team: 'engineer',
             avatar: '',
         },
         {
@@ -164,58 +164,59 @@ $(function () {
         {
             name: '김유라',
             position: 'backend',
-            team: '디자인팀',
+            team: 'designer',
             avatar: '',
         },
         {
             name: '김상혜',
             position: 'backend',
-            team: '마케팅팀',
+            team: 'marketer',
             avatar: '',
             startDate: '20171101',
         },
         {
             name: '박인정',
             position: 'backend',
-            team: '마케팅팀',
+            team: 'marketer',
             avatar: '',
         },
         {
             name: '허수정',
             position: 'backend',
-            team: '마케팅팀',
+            team: 'marketer',
             avatar: '',
         },
         {
             name: '임은정',
             position: 'backend',
-            team: 'ceo',
+            team: 'CEO',
             avatar: '',
             startDate: '20171201',
         },
         {
             name: '이재은',
             position: 'backend',
-            team: 'ceo',
+            team: 'CEO',
             avatar: '',
             startDate: '20171201',
         },
         {
             name: '이수민',
             position: 'backend',
-            team: 'ceo',
+            team: 'CEO',
             avatar: '',
             startDate: '20171201',
         },
         {
             name: '한경구',
             position: 'backend',
-            team: 'ceo',
+            team: '',
             avatar: '',
-            startDate: '20171101',
+            startDate: '20171201',
             resign: '20171110',
         },
     ];
+    var originBp = backpacker.slice();
 
     var ju = [
         "청소기",
@@ -229,6 +230,10 @@ $(function () {
         "유리청소",
         "딱 걸림",
     ];
+
+    if (localStorage.bp) {
+        backpacker = JSON.parse(localStorage.bp)
+    }
 
     function joinMember(arg) {
         var now = new Date().getTime();
@@ -366,9 +371,11 @@ $(function () {
                 html += '<div class="group title">' + title + '</div>';
             }
             for (var j = 0; j < groupMemberLength; j++) {
-                html += '<div class="group member"><span class="name">' +
-                groupMember[j].name +
-                '</span></div>';
+                html += '<div class="member-list member ' + groupMember[j].team.toLowerCase() + '"' +
+                ' style="background-image:url(' + groupMember[j].avatar + ')">' +
+                '<span class="name">' + groupMember[j].name + '</span>' +
+                '<span class="team">' + groupMember[j].team + '</span>' +
+                '</div>';
             }
             html += '</div>';
             i += 1;
@@ -439,7 +446,10 @@ $(function () {
 
         var i = 0;
         for(; i < v.length; i++) {
-            memberList += '<div class="member-list member"' +
+            if (typeof v[i].team === 'undefined') {
+                v[i].team = '';
+            }
+            memberList += '<div class="member-list member ' + v[i].team.toLowerCase() + '"' +
             ' style="background-image:url(' + v[i].avatar + ')">' +
             '<span class="name">' + v[i].name + '</span>' +
             '<span class="team">' + v[i].team + '</span>' +
@@ -448,6 +458,8 @@ $(function () {
 
         $('.member-list.body').html(memberList);
         $('.member-list.number').html(v.length);
+
+        localStorage.bp = JSON.stringify(clonebackpacker);
     }
 
     function renderJu(data) {
@@ -462,18 +474,12 @@ $(function () {
         }
 
         $body.html(html);
-        console.log(arr);
     }
 
     // 구성원 삭제
     function remove(o, v) {
         return o.splice(v, 1);
     }
-    // function remove(v) {
-    //     clonebackpacker.splice(v, 1);
-    //
-    //     _render();
-    // }
 
     // 구성원 이름 수정
     function endEdit(v, i) {
@@ -536,7 +542,9 @@ $(function () {
     // 구성원 초기화
     $(document).on('click', '.reset', function () {
         if (confirm ('구성원을 초기화 시키겠습니까?')) {
-            _render(backpacker);
+            clonebackpacker = joinMember(originBp);
+            localStorage.clear();
+            _render(clonebackpacker);
         }
     });
 
