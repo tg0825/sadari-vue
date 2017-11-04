@@ -13,5 +13,8 @@
   "main": "index.js",
   "repository": "https://tg0825@bitbucket.org/tg0825/dice.git",
   "author": "tg0825 <tg0825@backpack.kr>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "font-awesome": "^4.7.0"
+  }
 }

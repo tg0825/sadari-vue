@@ -255,3 +255,8 @@ gulp.task('test', ['browser-sync', 'buildPublicCSS', 'buildPublicJS', 'buildSpri
     gulp.watch(projectPath.src + '/**/*.js', ['buildPublicJS', 'eslint']);
     gulp.watch(['./**/*.php'], bs.reload);
 });
+
+gulp.task('fonts', function() {
+  return gulp.src('node_modules/font-awesome/fonts/*')
+    .pipe(gulp.dest('public/fonts'))
+})
