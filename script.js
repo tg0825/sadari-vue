@@ -508,31 +508,31 @@ $(function () {
 
             $input.val(oldText);
             $self
-            .text('')
-            .addClass('edit')
-            .append($input)
-            .find($input)
-            .focus()
-            .on({
-                focusout: function () {
-                    var text = $(this).val();
-                    endEdit.call(self, text, idx);
-                },
-                keypress: function (e) {
-                    if (e.keyCode == 13) {
-                        $(this).trigger('focusout');
+                .text('')
+                .addClass('edit')
+                .append($input)
+                .find($input)
+                .focus()
+                .on({
+                    focusout: function () {
+                        var text = $(this).val();
+                        endEdit.call(self, text, idx);
+                    },
+                    keypress: function (e) {
+                        if (e.keyCode == 13) {
+                            $(this).trigger('focusout');
+                        }
                     }
-                }
-            });
+                });
         },
         mouseenter: function () {
             $(this).find('.remove').remove();
             $(this).append('<span class="remove">x</span>');
         }
-    }, '.member-list.member');
+    }, '.member-list.body .member-list.member');
 
     // 구성원 삭제
-    $(document).on('click', '.member-list.member .remove', function (e) {
+    $(document).on('click', '.member-list.wrap .member-list.member .remove', function (e) {
         e.stopPropagation();
         var idx = $(this).parent().index();
         remove(clonebackpacker, idx);
@@ -601,9 +601,19 @@ $(function () {
     });
 
     // 사다리 시작
-    $('.start').on('click', function () {
+    $('.start').on('click', function (e) {
         game[diceType]();
+        scrollMove('.dice-select');
     });
+
+    function scrollMove(offsetElm) {
+        var elm = offsetElm;
+        var pos = $(elm).offset().top;
+
+        $('body, html').animate({
+            scrollTop: pos
+        }, 300);
+    }
 
     // 게임 종류 선택
     $('.dice-select').find('button').on('click', function () {

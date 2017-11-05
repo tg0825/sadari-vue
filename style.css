@@ -92,19 +92,21 @@ input:focus {
 
 .dice.title {
     text-align: center;
-    font-size: 34px;
+    font-size: 38px;
     margin-top: 40px;
-    margin-bottom: 20px;
-    color: #630000;
+    margin-bottom: 40px;
+    color: #333;
 }
 
 .member-list.wrap {
-    /*position: fixed;
-    top: 0;
-    left: 0;
-    bottom:55%;
-    right:350px;*/
+    width: 480px;
+    margin: -5px auto 20px;
     position: relative;
+}
+
+.member-list.title {
+    font-size: 16px;
+    vertical-align: middle;
 }
 
 .member-list.number {
@@ -124,14 +126,7 @@ input:focus {
     margin-right: 4px;
 }
 
-.member-list.title {
-    font-size: 16px;
-    vertical-align: middle;
-}
-
 .member-list.body {
-    width: 480px;
-    margin: -5px auto 20px;
 }
 
 .member-list.body:after {
@@ -255,7 +250,7 @@ input:focus {
     z-index: 100;
 }
 
-.member-list.member .remove {
+.member-list.body .member-list.member .remove {
     display: none;
     position: absolute;
     top: -5px;
@@ -271,13 +266,13 @@ input:focus {
     z-index: 100;
 }
 
-.member-list.member:hover .remove {
+.member-list.body .member-list.member:hover .remove {
     display: block;
 }
 
 .group.item {
     display: inline-block;
-    margin: 20px 10px;
+    margin: 10px;
     padding: 10px;
     background: #dedede;
     border-radius: 20px;
@@ -317,7 +312,7 @@ input:focus {
 .start-group,
 .start {
     width: 100%;
-    height: 40px;
+    height: 50px;
     background: #eb4949;
     color: #fff;
     font-size: 16px;
