@@ -158,8 +158,6 @@ $(function () {
             position: 'backend',
             team: '수출입팀',
             avatar: '',
-            startDate: '20160101',
-            resign: '20171010',
         },
         {
             name: '김유라',
@@ -181,17 +179,10 @@ $(function () {
             avatar: '',
         },
         {
-            name: '허수정',
-            position: 'backend',
-            team: 'marketer',
-            avatar: '',
-        },
-        {
             name: '임은정',
-            position: 'backend',
-            team: 'CEO',
+            position: 'VMD',
+            team: 'VMD',
             avatar: '',
-            startDate: '20171201',
         },
         {
             name: '이재은',
