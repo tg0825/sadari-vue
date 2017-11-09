@@ -1,8 +1,9 @@
 (function () {
 $(function () {
     var diceType = 'one';
-
-    // 전체인원
+    var clonebackpacker;
+    var originBp;
+    var ju = [];
     var backpacker = [
         {
             name: '김동환',
@@ -207,9 +208,8 @@ $(function () {
             resign: '20171110',
         },
     ];
-    var originBp = backpacker.slice();
 
-    var ju = [
+    ju = [
         "청소기",
         "청소기",
         "대걸레",
@@ -221,68 +221,6 @@ $(function () {
         "유리청소",
         "딱 걸림",
     ];
-
-    if (localStorage.bp) {
-        backpacker = JSON.parse(localStorage.bp)
-    }
-
-    function joinMember(arg) {
-        var now = new Date().getTime();
-        var date;
-        var y;
-        var m;
-        var d;
-
-        function check(x) {
-            if (x === '') {
-                return true;
-            }
-            y = x.substr(0,4);
-            m = x.substr(4,2);
-            d = x.substr(6,2);
-
-            m -= 1;
-            date = Date.UTC(y, m, d);
-            return date;
-        }
-
-        var re = arg.filter(function (v) {
-            if (v.hasOwnProperty('startDate')) {
-                date = check(v.startDate);
-
-                if (now < date) {
-
-                    return false;
-                }
-            }
-
-            if (v.hasOwnProperty('resign')) {
-                date = check(v.resign);
-
-                if (now > date) {
-
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
-        return re;
-    }
-
-    var clonebackpacker = backpacker.slice();
-    clonebackpacker = joinMember(clonebackpacker);
-
-    // 주번 랜더링
-    (function () {
-        var html = '<ul class="ju-list">';
-        ju.map(function (v) {
-            return html += '<li>' + v + '</li>';
-        });
-        html += '</ul>';
-        $('.tab-item').last().find('.tab-item-result').html(html);
-    }())
 
     // 사다리 종류
     var game = {
@@ -336,6 +274,52 @@ $(function () {
             });
         }
     };
+
+    // 현재 인원으로만 추리기
+    function joinMember(arg) {
+        var now = new Date().getTime();
+        var date;
+        var y;
+        var m;
+        var d;
+
+        function check(x) {
+            if (x === '') {
+                return true;
+            }
+            y = x.substr(0,4);
+            m = x.substr(4,2);
+            d = x.substr(6,2);
+
+            m -= 1;
+            date = Date.UTC(y, m, d);
+            return date;
+        }
+
+        var re = arg.filter(function (v) {
+            if (v.hasOwnProperty('startDate')) {
+                date = check(v.startDate);
+
+                if (now < date) {
+
+                    return false;
+                }
+            }
+
+            if (v.hasOwnProperty('resign')) {
+                date = check(v.resign);
+
+                if (now > date) {
+
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        return re;
+    }
 
     // 결과 출력
     function result(data) {
@@ -453,6 +437,7 @@ $(function () {
         localStorage.bp = JSON.stringify(clonebackpacker);
     }
 
+    // 주번 랜더링
     function renderJu(data) {
         var $body = data.body;
         var arr = data.arr;
@@ -484,63 +469,63 @@ $(function () {
         '</span>');
     }
 
-    // 구성원 이름 수정 이벤트 바인딩
-    $(document).on({
-        click: function () {
-            var self = this;
-            var $self = $(self);
-            var idx = $self.index();
-            var oldText = $self.find('.name').text();
-            var $input = $('<input maxLength="10" type="text">');
+    // 이름 변경
+    function changeName() {
+        var self = this;
+        var $self = $(self);
+        var idx = $self.index();
+        var oldText = $self.find('.name').text();
+        var $input = $('<input maxLength="10" type="text">');
 
-            if ($(this).is('.edit')) {
-                return;
-            }
-
-            $input.val(oldText);
-            $self
-                .text('')
-                .addClass('edit')
-                .append($input)
-                .find($input)
-                .focus()
-                .on({
-                    focusout: function () {
-                        var text = $(this).val();
-                        endEdit.call(self, text, idx);
-                    },
-                    keypress: function (e) {
-                        if (e.keyCode == 13) {
-                            $(this).trigger('focusout');
-                        }
-                    }
-                });
-        },
-        mouseenter: function () {
-            $(this).find('.remove').remove();
-            $(this).append('<span class="remove">x</span>');
+        if ($(this).is('.edit')) {
+            return;
         }
-    }, '.member-list.body .member-list.member');
 
-    // 구성원 삭제
-    $(document).on('click', '.member-list.wrap .member-list.member .remove', function (e) {
+        $input.val(oldText);
+        $self
+        .text('')
+        .addClass('edit')
+        .append($input)
+        .find($input)
+        .focus()
+        .on({
+            focusout: function () {
+                var text = $(this).val();
+                endEdit.call(self, text, idx);
+            },
+            keypress: function (e) {
+                if (e.keyCode == 13) {
+                    $(this).trigger('focusout');
+                }
+            }
+        });
+    }
+
+    // 삭제 버튼 보이기
+    function hoverName() {
+        $(this).find('.remove').remove();
+        $(this).append('<span class="remove">x</span>');
+    }
+
+    // 삭제 버튼 클릭
+    function clickRemove(e) {
         e.stopPropagation();
         var idx = $(this).parent().index();
         remove(clonebackpacker, idx);
         _render();
-    });
+    }
 
     // 구성원 초기화
-    $(document).on('click', '.reset', function () {
+    function reset() {
         if (confirm ('구성원을 초기화 시키겠습니까?')) {
             clonebackpacker = joinMember(originBp);
             localStorage.clear();
             _render(clonebackpacker);
         }
-    });
+    }
 
     // 구성원 추가
-    $('#frm').on('submit', function (e) {
+    function addMember(e) {
         e.preventDefault();
 
         // 추가할 직원 이름
@@ -570,33 +555,45 @@ $(function () {
         addMem(clonebackpacker, name);
         _render();
         $name.val('');
-    });
+    }
 
-    $('.ju-add').find('button').on('click', function () {
+    // 주번 항목 추가
+    function addJu() {
         var name = $(this).prev().val();
         addMem(ju, name);
         renderJu({
             body: $('.ju-list'),
             arr: ju
         });
-    });
+    }
 
-    // 주번 삭제
-    $('.ju-list').on('click', 'li', function () {
+    // 주번 항목 삭제
+    function removeJu() {
         var idx = $(this).index();
         remove(ju, idx);
         renderJu({
             body: $('.ju-list'),
             arr: ju
         });
-    });
+    }
 
-    // 사다리 시작
-    $('.start').on('click', function (e) {
+    // 주번 랜더링
+    function juRender() {
+        var html = '<ul class="ju-list">';
+        ju.forEach(function (v) {
+            return html += '<li>' + v + '</li>';
+        });
+        html += '</ul>';
+        $('.tab-item').last().find('.tab-item-result').html(html);
+    }
+
+    // 게임 시작
+    function diceStart() {
         game[diceType]();
         scrollMove('.dice-select');
-    });
+    }
 
+    // 스크롤 이동
     function scrollMove(offsetElm) {
         var elm = offsetElm;
         var pos = $(elm).offset().top;
@@ -606,8 +603,8 @@ $(function () {
         }, 300);
     }
 
-    // 게임 종류 선택
-    $('.dice-select').find('button').on('click', function () {
+    // 게임 선택
+    function selectDice() {
         var idx = $(this).parent().index();
         diceType = $(this).data('game');
 
@@ -618,10 +615,38 @@ $(function () {
             .hide()
             .eq(idx)
             .show();
-    });
+    }
 
-    $('.dice-select').find('button:eq(0)').trigger('click');
+    // 초기화
+    function init() {
+        originBp = backpacker.slice();
 
-    _render();
+        if (localStorage.bp) {
+            backpacker = JSON.parse(localStorage.bp);
+        }
+
+        clonebackpacker = backpacker.slice();
+        clonebackpacker = joinMember(clonebackpacker);
+
+        _render();
+        juRender();
+
+        $('.dice-select').find('button:eq(0)').trigger('click');
+    }
+
+    // event bind
+    $(document).on({
+        click: changeName,
+        mouseenter: hoverName
+    }, '.member-list.body .member-list.member');
+    $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
+    $(document).on('click', '.reset', reset);
+    $('#frm').on('submit', addMember);
+    $('.ju-add').find('button').on('click', addJu);
+    $('.ju-list').on('click', 'li', removeJu);
+    $('.start').on('click', diceStart);
+    $('.dice-select').find('button').on('click', selectDice);
+
+    init();
 });
 }(jQuery));
