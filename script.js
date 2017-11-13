@@ -179,6 +179,12 @@
             avatar: '',
         },
         {
+            name: '허수정',
+            position: 'marketer',
+            team: 'marketer',
+            avatar: '',
+        },
+        {
             name: '임은정',
             position: 'VMD',
             team: 'scouter',
