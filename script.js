@@ -224,7 +224,7 @@
         "집기딱이",
         "공기청정기",
         "유리청소",
-        "딱 걸림",
+        "전등",
     ];
 
     // 사다리 종류
@@ -569,6 +569,7 @@
     // 주번 항목 삭제
     function removeJu() {
         var idx = $(this).index();
+        console.log(1);
         remove(ju, idx);
         renderJu({
             body: $('.ju-list'),
@@ -633,18 +634,21 @@
         $('.dice-select').find('button:eq(0)').trigger('click');
     }
 
-    // event bind
-    $(document).on({
-        click: changeName,
-        mouseenter: hoverName
-    }, '.member-list.body .member-list.member');
-    $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
-    $(document).on('click', '.reset', reset);
-    $('#frm').on('submit', addMember);
-    $('.ju-add').find('button').on('click', addJu);
-    $('.ju-list').on('click', 'li', removeJu);
-    $('.start').on('click', diceStart);
-    $('.dice-select').find('button').on('click', selectDice);
+    function initEvent() {
+        // event bind
+        $(document).on({
+            click: changeName,
+            mouseenter: hoverName
+        }, '.member-list.body .member-list.member');
+        $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
+        $(document).on('click', '.reset', reset);
+        $(document).on('click', '.ju-list li', removeJu);
+        $('#frm').on('submit', addMember);
+        $('.ju-add').find('button').on('click', addJu);
+        $('.start').on('click', diceStart);
+        $('.dice-select').find('button').on('click', selectDice);
+    }
 
+    initEvent();
     init();
 }(jQuery));
