@@ -1,5 +1,4 @@
 (function () {
-$(function () {
     var diceType = 'one';
     var clonebackpacker;
     var originBp;
@@ -157,7 +156,7 @@ $(function () {
         {
             name: '김현우',
             position: 'backend',
-            team: '수출입팀',
+            team: 'trade',
             avatar: '',
         },
         {
@@ -182,22 +181,22 @@ $(function () {
         {
             name: '임은정',
             position: 'VMD',
-            team: 'VMD',
+            team: 'scouter',
             avatar: '',
         },
         {
             name: '이재은',
             position: 'backend',
-            team: 'CEO',
+            team: 'trade',
             avatar: '',
-            startDate: '20171201',
+            startDate: '20171111',
         },
         {
             name: '이수민',
             position: 'backend',
-            team: 'CEO',
+            team: 'trade',
             avatar: '',
-            startDate: '20171201',
+            startDate: '20171111',
         },
         {
             name: '한경구',
@@ -297,11 +296,11 @@ $(function () {
         }
 
         var re = arg.filter(function (v) {
+            console.log(v);
             if (v.hasOwnProperty('startDate')) {
                 date = check(v.startDate);
 
                 if (now < date) {
-
                     return false;
                 }
             }
@@ -310,14 +309,11 @@ $(function () {
                 date = check(v.resign);
 
                 if (now > date) {
-
                     return false;
                 }
             }
-
             return true;
         });
-
         return re;
     }
 
@@ -395,13 +391,10 @@ $(function () {
                     name: str,
                     idx: a
                 };
-
                 return true;
             }
-
             return false;
         });
-
         return result;
     }
 
@@ -648,5 +641,4 @@ $(function () {
     $('.dice-select').find('button').on('click', selectDice);
 
     init();
-});
 }(jQuery));

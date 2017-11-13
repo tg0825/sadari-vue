@@ -137,7 +137,7 @@ input:focus {
 
 .group.member,
 .member-list.member {
-    background: #eb4949;
+    background: #bfbfbf;
     color: #fff;
     width: 115px;
     height: 62px;
@@ -217,6 +217,14 @@ input:focus {
 
 .member-list.member.pr:after{
     content: '\f1ea';
+}
+
+.member-list.member.trade {
+    background: rgb(29, 119, 235);
+}
+
+.member-list.member.trade:after{
+    content: '\f21a';
 }
 
 .group.member .name,
