@@ -1,4 +1,5 @@
-(function () {
+(function ($, modal) {
+
     var diceType = 'one';
     var clonebackpacker;
     var originBp;
@@ -132,15 +133,20 @@
             html += '</div>';
             i += 1;
         }
-        $('.result').html(html);
+        // $('.result').html(html);
+        modal.open(html);
         resultText();
     }
 
+    // 결과 텍스트로 만들기
     function resultText() {
         var resultText_list = [];
         var renderText = '';
+        var cols = [];
 
-        $('.result .group.item').each(function (i, e) {
+        // 데이터 만들기
+        // $('.result .group.item').each(function (i, e) {
+        $('.modal .group.item').each(function (i, e) {
             var obj = {};
             obj.group = $(e).find('.group.title').text();
             obj.member = [];
@@ -154,16 +160,39 @@
             resultText_list.push(obj);
         });
 
+        // 데이터 출력
         resultText_list.forEach(function (v, i, a) {
-            console.log(v, i, a);
+            var vMax = a.length - 1;
+            var thisCols = '';
 
             for(var k in v) {
-                renderText += k + ': ' + v[k] + '\n';
+                if (Array.isArray(v[k])) {
+                    var max = v[k].length - 1;
+                    v[k].forEach(function (v, i, a) {
+                        thisCols += v.name;
+                        // thisCols += v.team;
+                        if (max === i) {
+                            // TODO : 쉼표 찍으려다 다음 배열 시작 안됨
+                            // return;
+                        }
+                        thisCols += ', ';
+                    });
+                    continue;
+                }
+                thisCols += '[' + v[k] + ']\n';
             }
 
+            if (vMax === i) {
+                // TODO : 쉼표 찍으려다 다음 배열 시작 안됨
+                // return;
+            }
+
+            thisCols += '\n';
+            renderText += thisCols;
         });
+        $('.resultText').attr('rows', resultText_list.length);
         $('.resultText').html(renderText);
-        console.log(renderText);
+        // console.log(renderText);
     }
 
     // 배열 섞기
@@ -446,15 +475,26 @@
             click: changeName,
             mouseenter: hoverName
         }, '.member-list.body .member-list.member');
-        $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
-        $(document).on('click', '.reset', reset);
-        $(document).on('click', '.ju-list li', removeJu);
+        // 멤버 추가
         $('#frm').on('submit', addMember);
-        $('.ju-add').find('button').on('click', addJu);
+        // 멤버 삭제
+        $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
+        // 주번 추가
+        $('.ju-add').on('click', 'button', addJu);
+        // 주번 삭제
+        $(document).on('click', '.ju-list li', removeJu);
+        // 사다리 선택
+        $('.dice-select').on('click', 'button', selectDice);
+        // 사다리 시작
         $('.start').on('click', diceStart);
-        $('.dice-select').find('button').on('click', selectDice);
+        // 구성원 리셋
+        $(document).on('click', '.reset', reset);
     }
 
     initEvent();
     init();
-}(jQuery));
+
+    // test action
+    $('.dice-select button').eq(1).click();
+    $('.start').click();
+}(jQuery, modal));
