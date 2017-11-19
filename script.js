@@ -495,6 +495,6 @@
     init();
 
     // test action
-    $('.dice-select button').eq(1).click();
-    $('.start').click();
+    // $('.dice-select button').eq(1).click();
+    // $('.start').click();
 }(jQuery, modal));
