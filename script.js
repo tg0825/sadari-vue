@@ -133,8 +133,9 @@
             html += '</div>';
             i += 1;
         }
-        // $('.result').html(html);
-        modal.open(html);
+        $('.result').html(html);
+        $('.resultText').show(html);
+        // modal.open(html);
         resultText();
     }
 
@@ -145,8 +146,8 @@
         var cols = [];
 
         // 데이터 만들기
-        // $('.result .group.item').each(function (i, e) {
-        $('.modal .group.item').each(function (i, e) {
+        $('.result .group.item').each(function (i, e) {
+        // $('.modal .group.item').each(function (i, e) {
             var obj = {};
             obj.group = $(e).find('.group.title').text();
             obj.member = [];
@@ -190,8 +191,8 @@
             thisCols += '\n';
             renderText += thisCols;
         });
-        $('.resultText').attr('rows', resultText_list.length);
-        $('.resultText').html(renderText);
+        $('.resultText textarea').attr('rows', resultText_list.length);
+        $('.resultText textarea').html(renderText);
         // console.log(renderText);
     }
 
