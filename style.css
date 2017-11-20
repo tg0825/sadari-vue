@@ -449,6 +449,16 @@ input:focus {
     padding: 10px;
 }
 
+.resultText button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 5px;
+}
+
 .resultText textarea {
     border: 1px solid #888;
     width: 300px;

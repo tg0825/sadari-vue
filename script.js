@@ -145,6 +145,27 @@
         var renderText = '';
         var cols = [];
 
+        var game = '';
+        switch(diceType) {
+            case 'one':
+                game = '한명뽑기';
+                break;
+            case 'jo-member':
+                game = '랜덤조';
+                break;
+            case 'jo-team':
+                game = '랜덤조';
+                break;
+            case 'ju':
+                game = '주번뽑기';
+                break;
+            default:
+                game = '한명뽑기'
+        }
+
+        // renderText += game + Date.UTC() + '\n';
+        renderText += game + '\n';
+
         // 데이터 만들기
         $('.result .group.item').each(function (i, e) {
         // $('.modal .group.item').each(function (i, e) {
@@ -172,28 +193,35 @@
                     v[k].forEach(function (v, i, a) {
                         thisCols += v.name;
                         // thisCols += v.team;
-                        if (max === i) {
-                            // TODO : 쉼표 찍으려다 다음 배열 시작 안됨
-                            // return;
+                        if (max !== i) {
+                            thisCols += ', ';
                         }
-                        thisCols += ', ';
                     });
                     continue;
                 }
-                thisCols += '[' + v[k] + ']\n';
+
+                if (v[k] !== '') {
+                    thisCols += '[' + v[k] + ']\n';
+                }
             }
 
-            if (vMax === i) {
-                // TODO : 쉼표 찍으려다 다음 배열 시작 안됨
-                // return;
+            if (vMax !== i) {
+                thisCols += '\n';
             }
 
-            thisCols += '\n';
             renderText += thisCols;
         });
         $('.resultText textarea').attr('rows', resultText_list.length);
         $('.resultText textarea').html(renderText);
         // console.log(renderText);
+    }
+
+    // <button onclick="myFunction()">Copy text</button>
+    function copy(e) {
+        $('.resultText textarea')[0].select();
+        if (document.execCommand("Copy")) {
+            alert('복사 완료!');
+        }
     }
 
     // 배열 섞기
@@ -490,6 +518,7 @@
         $('.start').on('click', diceStart);
         // 구성원 리셋
         $(document).on('click', '.reset', reset);
+        $(document).on('click', '[name=copy]', copy);
     }
 
     initEvent();
