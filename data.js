@@ -202,7 +202,7 @@ var backpacker = [
     {
         name: '한경구',
         position: 'backend',
-        team: '',
+        team: 'designer',
         avatar: '',
         startDate: '20171201',
         resign: '',
