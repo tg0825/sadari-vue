@@ -205,7 +205,7 @@ var backpacker = [
         team: '',
         avatar: '',
         startDate: '20171201',
-        resign: '20171110',
+        resign: '',
     },
 ];
 
