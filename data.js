@@ -198,13 +198,14 @@ var backpacker = [
         team: 'trade',
         avatar: '',
         startDate: '20171111',
+        resign: '',
     },
     {
         name: '한경구',
         position: 'backend',
         team: 'designer',
         avatar: '',
-        startDate: '20171201',
+        startDate: '20171101',
         resign: '',
     },
 ];
