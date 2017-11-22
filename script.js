@@ -87,7 +87,7 @@
                 }
             }
 
-            if (v.hasOwnProperty('resign')) {
+            if (v.hasOwnProperty('resign') && v.resign) {
                 date = check(v.resign);
 
                 if (now > date) {
