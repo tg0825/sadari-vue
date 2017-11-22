@@ -85,13 +85,21 @@
             <button class="start" type="submit">시작!</button>
         </div>
 
+        <div class="option root">
+            <label class="option item">
+                <input type="checkbox" data-option="number">
+                번호 표시
+            </label>
+        </div>
+
         <div class="result"> </div>
-        <div class="resultText">
+        <div class="resultText" style="display:none">
             <textarea></textarea>
             <button type="button" name="copy">결과 복사하기</button>
         </div>
     </div>
     <div class="clock"></div>
+    <button class="resultTextToggle">텍스트 결과 보기</button>
     <script src="data.js"></script>
     <script src="modal.js"></script>
     <script src="clock.js"></script>

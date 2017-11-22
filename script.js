@@ -103,6 +103,7 @@
     function result(data) {
         var html = '';
         var i = 0;
+        var index = 1;
         var title;
         var onegroup = (data.b === 1);
 
@@ -124,11 +125,12 @@
                 html += '<div class="group title">' + title + '</div>';
             }
             for (var j = 0; j < groupMemberLength; j++) {
-                html += '<div class="member-list member ' + groupMember[j].team.toLowerCase() + '"' +
+                html += '<div data-index=' + index + ' class="member-list member ' + groupMember[j].team.toLowerCase() + '"' +
                 ' style="background-image:url(' + groupMember[j].avatar + ')">' +
                 '<span class="name">' + groupMember[j].name + '</span>' +
                 '<span class="team">' + groupMember[j].team + '</span>' +
                 '</div>';
+                index += 1;
             }
             html += '</div>';
             i += 1;
@@ -144,6 +146,19 @@
         var resultText_list = [];
         var renderText = '';
         var cols = [];
+        var index = 1;
+
+        var date = new Date();
+        var today = date.getDay();
+        var week = ['일', '월', '화', '수', '목', '금', '토'];
+        var yyyymmdd = date.getFullYear() + '년' +
+        ("0" + (date.getMonth() + 1)).slice(-2) + '월' +
+        ("0" + date.getDate()).slice(-2) + '일' +
+        ' (' + week[today] + ') ' +
+        ("0" + date.getHours()).slice(-2) + '시' +
+        ("0" + date.getMinutes()).slice(-2) + '분\n';
+
+        renderText += yyyymmdd;
 
         var game = '';
         switch(diceType) {
@@ -191,11 +206,12 @@
                 if (Array.isArray(v[k])) {
                     var max = v[k].length - 1;
                     v[k].forEach(function (v, i, a) {
-                        thisCols += v.name;
+                        thisCols += '(' + index + ')' + v.name;
                         // thisCols += v.team;
                         if (max !== i) {
                             thisCols += ', ';
                         }
+                        index += 1;
                     });
                     continue;
                 }
@@ -481,6 +497,20 @@
             .show();
     }
 
+    // 옵션 선택
+    function option(e) {
+        var target = e.target;
+        var option = target.dataset.option;
+        var result = document.querySelector('.result');
+
+        result.dataset.option = (result.dataset.option === option) ? '' : option;
+    }
+
+    function resultTextToggle() {
+        var target = document.querySelector('.resultText');
+        target.style.display = (target.style.display === 'none') ? '' : 'none';
+    }
+
     // 초기화
     function init() {
         originBp = backpacker.slice();
@@ -519,6 +549,10 @@
         // 구성원 리셋
         $(document).on('click', '.reset', reset);
         $(document).on('click', '[name=copy]', copy);
+        // 옵션
+        $(document).on('click', '[data-option]', option);
+
+        $('.resultTextToggle').on('click', resultTextToggle)
     }
 
     initEvent();
@@ -527,4 +561,5 @@
     // test action
     // $('.dice-select button').eq(1).click();
     // $('.start').click();
+    // $('[data-option]').click();
 }(jQuery, modal));

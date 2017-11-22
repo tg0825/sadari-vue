@@ -424,29 +424,64 @@ input:focus {
     width: 800px;
 }
 
-.clock {
+.result .member-list.member:before {
+    content: attr(data-index);
     position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center;
+    background: rgba(0,0,0,.9);
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    display: none;
+    /*animation: bye 0.2s forwards;*/
+}
+.result[data-option=number] .member-list.member:before {
+    animation: pop 0.3s linear 1;
+    display: inline-block;
+}
+@keyframes pop {
+    50%  {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes bye {
+    100% {
+        transform: scale(0);
+    }
+}
+
+.clock {
+    position: fixed;
     top: 0;
+    left: 0;
     right: 0;
-    padding: 5px;
+    height: 20px;
+    background: #333;
     color: #333;
     font-size: 14px;
+    line-height: 20px;
     text-align: right;
     letter-spacing: 1px;
+    color: #fff;
+    padding-right: 5px;
 }
 
 .time {
-    display: block;
-    margin-top: 5px;
+    margin-left: 10px;
 }
 
 .resultText {
-    display: none;
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 20px;
+    left: 0;
     font-family: apple SD gothic neo, Noto Sans KR, '맑은고딕', 'malgun gothic', '돋움', dotum, sans-serif;
-    padding: 10px;
 }
 
 .resultText button {
@@ -475,6 +510,17 @@ input:focus {
 
 }
 
+.resultTextToggle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    height: 20px;
+}
+
 .modal {
     position: fixed;
     top: 50%;
@@ -489,4 +535,9 @@ input:focus {
     min-width: 320px;
     width: 100%;
     max-width: 800px;
+}
+
+.option.root {
+    width: 475px;
+    margin: 20px auto;
 }
