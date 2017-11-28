@@ -1,7 +1,7 @@
-(function ($, modal) {
+(function (window, $, modal) {
 
     var diceType = 'one';
-    var clonebackpacker;
+    var clonebackpacker = window.clonebackpacker || {};
     var originBp;
 
     // 사다리 종류
@@ -284,15 +284,6 @@
         return result;
     }
 
-    // 구성원 추가
-    function addMem(o, v) {
-        if (v === '') {
-            return;
-        }
-        var data = (typeof o[0] === 'string') ? v : {name: v};
-        return o.push(data);
-    }
-
     // 구성원 랜더링
     function _render(v) {
         var memberList = '';
@@ -394,6 +385,17 @@
         _render();
     }
 
+    function windowMem(e) {
+        var $this = $(e.target);
+        var top = $this.offset().top;
+        var left = $this.offset().left;
+        $('#frm').css({
+            'left': left,
+            'top': top + 30
+        });
+        $('#frm').toggle();
+    }
+
     // 구성원 초기화
     function reset() {
         if (confirm ('구성원을 초기화 시키겠습니까?')) {
@@ -407,15 +409,22 @@
     function addMember(e) {
         e.preventDefault();
 
-        // 추가할 직원 이름
         var $name = $('#name');
+        var $team = $('.team-list');
         var name = $name.val();
+        var team = $team.find('.is_active').attr('title');
 
         // 빈값, 중복 이름 여부 채크
         var com = compare(clonebackpacker, name);
 
         if (name === '') {
             alertMsg('이름을 입력해 주세요.');
+            $name.focus();
+            return;
+        }
+
+        if (typeof team === 'undefined') {
+            alertMsg('팀을 선택해 주세요.');
             return;
         }
 
@@ -431,7 +440,7 @@
             return;
         }
 
-        addMem(clonebackpacker, name);
+        addData(clonebackpacker, name, team);
         _render();
         $name.val('');
     }
@@ -439,11 +448,17 @@
     // 주번 항목 추가
     function addJu() {
         var name = $(this).prev().val();
-        addMem(ju, name);
+        addData(ju, name);
         renderJu({
             body: $('.ju-list'),
             arr: ju
         });
+    }
+
+    // 구성원 추가
+    function addData(o, v, t) {
+        var data = (typeof o[0] === 'string') ? v : {name: v, team: t};
+        return o.push(data);
     }
 
     // 주번 항목 삭제
@@ -511,6 +526,33 @@
         target.style.display = (target.style.display === 'none') ? '' : 'none';
     }
 
+    function teamRender() {
+        var bpkTeam = clonebackpacker.map(function (v) {
+            return v.team;
+        })
+
+       bpkTeam = bpkTeam.filter(function(elem, index, self) {
+            return index === self.indexOf(elem);
+        });
+
+        var html = '<div class="team root">';
+        bpkTeam.forEach(function (v) {
+            html += '<div class="team item ' + v.toLowerCase() + '" title="' + v + '"></div>';
+        });
+        html += '</div>';
+        $('.team-list').append(html);
+    }
+
+    function selectedTeam(e) {
+        var $self = $(this);
+        // $self.css('color', bg);
+        // $self.css('background-color', cl);
+        // $self.css('border', '2px solid ' + bg + '');
+        // $self.siblings().attr('style', '');
+
+        $self.addClass('is_active').siblings().removeClass('is_active');
+    }
+
     // 초기화
     function init() {
         originBp = backpacker.slice();
@@ -519,10 +561,11 @@
             backpacker = JSON.parse(localStorage.bp);
         }
 
-        clonebackpacker = backpacker.slice();
-        clonebackpacker = joinMember(clonebackpacker);
+        clonebackpacker = joinMember(backpacker.slice());
+        window.clonebackpacker = clonebackpacker;
 
         _render();
+        teamRender();
         juRender();
 
         $('.dice-select').find('button:eq(0)').trigger('click');
@@ -534,8 +577,12 @@
             click: changeName,
             mouseenter: hoverName
         }, '.member-list.body .member-list.member');
+        // 멤버 추가 창 토글
+        $('.toggleMenu').on('click', windowMem);
         // 멤버 추가
         $('#frm').on('submit', addMember);
+        // 추가 멤버 팀 선택
+        $(document).on('click', '.team.item', selectedTeam)
         // 멤버 삭제
         $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
         // 주번 추가
@@ -551,7 +598,7 @@
         $(document).on('click', '[name=copy]', copy);
         // 옵션
         $(document).on('click', '[data-option]', option);
-
+        // 텍스트결과 토글
         $('.resultTextToggle').on('click', resultTextToggle)
     }
 
@@ -562,4 +609,4 @@
     // $('.dice-select button').eq(1).click();
     // $('.start').click();
     // $('[data-option]').click();
-}(jQuery, modal));
+}(window, jQuery, modal));

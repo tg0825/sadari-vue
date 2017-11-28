@@ -10,16 +10,25 @@
 <title>SADARI</title>
 </head>
 <body>
+    <div class="gnb">
+        <button class="resultTextToggle">텍스트 결과 보기</button>
+        <button class="toggleMenu">인원 추가</button>
+        <div class="clock"></div>
+    </div>
+
     <div class="dice wrap">
         <h1 class="dice title">SADARI</h1>
-        <div class="member-list wrap">
-            <div class="member-list body"> </div>
-            <div class="member-list number"></div>
-        </div>
 
         <form action="" id="frm" autocomplete="off">
+            <button
+                type="button"
+                class="reset"
+            >인원초기화</button>
+            <h2>
+                <i class="fa fa-male" aria-hidden="true"></i>
+                인원추가
+            </h2>
             <div class="form-block">
-                <label for="">인원 추가</label>
                 <input
                     id="name"
                     name="name"
@@ -27,13 +36,17 @@
                     placeholder="이름을 입력해주세요."
                     maxlength="10"
                 >
-                <button type="submit" class="btn-add-mem">추가</button>
             </div>
-            <button
-                type="button"
-                class="reset"
-            >인원초기화</button>
+            <div class="form-block">
+                <div class="team-list"></div>
+            </div>
+            <button type="submit" class="btn-add-mem">추가</button>
         </form>
+
+        <div class="member-list wrap">
+            <div class="member-list body"> </div>
+            <div class="member-list number"></div>
+        </div>
 
         <div class="dice-select">
             <div><button class="btn" data-game="one">한명 뽑기 (또는 여러명)</button></div>
@@ -98,8 +111,6 @@
             <button type="button" name="copy">결과 복사하기</button>
         </div>
     </div>
-    <div class="clock"></div>
-    <button class="resultTextToggle">텍스트 결과 보기</button>
     <script src="data.js"></script>
     <script src="modal.js"></script>
     <script src="clock.js"></script>
