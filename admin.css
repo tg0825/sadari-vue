@@ -1,0 +1,15 @@
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+table th:nth-child(1) {
+}
+table th {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
