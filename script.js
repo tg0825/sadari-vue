@@ -301,6 +301,7 @@
             '</div>';
         }
 
+        console.log(memberList);
         $('.member-list.body').html(memberList);
         $('.member-list.number').html(v.length);
 
@@ -529,15 +530,17 @@
     function teamRender() {
         var bpkTeam = clonebackpacker.map(function (v) {
             return v.team;
-        })
+        });
 
-       bpkTeam = bpkTeam.filter(function(elem, index, self) {
+        bpkTeam = bpkTeam.filter(function(elem, index, self) {
             return index === self.indexOf(elem);
         });
 
         var html = '<div class="team root">';
         bpkTeam.forEach(function (v) {
-            html += '<div class="team item ' + v.toLowerCase() + '" title="' + v + '"></div>';
+            html += '<label class="team item ' + v.toLowerCase() + '" title="' + v + '">';
+            html += '<input type="radio" name="team" required value="' + v.toLowerCase() + '" />';
+            html += '</label>';
         });
         html += '</div>';
         $('.team-list').append(html);
@@ -555,11 +558,23 @@
 
     // 초기화
     function init() {
+        var backpacker = [];
+
+        $('.member-list.body').find('.member-list.member').each(function (i, e) {
+            var $member = $(e);
+            var member = {
+                name: $member.find('.name').html(),
+                team: $member.find('.team').html(),
+            }
+
+            backpacker.push(member);
+        });
+
         originBp = backpacker.slice();
 
-        if (localStorage.bp) {
-            backpacker = JSON.parse(localStorage.bp);
-        }
+        // if (localStorage.bp) {
+        //     backpacker = JSON.parse(localStorage.bp);
+        // }
 
         clonebackpacker = joinMember(backpacker.slice());
         window.clonebackpacker = clonebackpacker;
@@ -580,7 +595,7 @@
         // 멤버 추가 창 토글
         $('.toggleMenu').on('click', windowMem);
         // 멤버 추가
-        $('#frm').on('submit', addMember);
+        // $('#JSFORM').on('submit', addMember);
         // 추가 멤버 팀 선택
         $(document).on('click', '.team.item', selectedTeam)
         // 멤버 삭제
