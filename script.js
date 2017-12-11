@@ -125,7 +125,7 @@
                 html += '<div class="group title">' + title + '</div>';
             }
             for (var j = 0; j < groupMemberLength; j++) {
-                html += '<div data-index=' + index + ' class="member-list member ' + groupMember[j].team.toLowerCase() + '"' +
+                html += '<div data-index=' + index + ' class="member-list member ' + groupMember[j].team_eng + '"' +
                 ' style="background-image:url(' + groupMember[j].avatar + ')">' +
                 '<span class="name">' + groupMember[j].name + '</span>' +
                 '<span class="team">' + groupMember[j].team + '</span>' +
@@ -294,14 +294,15 @@
             if (typeof v[i].team === 'undefined') {
                 v[i].team = '';
             }
-            memberList += '<div class="member-list member ' + v[i].team.toLowerCase() + '"' +
+            memberList += '<div ' +
+            'data-team-eng="' + v[i].team_eng + '"' +
+            'class="member-list member ' + v[i].team_eng + '"' +
             ' style="background-image:url(' + v[i].avatar + ')">' +
             '<span class="name">' + v[i].name + '</span>' +
             '<span class="team">' + v[i].team + '</span>' +
             '</div>';
         }
 
-        console.log(memberList);
         $('.member-list.body').html(memberList);
         $('.member-list.number').html(v.length);
 
@@ -529,7 +530,7 @@
 
     function teamRender() {
         var bpkTeam = clonebackpacker.map(function (v) {
-            return v.team;
+            return v.team_eng;
         });
 
         bpkTeam = bpkTeam.filter(function(elem, index, self) {
@@ -538,8 +539,8 @@
 
         var html = '<div class="team root">';
         bpkTeam.forEach(function (v) {
-            html += '<label class="team item ' + v.toLowerCase() + '" title="' + v + '">';
-            html += '<input type="radio" name="team" required value="' + v.toLowerCase() + '" />';
+            html += '<label class="team item ' + v + '" title="' + v + '">';
+            html += '<input type="radio" name="team" required value="' + v + '" />';
             html += '</label>';
         });
         html += '</div>';
@@ -565,7 +566,8 @@
             var member = {
                 name: $member.find('.name').html(),
                 team: $member.find('.team').html(),
-            }
+                team_eng: $member.data('team-eng'),
+            };
 
             backpacker.push(member);
         });
@@ -579,7 +581,7 @@
         clonebackpacker = joinMember(backpacker.slice());
         window.clonebackpacker = clonebackpacker;
 
-        _render();
+        // _render();
         teamRender();
         juRender();
 

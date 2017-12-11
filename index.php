@@ -5,9 +5,11 @@ if($mysqli->connect_error){
     die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
 }
 
-$sql = "SELECT * FROM member";
+$sql = "SELECT *
+        from member AS m
+        left join team  AS t
+        ON m.team_id=t.team_id";
 $result = $mysqli->query($sql);
-$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -157,10 +159,13 @@ $mysqli->close();
             <div class="member-list body">
             <?php
                 if ($result->num_rows > 0) {
-                    // output data of each row
                     while($row = $result->fetch_assoc()) {
                     ?>
-                    <div class="member-list member <?=$row['team']?>" style="background-image:url()">
+                    <div
+                        class="member-list member <?=$row['team_eng']?>"
+                        style="background-image:url()"
+                        data-team-eng="<?=$row['team_eng']?>"
+                    >
                         <span class="name"><?=$row['name']?></span>
                         <span class="team"><?=$row['team']?></span>
                         <span class="remove">x</span>

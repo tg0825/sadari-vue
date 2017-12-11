@@ -5,9 +5,6 @@
 }
 
 body {
-    background-image:url('https://www.devicemart.co.kr/skin/goods/large/1158472.jpg');
-    background-repeat:no-repeat;
-    background-position: right 200px;
 }
 
 input {
@@ -246,19 +243,19 @@ input:focus {
     content: '\f004';
 }
 
-.pr{
+.PR{
     background: #b78ce3;
 }
 
-.pr:after{
+.PR:after{
     content: '\f1ea';
 }
 
-.trade {
+.b2b {
     background: rgb(29, 119, 235);
 }
 
-.trade:after{
+.b2b:after{
     content: '\f21a';
 }
 
