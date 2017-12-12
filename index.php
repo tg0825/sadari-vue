@@ -128,7 +128,9 @@ $result = $mysqli->query($sql);
                 <div class="ju-add">
                     <div class="form-block">
                         <label for="">주번 항목 추가</label>
-                        <input id="name" name="name" type="text" placeholder="창문닦이 기타 등등" maxlength="10">
+                        <div class="input-text">
+                            <input id="name" name="name" type="text" placeholder="창문닦이 기타 등등" maxlength="10">
+                        </div>
                         <button type="submit" class="btn-add-mem">추가</button>
                     </div>
                 </div>

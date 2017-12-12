@@ -447,9 +447,15 @@
         $name.val('');
     }
 
+    // 데이터 추가
+    function addData(o, v, t) {
+        var data = (Array.isArray(o) === true) ? v : {name: v, team: t};
+        return o.push(data);
+    }
+
     // 주번 항목 추가
     function addJu() {
-        var name = $(this).prev().val();
+        var name = $(this).parents('.ju-add').find('[name=name]').val();
         addData(ju, name);
         renderJu({
             body: $('.ju-list'),
@@ -457,16 +463,9 @@
         });
     }
 
-    // 구성원 추가
-    function addData(o, v, t) {
-        var data = (typeof o[0] === 'string') ? v : {name: v, team: t};
-        return o.push(data);
-    }
-
     // 주번 항목 삭제
     function removeJu() {
         var idx = $(this).index();
-        console.log(1);
         remove(ju, idx);
         renderJu({
             body: $('.ju-list'),
