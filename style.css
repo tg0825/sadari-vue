@@ -225,19 +225,11 @@ input:focus {
     content: '\f004';
 }
 
-<<<<<<< Updated upstream
 .pr{
     background: #b78ce3;
 }
 
 .pr:after{
-=======
-.PR {
-    background: #b78ce3;
-}
-
-.PR:after {
->>>>>>> Stashed changes
     content: '\f1ea';
 }
 
@@ -245,11 +237,7 @@ input:focus {
     background: rgb(29, 119, 235);
 }
 
-<<<<<<< Updated upstream
-.trade:after{
-=======
-.b2b:after {
->>>>>>> Stashed changes
+.trade:after {
     content: '\f21a';
 }
 
@@ -629,9 +617,6 @@ input:focus {
     font-size: 18px;
     font-family: FontAwesome;
 }
-<<<<<<< Updated upstream
-=======
-
 .team.item input {
     position: absolute;
     top: 0;
@@ -641,8 +626,6 @@ input:focus {
     z-index: -1;
     visibility: hidden;
 }
-
->>>>>>> Stashed changes
 @keyframes pop {
     50% {
         transform: scale(1.2);
