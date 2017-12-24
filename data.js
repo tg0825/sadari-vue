@@ -1,5 +1,4 @@
-var backpacker = [
-    {
+var backpacker = [{
         name: '김동환',
         position: '대표이사',
         team: 'CEO',
@@ -25,12 +24,6 @@ var backpacker = [
     },
     {
         name: '하동현',
-        position: 'backend',
-        team: 'engineer',
-        avatar: '',
-    },
-    {
-        name: '김태민',
         position: 'backend',
         team: 'engineer',
         avatar: '',

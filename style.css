@@ -1,24 +1,20 @@
-*{
-    margin:0;
-    padding:0;
-    font-family: apple SD gothic neo, Noto Sans KR, '맑은고딕', 'malgun gothic', '돋움', dotum, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nanum Gothic', apple SD gothic neo, Noto Sans KR, '맑은고딕', 'malgun gothic', '돋움', dotum, sans-serif;
 }
 
-body {
-<<<<<<< HEAD
-=======
-    /*background-image:url('https://www.devicemart.co.kr/skin/goods/large/1158472.jpg');
-    background-repeat:no-repeat;
-    background-position: right 200px;*/
->>>>>>> master
 }
+=======
+body {}
+>>>>>>> master
 
 input {
     box-sizing: border-box;
 }
 
 input:focus {
-    outline:0;
+    outline: 0;
     box-shadow: 0;
 }
 
@@ -96,7 +92,7 @@ input:focus {
 .form-block input {
     font-size: 16px;
     width: 70px;
-    height:40px;
+    height: 40px;
     padding: 5px;
     vertical-align: middle;
     border-radius: 5px;
@@ -150,8 +146,7 @@ input:focus {
     margin-right: 4px;
 }
 
-.member-list.body {
-}
+.member-list.body {}
 
 .member-list-in-db {
     display: none;
@@ -178,7 +173,7 @@ input:focus {
     cursor: pointer;
     transform: scale(1);
     transition: all 150ms;
-    box-shadow: 0 0 10px rgba(0,0,0,0);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
     box-sizing: border-box;
 }
 
@@ -190,51 +185,51 @@ input:focus {
     right: 12px;
 }
 
-.engineer{
+.engineer {
     background: #838383;
 }
 
-.engineer:after{
+.engineer:after {
     content: '\f121';
 }
 
-.designer{
+.designer {
     background: #57b8c9;
 }
 
-.designer:after{
+.designer:after {
     content: '\f040';
 }
 
-.scouter{
+.scouter {
     background: #1b508e;
 }
 
-.scouter:after{
+.scouter:after {
     content: '\f2b5';
 }
 
-.marketer{
+.marketer {
     background: #e84747;
 }
 
-.marketer:after{
+.marketer:after {
     content: '\f080';
 }
 
-.ceo{
+.ceo {
     background: #383838;
 }
 
-.ceo:after{
+.ceo:after {
     content: '\f27e';
 }
 
-.manager{
+.manager {
     background: #f4ab4a;
 }
 
-.manager:after{
+.manager:after {
     content: '\f004';
 }
 
@@ -249,13 +244,13 @@ input:focus {
 .b2b {
     background: rgb(29, 119, 235);
 }
-
-.b2b:after{
+.b2b:after,
+.trade:after {
     content: '\f21a';
 }
 
 .educator {
-    background:#84b453;
+    background: #84b453;
 }
 
 .educator:after {
@@ -289,7 +284,7 @@ input:focus {
 
 .member-list.member.highlight {
     transform: scale(1.4);
-    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     z-index: 100;
 }
 
@@ -348,6 +343,7 @@ input:focus {
     margin: 10px auto 10px;
     width: 475px;
 }
+
 .start-onlyone,
 .start-group,
 .start {
@@ -386,7 +382,7 @@ input:focus {
     content: ' <';
 }
 
-.nab > [class^=tab] {
+.nab>[class^=tab] {
     display: none;
 }
 
@@ -415,7 +411,9 @@ input:focus {
     color: #fff;
 }
 
+
 /* 주번관련 */
+
 .ju-add .form-block {
     position: relative;
 }
@@ -424,9 +422,7 @@ input:focus {
     margin-right: 80px;
 }
 
-.ju-add .input-text input {
-
-}
+.ju-add .input-text input {}
 
 .ju-add .btn-add-mem,
 #frm .btn-add-mem {
@@ -494,17 +490,19 @@ input:focus {
     font-size: 16px;
     line-height: 32px;
     text-align: center;
-    background: rgba(0,0,0,.9);
+    background: rgba(0, 0, 0, .9);
     border-radius: 50%;
     z-index: 10;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     display: none;
     /*animation: bye 0.2s forwards;*/
 }
+
 .result[data-option=number] .member-list.member:before {
     animation: pop 0.3s linear 1;
     display: inline-block;
 }
+
 .clock {
     position: absolute;
     top: 0;
@@ -547,9 +545,7 @@ input:focus {
     margin-bottom: 5px;
 }
 
-.resultText .fa-hand-o-up {
-
-}
+.resultText .fa-hand-o-up {}
 
 .toggleMenu {
     background: transparent;
@@ -594,6 +590,7 @@ input:focus {
     clear: both;
     display: block;
 }
+
 .team.root {
     margin: 5px 0 10px -5px;
     /*position: absolute;*/
@@ -629,7 +626,6 @@ input:focus {
     font-size: 18px;
     font-family: FontAwesome;
 }
-
 .team.item input {
     position: absolute;
     top: 0;
@@ -640,7 +636,7 @@ input:focus {
     visibility: hidden;
 }
 @keyframes pop {
-    50%  {
+    50% {
         transform: scale(1.2);
     }
 }

@@ -230,10 +230,28 @@
         $('.resultText textarea').attr('rows', resultText_list.length);
         $('.resultText textarea').html(renderText);
         // console.log(renderText);
+        if (confirm('결과를 slack으로 전송하시겠습니까?')) {
+            sendSlack(renderText);
+        }
     }
 
-    // <button onclick="myFunction()">Copy text</button>
-    function copy(e) {
+    function sendSlack(text) {
+        var channelName = 'tg0825test';
+        var token = 'KAqNxVAidiPcbZ3EixDDIPqg';
+        var url = 'https://backpackr-talk.slack.com/services/hooks/slackbot?token=' + token + '&channel=' + channelName;
+        var param = {
+            payload: text
+        };
+
+        function success(response) {
+            (response === 'ok') ? alert('배달 전송 완료!') : '';
+        }
+
+        $.post(url, param)
+            .done(success);
+    }
+
+    function copy() {
         $('.resultText textarea')[0].select();
         if (document.execCommand("Copy")) {
             alert('복사 완료!');
