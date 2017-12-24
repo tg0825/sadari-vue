@@ -1,3 +1,31 @@
+<?php
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+// var_dump($url);
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$mysqli = new mysqli($server, $username, $password, $db);
+?>
+
+<?php
+
+// $mysqli = new mysqli('127.0.0.1', 'root', 'root', 'sadari');
+
+if($mysqli->connect_error){
+    die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
+}
+
+$sql = "SELECT *
+        from member AS m
+        left join team  AS t
+        ON m.team_id=t.team_id";
+$result = $mysqli->query($sql);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +35,13 @@
 
 <link rel="stylesheet" href="resources/css/webfont.css">
 <link rel="stylesheet" href="style.css">
-<script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
 <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+
+<script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+
 <title>SADARI</title>
 </head>
 <body>
@@ -17,36 +50,58 @@
         <button class="toggleMenu">인원 추가</button>
         <div class="clock"></div>
     </div>
-
     <div class="dice wrap">
         <h1 class="dice title">SADARI</h1>
-
-        <form action="" id="frm" autocomplete="off">
-            <button
-                type="button"
-                class="reset"
-            >인원초기화</button>
-            <h2>
-                <i class="fa fa-male" aria-hidden="true"></i>
-                인원추가
-            </h2>
-            <div class="form-block">
-                <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="이름을 입력해주세요."
-                    maxlength="10"
-                >
-            </div>
-            <div class="form-block">
-                <div class="team-list"></div>
-            </div>
-            <button type="submit" class="btn-add-mem">추가</button>
-        </form>
+        <div id="frm">
+            <form id="JSFORM" action="insert.php" method="post" autocomplete="off">
+                <button
+                    type="button"
+                    class="reset"
+                >인원초기화</button>
+                <h2>
+                    <i class="fa fa-male" aria-hidden="true"></i>
+                    인원추가
+                </h2>
+                <div class="form-block">
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="이름을 입력해주세요."
+                        maxlength="10"
+                    >
+                </div>
+                <div class="form-block">
+                    <div class="team-list"></div>
+                </div>
+                <button type="submit" class="btn-add-mem">추가</button>
+            </form>
+        </div>
 
         <div class="member-list wrap">
-            <div class="member-list body"> </div>
+            <div class="member-list body">
+            <?php
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    ?>
+                    <div
+                        class="member-list member <?=$row['team_eng']?>"
+                        style="background-image:url()"
+                        data-team-eng="<?=$row['team_eng']?>"
+                    >
+                        <span class="name"><?=$row['name']?></span>
+                        <span class="team"><?=$row['team']?></span>
+                        <span class="remove">x</span>
+                    </div>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    없음
+                    <?php
+                }
+            ?>
+            </div>
             <div class="member-list number"></div>
         </div>
 
