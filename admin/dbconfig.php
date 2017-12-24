@@ -15,6 +15,9 @@ if (getenv("CLEARDB_DATABASE_URL")) {
 }
 
 $mysqli = new mysqli($server, $username, $password, $db);
+$mysqli->query("set session character_set_connection=utf8;");
+$mysqli->query("set session character_set_results=utf8;");
+$mysqli->query("set session character_set_client=utf8;");
 
 if($mysqli->connect_error){
     die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
