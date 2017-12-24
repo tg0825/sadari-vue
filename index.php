@@ -12,9 +12,9 @@
 
 // mysql_select_db($db_database) or die("Unable to select Database : " . mysql_error());
 
-mysql_query("set session character_set_connection=utf8;");
-mysql_query("set session character_set_results=utf8;");
-mysql_query("set session character_set_client=utf8;");
+// mysql_query("set session character_set_connection=utf8;");
+// mysql_query("set session character_set_results=utf8;");
+// mysql_query("set session character_set_client=utf8;");
 
 // $query = "SELECT * FROM temptest" ;
 
