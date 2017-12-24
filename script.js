@@ -230,7 +230,7 @@
         $('.resultText textarea').attr('rows', resultText_list.length);
         $('.resultText textarea').html(renderText);
         // console.log(renderText);
-        if (confirm('결과를 slack에 보내겠습니까?')) {
+        if (confirm('결과를 slack으로 전송하시겠습니까?')) {
             sendSlack(renderText);
         }
     }
