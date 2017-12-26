@@ -1,14 +1,8 @@
 (function (window, $, modal) {
-<<<<<<< HEAD
-
-    var diceType = 'one';
-    var clonebackpacker = window.clonebackpacker || {};
-=======
     var $wrap = $('.sadari.wrap');
     var sadariType = 'one';
     var clonebackpacker = window.clonebackpacker || {};
     var tmpbackpacker = [];
->>>>>>> dev
     var originBp;
 
     // 배열 랜덤 섞기
@@ -159,15 +153,9 @@
             i += 1;
         }
         $('.result').html(html);
-<<<<<<< HEAD
-        $('.resultText').show(html);
-        // modal.open(html);
-        resultText();
-=======
         // $('.resultText').show();
         $wrap.addClass('is_result');
         // modal.open(html);
->>>>>>> dev
     }
 
     // 결과 텍스트로 만들기
@@ -190,16 +178,6 @@
         renderText += yyyymmdd;
 
         var game = '';
-<<<<<<< HEAD
-        switch(diceType) {
-            case 'one':
-                game = '한명뽑기';
-                break;
-            case 'jo-member':
-                game = '랜덤조';
-                break;
-            case 'jo-team':
-=======
         switch(sadariType) {
             case 'one':
                 game = '한명뽑기';
@@ -208,7 +186,6 @@
                 game = '랜덤조';
                 break;
             case 'jo_team':
->>>>>>> dev
                 game = '랜덤조';
                 break;
             case 'ju':
@@ -267,37 +244,6 @@
 
             renderText += thisCols;
         });
-<<<<<<< HEAD
-        $('.resultText textarea').attr('rows', resultText_list.length);
-        $('.resultText textarea').html(renderText);
-        // console.log(renderText);
-        if (confirm('결과를 slack으로 전송하시겠습니까?')) {
-            sendSlack(renderText);
-        }
-    }
-
-    function sendSlack(text) {
-        var channelName = 'tg0825test';
-        var token = 'KAqNxVAidiPcbZ3EixDDIPqg';
-        var url = 'https://backpackr-talk.slack.com/services/hooks/slackbot?token=' + token + '&channel=' + channelName;
-        var param = {
-            payload: text
-        };
-
-        function success(response) {
-            (response === 'ok') ? alert('배달 전송 완료!') : '';
-        }
-
-        $.post(url, param)
-            .done(success);
-    }
-
-    function copy() {
-        $('.resultText textarea')[0].select();
-        if (document.execCommand("Copy")) {
-            alert('복사 완료!');
-        }
-=======
 
         if (confirm('결과를 slack으로 전송하시겠습니까?')) {
             sendSlack(renderText);
@@ -306,7 +252,6 @@
         $('.resultText textarea').attr('rows', resultText_list.length);
         $('.resultText textarea').html(renderText);
         $('.resultText').hide();
->>>>>>> dev
     }
 
     function sendSlack(text) {
@@ -430,44 +375,7 @@
             }
             return false;
         });
-<<<<<<< HEAD
-    }
-
-    // 삭제 버튼 보이기
-    function hoverName() {
-        $(this).find('.remove').remove();
-        $(this).append('<span class="remove">x</span>');
-    }
-
-    // 삭제 버튼 클릭
-    function clickRemove(e) {
-        e.stopPropagation();
-        var idx = $(this).parent().index();
-        remove(clonebackpacker, idx);
-        _render();
-    }
-
-    function windowMem(e) {
-        var $this = $(e.target);
-        var top = $this.offset().top;
-        var left = $this.offset().left;
-        $('#frm').css({
-            'left': left,
-            'top': top + 30
-        });
-        $('#frm').toggle();
-    }
-
-    // 구성원 초기화
-    function reset() {
-        if (confirm ('구성원을 초기화 시키겠습니까?')) {
-            clonebackpacker = joinMember(originBp);
-            localStorage.clear();
-            _render(clonebackpacker);
-        }
-=======
         $('.member-list.number').html((max - disable.length) + '/' + max);
->>>>>>> dev
     }
 
     // 구성원 추가
@@ -648,13 +556,8 @@
         clonebackpacker = joinMember(backpacker.slice());
         window.clonebackpacker = clonebackpacker;
 
-<<<<<<< HEAD
-        // _render();
-        teamRender();
-=======
         _render();
         // teamRender();
->>>>>>> dev
         juRender();
 
         $('.sadari-select').find('button:eq(0)').trigger('click');
@@ -662,20 +565,6 @@
 
     function initEvent() {
         // event bind
-<<<<<<< HEAD
-        $(document).on({
-            click: changeName,
-            mouseenter: hoverName
-        }, '.member-list.body .member-list.member');
-        // 멤버 추가 창 토글
-        $('.toggleMenu').on('click', windowMem);
-        // 멤버 추가
-        // $('#JSFORM').on('submit', addMember);
-        // 추가 멤버 팀 선택
-        $(document).on('click', '.team.item', selectedTeam)
-        // 멤버 삭제
-        $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
-=======
         // $(document).on({
         //     mouseenter: hoverName
         // }, '.member-list.body .member-list.member');
@@ -687,7 +576,6 @@
         // $(document).on('click', '.team.item', selectedTeam)
         // 멤버 비활성
         $(document).on('click', '.member-list.wrap .member-list.member', memberToggle);
->>>>>>> dev
         // 주번 추가
         $('.ju-add').on('click', 'button', addJu);
         // 주번 삭제
@@ -697,15 +585,9 @@
         // 사다리 시작
         $('.start').on('click', sadariStart);
         // 구성원 리셋
-<<<<<<< HEAD
-        $(document).on('click', '.reset', reset);
-        $(document).on('click', '[name=copy]', copy);
-        // 옵션
-=======
         // $(document).on('click', '.reset', reset);
         $(document).on('click', '[name=copy]', copy);
         // 결과 옵션
->>>>>>> dev
         $(document).on('click', '[data-option]', option);
         // 텍스트결과 토글
         $('.resultTextToggle').on('click', resultTextToggle)
