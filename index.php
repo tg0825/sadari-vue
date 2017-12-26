@@ -51,11 +51,11 @@ $result = $mysqli->query($sql);
 <body>
     <div class="gnb">
         <button class="resultTextToggle">텍스트 결과 보기</button>
-        <button class="toggleMenu">인원 추가</button>
+        <!-- <button class="toggleMenu">인원 추가</button> -->
         <div class="clock"></div>
     </div>
-    <div class="dice wrap">
-        <h1 class="dice title">SADARI</h1>
+    <div class="sadari wrap">
+        <h1 class="sadari title">SADARI</h1>
         <div id="frm">
             <form id="JSFORM" action="insert.php" method="post" autocomplete="off">
                 <button
@@ -109,10 +109,10 @@ $result = $mysqli->query($sql);
             <div class="member-list number"></div>
         </div>
 
-        <div class="dice-select">
+        <div class="sadari-select">
             <div><button class="btn" data-game="one">한명 뽑기 (또는 여러명)</button></div>
-            <div><button class="btn" data-game="jo-member">랜덤 조 (인원기준)</button></div>
-            <div><button class="btn" data-game="jo-team">랜덤 조 (팀 기준)</button></div>
+            <div><button class="btn" data-game="jo_member">랜덤 조 (인원기준)</button></div>
+            <div><button class="btn" data-game="jo_team">랜덤 조 (팀 기준)</button></div>
             <div><button class="btn" data-game="ju">주번 뽑기</button></div>
         </div>
 
@@ -120,7 +120,7 @@ $result = $mysqli->query($sql);
             <div class="tab-item">
                 <div class="form-block">
                     딱!
-                    <input id="onlyOne" name="onlyOne" type="number" value="1">
+                    <input class="ta-r" id="onlyOne" name="onlyOne" type="number" value="1">
                     명만 뽑기
                 </div>
             </div>
@@ -129,7 +129,7 @@ $result = $mysqli->query($sql);
                 <div class="form-block">
                     <label for=""></label>
                     한 조당
-                    <input id="groupMember" name="groupMember" type="number" value="3">
+                    <input class="ta-r" id="groupMember" name="groupMember" type="number" value="3">
                     명
                 </div>
             </div>
@@ -138,7 +138,7 @@ $result = $mysqli->query($sql);
                 <div class="form-block">
                     <label for=""></label>
                     총
-                    <input id="groupCount" name="groupCount" type="number" value="5">
+                    <input class="ta-r" id="groupCount" name="groupCount" type="number" value="5">
                     개 조 만들기
                 </div>
             </div>
