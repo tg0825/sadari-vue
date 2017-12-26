@@ -1,41 +1,60 @@
-(function ($, modal) {
-
-    var diceType = 'one';
-    var clonebackpacker;
+(function (window, $, modal) {
+    var $wrap = $('.sadari.wrap');
+    var sadariType = 'one';
+    var clonebackpacker = window.clonebackpacker || {};
+    var tmpbackpacker = [];
     var originBp;
+
+    // 배열 랜덤 섞기
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+    }
+
+    function fil() {
+        var remap = clonebackpacker.slice().filter(function (v) {
+            if (v.is_disable === true) {
+                return false;
+            }
+            return true;
+        });
+
+        shuffle(remap);
+
+        return remap;
+    }
 
     // 사다리 종류
     var game = {
         one: function () {
-            var tmpbackpacker = clonebackpacker.slice();
             var count = $('#onlyOne').val();
             var groupCount = 1;
 
-            shuffle(tmpbackpacker);
             result({
                 a: count,
                 b: groupCount,
                 c: tmpbackpacker
             });
         },
-        "jo-member": function () {
-            var tmpbackpacker = clonebackpacker.slice();
+        jo_member: function () {
             var count = $('#groupMember').val() || 3;
             var groupCount = Math.ceil(tmpbackpacker.length / count);
 
-            shuffle(tmpbackpacker);
             result({
                 a: count,
                 b: groupCount,
                 c: tmpbackpacker
             });
         },
-        "jo-team": function () {
-            var tmpbackpacker = clonebackpacker.slice();
+        jo_team: function () {
             var count = $('#groupCount').val() || 3;
             var groupCount = Math.ceil(tmpbackpacker.length / count);
 
-            shuffle(tmpbackpacker);
             result({
                 a: groupCount,
                 b: count,
@@ -43,11 +62,9 @@
             });
         },
         ju: function () {
-            var tmpbackpacker = clonebackpacker.slice();
             var count = ju.length || 3;
             var groupCount = Math.floor(tmpbackpacker.length / count);
 
-            shuffle(tmpbackpacker);
             result({
                 a: groupCount,
                 b: count,
@@ -133,9 +150,10 @@
             html += '</div>';
             i += 1;
         }
-        // $('.result').html(html);
-        modal.open(html);
-        resultText();
+        $('.result').html(html);
+        // $('.resultText').show();
+        $wrap.addClass('is_result');
+        // modal.open(html);
     }
 
     // 결과 텍스트로 만들기
@@ -143,6 +161,40 @@
         var resultText_list = [];
         var renderText = '';
         var cols = [];
+        var index = 1;
+
+        var date = new Date();
+        var today = date.getDay();
+        var week = ['일', '월', '화', '수', '목', '금', '토'];
+        var yyyymmdd = date.getFullYear() + '년' +
+        ("0" + (date.getMonth() + 1)).slice(-2) + '월' +
+        ("0" + date.getDate()).slice(-2) + '일' +
+        ' (' + week[today] + ') ' +
+        ("0" + date.getHours()).slice(-2) + '시' +
+        ("0" + date.getMinutes()).slice(-2) + '분\n';
+
+        renderText += yyyymmdd;
+
+        var game = '';
+        switch(sadariType) {
+            case 'one':
+                game = '한명뽑기';
+                break;
+            case 'jo_member':
+                game = '랜덤조';
+                break;
+            case 'jo_team':
+                game = '랜덤조';
+                break;
+            case 'ju':
+                game = '주번뽑기';
+                break;
+            default:
+                game = '한명뽑기'
+        }
+
+        // renderText += game + Date.UTC() + '\n';
+        renderText += game + '\n';
 
         // 데이터 만들기
         // $('.result .group.item').each(function (i, e) {
@@ -190,19 +242,36 @@
             thisCols += '\n';
             renderText += thisCols;
         });
-        $('.resultText').attr('rows', resultText_list.length);
-        $('.resultText').html(renderText);
-        // console.log(renderText);
+
+        if (confirm('결과를 slack으로 전송하시겠습니까?')) {
+            sendSlack(renderText);
+        }
+
+        $('.resultText textarea').attr('rows', resultText_list.length);
+        $('.resultText textarea').html(renderText);
+        $('.resultText').hide();
     }
 
-    // 배열 섞기
-    function shuffle(a) {
-        var j, x, i;
-        for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
+    function sendSlack(text) {
+        var channelName = 'tg0825test';
+        var token = 'KAqNxVAidiPcbZ3EixDDIPqg';
+        var url = 'https://backpackr-talk.slack.com/services/hooks/slackbot?token=' + token + '&channel=' + channelName;
+        var param = {
+            payload: text
+        };
+
+        function success(response) {
+            (response === 'ok') ? alert('전송 완료!') : '';
+        }
+
+        $.post(url, param)
+            .done(success);
+    }
+
+    function copy() {
+        $('.resultText textarea')[0].select();
+        if (document.execCommand("Copy")) {
+            alert('복사 완료!');
         }
     }
 
@@ -266,9 +335,9 @@
         }
 
         $('.member-list.body').html(memberList);
-        $('.member-list.number').html(v.length);
+        headCount();
 
-        localStorage.bp = JSON.stringify(clonebackpacker);
+        // localStorage.bp = JSON.stringify(clonebackpacker);
     }
 
     // 주번 랜더링
@@ -286,76 +355,32 @@
         $body.html(html);
     }
 
-    // 구성원 삭제
-    function remove(o, v) {
-        return o.splice(v, 1);
-    }
-
-    // 구성원 이름 수정
-    function endEdit(v, i) {
-        clonebackpacker[i].name = v;
-
-        $(this)
-        .removeClass('edit')
-        .text('')
-        .append('<span class="name">' +
-        clonebackpacker[i].name +
-        '</span>');
-    }
-
-    // 이름 변경
-    function changeName() {
-        var self = this;
-        var $self = $(self);
-        var idx = $self.index();
-        var oldText = $self.find('.name').text();
-        var $input = $('<input maxLength="10" type="text">');
-
-        if ($(this).is('.edit')) {
-            return;
-        }
-
-        $input.val(oldText);
-        $self
-        .text('')
-        .addClass('edit')
-        .append($input)
-        .find($input)
-        .focus()
-        .on({
-            focusout: function () {
-                var text = $(this).val();
-                endEdit.call(self, text, idx);
-            },
-            keypress: function (e) {
-                if (e.keyCode == 13) {
-                    $(this).trigger('focusout');
-                }
-            }
-        });
-    }
-
-    // 삭제 버튼 보이기
-    function hoverName() {
-        $(this).find('.remove').remove();
-        $(this).append('<span class="remove">x</span>');
-    }
-
-    // 삭제 버튼 클릭
-    function clickRemove(e) {
+    // 비활성 버튼 클릭
+    function memberToggle(e) {
         e.stopPropagation();
-        var idx = $(this).parent().index();
-        remove(clonebackpacker, idx);
-        _render();
+        var $target = $(e.currentTarget);
+        var idx = $target.index();
+
+        if ($target.is('.is_disable')) {
+            $target.removeClass('is_disable');
+            clonebackpacker[idx].is_disable = false;
+        } else {
+            $target.addClass('is_disable');
+            clonebackpacker[idx].is_disable = true;
+        }
+
+        headCount();
     }
 
-    // 구성원 초기화
-    function reset() {
-        if (confirm ('구성원을 초기화 시키겠습니까?')) {
-            clonebackpacker = joinMember(originBp);
-            localStorage.clear();
-            _render(clonebackpacker);
-        }
+    function headCount() {
+        var max = clonebackpacker.length;
+        var disable = clonebackpacker.filter(function (v) {
+            if (v.is_disable === true) {
+                return true;
+            }
+            return false;
+        });
+        $('.member-list.number').html((max - disable.length) + '/' + max);
     }
 
     // 구성원 추가
@@ -423,9 +448,10 @@
     }
 
     // 게임 시작
-    function diceStart() {
-        game[diceType]();
-        scrollMove('.dice-select');
+    function sadariStart() {
+        tmpbackpacker = fil();
+        game[sadariType]();
+        scrollMove('.sadari-select');
     }
 
     // 스크롤 이동
@@ -436,14 +462,18 @@
         $('body, html').animate({
             scrollTop: pos
         }, 300);
+
+        setTimeout(function () {
+            resultText();
+        }, 300);
     }
 
     // 게임 선택
     function selectDice() {
         var idx = $(this).parent().index();
-        diceType = $(this).data('game');
+        sadariType = $(this).data('game');
 
-        $('.dice-select').find('button').removeClass('is_on');
+        $('.sadari-select').find('button').removeClass('is_on');
         $(this).addClass('is_on');
         $('.tab')
             .find('> [class^=tab]')
@@ -464,37 +494,46 @@
         clonebackpacker = joinMember(clonebackpacker);
 
         _render();
+        // teamRender();
         juRender();
 
-        $('.dice-select').find('button:eq(0)').trigger('click');
+        $('.sadari-select').find('button:eq(0)').trigger('click');
     }
 
     function initEvent() {
         // event bind
-        $(document).on({
-            click: changeName,
-            mouseenter: hoverName
-        }, '.member-list.body .member-list.member');
+        // $(document).on({
+        //     mouseenter: hoverName
+        // }, '.member-list.body .member-list.member');
+        // 멤버 추가 창 토글
+        // $('.toggleMenu').on('click', windowMem);
         // 멤버 추가
-        $('#frm').on('submit', addMember);
-        // 멤버 삭제
-        $(document).on('click', '.member-list.wrap .member-list.member .remove', clickRemove);
+        // $('#JSFORM').on('submit', addMember);
+        // 추가 멤버 팀 선택
+        // $(document).on('click', '.team.item', selectedTeam)
+        // 멤버 비활성
+        $(document).on('click', '.member-list.wrap .member-list.member', memberToggle);
         // 주번 추가
         $('.ju-add').on('click', 'button', addJu);
         // 주번 삭제
         $(document).on('click', '.ju-list li', removeJu);
         // 사다리 선택
-        $('.dice-select').on('click', 'button', selectDice);
+        $('.sadari-select').on('click', 'button', selectDice);
         // 사다리 시작
-        $('.start').on('click', diceStart);
+        $('.start').on('click', sadariStart);
         // 구성원 리셋
-        $(document).on('click', '.reset', reset);
+        // $(document).on('click', '.reset', reset);
+        $(document).on('click', '[name=copy]', copy);
+        // 결과 옵션
+        $(document).on('click', '[data-option]', option);
+        // 텍스트결과 토글
+        $('.resultTextToggle').on('click', resultTextToggle)
     }
 
     initEvent();
     init();
 
     // test action
-    // $('.dice-select button').eq(1).click();
+    // $('.sadari-select button').eq(1).click();
     // $('.start').click();
 }(jQuery, modal));
