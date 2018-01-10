@@ -255,7 +255,7 @@
     }
 
     function sendSlack(text) {
-        var channelName = 'tg0825test';
+        var channelName = 'random';
         var token = 'KAqNxVAidiPcbZ3EixDDIPqg';
         var url = 'https://backpackr-talk.slack.com/services/hooks/slackbot?token=' + token + '&channel=' + channelName;
         var param = {
