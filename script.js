@@ -16,6 +16,11 @@
         }
     }
 
+    // 삭제
+    function remove(o, v) {
+        return o.splice(v, 1);
+    }
+
     function fil() {
         var remap = clonebackpacker.slice().filter(function (v) {
             if (v.is_disable === true) {
