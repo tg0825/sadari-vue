@@ -36,9 +36,10 @@ $result = $mysqli->query($sql);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
 
+<link rel="apple-touch-icon" href="resources/image/sadari.png">
 <link rel="stylesheet" href="resources/css/webfont.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="resources/vendor/font-awesome/css/font-awesome.css">
 
 <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
@@ -173,9 +174,9 @@ $result = $mysqli->query($sql);
             <button type="button" name="copy">결과 복사하기</button>
         </div>
     </div>
-    <script src="data.js"></script>
-    <script src="modal.js"></script>
-    <script src="clock.js"></script>
-    <script src="script.js"></script>
+    <script src="./resources/js/data.js"></script>
+    <script src="./resources/js/modal.js"></script>
+    <script src="./resources/js/clock.js"></script>
+    <script src="./resources/js/script.js"></script>
 </body>
 </html>
