@@ -34,11 +34,10 @@ $result = $mysqli->query($sql);
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, user-scalable=no">
 
 <link rel="stylesheet" href="resources/css/webfont.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
 
 <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>

@@ -103,8 +103,7 @@ input:focus {
 
 .sadari.wrap {
     min-width: 320px;
-    width: 90%;
-    /*max-width: 475px;*/
+    max-width: 480px;
     margin: 0 auto;
 }
 
@@ -121,14 +120,17 @@ input:focus {
 }
 
 .member-list.wrap {
-    width: 480px;
-    margin: -5px auto 20px;
+    max-width: 480px;
     position: relative;
 }
 
 .member-list.title {
     font-size: 16px;
     vertical-align: middle;
+}
+
+.member-list.body {
+    margin: 0 0 0 -5px;
 }
 
 .member-list.number {
@@ -147,8 +149,6 @@ input:focus {
     vertical-align: baseline;
     margin-right: 4px;
 }
-
-.member-list.body {}
 
 .member-list-in-db {
     display: none;
@@ -185,7 +185,7 @@ input:focus {
 
 .member-list.member.is_disable:before {
     content: '제외';
-    color: #ccc;
+    color: #fff;
     position: absolute;
     top: 0;
     left: 0;
@@ -363,7 +363,7 @@ input:focus {
 
 .start-root {
     margin: 10px auto 10px;
-    width: 475px;
+    max-width: 480px;
 }
 
 .start-onlyone,
@@ -380,7 +380,7 @@ input:focus {
 }
 
 .tab {
-    width: 475px;
+    max-width: 480px;
     clear: both;
     text-align: center;
     margin: 20px auto;
@@ -409,9 +409,9 @@ input:focus {
 }
 
 .sadari-select {
-    width: 475px;
+    max-width: 480px;
     clear: both;
-    margin: 20px auto;
+    margin: 20px 0 0 -5px;
     overflow: hidden;
 }
 
@@ -499,7 +499,7 @@ input:focus {
 
 .result {
     margin: 0 auto;
-    width: 800px;
+    max-width: 800px;
 }
 
 .result .member-list.member:before {
@@ -603,7 +603,7 @@ input:focus {
 }
 
 .option.root {
-    width: 475px;
+    max-width: 480px;
     margin: 20px auto;
 }
 
@@ -666,5 +666,61 @@ input:focus {
 @keyframes bye {
     100% {
         transform: scale(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .member-list.wrap {
+    }
+
+    .group.member,
+    .member-list.member {
+        height: 55px;
+        width: 25%;
+        margin: 0;
+        border-radius: 0;
+        font-size: 14px;
+    }
+
+    .group.member:before,
+    .member-list.member:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border: 1px solid rgba(0,0,0,.4);
+    }
+
+    .member-list.member.is_disable:before {
+        border-radius: 0;
+    }
+
+    .sadari-select div {
+        width: auto;
+        float: none;
+        margin: 0;
+    }
+
+    .sadari-select div button {
+        border-top: 1px solid #555;
+        border-radius: 0;
+    }
+
+    .group.title {
+        margin-left: 0;
+    }
+
+    .group.item {
+        border-radius: 0;
+        overflow: hidden;
+        margin: 0;
+        display: block;
+        border-top: 1px solid #b2b2b2;
+    }
+
+    .member-list.member .team {
+        font-size: 12px;
     }
 }

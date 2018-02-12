@@ -5,8 +5,6 @@ var pkg = require('./package.json');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
-// CONFIG /////////////////////////////////////////////////////////////////////////
-// 경로
 var projectPath = {
     src: './resources/src',
     dev: './resources/dev',
@@ -165,98 +163,3 @@ gulp.task('bs', ['browser-sync'], function () {
         './**/*.js'
     ], bs.reload);
 });
-
-// PRODUCTION TASKS /////////////////////////////////////////////////////////////////////////
-
-// projectPath.public 경로 지우기
-gulp.task('cleanPublic', function () {
-    return del(projectPath.public);
-});
-
-// projectPath.public용 css 파일생성
-gulp.task('buildPublicCSS', function () {
-    return gulp.src(entryFile.scss)
-        .pipe(sass({
-            errLogToConsole: false,
-            outputStyle: 'compressed'
-        }).on('error', sass.logError))
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions', 'ie 8', '> 5%'],
-            cascade: false
-        }))
-        .pipe(concat({
-            path: fileNames.cssFile + '.min.css'
-        }))
-        .pipe(gulp.dest(projectPath.public + '/css'));
-});
-
-// projectPath.public용 js 파일생성
-gulp.task('buildPublicJS', function () {
-    return gulp.src(clientJS)
-        .pipe(concat({
-            path: fileNames.jsFile + '.min.js'
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest(projectPath.public + '/js'));
-});
-
-// concat vendorJS
-gulp.task('buildVendor', function () {
-    return gulp.src(vendorJS)
-        .pipe(concat({
-            path: fileNames.vendor + '.min.js'
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest(projectPath.public + '/js'));
-});
-
-// PRODUCTION 이미지 스프라이트 생성
-gulp.task('buildSprite', function () {
-    var util = spritesmith.util;
-    var themeTemplate = util.createTemplate(
-        path.join(__dirname + '/resources/src/css', 'sp-template', 'sp-css.hbs'), [spOpt.addTheme, util.addPseudoClass]
-    );
-
-    var opts = {
-        spritesmith: function (options, sprite, icons) {
-            options.retinaImgPath = spOpt.bgPath + options.imgName;
-            options.imgPath = spOpt.bgPath + options.imgName;
-            options.cssTemplate = themeTemplate;
-            options.cssSpritesheetName = sprite;
-            options.padding = 15;
-            options.cssName = sprite + '.scss';
-            options.cssVarMap = function (sp) {
-                sp.name = sp.name;
-            };
-            return options;
-        }
-    }
-
-    var spriteData = gulp
-        .src(spOpt.img)
-        .pipe(spritesmith(opts))
-        .on('error', function (err) {
-            console.log(err);
-        });
-
-    del([
-        spOpt.distCss + '/*',
-        spOpt.distImg + '/*',
-    ]);
-    spriteData.img.pipe(gulp.dest(spOpt.distImg + '/sp'));
-    spriteData.css.pipe(gulp.dest(spOpt.css));
-});
-
-gulp.task('buildPublicSrc', ['buildVendor', 'buildPublicCSS', 'buildPublicJS', 'sprite']);
-
-// 애플리케이션쪽 작업용 (임시)
-gulp.task('test', ['browser-sync', 'buildPublicCSS', 'buildPublicJS', 'buildSprite'], function () {
-    gulp.watch(projectPath.src + '/**/*.scss', ['buildPublicCSS']);
-    gulp.watch(projectPath.src + '/**/*.js', ['buildPublicJS', 'eslint']);
-    gulp.watch(['./**/*.php'], bs.reload);
-});
-
-gulp.task('fonts', function() {
-  return gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('public/fonts'))
-})

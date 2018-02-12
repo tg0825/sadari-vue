@@ -11,10 +11,18 @@
   "name": "dice",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://tg0825@bitbucket.org/tg0825/dice.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://tg0825@bitbucket.org/tg0825/dice.git"
+  },
   "author": "tg0825 <tg0825@backpack.kr>",
   "license": "MIT",
   "dependencies": {
     "font-awesome": "^4.7.0"
-  }
+  },
+  "homepage": "https://bitbucket.org/tg0825/dice#readme",
+  "scripts": {
+    "start": "gulp bs"
+  },
+  "description": ""
 }
