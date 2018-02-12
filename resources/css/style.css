@@ -197,6 +197,7 @@ input:focus {
     background: rgba(0, 0, 0, .75);
     border-radius: 10px;
     z-index: 100;
+    box-sizing: border-box;
 }
 
 .member-list.member:after {
@@ -694,6 +695,7 @@ input:focus {
     }
 
     .member-list.member.is_disable:before {
+        line-height: 55px;
         border-radius: 0;
     }
 
@@ -722,5 +724,24 @@ input:focus {
 
     .member-list.member .team {
         font-size: 12px;
+    }
+
+
+    .tab {
+        border-radius: 0;
+    }
+
+    .start-onlyone,
+    .start-group,
+    .start {
+        border-radius: 0
+    }
+
+    .sadari.title {
+        text-align: center;
+        font-size: 27px;
+        margin-top: 31px;
+        margin-bottom: 15px;
+        color: #333;
     }
 }
