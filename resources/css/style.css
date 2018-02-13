@@ -120,7 +120,6 @@ input:focus {
 }
 
 .member-list.wrap {
-    max-width: 480px;
     position: relative;
 }
 
@@ -364,7 +363,7 @@ input:focus {
 
 .start-root {
     margin: 10px auto 10px;
-    max-width: 480px;
+    /* max-width: 480px; */
 }
 
 .start-onlyone,
@@ -381,7 +380,7 @@ input:focus {
 }
 
 .tab {
-    max-width: 480px;
+    /* max-width: 480px; */
     clear: both;
     text-align: center;
     margin: 20px auto;
@@ -410,7 +409,7 @@ input:focus {
 }
 
 .sadari-select {
-    max-width: 480px;
+    /* max-width: 480px; */
     clear: both;
     margin: 20px 0 0 -5px;
     overflow: hidden;
@@ -499,8 +498,8 @@ input:focus {
 }
 
 .result {
-    margin: 0 auto;
-    max-width: 800px;
+    margin: -10px 0 0 -10px;
+    /* max-width: 800px; */
 }
 
 .result .member-list.member:before {
@@ -600,11 +599,11 @@ input:focus {
     overflow: auto;
     min-width: 320px;
     width: 100%;
-    max-width: 800px;
+    /* max-width: 800px; */
 }
 
 .option.root {
-    max-width: 480px;
+    /* max-width: 480px; */
     margin: 20px auto;
 }
 
@@ -670,7 +669,12 @@ input:focus {
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+    .sadari.wrap {
+        width: auto;
+        max-width: none;
+    }
+
     .member-list.wrap {
     }
 
@@ -697,6 +701,11 @@ input:focus {
     .member-list.member.is_disable:before {
         line-height: 55px;
         border-radius: 0;
+    }
+
+    .sadari-select {
+        width: auto;
+        max-width: none;
     }
 
     .sadari-select div {
@@ -729,6 +738,7 @@ input:focus {
 
     .tab {
         border-radius: 0;
+        max-width: none;
     }
 
     .start-onlyone,
@@ -743,5 +753,9 @@ input:focus {
         margin-top: 31px;
         margin-bottom: 15px;
         color: #333;
+    }
+
+    .start-root {
+        max-width: none;
     }
 }
