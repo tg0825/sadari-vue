@@ -1,6 +1,5 @@
 <?php
 // dev
-
 $server = '127.0.0.1';
 $username = 'root';
 $password = 'root';
@@ -57,6 +56,7 @@ $result = $mysqli->query($sql);
     </div>
     <div class="sadari wrap">
         <h1 class="sadari title">SADARI</h1>
+
         <div id="frm">
             <form id="JSFORM" action="insert.php" method="post" autocomplete="off">
                 <button
@@ -111,10 +111,30 @@ $result = $mysqli->query($sql);
         </div>
 
         <div class="sadari-select">
-            <div><button class="btn" data-game="one">한명 뽑기 (또는 여러명)</button></div>
-            <div><button class="btn" data-game="jo_member">랜덤 조 (인원기준)</button></div>
-            <div><button class="btn" data-game="jo_team">랜덤 조 (팀 기준)</button></div>
-            <div><button class="btn" data-game="ju">주번 뽑기</button></div>
+            <div>
+                <button class="btn" data-game="one">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    한명 뽑기 (또는 여러명)
+                </button>
+            </div>
+            <div>
+                <button class="btn" data-game="jo_member">
+                    <i class="fa fa-random" aria-hidden="true"></i>
+                    랜덤 조 (인원기준)
+                </button>
+            </div>
+            <div>
+                <button class="btn" data-game="jo_team">
+                    <i class="fa fa-random" aria-hidden="true"></i>
+                    랜덤 조 (팀 기준)
+                </button>
+            </div>
+            <div>
+                <button class="btn" data-game="ju">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    주번 뽑기
+                </button>
+            </div>
         </div>
 
         <div class="tab">
@@ -162,19 +182,14 @@ $result = $mysqli->query($sql);
             <button class="start" type="submit">시작!</button>
         </div>
 
-        <div class="option root">
-            <label class="option item">
-                <input type="checkbox" data-option="number">
-                번호 표시
-            </label>
-        </div>
-
         <div class="result"> </div>
         <div class="resultText" style="display:none">
             <textarea></textarea>
             <button type="button" name="copy">결과 복사하기</button>
         </div>
     </div>
+
+    <script src="./resources/js/config.js"></script>
     <script src="./resources/js/data.js"></script>
     <script src="./resources/js/modal.js"></script>
     <script src="./resources/js/clock.js"></script>

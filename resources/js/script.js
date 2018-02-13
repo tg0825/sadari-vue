@@ -157,10 +157,10 @@
             html += '</div>';
             i += 1;
         }
-        $('.result').html(html);
+        // $('.result').html(html);
         // $('.resultText').show();
         $wrap.addClass('is_result');
-        // modal.open(html);
+        modal.open(html);
     }
 
     // 결과 텍스트로 만들기
@@ -498,7 +498,7 @@
     function option(e) {
         var target = e.target;
         var option = target.dataset.option;
-        var result = document.querySelector('.result');
+        var result = document.querySelector('.modal');
 
         result.dataset.option = (result.dataset.option === option) ? '' : option;
     }
@@ -593,7 +593,7 @@
         // $(document).on('click', '.reset', reset);
         $(document).on('click', '[name=copy]', copy);
         // 결과 옵션
-        $(document).on('click', '[data-option]', option);
+        $(document).on('click', '.option.root [data-option]', option);
         // 텍스트결과 토글
         $('.resultTextToggle').on('click', resultTextToggle)
     }
