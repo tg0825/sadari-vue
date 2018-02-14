@@ -579,20 +579,42 @@ input:focus {
 .modal {
 }
 
+.modal-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 18px;
+    color: #fff;
+    background: #000;
+    width: 35px;
+    height: 35px;
+    border-radius: 30px;
+    border: 0;
+}
+
 .modal-box {
     position: fixed;
     top: 5%;
     left: 5%;
     right: 5%;
-    left: 5%;
-    bottom: 5%;
     z-index: 1000;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 20px 30px rgba(0, 0, 0, .2);
-    overflow: auto;
     min-width: 320px;
+}
+
+.modal-head {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+}
+
+.modal-body {
+    overflow: auto;
     min-height: 320px;
+    max-height: 80vh;
+    border-radius: 0 0 10px 10px;
 }
 
 .modal-mask {
@@ -605,12 +627,8 @@ input:focus {
 }
 
 .option.root {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-left: 5px;
-    padding-bottom: 10px;
+    display: inline-block;
+    margin-left: 20px;
     font-size: 14px;
 }
 
