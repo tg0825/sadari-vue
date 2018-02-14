@@ -36,7 +36,8 @@ $result = $mysqli->query($sql);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
 
-<link rel="apple-touch-icon" href="resources/image/sadari.png">
+<link rel="icon" href="resources/image/favicon.ico">
+<link rel="apple-touch-icon" href="resources/image/home-sadari.png">
 <link rel="stylesheet" href="resources/css/webfont.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/vendor/font-awesome/css/font-awesome.css">
