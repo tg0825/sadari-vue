@@ -36,11 +36,15 @@ $result = $mysqli->query($sql);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
 
-<link rel="icon" href="resources/image/favicon.ico">
-<link rel="apple-touch-icon" href="resources/image/home-sadari.png">
-<link rel="stylesheet" href="resources/css/webfont.css">
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/vendor/font-awesome/css/font-awesome.css">
+<link rel="icon" href="./resources/src/image/favicon.ico">
+<link rel="apple-touch-icon" href="./resources/src/image/home-sadari.png">
+<link rel="stylesheet" href="./resources/src/css/reset.css">
+<link rel="stylesheet" href="./resources/src/css/webfont.css">
+<link rel="stylesheet" href="./resources/src/css/style.css">
+<link rel="stylesheet" href="./resources/src/css/ju.css">
+<link rel="stylesheet" href="./resources/src/css/modal.css">
+<link rel="stylesheet" href="./resources/src/vendor/font-awesome/css/font-awesome.css">
+<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 
 <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
@@ -51,8 +55,10 @@ $result = $mysqli->query($sql);
 </head>
 <body>
     <div class="gnb">
-        <button class="resultTextToggle">텍스트 결과 보기</button>
-        <!-- <button class="toggleMenu">인원 추가</button> -->
+        <button
+            class="resultTextToggle"
+            data-sadari="result-toggle"
+        >텍스트 결과 보기</button>
         <div class="clock"></div>
     </div>
     <div class="sadari wrap">
@@ -186,14 +192,18 @@ $result = $mysqli->query($sql);
         <div class="result"> </div>
         <div class="resultText" style="display:none">
             <textarea></textarea>
-            <button type="button" name="copy">결과 복사하기</button>
+            <button class="result-copy" type="button" name="copy">결과 복사하기</button>
+            <button
+                data-sadari="result-toggle"
+                class="result-close"
+            type="button"> <i class="fa fa-times" aria-hidden="true"></i> </button>
         </div>
     </div>
 
-    <script src="./resources/js/config.js"></script>
-    <script src="./resources/js/data.js"></script>
-    <script src="./resources/js/modal.js"></script>
-    <script src="./resources/js/clock.js"></script>
-    <script src="./resources/js/script.js"></script>
+    <script src="./resources/src/js/config.js"></script>
+    <script src="./resources/src/js/data.js"></script>
+    <script src="./resources/src/js/modal.js"></script>
+    <script src="./resources/src/js/clock.js"></script>
+    <script src="./resources/src/js/script.js"></script>
 </body>
 </html>

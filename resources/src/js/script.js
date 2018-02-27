@@ -1,10 +1,11 @@
 (function (window, $, modal) {
     var $wrap = $('.sadari.wrap');
+    var $result = $('[data-sadari="result"]');
     var sadariType = 'one';
     var clonebackpacker = window.clonebackpacker || {};
     var tmpbackpacker = [];
     var originBp;
-
+    var renderText = '';
     // 배열 랜덤 섞기
     function shuffle(a) {
         var j, x, i;
@@ -166,7 +167,6 @@
     // 결과 텍스트로 만들기
     function resultText() {
         var resultText_list = [];
-        var renderText = '';
         var cols = [];
         var index = 1;
 
@@ -204,8 +204,7 @@
         renderText += game + '\n';
 
         // 데이터 만들기
-        $('.result .group.item').each(function (i, e) {
-        // $('.modal .group.item').each(function (i, e) {
+        $('[data-sadari="result"] .group.item').each(function (i, e) {
             var obj = {};
             obj.group = $(e).find('.group.title').text();
             obj.member = [];
@@ -250,16 +249,13 @@
             renderText += thisCols;
         });
 
-        if (confirm('결과를 slack으로 전송하시겠습니까?')) {
-            sendSlack(renderText);
-        }
-
         $('.resultText textarea').attr('rows', resultText_list.length);
         $('.resultText textarea').html(renderText);
         $('.resultText').hide();
     }
 
     function sendSlack(text) {
+        text = text || renderText;
         var channelName = 'random';
         var token = 'KAqNxVAidiPcbZ3EixDDIPqg';
         var url = 'https://backpackr-talk.slack.com/services/hooks/slackbot?token=' + token + '&channel=' + channelName;
@@ -463,21 +459,7 @@
     function sadariStart() {
         tmpbackpacker = fil();
         game[sadariType]();
-        scrollMove('.sadari-select');
-    }
-
-    // 스크롤 이동
-    function scrollMove(offsetElm) {
-        var elm = offsetElm;
-        var pos = $(elm).offset().top;
-
-        $('body, html').animate({
-            scrollTop: pos
-        }, 300);
-
-        setTimeout(function () {
-            resultText();
-        }, 300);
+        resultText();
     }
 
     // 게임 선택
@@ -595,14 +577,15 @@
         // 결과 옵션
         $(document).on('click', '.option.root [data-option]', option);
         // 텍스트결과 토글
-        $('.resultTextToggle').on('click', resultTextToggle)
+        $(document).on('click', '[data-sadari="result-toggle"]', resultTextToggle);
+        // 슬랙으로 결과 보내기
+        $(document).on('click', '[data-sadari="send-slack"]', function () {
+            if (confirm('결과를 slack으로 전송하시겠습니까?')) {
+                sendSlack();
+            }
+        });
     }
 
     initEvent();
     init();
-
-    // test action
-    // $('.sadari-select button').eq(1).click();
-    // $('.start').click();
-    // $('[data-option]').click();
 }(window, jQuery, modal));
