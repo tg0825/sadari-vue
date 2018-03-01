@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>login</title>
+        <title>회원가입</title>
         <style media="screen">
             .layout-login .wrap {
                 max-width: 360px;
@@ -34,13 +34,14 @@
     </head>
     <body class="layout-login page-login">
         <div class="wrap">
-            <h1>로그인</h1>
-            <form class="" action="login-process.php" method="post">
+            <h1>회원가입</h1>
+            <form class="" action="signup-process.php" method="post">
                 <div>
                     <input
                         type="text"
                         placeholder="아이디"
                         name="member_id"
+                        required
                     >
                 </div>
                 <div>
@@ -48,6 +49,7 @@
                         type="password"
                         placeholder="비밀번호"
                         name="member_password"
+                        required
                     >
                 </div>
                 <div>
@@ -55,7 +57,7 @@
                 </div>
             </form>
             <a href="/">메인으로</a>
-            <!-- <a href="/signup.php">회원가입</a> -->
+            <a href="/login.php">로그인</a>
         </div>
     </body>
 </html>

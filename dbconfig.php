@@ -22,6 +22,3 @@ $mysqli->query("set session character_set_client=utf8;");
 if($mysqli->connect_error){
     die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
 }
-
-$sql = "SELECT * FROM member";
-$result = $mysqli->query($sql);

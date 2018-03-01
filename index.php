@@ -1,23 +1,6 @@
 <?php
-// dev
-$server = '127.0.0.1';
-$username = 'root';
-$password = 'root';
-$db = 'sadari';
-
-// heroku
-if (getenv("CLEARDB_DATABASE_URL")) {
-    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $server = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $db = substr($url["path"], 1);
-}
-
-$mysqli = new mysqli($server, $username, $password, $db);
-$mysqli->query("set session character_set_connection=utf8;");
-$mysqli->query("set session character_set_results=utf8;");
-$mysqli->query("set session character_set_client=utf8;");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
+session_start();
 
 if($mysqli->connect_error){
     die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
@@ -60,6 +43,20 @@ $result = $mysqli->query($sql);
             data-sadari="result-toggle"
         >텍스트 결과 보기</button>
         <div class="clock"></div>
+        <span>
+            <?php
+            if (!isset($_SESSION['member_id'])) {
+            ?>
+            <!-- <a href="./login.php">로그인</a> -->
+            <!-- <a href="./signup.php">회원가입</a> -->
+            <?php
+            } else {
+            ?>
+            <!-- <a href="./admin/index.php">관리자</a> -->
+            <?php
+            }
+            ?>
+        </span>
     </div>
     <div class="sadari wrap">
         <h1 class="sadari title">SADARI</h1>

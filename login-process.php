@@ -1,12 +1,7 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 session_start();
 
-$member_id = 'user';
-$member_password = 'password';
-
-// 아이디, 비밀번호 일치
-
-// 그 외
 if (!isset($_POST['member_id']) || !isset($_POST['member_password'])) {
 ?>
 <script>
@@ -15,10 +10,17 @@ if (!isset($_POST['member_id']) || !isset($_POST['member_password'])) {
 </script>
 <?php
 } else {
-    if (
-        strcmp($_POST['member_id'], $member_id) != 0
-        || strcmp($_POST['member_password'], $member_password) != 0
-    ) {
+    $member_id = mysqli_real_escape_string($mysqli, $_POST['member_id']);
+    $member_password = mysqli_real_escape_string($mysqli, $_POST['member_password']);
+
+    $sql = "SELECT *
+            from user
+            where id = '$member_id'
+            and password = password('$member_password')";
+
+    $result = $mysqli->query($sql);
+
+    if ($result->num_rows < 1) {
     ?>
     <script>
         alert('아이디와 비밀번호를 확인해주세요.');
@@ -26,11 +28,9 @@ if (!isset($_POST['member_id']) || !isset($_POST['member_password'])) {
     </script>
     <?php
     } else {
-        $_SESSION['member_id'] = $_POST['member_id'];
-        $_SESSION['member_password'] = $_POST['member_password'];
+        $_SESSION['member_id'] = $member_id;
     ?>
     <script>
-        alert('로그인 성공!');
         window.location.href = 'admin/index.php';
     </script>
     <?php
