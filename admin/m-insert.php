@@ -1,5 +1,5 @@
 <?php
-require_once("dbconfig.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 
 $name = mysqli_real_escape_string($mysqli, $_POST['name']);
 $team_id = mysqli_real_escape_string($mysqli, $_POST['team_id']);

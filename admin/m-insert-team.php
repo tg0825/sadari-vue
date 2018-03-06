@@ -1,5 +1,5 @@
 <?php
-require_once("dbconfig.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 
 $team = mysqli_real_escape_string($mysqli, $_POST['team']);
 $team_eng = mysqli_real_escape_string($mysqli, $_POST['team_eng']);
@@ -19,7 +19,10 @@ if ($mysqli->query($sql) === TRUE) {
 </script>
 <?php
 }
+
+// 접속 끊기
+$mysqli->close();
 ?>
 <script>
-    // window.location = '<?=$_SERVER['HTTP_REFERER']?>';
+    window.location = '<?=$_SERVER['HTTP_REFERER']?>';
 </script>

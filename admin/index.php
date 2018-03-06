@@ -152,6 +152,7 @@ function removeMember(e) {
     var tr = self.parentNode.parentNode;
 
     if (self.tagName === 'BUTTON' && self.dataset.member === 'delete') {
+        if (!confirm('삭제하시겠습니까?')) return;
         var btn = self;
         var $tr = $(btn).parents('tr');
         var api = '/admin/m-remove.php';
