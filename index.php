@@ -26,6 +26,8 @@ $result = $mysqli->query($sql);
 <link rel="stylesheet" href="./resources/src/css/style.css">
 <link rel="stylesheet" href="./resources/src/css/ju.css">
 <link rel="stylesheet" href="./resources/src/css/modal.css">
+<link rel="stylesheet" href="./resources/src/css/member-item.css">
+<link rel="stylesheet" href="./resources/src/css/member-color.css">
 <link rel="stylesheet" href="./resources/src/vendor/font-awesome/css/font-awesome.css">
 <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 

@@ -149,7 +149,7 @@
             }
             for (var j = 0; j < groupMemberLength; j++) {
                 html += '<div data-index=' + index + ' class="member-list member ' + groupMember[j].team_eng + '"' +
-                ' style="background-image:url(' + groupMember[j].avatar + ')">' +
+                ' style="">' +
                 '<span class="name">' + groupMember[j].name + '</span>' +
                 '<span class="team">' + groupMember[j].team + '</span>' +
                 '</div>';
@@ -324,7 +324,7 @@
             memberList += '<div ' +
             'data-team-eng="' + v[i].team_eng + '"' +
             'class="member-list member ' + v[i].team_eng + '"' +
-            ' style="background-image:url(' + v[i].avatar + ')">' +
+            ' style="">' +
             '<span class="name">' + v[i].name + '</span>' +
             '<span class="team">' + v[i].team + '</span>' +
             '</div>';

@@ -1,0 +1,71 @@
+.engineer {
+    background: linear-gradient(#838383, #757575);
+}
+
+.engineer:after {
+    content: '\f121';
+}
+
+.designer {
+    background: linear-gradient(#57b8c9, #41aec1);
+}
+
+.designer:after {
+    content: '\f040';
+}
+
+.scouter {
+    background: linear-gradient(#233e90, #182c69);
+}
+
+.scouter:after {
+    content: '\f2b5';
+}
+
+.marketer {
+    background: linear-gradient(#e84747, #c93e3e);
+}
+
+.marketer:after {
+    content: '\f080';
+}
+
+.ceo {
+    background: linear-gradient(#383838, #202020);
+}
+
+.ceo:after {
+    content: '\f27e';
+}
+
+.manager {
+    background: linear-gradient(#f4ab4a, #e9992d);
+}
+
+.manager:after {
+    content: '\f004';
+}
+
+.PR{
+    background: linear-gradient(#b78ce3, #865cb0);
+}
+
+.PR:after{
+    content: '\f1ea';
+}
+
+.b2b {
+    background: linear-gradient(#1d77eb, #0c5dc6);
+}
+.b2b:after,
+.trade:after {
+    content: '\f21a';
+}
+
+.educator {
+    background: linear-gradient(#84b453, #619d23);
+}
+
+.educator:after {
+    content: '\f19d';
+}
