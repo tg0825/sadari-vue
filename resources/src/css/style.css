@@ -38,6 +38,21 @@ input:focus {
     color: #333;
 }
 
+.gnb2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 15px 20px;
+    border-bottom: 1px solid #d53a3a;
+    font-size: 22px;
+    text-align: center;
+    color: #d53a3a;
+    background: #fff;
+    letter-spacing: -1px;
+}
+
 #frm {
     display: none;
     padding: 10px;
@@ -96,6 +111,7 @@ input:focus {
     min-width: 320px;
     max-width: 480px;
     margin: 0 auto;
+    padding-top: 100px;
 }
 
 .sadari.title {

@@ -39,7 +39,7 @@ $result = $mysqli->query($sql);
 <title>SADARI</title>
 </head>
 <body>
-    <div class="gnb">
+    <div class="gnb" style="display:none">
         <button
             class="resultTextToggle"
             data-sadari="result-toggle"
@@ -60,8 +60,14 @@ $result = $mysqli->query($sql);
             ?>
         </span>
     </div>
+
+    <div class="gnb2">
+        <div class="gnb2--title">SADARI</div>
+        <div class="clock"></div>
+    </div>
+
     <div class="sadari wrap">
-        <h1 class="sadari title">SADARI</h1>
+        <!-- <h1 class="sadari title">SADARI</h1> -->
 
         <div id="frm">
             <form id="JSFORM" action="insert.php" method="post" autocomplete="off">
