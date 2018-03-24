@@ -1,6 +1,5 @@
 (function (window, $, modal) {
     var $wrap = $('.sadari.wrap');
-    var $result = $('[data-sadari="result"]');
     var sadariType = 'one';
     var clonebackpacker = window.clonebackpacker || {};
     var tmpbackpacker = [];
@@ -18,8 +17,8 @@
     }
 
     // 삭제
-    function remove(o, v) {
-        return o.splice(v, 1);
+    function remove(removeArray, value) {
+        return removeArray.splice(value, 1);
     }
 
     function fil() {
@@ -67,8 +66,9 @@
                 c: tmpbackpacker
             });
         },
+        // 주번
         ju: function () {
-            var count = ju.length || 3;
+            var count = ju.length;
             var groupCount = Math.floor(tmpbackpacker.length / count);
 
             result({
@@ -129,6 +129,11 @@
         var index = 1;
         var title;
         var onegroup = (data.b === 1);
+
+        if (data.b == 0) {
+            alert('error');
+            return false;
+        }
 
         while (i < data.b) {
             title = (i + 1) + '조';
@@ -337,9 +342,7 @@
     }
 
     // 주번 랜더링
-    function renderJu(data) {
-        var $body = data.body;
-        var arr = data.arr;
+    function renderJu($body, arr) {
         var length = arr.length;
         var html = '';
 
@@ -420,29 +423,23 @@
     }
 
     // 데이터 추가
-    function addData(o, v, t) {
-        var data = (Array.isArray(o) === true) ? v : {name: v, team: t};
-        return o.push(data);
+    function addData(item, name, t) {
+        var data = (Array.isArray(item) === true) ? name : {name: name, team: t};
+        return item.push(data);
     }
 
     // 주번 항목 추가
     function addJu() {
         var name = $(this).parents('.ju-add').find('[name=name]').val();
         addData(ju, name);
-        renderJu({
-            body: $('.ju-list'),
-            arr: ju
-        });
+        renderJu($('.ju-list'), ju);
     }
 
     // 주번 항목 삭제
     function removeJu() {
         var idx = $(this).index();
         remove(ju, idx);
-        renderJu({
-            body: $('.ju-list'),
-            arr: ju
-        });
+        renderJu($('.ju-list'), ju);
     }
 
     // 주번 랜더링
