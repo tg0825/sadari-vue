@@ -139,9 +139,18 @@
         console.log(data);
 
         while (i < data.b) {
-            title = (i + 1) + '조';
-            if (data.jo) {
-                title = ju[i];
+            var groupData = {
+                title: data.jo ? ju[i] : (i + 1) + '조',
+                member: data.jo ? [data.c[i]] : data.c.splice(0, data.a)
+            };
+
+            if (restGroupType && groupData.member.length < data.a) {
+                if (confirm('나머지 인원이 있습니다. 다른 조에 포함 시키겠습니까?')) {
+                    groupData.member.forEach(function (v, idx) {
+                        resultObj[idx].member.push(v);
+                    });
+                    break;
+                };
             }
             var groupMember = data.c.splice(0, data.a);
             var groupMemberLength = data.jo ? 1 : groupMember.length;
