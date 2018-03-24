@@ -31,6 +31,10 @@
     text-align: left;
 }
 
+.ju-list {
+    text-align: left;
+}
+
 .ju-list li {
     display: inline-block;
     vertical-align: middle;
@@ -59,4 +63,5 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     z-index: 20;
+    text-align: center;
 }
