@@ -52,10 +52,10 @@
             var groupCount = Math.ceil(tmpbackpacker.length / count);
 
             result({
-                a: count,
-                b: groupCount,
+                a: count, // 한조 인원
+                b: groupCount, // 조 수
                 c: tmpbackpacker
-            });
+            }, true);
         },
         jo_team: function () {
             var count = $('#groupCount').val() || 3;
@@ -124,52 +124,54 @@
     }
 
     // 결과 출력
-    function result(data) {
-        var html = '';
+    function result(data, restGroupType) {
         var i = 0;
-        var index = 1;
-        var title;
         var onegroup = (data.b === 1);
 
-        if (data.b == 0 || data.a == 0) {
+        if (data.b <= 0 || data.a <= 0) {
             alert('값을 확인해주세요');
             return false;
         }
 
-        console.log(data);
-
-        while (i < data.b) {
-            title = (i + 1) + '조';
-            if (data.jo) {
-                title = ju[i];
-            }
-            var groupMember = data.c.splice(0, data.a);
-            var groupMemberLength = data.jo ? 1 : groupMember.length;
-
-            if (!groupMemberLength) {
-                break;
-            }
-            if (onegroup) {
-                html += '<div class="group item onegroup">';
-            } else {
-                html += '<div class="group item">';
-                html += '<div class="group title">' + title + '</div>';
-            }
-            for (var j = 0; j < groupMemberLength; j++) {
-                html += '<div data-index=' + index + ' class="member-list member ' + groupMember[j].team_eng + '"' +
-                ' style="background-image:url(' + groupMember[j].avatar + ')">' +
-                '<span class="name">' + groupMember[j].name + '</span>' +
-                '<span class="team">' + groupMember[j].team + '</span>' +
-                '</div>';
-                index += 1;
-            }
-            html += '</div>';
-            i += 1;
+        function renderResult(data, onegroup) {
+            var html = '';
+            data.forEach(function (group) {
+                if (onegroup) html += '<div class="group item onegroup">';
+                else html += '<div class="group item"><div class="group title">' + group.title + '</div>';
+                group.member.forEach(function (groupMember, memberIndex) {
+                    html += '<div data-index=' + memberIndex + ' class="member-list member ' + groupMember.team_eng + '"' +
+                        ' style="background-image:url(' + groupMember.avatar + ')">' +
+                        '<span class="name">' + groupMember.name + '</span>' +
+                        '<span class="team">' + groupMember.team + '</span>' +
+                        '</div>';
+                });
+                html += '</div>';
+            });
+            return html;
         }
-        // $('.result').html(html);
-        // $('.resultText').show();
+
+        var resultObj = [];
+        while (i < data.b) {
+            var groupData = {
+                title: (i + 1) + '조',
+                member: data.c.splice(0, data.a)
+            };
+
+            if (restGroupType && groupData.member.length < data.a) {
+                if (confirm('나머지 인원이 있습니다. 다른 조에 포함 시키겠습니까?')) {
+                    groupData.member.forEach(function (v, idx) {
+                        resultObj[idx].member.push(v);
+                    });
+                    break;
+                };
+            }
+
+            resultObj.push(groupData);
+            i ++;
+        }
+
         $wrap.addClass('is_result');
-        modal.open(html);
+        modal.open(renderResult(resultObj, onegroup));
     }
 
     // 결과 텍스트로 만들기
@@ -320,7 +322,7 @@
     }
 
     // 구성원 랜더링
-    function _render(v) {
+    function renderMember(v) {
         var memberList = '';
         v = v || clonebackpacker;
 
@@ -514,7 +516,7 @@
         clonebackpacker = joinMember(backpacker.slice());
         window.clonebackpacker = clonebackpacker;
 
-        _render();
+        renderMember();
         // teamRender();
         juRender();
 
