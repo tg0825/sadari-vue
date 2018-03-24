@@ -131,10 +131,12 @@
         var title;
         var onegroup = (data.b === 1);
 
-        if (data.b == 0) {
+        if (data.b == 0 || data.a == 0) {
             alert('값을 확인해주세요');
             return false;
         }
+
+        console.log(data);
 
         while (i < data.b) {
             title = (i + 1) + '조';
