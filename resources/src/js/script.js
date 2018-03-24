@@ -382,46 +382,6 @@
         $('.member-list.number').html((max - disable.length) + '/' + max);
     }
 
-    // 구성원 추가
-    function addMember(e) {
-        e.preventDefault();
-
-        var $name = $('#name');
-        var $team = $('.team-list');
-        var name = $name.val();
-        var team = $team.find('.is_active').attr('title');
-
-        // 빈값, 중복 이름 여부 채크
-        var com = compare(clonebackpacker, name);
-
-        if (name === '') {
-            alertMsg('이름을 입력해 주세요.');
-            $name.focus();
-            return;
-        }
-
-        if (typeof team === 'undefined') {
-            alertMsg('팀을 선택해 주세요.');
-            return;
-        }
-
-        if (com) {
-            alertMsg('이미 등록된 이름 입니다.');
-            $('.member-list.body .member')
-            .eq(com.idx)
-            .addClass('highlight')
-            .delay(300)
-            .queue( function () {
-                $(this).removeClass('highlight').dequeue();
-            });
-            return;
-        }
-
-        addData(clonebackpacker, name, team);
-        _render();
-        $name.val('');
-    }
-
     // 데이터 추가
     function addData(item, name, t) {
         var data = (Array.isArray(item) === true) ? name : {name: name, team: t};
