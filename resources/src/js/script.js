@@ -185,7 +185,7 @@
         ("0" + date.getHours()).slice(-2) + '시' +
         ("0" + date.getMinutes()).slice(-2) + '분\n';
 
-        renderText += yyyymmdd;
+        renderText = yyyymmdd;
 
         var game = '';
         switch(sadariType) {
@@ -243,7 +243,7 @@
                 }
 
                 if (v[k] !== '') {
-                    thisCols += '[' + v[k] + ']\n';
+                    thisCols += '\n[' + v[k] + ']\n';
                 }
             }
 
