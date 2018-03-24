@@ -1,5 +1,3 @@
-
-}
 body {}
 
 input {
@@ -92,12 +90,6 @@ input:focus {
 
 .form-block #name {
     width: 100%;
-}
-
-.sadari.wrap {
-    min-width: 320px;
-    max-width: 480px;
-    margin: 0 auto;
 }
 
 .sadari.title {

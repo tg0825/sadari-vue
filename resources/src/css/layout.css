@@ -1,0 +1,36 @@
+.layout-wrap {
+    margin:0 10px;
+}
+
+@media (max-width: 768px) {
+    .layout-wrap {
+        margin: 0;
+        padding: 0 10px;
+    }
+}
+
+.layout-member {
+    float: left;
+    width:60%;
+}
+
+@media (max-width: 768px) {
+    .layout-member {
+        float: none;
+        width: auto;
+    }
+}
+
+.layout-controller {
+    float: right;
+    width: 40%;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .layout-controller {
+        float: none;
+        width: auto;
+    }
+}

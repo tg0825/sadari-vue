@@ -22,6 +22,7 @@ $result = $mysqli->query($sql);
 <link rel="icon" href="./resources/src/image/favicon.ico">
 <link rel="apple-touch-icon" href="./resources/src/image/home-sadari.png">
 <link rel="stylesheet" href="./resources/src/css/reset.css">
+<link rel="stylesheet" href="./resources/src/css/layout.css">
 <link rel="stylesheet" href="./resources/src/css/webfont.css">
 <link rel="stylesheet" href="./resources/src/css/style.css">
 <link rel="stylesheet" href="./resources/src/css/ju.css">
@@ -58,132 +59,110 @@ $result = $mysqli->query($sql);
             ?>
         </span>
     </div>
-    <div class="sadari wrap">
+    <div class="layout-wrap sadari wrap">
         <h1 class="sadari title">SADARI</h1>
 
-        <div id="frm">
-            <form id="JSFORM" action="insert.php" method="post" autocomplete="off">
-                <button
-                    type="button"
-                    class="reset"
-                >인원초기화</button>
-                <h2>
-                    <i class="fa fa-male" aria-hidden="true"></i>
-                    인원추가
-                </h2>
-                <div class="form-block">
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="이름을 입력해주세요."
-                        maxlength="10"
-                    >
-                </div>
-                <div class="form-block">
-                    <div class="team-list"></div>
-                </div>
-                <button type="submit" class="btn-add-mem">추가</button>
-            </form>
-        </div>
-
-        <div class="member-list wrap">
-            <div class="member-list body">
-            <?php
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    ?>
-                    <div
-                        class="member-list member <?=$row['team_eng']?>"
-                        style="background-image:url()"
-                        data-team-eng="<?=$row['team_eng']?>"
-                    >
-                        <span class="name"><?=$row['name']?></span>
-                        <span class="team"><?=$row['team']?></span>
-                        <span class="remove">x</span>
-                    </div>
+        <div class="layout-member">
+            <div class="member-list wrap">
+                <div class="member-list body">
                     <?php
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            ?>
+                            <div
+                                class="member-list member <?=$row['team_eng']?>"
+                                style="background-image:url()"
+                                data-team-eng="<?=$row['team_eng']?>"
+                            >
+                                <span class="name"><?=$row['name']?></span>
+                                <span class="team"><?=$row['team']?></span>
+                                <span class="remove">x</span>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        없음
+                        <?php
                     }
-                } else {
                     ?>
-                    없음
-                    <?php
-                }
-            ?>
-            </div>
-            <div class="member-list number"></div>
-        </div>
-
-        <div class="sadari-select">
-            <div>
-                <button class="btn" data-game="one">
-                    <i class="fa fa-users" aria-hidden="true"></i>
-                    한명 뽑기 (또는 여러명)
-                </button>
-            </div>
-            <div>
-                <button class="btn" data-game="jo_member">
-                    <i class="fa fa-random" aria-hidden="true"></i>
-                    랜덤 조 (인원기준)
-                </button>
-            </div>
-            <div>
-                <button class="btn" data-game="jo_team">
-                    <i class="fa fa-random" aria-hidden="true"></i>
-                    랜덤 조 (팀 기준)
-                </button>
-            </div>
-            <div>
-                <button class="btn" data-game="ju">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    주번 뽑기
-                </button>
+                </div>
+                <div class="member-list number"></div>
             </div>
         </div>
 
-        <div class="tab">
-            <div class="tab-item">
-                <div class="form-block">
-                    딱!
-                    <input class="ta-r" id="onlyOne" name="onlyOne" type="number" value="1">
-                    명만 뽑기
+        <div class="layout-controller">
+            <div class="sadari-select">
+                <div>
+                    <button class="btn" data-game="one">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        한명 뽑기 (또는 여러명)
+                    </button>
+                </div>
+                <div>
+                    <button class="btn" data-game="jo_member">
+                        <i class="fa fa-random" aria-hidden="true"></i>
+                        랜덤 조 (인원기준)
+                    </button>
+                </div>
+                <div>
+                    <button class="btn" data-game="jo_team">
+                        <i class="fa fa-random" aria-hidden="true"></i>
+                        랜덤 조 (팀 기준)
+                    </button>
+                </div>
+                <div>
+                    <button class="btn" data-game="ju">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        주번 뽑기
+                    </button>
                 </div>
             </div>
 
-            <div class="tab-item">
-                <div class="form-block">
-                    <label for=""></label>
-                    한 조당
-                    <input class="ta-r" id="groupMember" name="groupMember" type="number" value="3">
-                    명
-                </div>
-            </div>
-
-            <div class="tab-item">
-                <div class="form-block">
-                    <label for=""></label>
-                    총
-                    <input class="ta-r" id="groupCount" name="groupCount" type="number" value="5">
-                    개 조 만들기
-                </div>
-            </div>
-
-            <div class="tab-item">
-                <div class="tab-item-result"></div>
-                <div class="ju-add">
+            <div class="tab">
+                <div class="tab-item">
                     <div class="form-block">
-                        <label for="">주번 항목 추가</label>
-                        <div class="input-text">
-                            <input id="name" name="name" type="text" placeholder="창문닦이 기타 등등" maxlength="10">
+                        딱!
+                        <input class="ta-r" id="onlyOne" name="onlyOne" type="number" value="1">
+                        명만 뽑기
+                    </div>
+                </div>
+
+                <div class="tab-item">
+                    <div class="form-block">
+                        <label for=""></label>
+                        한 조당
+                        <input class="ta-r" id="groupMember" name="groupMember" type="number" value="3">
+                        명
+                    </div>
+                </div>
+
+                <div class="tab-item">
+                    <div class="form-block">
+                        <label for=""></label>
+                        총
+                        <input class="ta-r" id="groupCount" name="groupCount" type="number" value="5">
+                        개 조 만들기
+                    </div>
+                </div>
+
+                <div class="tab-item">
+                    <div class="tab-item-result"></div>
+                    <div class="ju-add">
+                        <div class="form-block">
+                            <label for="">주번 항목 추가</label>
+                            <div class="input-text">
+                                <input id="name" name="name" type="text" placeholder="창문닦이 기타 등등" maxlength="10">
+                            </div>
+                            <button type="submit" class="btn-add-mem">추가</button>
                         </div>
-                        <button type="submit" class="btn-add-mem">추가</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="start-root">
-            <button class="start" type="submit">시작!</button>
+            <div class="start-root">
+                <button class="start" type="submit">시작!</button>
+            </div>
         </div>
 
         <div class="result"> </div>
