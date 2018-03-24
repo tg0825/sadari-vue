@@ -429,10 +429,16 @@
     }
 
     // 주번 항목 추가
-    function addJu() {
-        var name = $(this).parents('.ju-add').find('[name=name]').val();
+    function addJu(e) {
+        var eTarget = e.currentTarget;
+        var input = $(eTarget).parents('.ju-add').find('[name=name]');
+        var name = input[0].value;
+
         addData(ju, name);
         renderJu($('.ju-list'), ju);
+
+        input[0].focus();
+        input[0].value = '';
     }
 
     // 주번 항목 삭제
