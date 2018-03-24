@@ -1,4 +1,5 @@
 (function (window, $, modal) {
+    var storage = new Storage();
     var $wrap = $('.sadari.wrap');
     var sadariType = 'one';
     var clonebackpacker = window.clonebackpacker || {};
@@ -131,7 +132,7 @@
         var onegroup = (data.b === 1);
 
         if (data.b == 0) {
-            alert('error');
+            alert('값을 확인해주세요');
             return false;
         }
 
@@ -345,13 +346,10 @@
     function renderJu($body, arr) {
         var length = arr.length;
         var html = '';
-
         var i = 0;
-        for(; i < length; i++) {
-            html += '<li>' + arr[i] + '</li>';
-        }
-
+        for(; i < length; i++) html += '<li>' + arr[i] + '</li>';
         $body.html(html);
+        storage.setItem('juList', arr);
     }
 
     // 비활성 버튼 클릭
@@ -434,9 +432,7 @@
         var input = $(eTarget).parents('.ju-add').find('[name=name]');
         var name = input[0].value;
 
-        if (!name) {
-            alert('입력해주세요.');
-        } else {
+        if (name) {
             addData(ju, name);
             renderJu($('.ju-list'), ju);
             input[0].value = '';
@@ -529,6 +525,12 @@
     // 초기화
     function init() {
         var backpacker = [];
+
+        if (storage.getItem('juList')) {
+            ju = storage.getItem('juList');
+        } else {
+            storage.setItem('juList', ju);
+        }
 
         $('.member-list.body').find('.member-list.member').each(function (i, e) {
             var $member = $(e);
