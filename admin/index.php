@@ -17,37 +17,6 @@ $result = $mysqli->query($sql);
         <div class="col-10">
             <div class="row">
                 <div class="col">
-                    <form id="" action="/admin/m-insert-team.php" method="post" autocomplete="off">
-                        <h4>
-                            <i class="fa fa-male" aria-hidden="true"></i>
-                            팀 추가
-                        </h4>
-                        <div class="form-block">
-                            <div class="">
-                                <input
-                                    id="name"
-                                    name="team"
-                                    type="text"
-                                    placeholder="팀 한글명을 입력해주세요."
-                                    class="form-control"
-                                    required
-                                >
-                            </div>
-                            <div>
-                                <input
-                                    id="name"
-                                    name="team_eng"
-                                    type="text"
-                                    placeholder="팀 영문명을 입력해주세요."
-                                    class="form-control"
-                                    required
-                                >
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-add-mem">추가</button>
-                    </form>
-                </div>
-                <div class="col">
                     <form id="JSFORM" action="/admin/m-insert.php" method="post" autocomplete="off">
                         <h4>
                             <i class="fa fa-male" aria-hidden="true"></i>
@@ -66,7 +35,7 @@ $result = $mysqli->query($sql);
                             <!-- <input type="text" placeholder="역할" name="position" value=""> -->
                             <!-- <input type="text" placeholder="입사일자" name="start_date" value=""> -->
                         </div>
-                        <div class="form-block">
+                        <div class="form-block mt-1">
                             <div class="team-list"></div>
                             <?php
                             $sql = 'SELECT * FROM team';
@@ -74,7 +43,7 @@ $result = $mysqli->query($sql);
                             $result = $mysqli->query($sql);
                             if ($result->num_rows > 0) {
                                 ?>
-                                <select id="team_list" class="" name="team_id">
+                                <select id="team_list" class="form-control" name="team_id">
                                     <?php
                                     while($row = $result->fetch_assoc()) {
                                         ?>
@@ -87,52 +56,91 @@ $result = $mysqli->query($sql);
                             }
                             ?>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-add-mem">추가</button>
+                        <div class="mt-1">
+                            <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col">
+                    <form id="" action="/admin/m-insert-team.php" method="post" autocomplete="off">
+                        <h4>
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                            팀 추가
+                        </h4>
+                        <div class="form-block mt-1">
+                            <div class="">
+                                <input
+                                    id="name"
+                                    name="team"
+                                    type="text"
+                                    placeholder="팀 한글명을 입력해주세요."
+                                    class="form-control"
+                                    required
+                                >
+                            </div>
+                        </div>
+                        <div class="form-block mt-1">
+                            <input
+                                id="name"
+                                name="team_eng"
+                                type="text"
+                                placeholder="팀 영문명을 입력해주세요."
+                                class="form-control"
+                                required
+                            >
+                        </div>
+
+                        <div class="mt-1">
+                            <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div>
-                총 <?=$result->num_rows?> 명
-                <table id="member_list">
-                    <thead>
-                    <tr>
-                        <th>이름</th>
-                        <th>팀</th>
-                        <th>비고</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $sql = "SELECT *
-                from member AS m
-                left join team  AS t
-                ON m.team_id=t.team_id";
-                    $result = $mysqli->query($sql);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
+            <div class="row mt-5">
+                <div class="col">
+                    총 <?=$result->num_rows?> 명
+                    <table id="member_list">
+                        <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>팀</th>
+                            <th>옵션</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $sql = "SELECT *
+                    from member AS m
+                    left join team  AS t
+                    ON m.team_id=t.team_id";
+                        $result = $mysqli->query($sql);
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                ?>
+                                <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
+                                    <td data-member="name"><?=$row['name']?></td>
+                                    <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
+                                    <td data-member="option">
+                                        <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
+                                        <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
                             ?>
-                            <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
-                                <td data-member="name"><?=$row['name']?></td>
-                                <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
-                                <td data-member="option">
-                                    <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
-                                    <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
+                            <tr>
+                                <td colspan="3">
+                                    없음
                                 </td>
                             </tr>
                             <?php
                         }
-                    } else {
                         ?>
-                        <tr>
-                            <td colspan="3">
-                                없음
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

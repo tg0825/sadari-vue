@@ -17,3 +17,22 @@ table td {
     border: 1px solid #ddd;
     padding: 10px;
 }
+
+#member_list {
+}
+
+#member_list th {
+    text-align: center;
+}
+
+#member_list th:nth-child(2) {
+    width: 200px;
+}
+
+#member_list th:nth-child(3) {
+    width: 200px;
+}
+
+#member_list td:nth-child(3) {
+    text-align: center;
+}
