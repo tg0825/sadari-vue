@@ -6,121 +6,137 @@ $result = $mysqli->query($sql);
 
 ?>
 <body>
+<div class="container-fluid">
 <?php
     require_once('./header.php');
 ?>
-총 <?=$result->num_rows?> 명
-<div>
-    <table id="member_list">
-        <thead>
-            <tr>
-                <th>이름</th>
-                <th>팀</th>
-                <th>비고</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $sql = "SELECT *
+    <div class="row">
+        <div class="col-2">
+            nav
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col">
+                    <form id="" action="/admin/m-insert-team.php" method="post" autocomplete="off">
+                        <h4>
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                            팀 추가
+                        </h4>
+                        <div class="form-block">
+                            <div class="">
+                                <input
+                                    id="name"
+                                    name="team"
+                                    type="text"
+                                    placeholder="팀 한글명을 입력해주세요."
+                                    class="form-control"
+                                    required
+                                >
+                            </div>
+                            <div>
+                                <input
+                                    id="name"
+                                    name="team_eng"
+                                    type="text"
+                                    placeholder="팀 영문명을 입력해주세요."
+                                    class="form-control"
+                                    required
+                                >
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-add-mem">추가</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <form id="JSFORM" action="/admin/m-insert.php" method="post" autocomplete="off">
+                        <h4>
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                            인원추가
+                        </h4>
+                        <div class="form-block">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="이름을 입력해주세요."
+                                class="form-control"
+                                maxlength="10"
+                                required
+                            >
+                            <!-- <input type="text" placeholder="역할" name="position" value=""> -->
+                            <!-- <input type="text" placeholder="입사일자" name="start_date" value=""> -->
+                        </div>
+                        <div class="form-block">
+                            <div class="team-list"></div>
+                            <?php
+                            $sql = 'SELECT * FROM team';
+
+                            $result = $mysqli->query($sql);
+                            if ($result->num_rows > 0) {
+                                ?>
+                                <select id="team_list" class="" name="team_id">
+                                    <?php
+                                    while($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?=$row['team_id']?>"><?=$row['team']?></option>
+                                        <?php
+                                    };
+                                    ?>
+                                </select>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-add-mem">추가</button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                총 <?=$result->num_rows?> 명
+                <table id="member_list">
+                    <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>팀</th>
+                        <th>비고</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $sql = "SELECT *
                 from member AS m
                 left join team  AS t
                 ON m.team_id=t.team_id";
-        $result = $mysqli->query($sql);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-            ?>
-                <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
-                    <td data-member="name"><?=$row['name']?></td>
-                    <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
-                    <td data-member="option">
-                        <button type="type" data-member="edit" name="button">수정</button>
-                        <button type="type" data-member="delete" name="button">삭제</button>
-                    </td>
-                </tr>
-            <?php
-            }
-        } else {
-            ?>
-            <tr>
-                <td colspan="3">
-                    없음
-                </td>
-            </tr>
-            <?php
-        }
-        ?>
-        </tbody>
-    </table>
-</div>
-
-<form id="JSFORM" action="/admin/m-insert.php" method="post" autocomplete="off">
-    <h2>
-        <i class="fa fa-male" aria-hidden="true"></i>
-        인원추가
-    </h2>
-    <div class="form-block">
-        <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="이름을 입력해주세요."
-            maxlength="10"
-            required
-        >
-        <!-- <input type="text" placeholder="역할" name="position" value=""> -->
-        <!-- <input type="text" placeholder="입사일자" name="start_date" value=""> -->
-    </div>
-    <div class="form-block">
-        <div class="team-list"></div>
-        <?php
-        $sql = 'SELECT * FROM team';
-
-        $result = $mysqli->query($sql);
-        if ($result->num_rows > 0) {
-        ?>
-            <select id="team_list" class="" name="team_id">
-            <?php
-            while($row = $result->fetch_assoc()) {
-            ?>
-                <option value="<?=$row['team_id']?>"><?=$row['team']?></option>
-            <?php
-            };
-            ?>
-            </select>
-        <?php
-        }
-        ?>
-    </div>
-    <button type="submit" class="btn-add-mem">추가</button>
-</form>
-
-<form id="" action="/admin/m-insert-team.php" method="post" autocomplete="off">
-    <h2>
-        <i class="fa fa-male" aria-hidden="true"></i>
-       팀 추가
-    </h2>
-    <div class="form-block">
-        <div class="">
-            <input
-                id="name"
-                name="team"
-                type="text"
-                placeholder="팀 한글명을 입력해주세요."
-                required
-            >
-        </div>
-        <div>
-            <input
-                id="name"
-                name="team_eng"
-                type="text"
-                placeholder="팀 영문명을 입력해주세요."
-                required
-            >
+                    $result = $mysqli->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            ?>
+                            <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
+                                <td data-member="name"><?=$row['name']?></td>
+                                <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
+                                <td data-member="option">
+                                    <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
+                                    <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <tr>
+                            <td colspan="3">
+                                없음
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <button type="submit" class="btn-add-mem">추가</button>
-</form>
+
 
 <script>
 (function () {
@@ -270,5 +286,7 @@ $(member_list).on('click', '[data-member=edit]', edit);
 member_list.addEventListener('click', removeMember);
 }());
 </script>
+</div>
+</div>
 </body>
 </html>

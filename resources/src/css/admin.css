@@ -1,3 +1,7 @@
+header {
+    border-bottom: 1px solid #555;
+}
+
 table {
     table-layout: fixed;
     border-collapse: collapse;
