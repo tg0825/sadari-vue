@@ -537,7 +537,11 @@
         // 멤버 비활성
         $(document).on('click', '.member-list.wrap .member-list.member', memberToggle);
         // 주번 추가
-        $('.ju-add').on('click', 'button', addJu);
+        $('.ju-add')
+            .on('click', 'button', addJu)
+            .on('keypress', '#name', function (e) {
+                if (e.keyCode == 13) addJu(e);
+            })
         // 주번 삭제
         $(document).on('click', '.ju-list li', removeJu);
         // 사다리 선택
