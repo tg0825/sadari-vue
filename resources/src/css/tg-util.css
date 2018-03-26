@@ -1,3 +1,98 @@
+/**
+ * CSS UTILLITY
+ * - COMBINE TYPE
+ * - PURE TYPE
+ */
+
+/**
+ * COMBINE
+ */
+/* text-ellipsis */
+.text-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+/* clear both */
+.clear:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+/******
+ * PURE
+ */
+/* word-wrap */
+.wow-b {
+    word-wrap: break-word;
+}
+
+/* position */
+.pos-r {
+    position: relative;
+}
+
+.pos-a {
+    position: absolute;
+}
+
+.pos-f {
+    position: fixed;
+}
+
+.pos-s {
+    position: static;
+}
+
+/* vertical-align */
+.va-t {
+    vertical-align: top;
+}
+
+.va-m {
+    vertical-align: middle;
+}
+
+.va-m {
+    vertical-align: bottom;
+}
+
+/* text-decoration */
+.td-l {
+    text-decoration: line-through;
+}
+
+.td-u {
+    text-decoration: underline;
+}
+
+/* overflow */
+.ov-h {
+    overflow: hidden !important;
+}
+
+/* text-align */
+.ta-c {
+    text-align: center !important;
+}
+
+.ta-l {
+    text-align: left !important;
+}
+
 .ta-r {
     text-align: right !important;
+}
+
+/* display */
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
 }

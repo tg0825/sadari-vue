@@ -22,7 +22,9 @@ $result = $mysqli->query($sql);
 <link rel="icon" href="./resources/src/image/favicon.ico">
 <link rel="apple-touch-icon" href="./resources/src/image/home-sadari.png">
 <link rel="stylesheet" href="./resources/src/css/reset.css">
+<link rel="stylesheet" href="./resources/src/css/tg-util.css">
 <link rel="stylesheet" href="./resources/src/css/layout.css">
+<link rel="stylesheet" href="./resources/src/css/button.css">
 <link rel="stylesheet" href="./resources/src/css/webfont.css">
 <link rel="stylesheet" href="./resources/src/css/style.css">
 <link rel="stylesheet" href="./resources/src/css/ju.css">
