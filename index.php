@@ -62,7 +62,11 @@ $result = $mysqli->query($sql);
         </span>
     </div>
     <div class="layout-wrap sadari wrap">
-        <h1 class="sadari title">SADARI</h1>
+        <h1 class="sadari title">
+            SADARI
+            <div class="member-list number"></div>
+        </h1>
+
 
         <div class="layout-member">
             <div class="member-list wrap">
@@ -89,32 +93,31 @@ $result = $mysqli->query($sql);
                     }
                     ?>
                 </div>
-                <div class="member-list number"></div>
             </div>
         </div>
 
         <div class="layout-controller">
             <div class="sadari-select">
                 <div>
-                    <button class="btn" data-game="one">
+                    <button class="btn ta-l" data-game="one">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         한명 뽑기 (또는 여러명)
                     </button>
                 </div>
                 <div>
-                    <button class="btn" data-game="jo_member">
+                    <button class="btn ta-l" data-game="jo_member">
                         <i class="fa fa-random" aria-hidden="true"></i>
                         랜덤 조 (인원기준)
                     </button>
                 </div>
                 <div>
-                    <button class="btn" data-game="jo_team">
+                    <button class="btn ta-l" data-game="jo_team">
                         <i class="fa fa-random" aria-hidden="true"></i>
                         랜덤 조 (팀 기준)
                     </button>
                 </div>
                 <div>
-                    <button class="btn" data-game="ju">
+                    <button class="btn ta-l" data-game="ju">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         주번 뽑기
                     </button>
