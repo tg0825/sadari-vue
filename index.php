@@ -38,6 +38,15 @@ $result = $mysqli->query($sql);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
 
 <title>SADARI</title>
+
+<script>
+var OneSignal = window.OneSignal || [];
+OneSignal.push(function() {
+    OneSignal.init({
+        appId: "3f4bd3dc-0b38-406f-a3d8-af67cae9d044",
+    });
+});
+</script>
 </head>
 <body>
     <div class="gnb">
