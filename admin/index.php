@@ -1,9 +1,5 @@
 <?php
 require_once(__DIR__ . '/head.php');
-
-$sql = "SELECT * FROM member";
-$result = $mysqli->query($sql);
-
 ?>
 <body>
 <div class="container-fluid">
@@ -32,8 +28,6 @@ $result = $mysqli->query($sql);
                                 maxlength="10"
                                 required
                             >
-                            <!-- <input type="text" placeholder="역할" name="position" value=""> -->
-                            <!-- <input type="text" placeholder="입사일자" name="start_date" value=""> -->
                         </div>
                         <div class="form-block mt-1">
                             <div class="team-list"></div>
@@ -96,9 +90,67 @@ $result = $mysqli->query($sql);
                         </div>
                     </form>
                 </div>
+
+                <div class="col hide">
+                    <form id="" action="/admin/m-remove-team.php" method="post" autocomplete="off">
+                        <h4>
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                            팀 삭제
+                        </h4>
+                        <div class="form-block mt-1">
+                            <?php
+                            $sql_team = 'SELECT * FROM team';
+                            $result_team = $mysqli->query($sql_team);
+
+                            if ($result_team->num_rows > 0) {
+                                ?>
+                                <select id="team_list" class="form-control" name="team_id">
+                                    <?php
+                                    while($row = $result_team->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?=$row['team_id']?>"><?=$row['team']?></option>
+                                        <?php
+                                    };
+                                    ?>
+                                </select>
+                                <?php
+                            }
+                            ?>
+                        </div>
+
+                        <div class="mt-1">
+                            <button type="submit" class="btn btn-primary btn-block btn-add-mem">삭제</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="row mt-5">
                 <div class="col">
+
+                    <form name="search" method="get">
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                name="sw"
+                                class="form-control"
+                                placeholder="찾을 이름을 입력하세요."
+                                aria-label="Search term"
+                                aria-describedby="basic-addon"
+                            >
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="submit">검색</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col">
+                    <?php
+                    $sw = $_GET['sw'];
+                    $sql = "SELECT * from member AS m left join team AS t ON m.team_id=t.team_id WHERE name LIKE '%" . $sw . "%'";
+                    $result = $mysqli->query($sql);
+                    ?>
                     총 <?=$result->num_rows?> 명
                     <table id="member_list">
                         <thead>
@@ -110,11 +162,6 @@ $result = $mysqli->query($sql);
                         </thead>
                         <tbody>
                         <?php
-                        $sql = "SELECT *
-                    from member AS m
-                    left join team  AS t
-                    ON m.team_id=t.team_id";
-                        $result = $mysqli->query($sql);
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
                                 ?>
