@@ -5,7 +5,8 @@
         "$": true,
         "node": true,
         "window": true,
-        "document": true
+        "document": true,
+        "Mustache": true
     },
     "env": {
         "browser": true,
