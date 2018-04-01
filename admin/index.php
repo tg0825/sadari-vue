@@ -126,67 +126,90 @@ require_once(__DIR__ . '/head.php');
             </div>
             <div class="row mt-5">
                 <div class="col">
-
-                    <form name="search" method="get">
-                        <div class="input-group">
-                            <input
-                                type="text"
-                                name="sw"
-                                class="form-control"
-                                placeholder="찾을 이름을 입력하세요."
-                                aria-label="Search term"
-                                aria-describedby="basic-addon"
-                            >
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">검색</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col">
-                    <?php
-                    $sw = $_GET['sw'];
-                    $sql = "SELECT * from member AS m left join team AS t ON m.team_id=t.team_id WHERE name LIKE '%" . $sw . "%'";
-                    $result = $mysqli->query($sql);
-                    ?>
-                    총 <?=$result->num_rows?> 명
-                    <table id="member_list">
-                        <thead>
-                        <tr>
-                            <th>이름</th>
-                            <th>팀</th>
-                            <th>옵션</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                                ?>
-                                <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
-                                    <td data-member="name"><?=$row['name']?></td>
-                                    <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
-                                    <td data-member="option">
-                                        <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
-                                        <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="3">
-                                    없음
-                                </td>
-                            </tr>
+                    <div class="row">
+                        <div class="col">
                             <?php
-                        }
-                        ?>
-                        </tbody>
-                    </table>
+                            $sw = '';
+                            isset($_GET['sw']) && $sw = $_GET['sw'];
+                            $sql = "SELECT * from member AS m left join team AS t ON m.team_id=t.team_id WHERE name LIKE '%" . $sw . "%'";
+                            $result = $mysqli->query($sql);
+                            ?>
+                            총 <?=$result->num_rows?> 명
+                        </div>
+                        <div class="col">
+                            <form name="search" action="" method="get">
+                                <div class="input-group">
+                                    <input
+                                        type="text"
+                                        name="sw"
+                                        class="form-control"
+                                        placeholder="찾을 이름을 입력하세요."
+                                        aria-label="Search term"
+                                        aria-describedby="basic-addon"
+                                        data-api='/admin/api-search.php'
+                                        value="<?=$sw?>"
+                                    >
+                                    <div class="input-group-append">
+                                        <button
+                                            class="btn btn-secondary"
+                                            type="submit"
+                                        >검색</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <table id="member_list">
+                                <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>팀</th>
+                                    <th>옵션</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
+                                            <td data-member="name"><?=$row['name']?></td>
+                                            <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
+                                            <td data-member="option">
+                                                <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
+                                                <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="3" class="ta-c">
+                                        "<?=$sw?>" 의 결과가 없습니다.
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                                <script id="member_list_mustache" type="text/template">
+                                    {{#data}}
+                                    <tr data-member-id="{{id}}" data-is-edit="false">
+                                        <td data-member="name">{{name}}</td>
+                                        <td data-member="team" data-member-eng="{{team_eng}}">{{team}}</td>
+                                        <td data-member="option">
+                                            <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
+                                            <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
+                                        </td>
+                                    </tr>
+                                    {{/data}}
+                                </script>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
