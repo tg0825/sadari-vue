@@ -47,6 +47,16 @@ OneSignal.push(function() {
     });
 });
 </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116893453-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116893453-1');
+</script>
+
 </head>
 <body>
     <div class="gnb">
