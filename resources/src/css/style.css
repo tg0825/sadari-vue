@@ -191,6 +191,14 @@ input:focus {
     right: 12px;
 }
 
+.account {
+    background: #e7994d;
+}
+
+.account:after {
+    content: '\f155';
+}
+
 .engineer {
     background: #838383;
 }
