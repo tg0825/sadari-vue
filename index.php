@@ -96,7 +96,7 @@ OneSignal.push(function() {
                             ?>
                             <div
                                 class="member-list member <?=$row['team_eng']?>"
-                                style="background-image:url()"
+                                style="background-color:url(<?=$row['team_color']?>)"
                                 data-team-eng="<?=$row['team_eng']?>"
                             >
                                 <span class="name"><?=$row['name']?></span>

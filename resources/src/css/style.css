@@ -271,6 +271,14 @@ input:focus {
     content: '\f19d';
 }
 
+.hr {
+    background: #ff80da;
+}
+
+.hr:after {
+    content: '\f183';
+}
+
 .group.member .name,
 .member-list.member input,
 .member-list.member .name {
