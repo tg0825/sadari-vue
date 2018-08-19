@@ -1,11 +1,3 @@
-<?php
-require_once(__DIR__ . '/head.php');
-?>
-<body>
-<div class="container-fluid">
-<?php
-    require_once('./header.php');
-?>
     <div class="row">
         <div class="col-3">
             <div id="mySidenav" class="sidenav">

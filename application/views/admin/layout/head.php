@@ -39,3 +39,8 @@ if (!isset($_SESSION['member_id'])) {
 <?php
 }
 ?>
+<body>
+<div class="container-fluid">
+<?php
+    require_once(PATH_ADMIN . '/layout/header.php');
+?>
