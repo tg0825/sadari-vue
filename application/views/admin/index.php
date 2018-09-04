@@ -31,20 +31,21 @@
                             $sql = "SELECT *
                                 FROM team";
 
-                            $result = $mysqli->query($sql);
-                            if ($result->num_rows > 0) {
+                            // $result = $mysqli->query($sql);
+                            // $result = $user_list;
+                            // if ($result->num_rows > 0) {
                                 ?>
                                 <select id="team_list" class="form-control" name="team_id">
                                     <?php
-                                    while($row = $result->fetch_assoc()) {
+                                    // while($row = $result->fetch_assoc()) {
                                         ?>
-                                        <option value="<?=$row['team_id']?>"><?=$row['team']?></option>
+                                        <!-- <option value="<?=$row['team_id']?>"><?=$row['team']?></option> -->
                                         <?php
-                                    };
+                                    // };
                                     ?>
                                 </select>
                                 <?php
-                            }
+                            // }
                             ?>
                         </div>
                         <div class="mt-1">
@@ -115,21 +116,21 @@
                             <?php
                             $sql_team = "SELECT *
                                 FROM team";
-                            $result_team = $mysqli->query($sql_team);
+                            // $result_team = $mysqli->query($sql_team);
 
-                            if ($result_team->num_rows > 0) {
+                            // if ($result_team->num_rows > 0) {
                                 ?>
                                 <select id="team_list" class="form-control" name="team_id">
                                     <?php
-                                    while($row = $result_team->fetch_assoc()) {
+                                    // while($row = $result_team->fetch_assoc()) {
                                         ?>
-                                        <option value="<?=$row['team_id']?>"><?=$row['team']?></option>
+                                        <!-- <option value="<?=$row['team_id']?>"><?=$row['team']?></option> -->
                                         <?php
-                                    };
+                                    // };
                                     ?>
-                                </select>
+                                <!-- </select> -->
                                 <?php
-                            }
+                            // }
                             ?>
                         </div>
 
@@ -146,15 +147,15 @@
                         <div class="col js_total-number">
                             <?php
                             $sw = '';
-                            isset($_GET['sw']) && $sw = $_GET['sw'];
-                            $sql = "SELECT *
-                                FROM member AS m
-                                LEFT JOIN team AS t
-                                    ON m.team_id=t.team_id
-                                WHERE name LIKE '%" . $sw . "%'";
-                            $result = $mysqli->query($sql);
+                            // isset($_GET['sw']) && $sw = $_GET['sw'];
+                            // $sql = "SELECT *
+                            //     FROM member AS m
+                            //     LEFT JOIN team AS t
+                            //         ON m.team_id=t.team_id
+                            //     WHERE name LIKE '%" . $sw . "%'";
+                            // $result = $mysqli->query($sql);
                             ?>
-                            총 <?=$result->num_rows?> 명
+                            <!-- 총 <?=$result->num_rows?> 명 -->
                         </div>
                         <div class="col">
                             <form name="search" action="" method="get">
@@ -198,20 +199,20 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
+                                if (count($member_list) > 0) {
+                                    foreach($member_list as $member) {
                                         ?>
-                                        <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
-                                            <td data-member="name"><?=$row['name']?></td>
-                                            <td data-member="team" data-member-eng="<?=$row['team_eng']?>">
-                                                <?=$row['team']?>
+                                        <tr data-member-id="<?=$member->id?>" data-is-edit="false">
+                                            <td data-member="name"><?=$member->name?></td>
+                                            <td data-member="team" data-member-eng="<?=$member->team_eng?>">
+                                                <?=$member->team?>
                                             </td>
                                             <td>
                                                 <input
                                                     class="team-color"
                                                     type="color"
                                                     name=""
-                                                    value="<?=$row['team_color']?>"
+                                                    value="<?=$member->team_color?>"
                                                 >
                                                 <button
                                                     type="button"

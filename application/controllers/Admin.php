@@ -18,10 +18,18 @@ class Admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
+
 	public function index()
-	   {
-		// $this->load->view('admin/layout/head.php');
-		$this->load->view('admin/index');
-		// $this->load->view('admin/layout/footer.php');
-	}
+    {
+        $this->load->model('member');
+        $data['member_list'] = $this->member->get_all();
+        $this->load->view('admin/layout/head.php');
+        $this->load->view('admin/index', $data);
+        $this->load->view('admin/layout/footer.php');
+    }
 }

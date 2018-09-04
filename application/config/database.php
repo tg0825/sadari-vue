@@ -73,13 +73,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$db['master']['dsn'] = 'mysql:dbname=idusme;host=backpackr.asuscomm.com';
+
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
-	'dbdriver' => 'mysqli',
+	'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
+	'hostname' => 'mysql:host=0.0.0.0',
+	'username' => 'root',
+	'password' => 'root',
+	'database' => 'sadari',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
