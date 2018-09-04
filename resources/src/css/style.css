@@ -199,6 +199,14 @@ input:focus {
     content: '\f155';
 }
 
+.hr {
+    background: #5aeab3;
+}
+
+.hr:after {
+    content: '\f0c0';
+}
+
 .engineer {
     background: #838383;
 }
