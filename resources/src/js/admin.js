@@ -192,9 +192,3 @@ $(function () {
         $searchForm.on('keyup', '[name="sw"]', handleSearch);
     }());
 });
-
-
-// 변경된 컬러 저장하기
-$(function () {
-
-})

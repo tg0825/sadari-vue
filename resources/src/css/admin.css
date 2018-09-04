@@ -64,11 +64,3 @@ table td {
     font-size: 36px;
     margin-left: 50px;
 }
-
-.team-color {
-    display: inline-block;
-    vertical-align: middle;
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-}

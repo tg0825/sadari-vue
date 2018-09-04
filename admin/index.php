@@ -36,8 +36,7 @@ require_once(__DIR__ . '/head.php');
                         <div class="form-block mt-1">
                             <div class="team-list"></div>
                             <?php
-                            $sql = "SELECT *
-                                FROM team";
+                            $sql = 'SELECT * FROM team';
 
                             $result = $mysqli->query($sql);
                             if ($result->num_rows > 0) {
@@ -62,12 +61,7 @@ require_once(__DIR__ . '/head.php');
                 </div>
 
                 <div class="col">
-                    <form
-                        id=""
-                        action="/admin/m-insert-team.php"
-                        method="post"
-                        autocomplete="off"
-                    >
+                    <form id="" action="/admin/m-insert-team.php" method="post" autocomplete="off">
                         <h4>
                             <i class="fa fa-male" aria-hidden="true"></i>
                             팀 추가
@@ -94,18 +88,6 @@ require_once(__DIR__ . '/head.php');
                                 required
                             >
                         </div>
-                        <div class="form-block mt-1">
-                            <input
-                                id="name"
-                                name="team_color"
-                                type="color"
-                                placeholder="팀 색상을 선택해주세요."
-                                class="form-control"
-                                style="height:40px"
-                                value="#ff0000"
-                                required
-                            >
-                        </div>
 
                         <div class="mt-1">
                             <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
@@ -121,8 +103,7 @@ require_once(__DIR__ . '/head.php');
                         </h4>
                         <div class="form-block mt-1">
                             <?php
-                            $sql_team = "SELECT *
-                                FROM team";
+                            $sql_team = 'SELECT * FROM team';
                             $result_team = $mysqli->query($sql_team);
 
                             if ($result_team->num_rows > 0) {
@@ -155,11 +136,7 @@ require_once(__DIR__ . '/head.php');
                             <?php
                             $sw = '';
                             isset($_GET['sw']) && $sw = $_GET['sw'];
-                            $sql = "SELECT *
-                                FROM member AS m
-                                LEFT JOIN team AS t
-                                    ON m.team_id=t.team_id
-                                WHERE name LIKE '%" . $sw . "%'";
+                            $sql = "SELECT * from member AS m left join team AS t ON m.team_id=t.team_id WHERE name LIKE '%" . $sw . "%'";
                             $result = $mysqli->query($sql);
                             ?>
                             총 <?=$result->num_rows?> 명
@@ -190,17 +167,10 @@ require_once(__DIR__ . '/head.php');
                     <div class="row mt-1">
                         <div class="col">
                             <table id="member_list">
-                                <colgroup>
-                                    <col>
-                                    <col>
-                                    <col style="width:100px">
-                                    <col style="width:200px">
-                                </colgroup>
                                 <thead>
                                 <tr>
                                     <th>이름</th>
                                     <th>팀</th>
-                                    <th>팀 컬러</th>
                                     <th>옵션</th>
                                 </tr>
                                 </thead>
@@ -211,22 +181,8 @@ require_once(__DIR__ . '/head.php');
                                         ?>
                                         <tr data-member-id="<?=$row['id']?>" data-is-edit="false">
                                             <td data-member="name"><?=$row['name']?></td>
-                                            <td data-member="team" data-member-eng="<?=$row['team_eng']?>">
-                                                <?=$row['team']?>
-                                            </td>
-                                            <td>
-                                                <input
-                                                    class="team-color"
-                                                    type="color"
-                                                    name=""
-                                                    value="<?=$row['team_color']?>"
-                                                >
-                                                <button
-                                                    type="button"
-                                                    name="button"
-                                                >확인</button>
-                                            </td>
-                                            <td class="ta-c" data-member="option">
+                                            <td data-member="team" data-member-eng="<?=$row['team_eng']?>"><?=$row['team']?></td>
+                                            <td data-member="option">
                                                 <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
                                                 <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
                                             </td>
@@ -236,7 +192,7 @@ require_once(__DIR__ . '/head.php');
                                 } else {
                                     ?>
                                     <tr>
-                                        <td colspan="4" class="ta-c">
+                                        <td colspan="3" class="ta-c">
                                         "<?=$sw?>" 의 결과가 없습니다.
                                         </td>
                                     </tr>

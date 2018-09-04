@@ -3,14 +3,11 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 
 $team = mysqli_real_escape_string($mysqli, $_POST['team']);
 $team_eng = mysqli_real_escape_string($mysqli, $_POST['team_eng']);
-$team_color = mysqli_real_escape_string($mysqli, $_POST['team_color']);
 
 // 유효성검사: 기존팀들 이름과 비교
 $sql = "SELECT team
-    FROM team
-    WHERE team='$team'
-        OR team_eng='$team_eng'
-    ";
+    from team
+    WHERE team='$team' OR team_eng='$team_eng'";
 if ($mysqli->query($sql)->num_rows > 0) {
     ?>
     <script>
@@ -18,9 +15,7 @@ if ($mysqli->query($sql)->num_rows > 0) {
     </script>
     <?php
 } else {
-    $sql = "INSERT INTO team (team, team_eng, team_color)
-        VALUES ('$team', '$team_eng', '$team_color')
-    ";
+    $sql = "INSERT INTO team (team, team_eng) VALUES ('$team', '$team_eng')";
 
     if ($mysqli->query($sql) === TRUE) {
     ?>
@@ -35,6 +30,7 @@ if ($mysqli->query($sql)->num_rows > 0) {
     </script>
     <?php
     }
+
     ?>
     <?php
 $mysqli->close();
