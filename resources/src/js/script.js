@@ -331,14 +331,14 @@
             if (typeof v[i].team === 'undefined') {
                 v[i].team = '';
             }
-            memberList += '<div ' +
+            memberList += '<label ' +
                 'data-team-eng="' + v[i].team_eng + '"' +
                 'class="member-list member ' + v[i].team_eng + '"' +
                 ' style="background-image:url(' + v[i].avatar + ')">' +
                 '<input type="checkbox" class="js-all-check-item"/>' +
                 '<span class="name">' + v[i].name + '</span>' +
                 '<span class="team">' + v[i].team + '</span>' +
-                '</div>';
+                '</label>';
         }
 
         $('.member-list.body').html(memberList);
