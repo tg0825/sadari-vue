@@ -116,7 +116,7 @@ AllCheck.prototype = {
     _bindEvent: function () {
         this.$ui
             .on('change', this.itemSelector, this._handleChangeItem.bind(this))
-            .on('change', this.masterSelector, this._handleChangeMaster.bind(this));
+            .on('click', this.masterSelector, this._handleChangeMaster.bind(this));
 
         // events.on('updateMasterCheck', this.updateMasterCheck.bind(this));
         // events.on('checkAllItem', this.checkAllItem.bind(this));

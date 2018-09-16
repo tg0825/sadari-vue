@@ -162,6 +162,13 @@ input:focus {
     box-sizing: border-box;
 }
 
+.group.member input,
+.member-list.member input{
+    position: absolute;
+    z-index: -1;
+    visibility: hidden;
+}
+
 .member-list.member.is_disable {
     /* opacity: 0.1; */
 }

@@ -357,23 +357,41 @@
         storage.setItem('juList', arr);
     }
 
-    // 비활성 버튼 클릭
+    // 직원 항목 클릭
     function memberToggle(e) {
         e.stopPropagation();
-        var $target = $(e.currentTarget);
-        var idx = $target.index();
 
-        if ($target.is('.is_disable')) {
-            $target.removeClass('is_disable');
-            clonebackpacker[idx].is_disable = false;
+        var $target = $(e.currentTarget);
+        var $item = $target.parents('.member-list.member');
+        var idx = $item.index();
+        var state = null;
+
+        if ($item.is('.is_disable')) {
+            $item.removeClass('is_disable');
+            state = false;
         } else {
-            $target.addClass('is_disable');
-            clonebackpacker[idx].is_disable = true;
+            $item.addClass('is_disable');
+            state = true;
         }
 
+        updateState(idx, state);
         headCount();
     }
 
+    function updateState(index, state) {
+        clonebackpacker[index].is_disable = state;
+    }
+
+    function allMemberToggle(e) {
+        var state = e.currentTarget.checked;
+        var $itemList = $('.member-list.body .member-list.member');
+        $.each($itemList, function (i, e) {
+            updateState(i, state);
+        });
+        headCount();
+    }
+
+    // 선택 인원 카운트 최신화
     function headCount() {
         var max = clonebackpacker.length;
         var disable = clonebackpacker.filter(function (v) {
@@ -536,7 +554,9 @@
         // 추가 멤버 팀 선택
         // $(document).on('click', '.team.item', selectedTeam)
         // 멤버 비활성
-        $(document).on('click', '.member-list.wrap .member-list.member', memberToggle);
+        $(document)
+            .on('click', '.member-list.wrap .member-list.member input:checkbox', memberToggle)
+            .on('click', '.js-all-check-master', allMemberToggle)
         // 주번 추가
         $('.ju-add')
             .on('click', 'button', addJu)

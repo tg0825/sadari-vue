@@ -222,7 +222,11 @@ OneSignal.push(function() {
     <script src="./resources/src/js/script.js"></script>
     <script src="./resources/src/js/allcheck.js"></script>
     <script type="text/javascript">
-        var allCheck = new AllCheck();
+        var allCheck = new AllCheck({
+            activeClass: 'is_disable',
+            activeElement: 'label',
+            isActiveClass: true
+        });
     </script>
 </body>
 </html>
