@@ -35,7 +35,7 @@
     <body class="layout-login page-login">
         <div class="wrap">
             <h1>로그인</h1>
-            <form class="" action="login-process.php" method="post">
+            <form class="" action="/admin/login-process" method="post">
                 <div>
                     <input
                         type="text"

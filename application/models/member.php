@@ -9,6 +9,8 @@ class Member extends CI_Model {
 
     public function get_all()
     {
+        $this->load->database();
+        
         $this->db->select('*');
         $this->db->from('member as m');
         $this->db->join('team as t', 'm.team_id = t.team_id');

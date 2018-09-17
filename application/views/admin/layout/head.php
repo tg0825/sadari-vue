@@ -34,7 +34,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 if (!isset($_SESSION['member_id'])) {
 ?>
 <script>
-    window.location.href = '/login.php';
+    window.location.href = '/admin/login';
 </script>
 <?php
 }

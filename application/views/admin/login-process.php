@@ -24,14 +24,14 @@ if (!isset($_POST['member_id']) || !isset($_POST['member_password'])) {
     ?>
     <script>
         alert('아이디와 비밀번호를 확인해주세요.');
-        window.location.href = 'login.php';
+        window.location.href = '/admin/login';
     </script>
     <?php
     } else {
         $_SESSION['member_id'] = $member_id;
     ?>
     <script>
-        window.location.href = 'admin/index.php';
+        window.location.href = '/admin';
     </script>
     <?php
     }
