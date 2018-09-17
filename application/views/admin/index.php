@@ -25,7 +25,7 @@
                                         placeholder="찾을 이름을 입력하세요."
                                         aria-label="Search term"
                                         aria-describedby="basic-addon"
-                                        data-api='/admin/api-search.php'
+                                        data-api='/admin/search'
                                         value="<?=$sw?>"
                                     >
                                     <div class="input-group-append">
