@@ -100,6 +100,10 @@
                                     <tr data-member-id="{{id}}" data-is-edit="false">
                                         <td data-member="name">{{name}}</td>
                                         <td data-member="team" data-member-eng="{{team_eng}}">{{team}}</td>
+                                        <td>
+                                            <input class="team-color" type="color" name="" value="">
+                                            <button type="button" name="button">확인</button>
+                                        </td>
                                         <td data-member="option">
                                             <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
                                             <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>

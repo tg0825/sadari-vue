@@ -156,7 +156,7 @@ $(function () {
 
         var $totalNumber = $('.js_total-number');
 
-        function MustacheRedner(tmplName, data) {
+        function MustacheRender(tmplName, data) {
             var template = $(tmplName).html();
             Mustache.parse(template);
             var render = Mustache.render(template, {data: data});
@@ -179,7 +179,7 @@ $(function () {
                     .done(function (response) {
                         var result;
                         var length = response.length;
-                        if (length) result = MustacheRedner('#member_list_mustache', response);
+                        if (length) result = MustacheRender('#member_list_mustache', response);
                         else result = $row.html(emptyMessage);
                         $tableTbody.html(result);
                         $totalNumber.html('총 ' + length + ' 명');

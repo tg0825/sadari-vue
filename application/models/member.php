@@ -10,7 +10,7 @@ class Member extends CI_Model {
     public function get_all()
     {
         $this->load->database();
-        
+
         $this->db->select('*');
         $this->db->from('member as m');
         $this->db->join('team as t', 'm.team_id = t.team_id');
@@ -20,5 +20,17 @@ class Member extends CI_Model {
         }else{
             return false;
         }
+    }
+
+    public function get_search($sw)
+    {
+        $this->load->database();
+        $this->db->select('*');
+        $this->db->from('member AS m');
+        $this->db->join('team AS t', 'm.team_id = t.team_id');
+        $this->db->where("name LIKE '%{$sw}%'");
+        $query = $this->db->get();
+
+        return $query->result();
     }
 }

@@ -50,10 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['admin'] = 'admin/main';
-$route['admin/search'] = 'admin/search';
 $route['admin/member'] = 'admin/member';
 $route['admin/team'] = 'admin/team';
-$route['admin/(:any)'] = 'admin/$1';
+$route['admin/login'] = 'admin/main/login';
+$route['admin/login-process'] = 'admin/main/login_process';
+$route['admin/logout'] = 'admin/main/logout';
+$route['admin/search'] = 'admin/main/search';
 
 $route['default_controller'] = 'game';
 $route['404_override'] = '';

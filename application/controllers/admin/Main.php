@@ -10,11 +10,13 @@ class Main extends CI_Controller {
 	public function index()
     {
         $this->load->model('member');
-        $data['member_list'] = $this->member->get_all();
+        $result = $this->member->get_all();
 
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
-        $this->load->view('admin/index', $data);
+        $this->load->view('admin/index', [
+            'member_list' => $result
+        ]);
         $this->load->view('admin/layout/footer.php');
     }
 
@@ -30,7 +32,10 @@ class Main extends CI_Controller {
 
     public function search()
     {
-        $this->load->model('search');
+        $sw = $this->input->get('sw');
+        $this->load->model('member');
+        $result = $this->member->get_search($sw);
+        echo json_encode($result);
         // // dev
         // $server = '127.0.0.1';
         // $username = 'root';
@@ -55,17 +60,15 @@ class Main extends CI_Controller {
         //     die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
         // }
 
-        $sw = '';
-        $searchAll = [];
-        if (isset($_GET['sw']) && $_GET['sw']) {
-            $sw = $_GET['sw'];
-            $sql = "SELECT * from member AS m left join team AS t ON m.team_id=t.team_id WHERE name LIKE '%" . $sw . "%'";
-            $result = $mysqli->query($sql);
-            while ($row = $result->fetch_assoc()) {
-                $searchAll[] = $row;
-            }
-        }
-
-        echo json_encode($searchAll);
+        // $searchAll = [];
+        // if (isset($_GET['sw']) && $_GET['sw']) {
+        //     $sw = $_GET['sw'];
+        //     $sql = "SELECT * from member AS m left join team AS t ON m.team_id=t.team_id WHERE name LIKE '%" . $sw . "%'";
+        //     $result = $mysqli->query($sql);
+        //     while ($row = $result->fetch_assoc()) {
+        //         $searchAll[] = $row;
+        //     }
+        // }
+        // echo json_encode($searchAll);
     }
 }
