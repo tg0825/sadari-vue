@@ -1,7 +1,12 @@
     <div class="col-9">
         <div class="row">
             <div class="col">
-                <form id="JSFORM" action="/admin/m-insert.php" method="post" autocomplete="off">
+                <form
+                    id="JSFORM"
+                    action="/admin/member/add-process"
+                    method="post"
+                    autocomplete="off"
+                >
                     <h4>
                         <i class="fa fa-male" aria-hidden="true"></i>
                         인원추가
@@ -19,29 +24,20 @@
                     </div>
                     <div class="form-block mt-1">
                         <div class="team-list"></div>
-                        <?php
-                        $sql = "SELECT *
-                            FROM team";
-
-                        // $result = $mysqli->query($sql);
-                        // $result = $user_list;
-                        // if ($result->num_rows > 0) {
-                            ?>
                             <select id="team_list" class="form-control" name="team_id">
                                 <?php
-                                // while($row = $result->fetch_assoc()) {
-                                    ?>
-                                    <!-- <option value="<?=$row['team_id']?>"><?=$row['team']?></option> -->
-                                    <?php
-                                // };
+                                foreach($team_list as $team) {
+                                ?>
+                                    <option value="<?=$team->team_id?>"><?=$team->team?></option>
+                                <?php
+                                }
                                 ?>
                             </select>
-                            <?php
-                        // }
-                        ?>
-                    </div>
-                    <div class="mt-1">
-                        <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
+                        </div>
+
+                        <div class="mt-1">
+                            <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
+                        </div>
                     </div>
                 </form>
             </div>

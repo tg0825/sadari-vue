@@ -150,7 +150,7 @@ $(function () {
     (function () {
         var $searchForm = $('[name="search"]');
         var $tableTbody = $('#member_list tbody');
-        var $row = $('<tr><td colspan="3" class="ta-c"></td></tr>').find('td');
+        var $row = $('<tr><td colspan="4" class="ta-c"></td></tr>').find('td');
         var emptyMessage = '결과가 없습니다.';
         var loadingMessage = '로딩중..';
 
