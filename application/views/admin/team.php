@@ -55,7 +55,12 @@
 
         <div class="row mt-5">
             <div class="col">
-                <form id="" action="/admin/team/delete/submit" method="post" autocomplete="off">
+                <form
+                    id=""
+                    action="/admin/team/delete/submit"
+                    method="post"
+                    autocomplete="off"
+                >
                     <h4>
                         <i class="fa fa-male" aria-hidden="true"></i>
                         팀 삭제

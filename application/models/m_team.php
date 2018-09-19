@@ -29,4 +29,12 @@ class m_team extends CI_Model {
 
         return $result;
     }
+
+    public function delete($data)
+    {
+        $this->load->database();
+        $this->db->where('team_id', $data['team_id']);
+        $result = $this->db->delete('team');
+        return $result;
+    }
 }

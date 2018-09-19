@@ -40,4 +40,16 @@ class team extends CI_Controller {
         $result = $this->m_team->edit($data);
         redirect('/admin/team/edit');
     }
+
+    public function delete_submit()
+    {
+        $this->load->helper('url');
+        $data = [
+            'team_id' => $_POST['team_id'],
+        ];
+
+        $this->load->model('m_team');
+        $result = $this->m_team->delete($data);
+        redirect('/admin/team/edit');
+    }
 }
