@@ -27,7 +27,7 @@ class team extends CI_Controller {
         $this->load->view('admin/layout/footer.php');
     }
 
-    public function team_submit()
+    public function edit_submit()
     {
         $this->load->helper('url');
         $data = [

@@ -51,9 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['admin'] = 'admin/main';
 $route['admin/member/edit'] = 'admin/member/edit';
-$route['admin/member/edit-submit'] = 'admin/member/edit-submit';
+$route['admin/member/edit/submit'] = 'admin/member/edit-submit';
 $route['admin/team/edit'] = 'admin/team/edit';
-$route['admin/team-submit'] = 'admin/team/team-submit';
+$route['admin/team/edit/submit'] = 'admin/team/edit-submit';
+$route['admin/team/delete/submit'] = 'admin/team/delete-submit';
 $route['admin/login'] = 'admin/main/login';
 $route['admin/login-process'] = 'admin/main/login_process';
 $route['admin/logout'] = 'admin/main/logout';
