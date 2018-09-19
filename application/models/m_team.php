@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Team extends CI_Model {
+class m_team extends CI_Model {
     public function __construct()
     {
         parent::__construct();
@@ -17,13 +17,16 @@ class Team extends CI_Model {
         return $query->result();
     }
 
-    public function add($data)
+    public function edit($data)
     {
         $this->load->database();
 
-        $this->db->insert('member', [
-            'name' => $data['name'],
-            'team_id' => $data['team_id']
+        $result = $this->db->insert('team', [
+            'team' => $data['team'],
+            'team_eng' => $data['team_eng'],
+            'team_color' => $data['team_color']
         ]);
+
+        return $result;
     }
 }

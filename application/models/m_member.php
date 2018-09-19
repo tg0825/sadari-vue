@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Member extends CI_Model {
+class m_member extends CI_Model {
     public function __construct()
     {
         parent::__construct();
@@ -20,6 +20,16 @@ class Member extends CI_Model {
         }else{
             return false;
         }
+    }
+
+    public function add($data)
+    {
+        $this->load->database();
+
+        $this->db->insert('member', [
+            'name' => $data['name'],
+            'team_id' => $data['team_id']
+        ]);
     }
 
     public function get_search($sw)

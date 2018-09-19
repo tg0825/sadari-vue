@@ -3,7 +3,7 @@
             <div class="col">
                 <form
                     id=""
-                    action="/admin/m-insert-team.php"
+                    action="/admin/team-submit"
                     method="post"
                     autocomplete="off"
                 >
@@ -61,25 +61,15 @@
                         팀 삭제
                     </h4>
                     <div class="form-block mt-1">
-                        <?php
-                        $sql_team = "SELECT *
-                            FROM team";
-                        // $result_team = $mysqli->query($sql_team);
-
-                        // if ($result_team->num_rows > 0) {
-                            ?>
-                            <select id="team_list" class="form-control" name="team_id">
-                                <?php
-                                // while($row = $result_team->fetch_assoc()) {
-                                    ?>
-                                    <!-- <option value="<?=$row['team_id']?>"><?=$row['team']?></option> -->
-                                    <?php
-                                // };
-                                ?>
-                            <!-- </select> -->
+                        <select id="team_list" class="form-control" name="team_id">
                             <?php
-                        // }
-                        ?>
+                            foreach($team_list as $team) {
+                            ?>
+                                <option value="<?=$team->team_id?>"><?=$team->team?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="mt-1">

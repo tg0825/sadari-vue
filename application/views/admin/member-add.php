@@ -3,7 +3,7 @@
             <div class="col">
                 <form
                     id="JSFORM"
-                    action="/admin/member/add-process"
+                    action="/admin/member/edit-submit"
                     method="post"
                     autocomplete="off"
                 >

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class main extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
@@ -9,8 +9,8 @@ class Main extends CI_Controller {
 
 	public function index()
     {
-        $this->load->model('member');
-        $result = $this->member->get_all();
+        $this->load->model('m_member');
+        $result = $this->m_member->get_all();
 
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
@@ -33,8 +33,8 @@ class Main extends CI_Controller {
     public function search()
     {
         $sw = $this->input->get('sw');
-        $this->load->model('member');
-        $result = $this->member->get_search($sw);
+        $this->load->model('m_member');
+        $result = $this->m_member->get_search($sw);
         echo json_encode($result);
     }
 }

@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Member extends CI_Controller {
+class member extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
     }
 
-	public function add()
+	public function edit()
     {
-        $this->load->model('team');
-        $result = $this->team->get_all();
+        $this->load->model('m_team');
+        $result = $this->m_team->get_all();
 
         $data = [
             'team_list' => $result
@@ -22,15 +22,16 @@ class Member extends CI_Controller {
         $this->load->view('admin/layout/footer.php');
     }
 
-    public function add_process()
+    public function edit_submit()
     {
+        $this->load->helper('url');
         $data = [
             'name' => $this->input->post('name'),
             'team_id' => $this->input->post('team_id')
         ];
 
-        $this->load->model('team');
-        $result = $this->team->add($data);
-        $this->load->view('admin/member-add-process.php');
+        $this->load->model('m_member');
+        $result = $this->m_member->add($data);
+        redirect('/admin/member/edit');
     }
 }
