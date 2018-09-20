@@ -80,7 +80,7 @@ $(function () {
                 var api = '/admin/member/update';
                 var param = obj;
 
-                $.post(api, param)
+                return $.post(api, param)
                     .done(function (response) {
                         console.log(response);
                         // alert('수정완료');
@@ -136,8 +136,10 @@ $(function () {
                         id: $tr.attr('data-member-id'),
                         name: $tr.find('[data-member=name]').text(),
                         team_id: selectedValue,
+                    }).done(function () {
+                        $tr.find('[data-member=edit]').text(btnText.edit);
+                        $tr.attr('data-is-edit', 'false');
                     });
-                    $tr.attr('data-is-edit', 'false');
                 }
             }
         }());
