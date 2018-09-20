@@ -41,6 +41,14 @@ class m_member extends CI_Model {
         return $this->db->update('member');
     }
 
+    public function delete($id)
+    {
+        $this->load->database();
+
+        $this->db->where('id', $id);
+        return $this->db->delete('member');
+    }
+
     public function get_search($sw)
     {
         $this->load->database();

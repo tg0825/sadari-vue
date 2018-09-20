@@ -22,28 +22,6 @@ $(function () {
             name: valid('이름을 입력해주세요.'),
         };
 
-        // 삭제
-        function removeMember(e) {
-            var self = e.target;
-            var tr = self.parentNode.parentNode;
-
-            if (self.tagName === 'BUTTON' && self.dataset.member === 'delete') {
-                if (!confirm('삭제하시겠습니까?')) return;
-                var btn = self;
-                var $tr = $(btn).parents('tr');
-                var api = '/admin/m-remove.php';
-                var param = {
-                    name: tr.querySelector('[data-member=name]').textContent.trim(),
-                    team_eng: tr.querySelector('[data-member-eng]').dataset.memberEng,
-                };
-
-                $.post(api, param, function (response) {
-                    var res = response;
-                    $tr.remove();
-                });
-            }
-        }
-
         // 수정
         var edit = (function () {
             // property
@@ -144,9 +122,25 @@ $(function () {
             }
         }());
 
+        // 삭제
+        function _handleClickDeleteMember(e) {
+            var message = '삭제하시겠습니까?';
+            var api = '/admin/member/delete';
+            var $tr = $(e.currentTarget).parents('tr');
+            var param = {
+                id: $tr.attr('data-member-id')
+            };
+
+            if (!confirm(message)) return false;
+            $.post(api, param, function (response) {
+                var res = response;
+                $tr.remove();
+            });
+        }
+
         $(member_list)
-            .on('click', '[data-member=edit]', edit)
-            .on('click', removeMember);
+            .on('click', '[data-member="edit"]', edit)
+            .on('click', '[data-member="delete"]', _handleClickDeleteMember);
     }());
 
     // ajax search
