@@ -45,6 +45,6 @@ class member extends CI_Controller {
         $id = $this->input->post('id');
 
         $this->load->model('m_member');
-        $result = $this->m_member->add($data, $id);
+        $result = $this->m_member->update($data, $id);
     }
 }

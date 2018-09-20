@@ -10,12 +10,16 @@ class main extends CI_Controller {
 	public function index()
     {
         $this->load->model('m_member');
-        $result = $this->m_member->get_all();
+        $this->load->model('m_team');
+
+        $member_list = $this->m_member->get_all();
+        $team_list = $this->m_team->get_all();
 
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
         $this->load->view('admin/index', [
-            'member_list' => $result
+            'member_list' => $member_list,
+            'team_list' => $team_list
         ]);
         $this->load->view('admin/layout/footer.php');
     }

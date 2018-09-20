@@ -38,9 +38,7 @@ class m_member extends CI_Model {
 
         $this->db->set($data);
         $this->db->where('id', $id);
-        $query = $this->db->update('member');
-
-        return $query->result();
+        return $this->db->update('member');
     }
 
     public function get_search($sw)

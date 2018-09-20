@@ -3,6 +3,9 @@
                 <div class="col">
                     <div class="row">
                         <div class="col js_total-number">
+                            <?php
+                            $sw = '';
+                            ?>
                             총 <?=count($member_list)?> 명
                         </div>
                         <div class="col">
@@ -30,6 +33,17 @@
                     </div>
                     <div class="row mt-1">
                         <div class="col">
+
+                            <select id="team_list" class="form-control" name="team_id">
+                                <?php
+                                foreach($team_list as $team) {
+                                ?>
+                                    <option value="<?=$team->team_id?>"><?=$team->team?></option>
+                                    <?php
+                                };
+                                ?>
+                            </select>
+
                             <table id="member_list">
                                 <colgroup>
                                     <col>
