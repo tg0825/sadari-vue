@@ -27,6 +27,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 
 <!-- app js -->
 <script src="/resources/src/js/admin.js"></script>
+<script src="/resources/src/js/team.js"></script>
 
 <title>SADARI ADMIN</title>
 </head>

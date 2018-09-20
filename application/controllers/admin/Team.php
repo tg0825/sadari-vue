@@ -9,12 +9,6 @@ class team extends CI_Controller {
 
     public function index()
     {
-        $this->load->helper('url');
-        redirect('/admin/team/edit');
-    }
-
-	public function edit()
-    {
         $this->load->model('m_team');
         $team_list = $this->m_team->get_all();
         $data = [
@@ -24,6 +18,14 @@ class team extends CI_Controller {
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
         $this->load->view('admin/team.php', $data);
+        $this->load->view('admin/layout/footer.php');
+    }
+
+    public function add()
+    {
+        $this->load->view('admin/layout/head.php');
+        $this->load->view('admin/layout/lnb.php');
+        $this->load->view('admin/team-add.php');
         $this->load->view('admin/layout/footer.php');
     }
 
@@ -38,18 +40,16 @@ class team extends CI_Controller {
 
         $this->load->model('m_team');
         $result = $this->m_team->edit($data);
-        redirect('/admin/team/edit');
+        redirect('/admin/team');
     }
 
-    public function delete_submit()
+    public function delete()
     {
-        $this->load->helper('url');
         $data = [
             'team_id' => $_POST['team_id'],
         ];
 
         $this->load->model('m_team');
         $result = $this->m_team->delete($data);
-        redirect('/admin/team/edit');
     }
 }
