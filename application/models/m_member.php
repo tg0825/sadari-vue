@@ -32,6 +32,17 @@ class m_member extends CI_Model {
         ]);
     }
 
+    public function update($data, $id)
+    {
+        $this->load->database();
+
+        $this->db->set($data);
+        $this->db->where('id', $id);
+        $query = $this->db->update('member');
+
+        return $query->result();
+    }
+
     public function get_search($sw)
     {
         $this->load->database();

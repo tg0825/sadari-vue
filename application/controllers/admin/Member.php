@@ -34,4 +34,17 @@ class member extends CI_Controller {
         $result = $this->m_member->add($data);
         redirect('/admin/member/edit');
     }
+
+    public function update()
+    {
+        $data = [
+            'name' => $this->input->post('name'),
+            'team_id' => $this->input->post('team_id')
+        ];
+
+        $id = $this->input->post('id');
+
+        $this->load->model('m_member');
+        $result = $this->m_member->add($data, $id);
+    }
 }

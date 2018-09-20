@@ -77,7 +77,7 @@ $(function () {
             }
 
             function update(obj) {
-                var api = '/admin/m-update.php';
+                var api = '/admin/member/update';
                 var param = obj;
 
                 $.post(api, param)
@@ -142,8 +142,9 @@ $(function () {
             }
         }());
 
-        $(member_list).on('click', '[data-member=edit]', edit);
-        $(member_list).on('click', removeMember);
+        $(member_list)
+            .on('click', '[data-member=edit]', edit)
+            .on('click', removeMember);
     }());
 
     // ajax search
@@ -192,7 +193,6 @@ $(function () {
         $searchForm.on('keyup', '[name="sw"]', handleSearch);
     }());
 });
-
 
 // 변경된 컬러 저장하기
 $(function () {
