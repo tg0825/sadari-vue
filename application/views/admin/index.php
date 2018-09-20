@@ -3,17 +3,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col js_total-number">
-                            <?php
-                            $sw = '';
-                            // isset($_GET['sw']) && $sw = $_GET['sw'];
-                            // $sql = "SELECT *
-                            //     FROM member AS m
-                            //     LEFT JOIN team AS t
-                            //         ON m.team_id=t.team_id
-                            //     WHERE name LIKE '%" . $sw . "%'";
-                            // $result = $mysqli->query($sql);
-                            ?>
-                            <!-- 총 <?=$result->num_rows?> 명 -->
+                            총 <?=count($member_list)?> 명
                         </div>
                         <div class="col">
                             <form name="search" action="" method="get">
