@@ -48,14 +48,12 @@
                                 <colgroup>
                                     <col>
                                     <col>
-                                    <col style="width:100px">
                                     <col style="width:200px">
                                 </colgroup>
                                 <thead>
                                 <tr>
                                     <th>이름</th>
                                     <th>팀</th>
-                                    <th>팀 컬러</th>
                                     <th>옵션</th>
                                 </tr>
                                 </thead>
@@ -69,18 +67,6 @@
                                             <td data-member="team" data-member-eng="<?=$member->team_eng?>">
                                                 <?=$member->team?>
                                             </td>
-                                            <td>
-                                                <input
-                                                    class="team-color"
-                                                    type="color"
-                                                    name=""
-                                                    value="<?=$member->team_color?>"
-                                                >
-                                                <button
-                                                    type="button"
-                                                    name="button"
-                                                >확인</button>
-                                            </td>
                                             <td class="ta-c" data-member="option">
                                                 <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
                                                 <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
@@ -91,7 +77,7 @@
                                 } else {
                                     ?>
                                     <tr>
-                                        <td colspan="4" class="ta-c">
+                                        <td colspan="3" class="ta-c">
                                         "<?=$sw?>" 의 결과가 없습니다.
                                         </td>
                                     </tr>
@@ -104,10 +90,6 @@
                                     <tr data-member-id="{{id}}" data-is-edit="false">
                                         <td data-member="name">{{name}}</td>
                                         <td data-member="team" data-member-eng="{{team_eng}}">{{team}}</td>
-                                        <td>
-                                            <input class="team-color" type="color" name="" value="">
-                                            <button type="button" name="button">확인</button>
-                                        </td>
                                         <td data-member="option">
                                             <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
                                             <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
