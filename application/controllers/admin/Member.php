@@ -7,6 +7,31 @@ class member extends CI_Controller {
         parent::__construct();
     }
 
+    public function index()
+    {
+        $this->load->model('m_member');
+        $this->load->model('m_team');
+
+        $member_list = $this->m_member->get_all();
+        $team_list = $this->m_team->get_all();
+
+        $this->load->view('admin/layout/head.php');
+        $this->load->view('admin/layout/lnb.php');
+        $this->load->view('admin/index', [
+            'member_list' => $member_list,
+            'team_list' => $team_list
+        ]);
+        $this->load->view('admin/layout/footer.php');
+    }
+
+    public function search()
+    {
+        $sw = $this->input->get('sw');
+        $this->load->model('m_member');
+        $result = $this->m_member->get_search($sw);
+        echo json_encode($result);
+    }
+
 	public function edit()
     {
         $this->load->model('m_team');

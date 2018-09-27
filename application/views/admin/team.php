@@ -1,5 +1,13 @@
     <div class="col-9">
         <div class="row">
+            <div class="col text-right">
+                <a
+                    class="btn btn-lg btn-primary"
+                    href="/admin/team/add">팀 추가</a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
             <?php
             foreach($team_list as $team) {
             ?>
@@ -21,14 +29,6 @@
             <?php
             }
             ?>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col text-right">
-                <a
-                    class="btn btn-lg btn-primary"
-                    href="/admin/team/add">팀 추가</a>
-            </div>
         </div>
     </div>
 </div>

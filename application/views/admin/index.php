@@ -1,4 +1,12 @@
         <div class="col-9">
+            <div class="row">
+                <div class="col text-right">
+                    <a
+                        class="btn btn-lg btn-primary"
+                        href="/admin/member/edit">구성원 추가</a>
+                </div>
+            </div>
+
             <div class="row mt-5">
                 <div class="col">
                     <div class="row">
@@ -34,15 +42,17 @@
                     <div class="row mt-1">
                         <div class="col">
 
-                            <select id="team_list" class="form-control" name="team_id">
-                                <?php
-                                foreach($team_list as $team) {
-                                ?>
-                                    <option value="<?=$team->team_id?>"><?=$team->team?></option>
+                            <div class="" style="display: none">
+                                <select id="team_list" class="form-control" name="team_id">
                                     <?php
-                                };
-                                ?>
-                            </select>
+                                    foreach($team_list as $team) {
+                                    ?>
+                                        <option value="<?=$team->team_id?>"><?=$team->team?></option>
+                                        <?php
+                                    };
+                                    ?>
+                                </select>
+                            </div>
 
                             <table id="member_list">
                                 <colgroup>
