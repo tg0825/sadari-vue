@@ -21,17 +21,39 @@ class team extends CI_Controller {
         $this->load->view('admin/layout/footer.php');
     }
 
-    public function add()
+    public function edit($id = null)
     {
+        $this->load->model('m_team');
+        $data = [];
+
+        if ($id) {
+            $data = $this->m_team->get_item($id);
+            $data = (array)$data[0];
+        }
+
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
-        $this->load->view('admin/team-add.php');
+        $this->load->view('admin/team-add.php', $data);
         $this->load->view('admin/layout/footer.php');
     }
 
     public function edit_submit()
     {
         $this->load->helper('url');
+
+        $is_update = $_POST['team_id'];
+
+        if ($is_update) {
+            $this->update();
+        } else {
+            $this->add();
+        }
+
+        redirect('/admin/team');
+    }
+
+    private function add()
+    {
         $data = [
             'team' => $_POST['team'],
             'team_eng' => $_POST['team_eng'],
@@ -39,8 +61,20 @@ class team extends CI_Controller {
         ];
 
         $this->load->model('m_team');
-        $result = $this->m_team->edit($data);
-        redirect('/admin/team');
+        $this->m_team->add($data);
+    }
+
+    private function update()
+    {
+        $data = [
+            'team_id' => $_POST['team_id'],
+            'team' => $_POST['team'],
+            'team_eng' => $_POST['team_eng'],
+            'team_color' => $_POST['team_color']
+        ];
+
+        $this->load->model('m_team');
+        $this->m_team->update($data);
     }
 
     public function delete()

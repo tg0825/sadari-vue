@@ -3,7 +3,7 @@
             <div class="col text-right">
                 <a
                     class="btn btn-lg btn-primary"
-                    href="/admin/team/add">팀 추가</a>
+                    href="/admin/team/edit">팀 추가</a>
             </div>
         </div>
 
@@ -15,14 +15,19 @@
                     class="col-sm-3 mb-3 team-item"
                     data-team-id="<?=$team->team_id?>"
                 >
-                    <div class="card">
+                    <div
+                        class="card"
+                        style="background-color:<?=$team->team_color?>"
+                    >
                         <div class="card-body">
                             <h5 class="card-title"> <?=$team->team?> </h5>
-                            <p class="card-text">
+                            <!-- <p class="card-text">
                                 desc..
-                            </p>
-                            <a href="#" class="card-link">수정</a>
-                            <a href="#" class="card-link" data-team-btn="delete">삭제</a>
+                            </p> -->
+                            <a href="/admin/team/edit/<?=$team->team_id?>" class="card-link">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                관리
+                            </a>
                         </div>
                     </div>
                 </div>
