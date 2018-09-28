@@ -22,6 +22,7 @@
         return removeArray.splice(value, 1);
     }
 
+    // 구성원 데이터 구성
     function fil() {
         var remap = clonebackpacker.slice().filter(function (v) {
             if (v.is_disable === true) {
@@ -140,7 +141,8 @@
                 else html += '<div class="group item"><div class="group title">' + group.title + '</div>';
                 group.member.forEach(function (groupMember, memberIndex) {
                     html += '<div data-index=' + memberIndex + ' class="member-list member ' + groupMember.team_eng + '"' +
-                        ' style="background-image:url(' + groupMember.avatar + ')">' +
+                        ' style="background-image:url(' + groupMember.avatar + ');' +
+                        ' background-color:' + groupMember.team_color + '">' +
                         '<span class="name">' + groupMember.name + '</span>' +
                         '<span class="team">' + groupMember.team + '</span>' +
                         '</div>';
@@ -502,6 +504,7 @@
                 name: $member.find('.name').html(),
                 team: $member.find('.team').html(),
                 team_eng: $member.data('team-eng'),
+                team_color: $member.data('team-color'),
             };
 
             backpacker.push(member);
@@ -516,7 +519,7 @@
         clonebackpacker = joinMember(backpacker.slice());
         window.clonebackpacker = clonebackpacker;
 
-        renderMember();
+        // renderMember();
         // teamRender();
         juRender();
 
