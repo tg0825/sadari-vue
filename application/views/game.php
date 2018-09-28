@@ -201,7 +201,7 @@ OneSignal.push(function() {
     </div>
 
     <script src="./resources/src/js/config.js"></script>
-    <script src="./resources/src/js/Storage.js"></script>
+    <script src="./resources/src/js/storage.js"></script>
     <script src="./resources/src/js/data.js"></script>
     <script src="./resources/src/js/modal.js"></script>
     <script src="./resources/src/js/clock.js"></script>
