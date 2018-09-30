@@ -32,18 +32,21 @@ class member extends CI_Controller {
         echo json_encode($result);
     }
 
-	public function edit()
+	public function edit($id = null)
     {
-        $this->load->model('m_team');
-        $result = $this->m_team->get_all();
+        $data = [];
 
-        $data = [
-            'team_list' => $result
-        ];
+        if ($id) {
+            $this->load->model('m_member');
+            $data = $this->m_member->get_item($id);
+        } else {
+            $this->load->model('m_team');
+            $data = $this->m_team->get_all();
+        }
 
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
-        $this->load->view('admin/member-add.php', $data);
+        $this->load->view('admin/member-add.php', (array)$data[0]);
         $this->load->view('admin/layout/footer.php');
     }
 

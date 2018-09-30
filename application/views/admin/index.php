@@ -58,7 +58,7 @@
                                 <colgroup>
                                     <col>
                                     <col>
-                                    <col style="width:200px">
+                                    <col style="width:100px">
                                 </colgroup>
                                 <thead>
                                 <tr>
@@ -74,12 +74,14 @@
                                         ?>
                                         <tr data-member-id="<?=$member->id?>" data-is-edit="false">
                                             <td data-member="name"><?=$member->name?></td>
-                                            <td data-member="team" data-member-eng="<?=$member->team_eng?>">
-                                                <?=$member->team?>
+                                            <td data-member="team">
+                                                <?=$member->team ?? '-'?>
                                             </td>
                                             <td class="ta-c" data-member="option">
-                                                <button type="type" class="btn btn-primary" data-member="edit" name="button">수정</button>
-                                                <button type="type" class="btn btn-primary" data-member="delete" name="button">삭제</button>
+                                                <a
+                                                    href="/admin/member/edit/<?=$member->id?>"
+                                                    class="btn btn-primary"
+                                                >관리</a>
                                             </td>
                                         </tr>
                                         <?php

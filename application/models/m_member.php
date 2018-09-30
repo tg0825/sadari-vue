@@ -11,15 +11,24 @@ class m_member extends CI_Model {
     {
         $this->load->database();
 
-        $this->db->select('*');
-        $this->db->from('member as m');
-        $this->db->join('team as t', 'm.team_id = t.team_id');
-        $query = $this->db->get();
+        $query = $this->db->get('member');
+        return $query->result();
         if(count($query->result()) > 0){
             return $query->result();
         }else{
             return false;
         }
+    }
+
+    public function get_item($id)
+    {
+        $this->load->database();
+
+        $this->db->select('*');
+        $this->db->from('member');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->result();
     }
 
     public function add($data)

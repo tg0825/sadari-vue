@@ -11,6 +11,7 @@ $route['admin/logout'] = 'admin/main/logout';
 // 구성원
 $route['admin/member'] = 'admin/member';
 $route['admin/member/edit'] = 'admin/member/edit';
+$route['admin/member/edit/(:num)'] = 'admin/member/edit/$1';
 $route['admin/member/edit/submit'] = 'admin/member/edit-submit';
 $route['admin/member/update'] = 'admin/member/update';
 $route['admin/member/delete'] = 'admin/member/delete';
