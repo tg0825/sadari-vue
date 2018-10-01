@@ -74,8 +74,11 @@
                                         ?>
                                         <tr data-member-id="<?=$member->id?>" data-is-edit="false">
                                             <td data-member="name"><?=$member->name?></td>
-                                            <td data-member="team">
-                                                <?=$member->team ?? '-'?>
+                                            <td
+                                                data-member="team"
+                                                class="ta-c"
+                                            >
+                                                <?=$member->team ?? '미정'?>
                                             </td>
                                             <td class="ta-c" data-member="option">
                                                 <a
