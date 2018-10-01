@@ -1,5 +1,5 @@
     <?php
-    $type = isset($id) ? '관리' : '추가';
+    $type = isset($member['id']) ? '관리' : '추가';
     ?>
     <div class="col-9">
         <div class="row">
@@ -51,7 +51,7 @@
                         <div class="mt-1">
                             <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
                             <?php
-                                if (isset($id)) {
+                                if (isset($member['id'])) {
                             ?>
                                     <button type="submit" class="btn btn-primary btn-block btn-add-mem">삭제</button>
                             <?php
