@@ -17,7 +17,11 @@
                             총 <?=count($member_list)?> 명
                         </div>
                         <div class="col">
-                            <form name="search" action="" method="get">
+                            <form
+                                name="search"
+                                action="/admin/member"
+                                method="get"
+                            >
                                 <div class="input-group">
                                     <input
                                         type="text"

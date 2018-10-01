@@ -7,13 +7,18 @@ class m_member extends CI_Model {
         parent::__construct();
     }
 
-    public function get_all()
+    public function get_all($sw)
     {
         $this->load->database();
 
         $this->db->select('*');
         $this->db->from('member as m');
         $this->db->join('team as t', 'm.team_id = t.team_id', 'left outer');
+
+        if($sw){
+           $this->db->like('name', $sw);
+        }
+
         $query = $this->db->get();
         return $query->result();
     }

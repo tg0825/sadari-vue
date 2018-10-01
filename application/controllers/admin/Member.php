@@ -11,8 +11,9 @@ class member extends CI_Controller {
     {
         $this->load->model('m_member');
         $this->load->model('m_team');
+        $sw = $this->input->get('sw') ?? '';
 
-        $member_list = $this->m_member->get_all();
+        $member_list = $this->m_member->get_all($sw);
         $team_list = $this->m_team->get_all();
 
         $this->load->view('admin/layout/head.php');
