@@ -23,8 +23,9 @@ class m_member extends CI_Model {
         $this->load->database();
 
         $this->db->select('*');
-        $this->db->from('member');
-        $this->db->where('id', $id);
+        $this->db->from('member as m');
+        $this->db->join('team as t', 'm.team_id = t.team_id', 'left outer');
+        $this->db->where('m.id', $id);
         $query = $this->db->get();
         return $query->result();
     }

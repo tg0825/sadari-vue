@@ -13,7 +13,7 @@
                     <input
                         type="hidden"
                         name="team_id"
-                        value="<?=$id ?? ''?>"
+                        value="<?=$member['id'] ?? ''?>"
                     >
                     <h4>
                         <i class="fa fa-male" aria-hidden="true"></i>
@@ -28,16 +28,20 @@
                             class="form-control"
                             maxlength="10"
                             required
-                            value="<?=$name ?? ''?>"
+                            value="<?=$member['name'] ?? ''?>"
                         >
                     </div>
                     <div class="form-block mt-1">
-                        <div class="team-list"></div>
+                        <div class="team-list">
                             <select id="team_list" class="form-control" name="team_id">
                                 <?php
-                                foreach($team_list as $team) {
+                                foreach($team_item_list as $team_item) {
+                                    $selected = ($member['team'] == $team_item->team);
                                 ?>
-                                    <option value="<?=$team->team_id?>"><?=$team->team?></option>
+                                    <option
+                                        value="<?=$team_item->team_id?>"
+                                        <?=$selected ? 'selected' : ''?>
+                                    ><?=$team_item->team?></option>
                                 <?php
                                 }
                                 ?>
@@ -46,7 +50,6 @@
 
                         <div class="mt-1">
                             <button type="submit" class="btn btn-primary btn-block btn-add-mem">추가</button>
-
                             <?php
                                 if (isset($id)) {
                             ?>

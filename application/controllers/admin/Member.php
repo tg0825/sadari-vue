@@ -38,15 +38,15 @@ class member extends CI_Controller {
 
         if ($id) {
             $this->load->model('m_member');
-            $data = $this->m_member->get_item($id);
-        } else {
-            $this->load->model('m_team');
-            $data = $this->m_team->get_all();
+            $data['member'] = (array)$this->m_member->get_item($id)[0];
         }
+
+        $this->load->model('m_team');
+        $data['team_item_list'] = $this->m_team->get_all();
 
         $this->load->view('admin/layout/head.php');
         $this->load->view('admin/layout/lnb.php');
-        $this->load->view('admin/member-add.php', (array)$data[0]);
+        $this->load->view('admin/member-add.php', $data);
         $this->load->view('admin/layout/footer.php');
     }
 
