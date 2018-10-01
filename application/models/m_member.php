@@ -40,12 +40,12 @@ class m_member extends CI_Model {
         ]);
     }
 
-    public function update($data, $id)
+    public function update($data)
     {
         $this->load->database();
 
         $this->db->set($data);
-        $this->db->where('id', $id);
+        $this->db->where('id', $data['id']);
         return $this->db->update('member');
     }
 

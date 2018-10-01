@@ -50,7 +50,8 @@ class member extends CI_Controller {
         $this->load->view('admin/layout/footer.php');
     }
 
-    public function edit_submit()
+    // 저장
+    public function edit_submit($id = null)
     {
         $this->load->helper('url');
         $data = [
@@ -59,23 +60,18 @@ class member extends CI_Controller {
         ];
 
         $this->load->model('m_member');
-        $result = $this->m_member->add($data);
-        redirect('/admin/member/edit');
+
+        if ($id) {
+            $data['id'] = $id;
+            $result = $this->m_member->update($data);
+        } else {
+            $result = $this->m_member->add($data);
+        }
+
+        redirect('/admin/member');
     }
 
-    public function update()
-    {
-        $data = [
-            'name' => $this->input->post('name'),
-            'team_id' => $this->input->post('team_id')
-        ];
-
-        $id = $this->input->post('id');
-
-        $this->load->model('m_member');
-        $result = $this->m_member->update($data, $id);
-    }
-
+    // 삭제
     public function delete()
     {
         $id = $this->input->post('id');

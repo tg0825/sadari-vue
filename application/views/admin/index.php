@@ -84,7 +84,7 @@
                                                 <a
                                                     href="/admin/member/edit/<?=$member->id?>"
                                                     class="btn btn-primary"
-                                                >관리</a>
+                                                >수정</a>
                                             </td>
                                         </tr>
                                         <?php
