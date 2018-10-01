@@ -1,5 +1,5 @@
     <?php
-    $type = isset($team_id) ? '관리' : '추가';
+    $type = isset($team_id) ? '수정' : '추가';
     ?>
     <div class="col-9">
         <div class="row">

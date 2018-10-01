@@ -26,7 +26,7 @@
                             </p> -->
                             <a href="/admin/team/edit/<?=$team->team_id?>" class="card-link">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
-                                관리
+                                수정
                             </a>
                         </div>
                     </div>
