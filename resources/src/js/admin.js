@@ -189,6 +189,7 @@ $(function () {
         // $searchForm.on('keyup', '[name="sw"]', handleSearch);
     }());
 
+    // 구성원 삭제
     $('.js-member-delete').on('click', function (e) {
         if (e) {
             e.preventDefault()
