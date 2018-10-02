@@ -7,7 +7,7 @@ class m_member extends CI_Model {
         parent::__construct();
     }
 
-    public function get_all($sw)
+    public function get_all($sw = null)
     {
         $this->load->database();
 

@@ -1,16 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 session_start();
-
-if($mysqli->connect_error){
-    die('Connect Error:('.$mysqli->connect_errno.') '.$mysqli->connect_error);
-}
-
-$sql = "SELECT *
-        from member AS m
-        left join team  AS t
-        ON m.team_id=t.team_id";
-$result = $mysqli->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -91,25 +80,19 @@ OneSignal.push(function() {
             <div class="member-list wrap">
                 <div class="member-list body">
                     <?php
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            ?>
-                            <div
-                                class="member-list member <?=$row['team_eng']?>"
-                                style="background-color:<?=$row['team_color']?>"
-                                data-team-eng="<?=$row['team_eng']?>"
-                                data-team-color="<?=$row['team_color']?>"
-                            >
-                                <span class="name"><?=$row['name']?></span>
-                                <span class="team"><?=$row['team']?></span>
-                                <span class="remove">x</span>
-                            </div>
-                            <?php
-                        }
-                    } else {
-                        ?>
-                        없음
-                        <?php
+                    foreach($member_list as $member) {
+                    ?>
+                        <div
+                            class="member-list member <?=$member->team_eng?>"
+                            style="background-color:<?=$member->team_color?>"
+                            data-team-eng="<?=$member->team_eng?>"
+                            data-team-color="<?=$member->team_color?>"
+                        >
+                            <span class="name"><?=$member->name?></span>
+                            <span class="team"><?=$member->team?></span>
+                            <span class="remove">x</span>
+                        </div>
+                    <?php
                     }
                     ?>
                 </div>

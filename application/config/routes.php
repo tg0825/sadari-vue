@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['/'] = '/Game';
+
 $route['admin'] = 'admin/main';
 
 $route['admin/login'] = 'admin/main/login';
