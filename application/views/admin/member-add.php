@@ -47,19 +47,29 @@
                                 ?>
                             </select>
                         </div>
+                    </div>
 
-                        <div class="mt-1">
-                            <button type="submit" class="btn btn-primary btn-block btn-add-mem"><?=$type?></button>
-                            <?php
-                                if (isset($member['id'])) {
-                            ?>
-                                    <button type="submit" class="btn btn-primary btn-block btn-add-mem">삭제</button>
-                            <?php
-                                }
-                            ?>
-                        </div>
+                    <div class="mt-1">
+                        <button type="submit" class="btn btn-primary btn-block btn-add-mem">
+                            <?=$type?>
+                        </button>
                     </div>
                 </form>
+
+                <?php
+                    if (isset($member['id'])) {
+                ?>
+                <div class="mt-1">
+                    <a
+                        class="btn btn-primary btn-block js-member-delete"
+                        data-member-id="<?=$member['id']?>"
+                        href="/admin/member/delete">
+                        삭제
+                    </a>
+                </div>
+                <?php
+                    }
+                ?>
             </div>
         </div>
     </div>

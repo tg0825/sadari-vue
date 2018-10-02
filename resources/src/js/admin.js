@@ -188,4 +188,27 @@ $(function () {
 
         // $searchForm.on('keyup', '[name="sw"]', handleSearch);
     }());
+
+    $('.js-member-delete').on('click', function (e) {
+        if (e) {
+            e.preventDefault()
+        }
+
+        var eTarget = e.currentTarget;
+        var memberId = eTarget.dataset.memberId;
+        var api = '/admin/member/delete';
+        var messageConfirm = '삭제하시겠습니까?';
+        var messageDeleteDone = '삭제 성공';
+        var param = {
+            id: memberId
+        };
+
+        if (!confirm(messageConfirm)) return false;
+
+        $.post(api, param)
+            .done(function () {
+                alert(messageDeleteDone);
+                window.location.href = '/admin/member';
+            });
+    });
 });
