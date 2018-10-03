@@ -5,9 +5,10 @@ $route['/'] = '/Game';
 
 $route['admin'] = 'admin/main';
 
-$route['admin/login'] = 'admin/main/login';
-$route['admin/login-process'] = 'admin/main/login_process';
-$route['admin/logout'] = 'admin/main/logout';
+// 로그인
+$route['admin/login'] = 'admin/auth/login';
+$route['admin/login-process'] = 'admin/auth/process';
+$route['admin/logout'] = 'admin/auth/logout';
 
 
 // 구성원
