@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
-session_start();
+// require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
+// session_start();
 
 if (!isset($_POST['member_id']) || !isset($_POST['member_password'])) {
 ?>
