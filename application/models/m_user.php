@@ -9,8 +9,8 @@ class m_user extends CI_Model {
 
     public function validate()
     {
-        $id = $_POST['member_id'];
-        $password = $_POST['member_password'];
+        $id = $this->input->post('member_id');
+        $password = $this->input->post('member_password');
 
         $this->load->database();
         $this->db->where('id', $id);
