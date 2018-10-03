@@ -5,9 +5,10 @@
     <div class="col ta-r pt-2">
         <a href="/">
             <i class="fa fa-home" aria-hidden="true"></i>
-            사다리</a>
+            사다리
+        </a>
 
-        <span><?=$_SESSION['member_id']?> 님</span>
+        <span><?=$username?> 님</span>
         안녕하세요.
 
         <a href="/logout.php">

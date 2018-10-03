@@ -5,6 +5,16 @@ class member extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->check_login();
+    }
+
+    private function check_login()
+    {
+        $this->load->helper('url');
+
+        if (!$this->session->userdata('validated')) {
+            redirect('/admin/login');
+        }
     }
 
     public function index()
@@ -12,11 +22,14 @@ class member extends CI_Controller {
         $this->load->model('m_member');
         $this->load->model('m_team');
         $sw = $this->input->get('sw') ?? '';
+        $username = $this->session->userdata('username');
 
         $member_list = $this->m_member->get_all($sw);
         $team_list = $this->m_team->get_all();
 
-        $this->load->view('admin/layout/head.php');
+        $this->load->view('admin/layout/head.php', [
+            'username' => $username
+        ]);
         $this->load->view('admin/layout/lnb.php');
         $this->load->view('admin/index', [
             'member_list' => $member_list,

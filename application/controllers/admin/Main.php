@@ -12,14 +12,4 @@ class main extends CI_Controller {
         $this->load->helper('url');
         redirect('admin/member');
     }
-
-    public function login()
-    {
-        $this->load->view('admin/login.php');
-    }
-
-    public function login_process()
-    {
-        $this->load->view('admin/login-process');
-    }
 }

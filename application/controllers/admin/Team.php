@@ -5,17 +5,30 @@ class team extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->check_login();
+    }
+
+    private function check_login()
+    {
+        $this->load->helper('url');
+
+        if (!$this->session->userdata('validated')) {
+            redirect('/admin/login');
+        }
     }
 
     public function index()
     {
         $this->load->model('m_team');
         $team_list = $this->m_team->get_all();
+        $username = $this->session->userdata('username');
         $data = [
             'team_list' => $team_list
         ];
 
-        $this->load->view('admin/layout/head.php');
+        $this->load->view('admin/layout/head.php', [
+            'username' => $username
+        ]);
         $this->load->view('admin/layout/lnb.php');
         $this->load->view('admin/team.php', $data);
         $this->load->view('admin/layout/footer.php');

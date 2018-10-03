@@ -1,6 +1,6 @@
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
+// session_start();
+// require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,15 +31,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/dbconfig.php');
 
 <title>SADARI ADMIN</title>
 </head>
-<?php
-if (!isset($_SESSION['member_id'])) {
-?>
-<script>
-    window.location.href = '/admin/login';
-</script>
-<?php
-}
-?>
 <body>
 <div class="container-fluid">
 <?php
