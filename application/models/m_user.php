@@ -16,13 +16,14 @@ class m_user extends CI_Model {
         $this->db->where('id', $id);
         $this->db->where('password', $password);
 
-        $query = $this->db->get('user');
+        $query = $this->db->query("SELECT * FROM user WHERE id ='$id' AND password = password('$password')");
+        $result = $query->row_array();
 
-        if ($query->num_rows == 1) {
-            $data = array(
-                    'username' => $row->id,
-                    'validated' => true
-                    );
+        if ($result) {
+            $data = [
+                'username' => $result['id'],
+                'validated' => true
+            ];
             $this->session->set_userdata($data);
             return true;
         } else {
