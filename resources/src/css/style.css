@@ -149,7 +149,7 @@ input:focus {
     width: 116px;
     height: 62px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: left;
     float: left;
     margin: 5px 0 0 5px;
@@ -160,6 +160,13 @@ input:focus {
     transition: all 150ms;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0);
     box-sizing: border-box;
+}
+
+.group.member input,
+.member-list.member input{
+    position: absolute;
+    z-index: -1;
+    visibility: hidden;
 }
 
 .member-list.member.is_disable {
@@ -197,6 +204,14 @@ input:focus {
 
 .account:after {
     content: '\f155';
+}
+
+.hr {
+    background: #5aeab3;
+}
+
+.hr:after {
+    content: '\f0c0';
 }
 
 .engineer {
@@ -269,14 +284,6 @@ input:focus {
 
 .educator:after {
     content: '\f19d';
-}
-
-.hr {
-    background: #ff80da;
-}
-
-.hr:after {
-    content: '\f183';
 }
 
 .group.member .name,

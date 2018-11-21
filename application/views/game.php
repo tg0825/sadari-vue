@@ -69,7 +69,7 @@ OneSignal.push(function() {
             ?>
         </span>
     </div>
-    <div class="layout-wrap sadari wrap">
+    <div class="layout-wrap sadari wrap js-all-check">
         <h1 class="sadari title">
             SADARI
             <div class="member-list number"></div>
@@ -82,16 +82,17 @@ OneSignal.push(function() {
                     <?php
                     foreach($member_list as $member) {
                     ?>
-                        <div
+                        <label
                             class="member-list member <?=$member->team_eng?>"
                             style="background-color:<?=$member->team_color ?? '#ddd'?>"
                             data-team-eng="<?=$member->team_eng?>"
                             data-team-color="<?=$member->team_color?>"
                         >
+                            <input type="checkbox" class="js-all-check-item"/>
                             <span class="name"><?=$member->name?></span>
                             <span class="team"><?=$member->team ?? '미정'?></span>
                             <span class="remove">x</span>
-                        </div>
+                        </label>
                     <?php
                     }
                     ?>
@@ -171,6 +172,16 @@ OneSignal.push(function() {
             <div class="start-root">
                 <button class="start" type="submit">시작!</button>
             </div>
+            
+            <label>
+                <input
+                    type="checkbox"
+                    class="js-all-check-master"
+                    name=""
+                    value=""
+                >
+                전체선택
+            </label>
         </div>
 
         <div class="result"> </div>
@@ -190,5 +201,13 @@ OneSignal.push(function() {
     <script src="./resources/src/js/modal.js"></script>
     <script src="./resources/src/js/clock.js"></script>
     <script src="./resources/src/js/script.js"></script>
+    <script src="./resources/src/js/allcheck.js"></script>
+    <script type="text/javascript">
+     var allCheck = new AllCheck({
+         activeClass: 'is_disable',
+         activeElement: 'label',
+         isActiveClass: true
+     });
+     </script>
 </body>
 </html>
