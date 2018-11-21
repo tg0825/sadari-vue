@@ -16,7 +16,12 @@ class m_user extends CI_Model {
         $this->db->where('id', $id);
         $this->db->where('password', $password);
 
-        $query = $this->db->query("SELECT * FROM user WHERE id ='$id' AND password = password('$password')");
+        $query = $this->db->query("
+            SELECT * FROM user
+            WHERE id ='$id' 
+            AND password = password('$password')
+        ");
+        
         $result = $query->row_array();
 
         if ($result) {
