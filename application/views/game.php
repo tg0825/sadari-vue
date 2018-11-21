@@ -84,12 +84,12 @@ OneSignal.push(function() {
                     ?>
                         <div
                             class="member-list member <?=$member->team_eng?>"
-                            style="background-color:<?=$member->team_color?>"
+                            style="background-color:<?=$member->team_color ?? '#ddd'?>"
                             data-team-eng="<?=$member->team_eng?>"
                             data-team-color="<?=$member->team_color?>"
                         >
                             <span class="name"><?=$member->name?></span>
-                            <span class="team"><?=$member->team?></span>
+                            <span class="team"><?=$member->team ?? '미정'?></span>
                             <span class="remove">x</span>
                         </div>
                     <?php
