@@ -336,9 +336,10 @@ input:focus {
 }
 
 .group.title {
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
     margin-left: 5px;
+    color: #333;
 }
 
 .group.member {
