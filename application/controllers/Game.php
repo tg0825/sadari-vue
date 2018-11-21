@@ -9,7 +9,7 @@ class Game extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->model('M_member');
+        $this->load->model('m_member');
         $member_list = $this->m_member->get_all();
 		$this->load->view('game', [
             'member_list' => $member_list
