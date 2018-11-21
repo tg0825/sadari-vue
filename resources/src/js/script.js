@@ -522,6 +522,7 @@
         // renderMember();
         // teamRender();
         juRender();
+        headCount();
 
         $('.sadari-select').find('button:eq(0)').trigger('click');
     }
