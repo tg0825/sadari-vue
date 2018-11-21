@@ -32,7 +32,7 @@
 <title>SADARI ADMIN</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
 <?php
     require_once(PATH_ADMIN . '/layout/header.php');
 ?>
