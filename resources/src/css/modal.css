@@ -61,7 +61,7 @@
     line-height: 32px;
     text-align: center;
     background: rgba(0, 0, 0, .9);
-    border-radius: 50%;
+    border-radius: 4px;
     z-index: 10;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     display: none;
