@@ -2,10 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class member extends CI_Controller {
+    // 유저 이름
+    private $username;
+    
     public function __construct()
     {
         parent::__construct();
         $this->check_login();
+        $this->username = $this->session->userdata('username');
     }
 
     private function check_login()
@@ -58,7 +62,9 @@ class member extends CI_Controller {
         $this->load->model('m_team');
         $data['team_item_list'] = $this->m_team->get_all();
 
-        $this->load->view('admin/layout/head.php');
+        $this->load->view('admin/layout/head.php', [
+            'username' => $this->username
+        ]);
         $this->load->view('admin/layout/lnb.php');
         $this->load->view('admin/member-add.php', $data);
         $this->load->view('admin/layout/footer.php');
