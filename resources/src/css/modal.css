@@ -50,6 +50,14 @@
     background: rgba(0,0,0,.7);
 }
 
+.modal .member-list.member {
+    margin-left: 0;
+}
+
+.modal .member-list.member + .member {
+    margin-left: 5px;
+}
+
 .modal .member-list.member:before {
     content: attr(data-index);
     position: absolute;

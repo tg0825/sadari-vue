@@ -299,7 +299,7 @@ input:focus {
 
 .member-list.member .team {
     display: inline-block;
-    margin-top: 5px;
+    margin-top: 8px;
     font-size: 14px;
     color: #eee;
 }
@@ -329,17 +329,16 @@ input:focus {
 .group.item {
     display: inline-block;
     margin: 10px;
-    padding: 10px;
-    background: #dedede;
+    padding: 8px 10px 10px;
+    background: #f0f0f0;
     border-radius: 10px;
+    border: 1px solid #eaeaea;
 }
 
 .group.title {
     font-size: 18px;
     text-align: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .group.member {

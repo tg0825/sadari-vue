@@ -141,8 +141,7 @@
                 else html += '<div class="group item"><div class="group title">' + group.title + '</div>';
                 group.member.forEach(function (groupMember, memberIndex) {
                     html += '<div data-index=' + memberIndex + ' class="member-list member ' + groupMember.team_eng + '"' +
-                        ' style="background-image:url(' + groupMember.avatar + ');' +
-                        ' background-color:' + groupMember.team_color + '">' +
+                        ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
                         '<span class="name">' + groupMember.name + '</span>' +
                         '<span class="team">' + groupMember.team + '</span>' +
                         '</div>';
@@ -336,7 +335,7 @@
             memberList += '<div ' +
                 'data-team-eng="' + v[i].team_eng + '"' +
                 'class="member-list member ' + v[i].team_eng + '"' +
-                ' style="background-image:url(' + v[i].avatar + ')">' +
+                // ' style="background-image:url(' + v[i].avatar + ')">' +
                 '<span class="name">' + v[i].name + '</span>' +
                 '<span class="team">' + v[i].team + '</span>' +
                 '</div>';
