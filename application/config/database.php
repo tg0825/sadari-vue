@@ -81,7 +81,7 @@ var_dump($url);
 if (isset($url['host'])) {
     $db['default'] = array(
     	// 'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
-    	'dsn'	=> '',
+    	'dsn'	=> 'mysql:dbname=' . substr($url['path'],1) .';host='.$url['host'],
     	'hostname' => $url['host'],
     	'username' => $url['user'],
     	'password' => $url['pass'],
