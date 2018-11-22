@@ -251,7 +251,7 @@
     }
 
     // 직원 항목 클릭
-    function memberToggle(e) {
+    function toggleMember(e) {
         e.stopPropagation();
 
         var $target = $(e.currentTarget);
@@ -271,11 +271,13 @@
         store.emit('updateMemberCount', clonebackpacker);
     }
 
+    // 상태 업데이트
     function updateState(index, state) {
         clonebackpacker[index].is_disable = state;
     }
 
-    function allMemberToggle(e) {
+    // 전체 토글
+    function toggleAllMember(e) {
         var state = e.currentTarget.checked;
         var $itemList = $('.member-list.body .member-list.member');
         $.each($itemList, function (i, e) {
@@ -313,7 +315,7 @@
     }
 
     // 주번 랜더링
-    function juRender() {
+    function renderJu() {
         if (storage.getItem('juList')) {
             ju = storage.getItem('juList');
         } else {
@@ -329,14 +331,14 @@
     }
 
     // 게임 시작
-    function sadariStart() {
+    function startSadari() {
         tmpbackpacker = fil();
         game[sadariType]();
         store.emit('renderTextResult', resultText);
     }
 
     // 게임 선택
-    function selectDice() {
+    function selectSadari() {
         var idx = $(this).parent().index();
         sadariType = $(this).data('game');
 
@@ -376,22 +378,17 @@
 
     // 이벤트 바인딩
     function bindEvent() {
-        // 멤버 비활성
         $(document)
-            .on('click', '.member-list.wrap .member-list.member input:checkbox', memberToggle)
-            .on('click', '.js-all-check-master', allMemberToggle)
-        // 주번 추가
+            .on('click', '.member-list.wrap .member-list.member input:checkbox', toggleMember)
+            .on('click', '.js-all-check-master', toggleAllMember)
+            .on('click', '.ju-list li', removeJu);
         $('.ju-add')
             .on('click', 'button', addJu)
             .on('keypress', '#name', function (e) {
                 if (e.keyCode == 13) addJu(e);
             })
-        // 주번 삭제
-        $(document).on('click', '.ju-list li', removeJu);
-        // 사다리 선택
-        $('.sadari-select').on('click', 'button', selectDice);
-        // 사다리 시작
-        $('.start').on('click', sadariStart);
+        $('.sadari-select').on('click', 'button', selectSadari);
+        $('.start').on('click', startSadari);
         
         store.on('getGameType', _getGameType);
     }
@@ -399,7 +396,8 @@
     function init() {
         bindEvent();
         initData();
-        juRender();
+        renderJu();
+        
         $('.sadari-select').find('button:eq(0)').trigger('click');
         store.emit('updateMemberCount', clonebackpacker);
     }

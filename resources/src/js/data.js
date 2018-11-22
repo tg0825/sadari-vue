@@ -22,6 +22,7 @@ backpacker = (function (bp) {
         marketer: '마케팅',
         pr: '홍보',
     }
+    
     bp = bp.map(function (v, i, a) {
         var t = '' + v.team;
         t = t.toLowerCase();
