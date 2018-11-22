@@ -176,21 +176,6 @@
         modal.open(renderResult(resultObj, onegroup));
     }
 
-    // 경고 문구
-    function alertMsg(msg) {
-        var $comment = $('<p class="f-error"></p>');
-        var $parent = $(document.forms[0].name).parent();
-
-        $parent.find('.f-error').remove();
-        $comment
-            .append(msg)
-            .appendTo($parent)
-            .delay(1000)
-            .queue(function () {
-                $(this).remove().dequeue();
-            });
-    }
-
     // 중복값 찾기
     function compare(arr, str) {
         var result;
@@ -207,32 +192,6 @@
             return false;
         });
         return result;
-    }
-
-    // 구성원 랜더링
-    function renderMember(v) {
-        var memberList = '';
-        v = v || clonebackpacker;
-
-        var i = 0;
-        for(; i < v.length; i++) {
-            if (typeof v[i].team === 'undefined') {
-                v[i].team = '';
-            }
-            memberList += '<label ' +
-                'data-team-eng="' + v[i].team_eng + '"' +
-                'class="member-list member ' + v[i].team_eng + '"' +
-                ' style="background-image:url(' + v[i].avatar + ')">' +
-                '<input type="checkbox" class="js-all-check-item"/>' +
-                '<span class="name">' + v[i].name + '</span>' +
-                '<span class="team">' + v[i].team + '</span>' +
-                '</label>';
-        }
-
-        $('.member-list.body').html(memberList);
-        store.emit('updateMemberCount', clonebackpacker);
-
-        // localStorage.bp = JSON.stringify(clonebackpacker);
     }
 
     // 주번 랜더링
