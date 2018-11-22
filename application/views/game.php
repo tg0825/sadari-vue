@@ -212,6 +212,7 @@ OneSignal.push(function() {
 
     <script src="./resources/src/js/store.js"></script>
     <script src="./resources/src/js/result-text.js"></script>
+    <script src="./resources/src/js/slack.js"></script>
     <script src="./resources/src/js/head-count.js"></script>
     <script src="./resources/src/js/config.js"></script>
     <script src="./resources/src/js/storage.js"></script>
