@@ -80,6 +80,15 @@
                 c: tmpbackpacker,
                 jo: true
             });
+        },
+        // 랜덤점심
+        random_lunch: function () {
+            var count = $('#randomCount').val();
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var data = {
+            };
+            
+            result(data);
         }
     };
 
@@ -124,6 +133,28 @@
         });
         return re;
     }
+        
+    // 결과 랜더링
+    function renderResult(data, onegroup) {
+        var html = '';
+        data.forEach(function (group) {
+            if (onegroup) {
+                html += '<div class="group item onegroup">';    
+            } else {
+                html += '<div class="group item"><div class="group title">' + group.title + '</div>';
+            }
+            
+            group.member.forEach(function (groupMember, memberIndex) {
+                html += '<div data-index=' + memberIndex + ' class="member-list member ' + groupMember.team_eng + '"' +
+                    ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
+                    '<span class="name">' + groupMember.name + '</span>' +
+                    '<span class="team">' + groupMember.team + '</span>' +
+                    '</div>';
+            });
+            html += '</div>';
+        });
+        return html;
+    }
 
     // 결과 출력
     function result(data, restGroupType) {
@@ -133,23 +164,6 @@
         if (data.b <= 0 || data.a <= 0) {
             alert('값을 확인해주세요');
             return false;
-        }
-
-        function renderResult(data, onegroup) {
-            var html = '';
-            data.forEach(function (group) {
-                if (onegroup) html += '<div class="group item onegroup">';
-                else html += '<div class="group item"><div class="group title">' + group.title + '</div>';
-                group.member.forEach(function (groupMember, memberIndex) {
-                    html += '<div data-index=' + memberIndex + ' class="member-list member ' + groupMember.team_eng + '"' +
-                        ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
-                        '<span class="name">' + groupMember.name + '</span>' +
-                        '<span class="team">' + groupMember.team + '</span>' +
-                        '</div>';
-                });
-                html += '</div>';
-            });
-            return html;
         }
 
         var resultObj = [];
