@@ -77,7 +77,6 @@ $query_builder = TRUE;
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $db['default'] = array(
-	// 'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
 	'dsn'	=> 'mysql:dbname=' . substr($url['path'],1) .';host='.$url['host'],
 	'hostname' => $url['host'],
 	'username' => $url['user'],
