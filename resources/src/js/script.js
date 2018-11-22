@@ -23,11 +23,6 @@
         }
     }
 
-    // 삭제
-    function remove(removeArray, value) {
-        return removeArray.splice(value, 1);
-    }
-
     // 구성원 데이터 구성
     function fil() {
         var remap = clonebackpacker.slice().filter(function (v) {
@@ -310,7 +305,8 @@
     // 주번 항목 삭제
     function removeJu() {
         var idx = $(this).index();
-        remove(ju, idx);
+        ju.splice(idx, 1);
+        
         renderJu($('.ju-list'), ju);
     }
 
