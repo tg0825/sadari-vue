@@ -176,33 +176,17 @@
         modal.open(renderResult(resultObj, onegroup));
     }
 
-    // 중복값 찾기
-    function compare(arr, str) {
-        var result;
-        arr = arr || clonebackpacker;
-
-        arr.some(function (e, a) {
-            if (e.name === str) {
-                result = {
-                    name: str,
-                    idx: a
-                };
-                return true;
-            }
-            return false;
-        });
-        return result;
-    }
-
     // 주번 항목 추가
     function addJu(e) {
         var eTarget = e.currentTarget;
         var input = $(eTarget).parents('.ju-add').find('[name=name]');
         var name = input[0].value;
-
+        var data;
+        
         if (name) {
-            addData(ju, name);
-            renderJu($('.ju-list'), ju);
+            data = (Array.isArray(ju) === true) ? name : {name: name, team: t};
+            ju.push(data);
+            renderJu();
             input[0].value = '';
         }
 
@@ -214,18 +198,31 @@
         var idx = $(this).index();
         ju.splice(idx, 1);
         
-        renderJu($('.ju-list'), ju);
+        renderJu();
     }
     
     // 주번 랜더링
-    function renderJu($body, arr) {
-        var length = arr.length;
-        var html = '';
-        var i = 0;
-        for(; i < length; i++) html += '<li>' + arr[i] + '</li>';
-        $body.html(html);
-        storage.setItem('juList', arr);
+    function renderJu() {
+        var html = '<ul class="ju-list">';
+        ju.forEach(function (v) {
+            return html += '<li>' + v + '</li>';
+        });
+        html += '</ul>';
+        $('.tab-item').last().find('.tab-item-result').html(html);
+        storage.setItem('juList', ju);
     }
+    
+    // 주번 랜더링
+    function initJu() {
+        if (storage.getItem('juList')) {
+            ju = storage.getItem('juList');
+        } else {
+            storage.setItem('juList', ju);
+        }
+        
+        renderJu();
+    }
+
 
     // 직원 토글
     function toggleMember(e) {
@@ -261,28 +258,6 @@
             updateState(i, state);
         });
         store.emit('updateMemberCount', clonebackpacker);
-    }
-
-    // 데이터 추가
-    function addData(item, name, t) {
-        var data = (Array.isArray(item) === true) ? name : {name: name, team: t};
-        return item.push(data);
-    }
-
-    // 주번 랜더링
-    function renderJu() {
-        if (storage.getItem('juList')) {
-            ju = storage.getItem('juList');
-        } else {
-            storage.setItem('juList', ju);
-        }
-
-        var html = '<ul class="ju-list">';
-        ju.forEach(function (v) {
-            return html += '<li>' + v + '</li>';
-        });
-        html += '</ul>';
-        $('.tab-item').last().find('.tab-item-result').html(html);
     }
 
     // 게임 시작
@@ -351,7 +326,7 @@
     function init() {
         bindEvent();
         initData();
-        renderJu();
+        initJu();
         
         $('.sadari-select').find('button:eq(0)').trigger('click');
         store.emit('updateMemberCount', clonebackpacker);
