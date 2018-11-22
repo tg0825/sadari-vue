@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
+	'dsn'	=> 'mysql:dbname=heroku_535421992be7303;host=0.0.0.0',
 	'hostname' => 'mysql:host=0.0.0.0',
 	'username' => 'root',
 	'password' => 'root',
-	'database' => 'sadari',
+	'database' => 'heroku_535421992be7303',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
