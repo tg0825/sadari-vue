@@ -4,7 +4,6 @@
     var clonebackpacker = window.clonebackpacker || {};
     var tmpbackpacker = [];
     var originBp;
-    var renderText = '';
     
     // 게임 종류 리턴
     function _getGameType() {
