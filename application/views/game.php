@@ -170,7 +170,7 @@ OneSignal.push(function() {
                     </div>
                 </div>
 
-                <div class="tab-item">
+                <div class="tab-item js-tab-ju">
                     <div class="tab-item-result"></div>
                     <div class="ju-add">
                         <div class="form-block">
@@ -220,6 +220,7 @@ OneSignal.push(function() {
     <script src="./resources/src/js/modal.js"></script>
     <script src="./resources/src/js/clock.js"></script>
     <script src="./resources/src/js/main.js"></script>
+    <script src="./resources/src/js/ju.js"></script>
     <script src="./resources/src/js/allcheck.js"></script>
     <script src="./resources/src/js/game.js"></script>
     <script type="text/javascript">

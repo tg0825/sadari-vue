@@ -1,5 +1,4 @@
 (function (window, $, modal) {
-    var storage = new Storage();
     var $wrap = $('.sadari.wrap');
     var sadariType = 'one';
     var clonebackpacker = window.clonebackpacker || {};
@@ -36,61 +35,6 @@
 
         return remap;
     }
-
-    // 사다리 종류
-    var game = {
-        one: function () {
-            var count = $('#onlyOne').val();
-            var groupCount = 1;
-
-            result({
-                a: count,
-                b: groupCount,
-                c: tmpbackpacker
-            });
-        },
-        jo_member: function () {
-            var count = $('#groupMember').val() || 3;
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
-
-            result({
-                a: count, // 한조 인원
-                b: groupCount, // 조 수
-                c: tmpbackpacker
-            }, true);
-        },
-        jo_team: function () {
-            var count = $('#groupCount').val() || 3;
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
-
-            result({
-                a: groupCount,
-                b: count,
-                c: tmpbackpacker
-            });
-        },
-        // 주번
-        ju: function () {
-            var count = ju.length;
-            var groupCount = Math.floor(tmpbackpacker.length / count);
-
-            result({
-                a: groupCount,
-                b: count,
-                c: tmpbackpacker,
-                jo: true
-            });
-        },
-        // 랜덤점심
-        random_lunch: function () {
-            var count = $('#randomCount').val();
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
-            var data = {
-            };
-            
-            result(data);
-        }
-    };
 
     // 현재 인원으로만 추리기
     function joinMember(arg) {
@@ -133,9 +77,74 @@
         });
         return re;
     }
+
+    // 사다리 종류
+    var game = {
+        one: function () {
+            var count = $('#onlyOne').val();
+            var groupCount = 1;
+            var data = {
+                a: count, // 출력 인원
+                b: groupCount, // 그룹 수
+                c: tmpbackpacker // 선택 되지 않은 인원
+            };
+
+            console.log(data);
+            result(data);
+        },
+        jo_member: function () {
+            var count = $('#groupMember').val() || 3;
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var data = {
+                a: count, // 한조 인원
+                b: groupCount, // 그룹 수
+                c: tmpbackpacker // 선택 되지 않은 인원
+            };
+            
+            console.log(data);
+            result(data, true);
+        },
+        jo_team: function () {
+            var count = $('#groupCount').val() || 3;
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var data = {
+                a: groupCount, // 한조 인원
+                b: count, // 그룹 수
+                c: tmpbackpacker // 선택 되지 않은 인원
+            };
+            
+            console.log(data);
+            result(data);
+        },
+        // 주번
+        ju: function () {
+            var groupCount = ju.length;
+            var data = {
+                a: 1, // 사용하지 않음
+                b: groupCount, // 청소 종류
+                c: tmpbackpacker,
+                jo_name_ju: true // 조 이름 주번 이름으로 사용
+            };
+            
+            console.log(groupCount);
+            console.log(data);
+
+            result(data);
+        },
+        // 랜덤점심
+        random_lunch: function () {
+            var count = $('#randomCount').val();
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var data = {
+            };
+            
+            console.log(data);
+            result(data);
+        }
+    };
         
-    // 결과 랜더링
-    function renderResult(data, onegroup) {
+    // 결과 html 제작
+    function returnResultHtml(data, onegroup) {
         var html = '';
         data.forEach(function (group) {
             if (onegroup) {
@@ -169,8 +178,8 @@
         var resultObj = [];
         while (i < data.b) {
             var groupData = {
-                title: data.jo ? ju[i] : (i + 1) + '조',
-                member: data.jo ? [data.c[i]] : data.c.splice(0, data.a)
+                title: data.jo_name_ju ? ju[i] : (i + 1) + '조',
+                member: data.jo_name_ju ? [data.c[i]] : data.c.splice(0, data.a)
             };
 
             if (restGroupType && groupData.member.length < data.a) {
@@ -187,56 +196,13 @@
         }
 
         $wrap.addClass('is_result');
-        modal.open(renderResult(resultObj, onegroup));
+        modal.open(returnResultHtml(resultObj, onegroup));
     }
 
-    // 주번 항목 추가
-    function addJu(e) {
-        var eTarget = e.currentTarget;
-        var input = $(eTarget).parents('.ju-add').find('[name=name]');
-        var name = input[0].value;
-        var data;
-        
-        if (name) {
-            data = (Array.isArray(ju) === true) ? name : {name: name, team: t};
-            ju.push(data);
-            renderJu();
-            input[0].value = '';
-        }
-
-        input[0].focus();
+    // 상태 업데이트
+    function updateState(index, state) {
+        clonebackpacker[index].is_disable = state;
     }
-    
-    // 주번 항목 삭제
-    function removeJu() {
-        var idx = $(this).index();
-        ju.splice(idx, 1);
-        
-        renderJu();
-    }
-    
-    // 주번 랜더링
-    function renderJu() {
-        var html = '<ul class="ju-list">';
-        ju.forEach(function (v) {
-            return html += '<li>' + v + '</li>';
-        });
-        html += '</ul>';
-        $('.tab-item').last().find('.tab-item-result').html(html);
-        storage.setItem('juList', ju);
-    }
-    
-    // 주번 랜더링
-    function initJu() {
-        if (storage.getItem('juList')) {
-            ju = storage.getItem('juList');
-        } else {
-            storage.setItem('juList', ju);
-        }
-        
-        renderJu();
-    }
-
 
     // 직원 토글
     function toggleMember(e) {
@@ -257,11 +223,6 @@
 
         updateState(idx, state);
         store.emit('updateMemberCount', clonebackpacker);
-    }
-
-    // 상태 업데이트
-    function updateState(index, state) {
-        clonebackpacker[index].is_disable = state;
     }
 
     // 전체 토글
@@ -325,12 +286,6 @@
         $(document)
             .on('click', '.member-list.wrap .member-list.member input:checkbox', toggleMember)
             .on('click', '.js-all-check-master', toggleAllMember)
-            .on('click', '.ju-list li', removeJu);
-        $('.ju-add')
-            .on('click', 'button', addJu)
-            .on('keypress', '#name', function (e) {
-                if (e.keyCode == 13) addJu(e);
-            })
         $('.sadari-select').on('click', 'button', selectSadari);
         $('.start').on('click', startSadari);
         
@@ -340,7 +295,6 @@
     function init() {
         bindEvent();
         initData();
-        initJu();
         
         $('.sadari-select').find('button:eq(0)').trigger('click');
         store.emit('updateMemberCount', clonebackpacker);
