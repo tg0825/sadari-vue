@@ -194,6 +194,29 @@
         return result;
     }
 
+    // 주번 항목 추가
+    function addJu(e) {
+        var eTarget = e.currentTarget;
+        var input = $(eTarget).parents('.ju-add').find('[name=name]');
+        var name = input[0].value;
+
+        if (name) {
+            addData(ju, name);
+            renderJu($('.ju-list'), ju);
+            input[0].value = '';
+        }
+
+        input[0].focus();
+    }
+    
+    // 주번 항목 삭제
+    function removeJu() {
+        var idx = $(this).index();
+        ju.splice(idx, 1);
+        
+        renderJu($('.ju-list'), ju);
+    }
+    
     // 주번 랜더링
     function renderJu($body, arr) {
         var length = arr.length;
@@ -204,7 +227,7 @@
         storage.setItem('juList', arr);
     }
 
-    // 직원 항목 클릭
+    // 직원 토글
     function toggleMember(e) {
         e.stopPropagation();
 
@@ -244,29 +267,6 @@
     function addData(item, name, t) {
         var data = (Array.isArray(item) === true) ? name : {name: name, team: t};
         return item.push(data);
-    }
-
-    // 주번 항목 추가
-    function addJu(e) {
-        var eTarget = e.currentTarget;
-        var input = $(eTarget).parents('.ju-add').find('[name=name]');
-        var name = input[0].value;
-
-        if (name) {
-            addData(ju, name);
-            renderJu($('.ju-list'), ju);
-            input[0].value = '';
-        }
-
-        input[0].focus();
-    }
-
-    // 주번 항목 삭제
-    function removeJu() {
-        var idx = $(this).index();
-        ju.splice(idx, 1);
-        
-        renderJu($('.ju-list'), ju);
     }
 
     // 주번 랜더링
