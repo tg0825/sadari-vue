@@ -1,3 +1,5 @@
+var renderText;
+    
 // 텍스트결과 토글
 function resultTextToggle() {
     var target = document.querySelector('.resultText');
@@ -8,7 +10,7 @@ $(document).on('click', '[data-sadari="result-toggle"]', resultTextToggle);
     
 // 결과 텍스트로 만들기
 function resultText() {
-    console.log(1);
+    var _sadariType = store.emit('getGameType')[0];
     var resultText_list = [];
     var cols = [];
     var index = 1;
@@ -26,7 +28,7 @@ function resultText() {
     renderText = yyyymmdd;
 
     var game = '';
-    switch(sadariType) {
+    switch(_sadariType) {
         case 'one':
             game = '한명뽑기';
             break;
@@ -98,3 +100,6 @@ function resultText() {
 }
 
 store.on('renderTextResult', resultText);
+store.on('getRenderText', function () {
+    return renderText;
+});

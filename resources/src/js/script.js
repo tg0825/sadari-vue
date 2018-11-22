@@ -7,6 +7,11 @@
     var originBp;
     var renderText = '';
     
+    // 게임 종류 리턴
+    function _getGameType() {
+        return sadariType;
+    }
+    
     // 배열 랜덤 섞기
     function shuffle(a) {
         var j, x, i;
@@ -174,23 +179,6 @@
 
         $wrap.addClass('is_result');
         modal.open(renderResult(resultObj, onegroup));
-    }
-
-    function sendSlack(text) {
-        text = text || renderText;
-        var channelName = 'random';
-        var token = 'KAqNxVAidiPcbZ3EixDDIPqg';
-        var url = 'https://backpackr-talk.slack.com/services/hooks/slackbot?token=' + token + '&channel=' + channelName;
-        var param = {
-            payload: text
-        };
-
-        function success(response) {
-            (response === 'ok') ? alert('전송 완료!') : '';
-        }
-
-        $.post(url, param)
-            .done(success);
     }
 
     function copy() {
@@ -471,14 +459,8 @@
         $(document).on('click', '[name=copy]', copy);
         // 결과 옵션
         $(document).on('click', '.option.root [data-option]', option);
-        // 슬랙으로 결과 보내기
-        $(document).on('click', '[data-sadari="send-slack"]', function () {
-            if (confirm('결과를 slack으로 전송하시겠습니까?')) {
-                sendSlack();
-            }
-        });
         
-        store.on('getMemberCount', );
+        store.on('getGameType', _getGameType);
     }
 
     initEvent();
