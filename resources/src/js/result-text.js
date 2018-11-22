@@ -103,3 +103,13 @@ store.on('renderTextResult', resultText);
 store.on('getRenderText', function () {
     return renderText;
 });
+    
+// 결과 복사
+function copy() {
+    $('.resultText textarea')[0].select();
+    if (document.execCommand("Copy")) {
+        alert('복사 완료!');
+    }
+}
+
+$(document).on('click', '[name=copy]', copy);

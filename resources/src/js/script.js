@@ -181,13 +181,6 @@
         modal.open(renderResult(resultObj, onegroup));
     }
 
-    function copy() {
-        $('.resultText textarea')[0].select();
-        if (document.execCommand("Copy")) {
-            alert('복사 완료!');
-        }
-    }
-
     // 경고 문구
     function alertMsg(msg) {
         var $comment = $('<p class="f-error"></p>');
@@ -456,7 +449,6 @@
         $('.start').on('click', sadariStart);
         // 구성원 리셋
         // $(document).on('click', '.reset', reset);
-        $(document).on('click', '[name=copy]', copy);
         // 결과 옵션
         $(document).on('click', '.option.root [data-option]', option);
         
