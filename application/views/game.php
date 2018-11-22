@@ -210,6 +210,8 @@ OneSignal.push(function() {
         </div>
     </div>
 
+    <script src="./resources/src/js/store.js"></script>
+    <script src="./resources/src/js/head-count.js"></script>
     <script src="./resources/src/js/config.js"></script>
     <script src="./resources/src/js/storage.js"></script>
     <script src="./resources/src/js/data.js"></script>

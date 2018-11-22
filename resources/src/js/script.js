@@ -6,6 +6,7 @@
     var tmpbackpacker = [];
     var originBp;
     var renderText = '';
+    
     // 배열 랜덤 섞기
     function shuffle(a) {
         var j, x, i;
@@ -343,7 +344,7 @@
         }
 
         $('.member-list.body').html(memberList);
-        headCount();
+        store.emit('updateMemberCount', clonebackpacker);
 
         // localStorage.bp = JSON.stringify(clonebackpacker);
     }
@@ -376,7 +377,7 @@
         }
 
         updateState(idx, state);
-        headCount();
+        store.emit('updateMemberCount', clonebackpacker);
     }
 
     function updateState(index, state) {
@@ -389,19 +390,7 @@
         $.each($itemList, function (i, e) {
             updateState(i, state);
         });
-        headCount();
-    }
-
-    // 선택 인원 카운트 최신화
-    function headCount() {
-        var max = clonebackpacker.length;
-        var disable = clonebackpacker.filter(function (v) {
-            if (v.is_disable === true) {
-                return true;
-            }
-            return false;
-        });
-        $('.member-list.number').html((max - disable.length) + '/' + max);
+        store.emit('updateMemberCount', clonebackpacker);
     }
 
     // 데이터 추가
@@ -540,7 +529,7 @@
         // renderMember();
         // teamRender();
         juRender();
-        headCount();
+        store.emit('updateMemberCount', clonebackpacker);
 
         $('.sadari-select').find('button:eq(0)').trigger('click');
     }
@@ -585,6 +574,8 @@
                 sendSlack();
             }
         });
+        
+        store.on('getMemberCount', );
     }
 
     initEvent();
