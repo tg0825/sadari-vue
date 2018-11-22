@@ -76,26 +76,51 @@ $query_builder = TRUE;
 // heroku
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$db['default'] = array(
-	// 'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
-	'dsn'	=> '',
-	'hostname' => $url['host'],
-	'username' => $url['user'],
-	'password' => $url['pass'],
-	'database' => substr($url['path'],1),
-	'dbdriver' => 'pdo',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
+var_dump($url);
 
+if ($url) {
+    $db['default'] = array(
+    	// 'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
+    	'dsn'	=> '',
+    	'hostname' => $url['host'],
+    	'username' => $url['user'],
+    	'password' => $url['pass'],
+    	'database' => substr($url['path'],1),
+    	'dbdriver' => 'pdo',
+    	'dbprefix' => '',
+    	'pconnect' => FALSE,
+    	'db_debug' => (ENVIRONMENT !== 'production'),
+    	'cache_on' => FALSE,
+    	'cachedir' => '',
+    	'char_set' => 'utf8',
+    	'dbcollat' => 'utf8_general_ci',
+    	'swap_pre' => '',
+    	'encrypt' => FALSE,
+    	'compress' => FALSE,
+    	'stricton' => FALSE,
+    	'failover' => array(),
+    	'save_queries' => TRUE
+    );
+} else {
+    $db['default'] = array(
+    	'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
+    	'hostname' => 'mysql:host=0.0.0.0',
+    	'username' => 'root',
+    	'password' => 'root',
+    	'database' => 'sadari',
+    	'dbdriver' => 'pdo',
+    	'dbprefix' => '',
+    	'pconnect' => FALSE,
+    	'db_debug' => (ENVIRONMENT !== 'production'),
+    	'cache_on' => FALSE,
+    	'cachedir' => '',
+    	'char_set' => 'utf8',
+    	'dbcollat' => 'utf8_general_ci',
+    	'swap_pre' => '',
+    	'encrypt' => FALSE,
+    	'compress' => FALSE,
+    	'stricton' => FALSE,
+    	'failover' => array(),
+    	'save_queries' => TRUE
+    );
+}
