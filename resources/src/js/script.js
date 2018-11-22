@@ -314,6 +314,12 @@
 
     // 주번 랜더링
     function juRender() {
+        if (storage.getItem('juList')) {
+            ju = storage.getItem('juList');
+        } else {
+            storage.setItem('juList', ju);
+        }
+
         var html = '<ul class="ju-list">';
         ju.forEach(function (v) {
             return html += '<li>' + v + '</li>';
@@ -343,53 +349,9 @@
             .show();
     }
 
-    // 옵션 선택
-    function option(e) {
-        var target = e.target;
-        var option = target.dataset.option;
-        var result = document.querySelector('.modal');
-
-        result.dataset.option = (result.dataset.option === option) ? '' : option;
-    }
-
-    function teamRender() {
-        var bpkTeam = clonebackpacker.map(function (v) {
-            return v.team_eng;
-        });
-
-        bpkTeam = bpkTeam.filter(function(elem, index, self) {
-            return index === self.indexOf(elem);
-        });
-
-        var html = '<div class="team root">';
-        bpkTeam.forEach(function (v) {
-            html += '<label class="team item ' + v + '" title="' + v + '">';
-            html += '<input type="radio" name="team" required value="' + v + '" />';
-            html += '</label>';
-        });
-        html += '</div>';
-        $('.team-list').append(html);
-    }
-
-    function selectedTeam(e) {
-        var $self = $(this);
-        // $self.css('color', bg);
-        // $self.css('background-color', cl);
-        // $self.css('border', '2px solid ' + bg + '');
-        // $self.siblings().attr('style', '');
-
-        $self.addClass('is_active').siblings().removeClass('is_active');
-    }
-
-    // 초기화
-    function init() {
+    // 데이터 초기화
+    function initData() {
         var backpacker = [];
-
-        if (storage.getItem('juList')) {
-            ju = storage.getItem('juList');
-        } else {
-            storage.setItem('juList', ju);
-        }
 
         $('.member-list.body').find('.member-list.member').each(function (i, e) {
             var $member = $(e);
@@ -403,34 +365,17 @@
             backpacker.push(member);
         });
 
-        originBp = backpacker.slice();
-
         // if (localStorage.bp) {
         //     backpacker = JSON.parse(localStorage.bp);
         // }
 
+        originBp = backpacker.slice();
         clonebackpacker = joinMember(backpacker.slice());
         window.clonebackpacker = clonebackpacker;
-
-        // renderMember();
-        // teamRender();
-        juRender();
-        store.emit('updateMemberCount', clonebackpacker);
-
-        $('.sadari-select').find('button:eq(0)').trigger('click');
     }
 
-    function initEvent() {
-        // event bind
-        // $(document).on({
-        //     mouseenter: hoverName
-        // }, '.member-list.body .member-list.member');
-        // 멤버 추가 창 토글
-        // $('.toggleMenu').on('click', windowMem);
-        // 멤버 추가
-        // $('#JSFORM').on('submit', addMember);
-        // 추가 멤버 팀 선택
-        // $(document).on('click', '.team.item', selectedTeam)
+    // 이벤트 바인딩
+    function bindEvent() {
         // 멤버 비활성
         $(document)
             .on('click', '.member-list.wrap .member-list.member input:checkbox', memberToggle)
@@ -447,14 +392,17 @@
         $('.sadari-select').on('click', 'button', selectDice);
         // 사다리 시작
         $('.start').on('click', sadariStart);
-        // 구성원 리셋
-        // $(document).on('click', '.reset', reset);
-        // 결과 옵션
-        $(document).on('click', '.option.root [data-option]', option);
         
         store.on('getGameType', _getGameType);
     }
-
-    initEvent();
+    
+    function init() {
+        bindEvent();
+        initData();
+        juRender();
+        $('.sadari-select').find('button:eq(0)').trigger('click');
+        store.emit('updateMemberCount', clonebackpacker);
+    }
+    
     init();
 }(window, jQuery, modal));
