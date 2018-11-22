@@ -78,7 +78,7 @@ $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 var_dump($url);
 
-if ($url) {
+if (isset($url['host'])) {
     $db['default'] = array(
     	// 'dsn'	=> 'mysql:dbname=sadari;host=0.0.0.0',
     	'dsn'	=> '',
