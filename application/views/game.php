@@ -121,9 +121,15 @@ OneSignal.push(function() {
                     </button>
                 </div>
                 <div>
+                    <button class="btn ta-l" data-game="jo_lunch">
+                        <i class="fa fa-cutlery" aria-hidden="true"></i>
+                        랜덤 점심
+                    </button>
+                </div>
+                <div>
                     <button class="btn ta-l" data-game="ju">
                         <i class="fa fa-trash" aria-hidden="true"></i>
-                        주번 뽑기
+                        청소 뽑기
                     </button>
                 </div>
             </div>
@@ -146,6 +152,15 @@ OneSignal.push(function() {
                     </div>
                 </div>
 
+                <div class="tab-item">
+                    <div class="form-block">
+                        <label for=""></label>
+                        총
+                        <input class="ta-r" id="groupCount" name="groupCount" type="number" value="5">
+                        개 조 만들기
+                    </div>
+                </div>
+                
                 <div class="tab-item">
                     <div class="form-block">
                         <label for=""></label>
