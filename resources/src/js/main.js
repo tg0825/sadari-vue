@@ -133,84 +133,20 @@
             var groupCount = $('#groupCount').val();
             var groupMemberCount = Math.ceil(tmpbackpacker.length / groupCount);
             var data = {
-                a: groupMemberCount, // 조 인원
-                b: groupCount,//한 그룹당 인원
-                c: tmpbackpacker// 인원
-            };
+                groupCount: groupCount,
+            }
             
-            var list = [];
+            // 유효성 검사
+            if (
+                tmpbackpacker.length == 0
+                || !groupCount
+                || groupCount == 0
+            ) {
+                alert('값을 확인해주세요.');
+                return;
+            }
             
-            // get Team List
-            $.each(tmpbackpacker, function (index, memberObj) {
-                // 팀 존재 유무
-                var isTeamExist = false;
-                
-                // 현재 팀 이름
-                var thisTeam = memberObj.team;
-                
-                // list 배열에 현재 팀 이름이 존재 유무 반환
-                $.each(list, function (index, team) {
-                    if (team.teamName === thisTeam) {
-                        isTeamExist = true;
-                        
-                        // break;
-                        return false;
-                    }
-                });
-                
-                // list 배열에 팀이 없으면 팀을 추가
-                if (!isTeamExist) {
-                    list.push({
-                        teamName: memberObj.team,
-                        teamMember: []
-                    });
-                }
-                
-                // 변경 된 list 배열을 돌면서 팀 
-                $.each(list, function (index, team) {
-                    if (team.teamName === thisTeam) {
-                        list[index].teamMember.push(memberObj);
-                        
-                        // break;
-                        return false;
-                    }
-                });
-            });
-                
-            // 팀별 리스트에서 멤버만 추출
-            var memberListList = (function () {
-                return list.map(function (teamObj, index) {
-                    return teamObj.teamMember;
-                });
-            }());
-            
-            // 멤버만 추출한 배열 직열활
-            var memberStack = [];
-            $.each(memberListList, function (index, memberList) {
-                memberStack = memberStack.concat(memberList);
-            });
-            
-            // 모든 인원 루프를 돌며 해당 index 배열에 푸시
-            var orderByGroup = [];
-            var i = 0;
-            $.each(memberStack, function (index, member) {
-                if (i == groupCount) {
-                    i = 0;
-                }
-                
-                if (!orderByGroup[i]) {
-                    orderByGroup.push({
-                        title: (i + 1) + '조',
-                        member: []
-                    });
-                }
-                
-                orderByGroup[i].member.push(member);
-                i += 1;
-            });
-            
-            $wrap.addClass('is_result');
-            modal.open(renderHtml(orderByGroup));
+            resultLunch(data);
         }
     };
     
@@ -239,6 +175,82 @@
             console.log(e);
         }
         return html;
+    }
+    
+    // 점심 전용 결과 출력
+    function resultLunch(data) {
+        var list = [];
+        // 팀별 직원 정렬
+        $.each(tmpbackpacker, function (index, memberObj) {
+            // 팀 존재 유무
+            var isTeamExist = false;
+            
+            // 현재 팀 이름
+            var thisTeam = memberObj.team;
+            
+            // list 배열에 현재 팀 이름 존재 유무 반환
+            $.each(list, function (index, team) {
+                if (team.teamName === thisTeam) {
+                    isTeamExist = true;
+                    
+                    // break;
+                    return false;
+                }
+            });
+            
+            // list 배열에 팀이 없으면 팀을 추가
+            if (!isTeamExist) {
+                list.push({
+                    teamName: memberObj.team,
+                    teamMember: []
+                });
+            }
+            
+            // 변경 된 list 배열을 돌면서 팀 
+            $.each(list, function (index, team) {
+                if (team.teamName === thisTeam) {
+                    list[index].teamMember.push(memberObj);
+                    
+                    // break;
+                    return false;
+                }
+            });
+        });
+            
+        // 팀별 리스트에서 멤버만 추출
+        var memberListList = (function () {
+            return list.map(function (teamObj, index) {
+                return teamObj.teamMember;
+            });
+        }());
+        
+        // 팀별 배열 하나로 병합
+        var memberStack = [];
+        $.each(memberListList, function (index, memberList) {
+            memberStack = memberStack.concat(memberList);
+        });
+        
+        // 모든 인원 루프 돌면서 해당 index에 푸시
+        var orderByGroup = [];
+        var i = 0;
+        $.each(memberStack, function (index, member) {
+            if (i == data.groupCount) {
+                i = 0;
+            }
+            
+            if (!orderByGroup[i]) {
+                orderByGroup.push({
+                    title: (i + 1) + '조',
+                    member: []
+                });
+            }
+            
+            orderByGroup[i].member.push(member);
+            i += 1;
+        });
+            
+        $wrap.addClass('is_result');
+        modal.open(renderHtml(orderByGroup));
     }
 
     // 결과 출력
