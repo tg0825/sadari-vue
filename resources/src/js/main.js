@@ -5,6 +5,80 @@
     var tmpbackpacker = [];
     var originBp;
     
+    // 사다리 종류
+    var game = {
+        // 한명 뽑기
+        one: function () {
+            var count = $('#onlyOne').val();
+            var groupCount = 1;
+            var data = {
+                a: count, // 출력 인원
+                b: groupCount, // 그룹 수
+                c: tmpbackpacker // 선택 되지 않은 인원
+            };
+
+            console.log(data);
+            result(data);
+        },
+        jo_member: function () {
+            var count = $('#groupMember').val() || 3;
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var data = {
+                a: count, // 한조 인원
+                b: groupCount, // 그룹 수
+                c: tmpbackpacker // 랜덤 값
+            };
+            
+            console.log(data);
+            result(data, true);
+        },
+        jo_team: function () {
+            var count = $('#groupCount').val() || 3;
+            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var data = {
+                a: groupCount, // 한조 인원
+                b: count, // 그룹 수
+                c: tmpbackpacker // 랜덤 값
+            };
+            
+            console.log(data);
+            result(data);
+        },
+        // 주번
+        ju: function () {
+            var groupCount = ju.length;
+            var data = {
+                a: 1, // 조 에서는 기준값 사용 안함
+                b: groupCount, // 청소 종류
+                c: tmpbackpacker,
+                jo_name_ju: true // 조 이름 주번 이름으로 사용
+            };
+            
+            console.log(data);
+            result(data);
+        },
+        // 랜덤점심
+        jo_lunch: function () {
+            var groupCount = $('#groupCount').val();
+            var groupMemberCount = Math.ceil(tmpbackpacker.length / groupCount);
+            var data = {
+                groupCount: groupCount,
+            }
+            
+            // 유효성 검사
+            if (
+                tmpbackpacker.length == 0
+                || !groupCount
+                || groupCount == 0
+            ) {
+                alert('값을 확인해주세요.');
+                return;
+            }
+            
+            resultLunch(data);
+        }
+    };
+    
     // 게임 종류 리턴
     function _getGameType() {
         return sadariType;
@@ -77,79 +151,6 @@
         return re;
     }
 
-    // 사다리 종류
-    var game = {
-        one: function () {
-            var count = $('#onlyOne').val();
-            var groupCount = 1;
-            var data = {
-                a: count, // 출력 인원
-                b: groupCount, // 그룹 수
-                c: tmpbackpacker // 선택 되지 않은 인원
-            };
-
-            console.log(data);
-            result(data);
-        },
-        jo_member: function () {
-            var count = $('#groupMember').val() || 3;
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
-            var data = {
-                a: count, // 한조 인원
-                b: groupCount, // 그룹 수
-                c: tmpbackpacker // 랜덤 값
-            };
-            
-            console.log(data);
-            result(data, true);
-        },
-        jo_team: function () {
-            var count = $('#groupCount').val() || 3;
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
-            var data = {
-                a: groupCount, // 한조 인원
-                b: count, // 그룹 수
-                c: tmpbackpacker // 랜덤 값
-            };
-            
-            console.log(data);
-            result(data);
-        },
-        // 주번
-        ju: function () {
-            var groupCount = ju.length;
-            var data = {
-                a: 1, // 조 에서는 기준값 사용 안함
-                b: groupCount, // 청소 종류
-                c: tmpbackpacker,
-                jo_name_ju: true // 조 이름 주번 이름으로 사용
-            };
-            
-            console.log(data);
-            result(data);
-        },
-        // 랜덤점심
-        jo_lunch: function () {
-            var groupCount = $('#groupCount').val();
-            var groupMemberCount = Math.ceil(tmpbackpacker.length / groupCount);
-            var data = {
-                groupCount: groupCount,
-            }
-            
-            // 유효성 검사
-            if (
-                tmpbackpacker.length == 0
-                || !groupCount
-                || groupCount == 0
-            ) {
-                alert('값을 확인해주세요.');
-                return;
-            }
-            
-            resultLunch(data);
-        }
-    };
-    
     // 결과 html 제작
     function renderHtml(data, onegroup) {
         var html = '';
