@@ -21,8 +21,8 @@
         }
     }
 
-    // 구성원 데이터 구성
-    function fil() {
+    // 구성원 데이터 재구성
+    function filtering() {
         var remap = clonebackpacker.slice().filter(function (v) {
             if (v.is_disable === true) {
                 return false;
@@ -35,7 +35,7 @@
         return remap;
     }
 
-    // 현재 인원으로만 추리기
+    // 퇴사한 사람, 출근 전 사람 제외
     function joinMember(arg) {
         var now = new Date().getTime();
         var date;
@@ -97,7 +97,7 @@
             var data = {
                 a: count, // 한조 인원
                 b: groupCount, // 그룹 수
-                c: tmpbackpacker // 선택 되지 않은 인원
+                c: tmpbackpacker // 랜덤 값
             };
             
             console.log(data);
@@ -109,7 +109,7 @@
             var data = {
                 a: groupCount, // 한조 인원
                 b: count, // 그룹 수
-                c: tmpbackpacker // 선택 되지 않은 인원
+                c: tmpbackpacker // 랜덤 값
             };
             
             console.log(data);
@@ -119,7 +119,7 @@
         ju: function () {
             var groupCount = ju.length;
             var data = {
-                a: 1, // 사용하지 않음
+                a: 1, // 조 에서는 기준값 사용 안함
                 b: groupCount, // 청소 종류
                 c: tmpbackpacker,
                 jo_name_ju: true // 조 이름 주번 이름으로 사용
@@ -165,16 +165,21 @@
     }
 
     // 결과 출력
+    // restGroupType
+    // a 한 그룹의 인원
+    // b 그룹 수
+    // c 램덤 인원
     function result(data, restGroupType) {
         var i = 0;
         var onegroup = (data.b === 1);
+        var resultObj = [];
 
         if (data.b <= 0 || data.a <= 0) {
             alert('값을 확인해주세요');
             return false;
         }
-
-        var resultObj = [];
+        
+        // 그룹 수 만큼 반복
         while (i < data.b) {
             var groupData = {
                 title: data.jo_name_ju ? ju[i] : (i + 1) + '조',
@@ -236,7 +241,9 @@
 
     // 게임 시작
     function startSadari() {
-        tmpbackpacker = fil();
+        tmpbackpacker = filtering();
+        
+        // 게임 시작
         game[sadariType]();
         store.emit('renderTextResult', resultText);
     }
