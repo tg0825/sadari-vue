@@ -156,7 +156,7 @@ OneSignal.push(function() {
                     <div class="form-block">
                         <label for=""></label>
                         총
-                        <input class="ta-r" id="randomCount" name="randomCount" type="number" value="5">
+                        <input class="ta-r" id="randomCount" name="randomCount" type="number" value="9">
                         개 조 만들기
                     </div>
                 </div>
@@ -165,7 +165,7 @@ OneSignal.push(function() {
                     <div class="form-block">
                         <label for=""></label>
                         총
-                        <input class="ta-r" id="groupCount" name="groupCount" type="number" value="5">
+                        <input class="ta-r" id="groupCount" name="groupCount" type="number" value="10">
                         개 조 만들기
                     </div>
                 </div>

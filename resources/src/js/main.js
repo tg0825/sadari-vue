@@ -131,36 +131,137 @@
             result(data);
         },
         // 랜덤점심
-        random_lunch: function () {
-            var count = $('#randomCount').val();
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
+        jo_lunch: function () {
+            var groupCount = $('#groupCount').val();
+            var groupMemberCount = Math.ceil(tmpbackpacker.length / groupCount);
             var data = {
+                a: groupMemberCount, // 조 인원
+                b: groupCount,//한 그룹당 인원
+                c: tmpbackpacker// 인원
             };
             
-            console.log(data);
-            result(data);
+            var list = [];
+            
+            // get Team List
+            $.each(tmpbackpacker, function (index, memberObj) {
+                // 팀 존재 유무
+                var isTeamExist = false;
+                
+                // 현재 팀 이름
+                var thisTeam = memberObj.team;
+                
+                // list 배열에 현재 팀 이름이 존재 유무 반환
+                $.each(list, function (index, team) {
+                    if (team.teamName === thisTeam) {
+                        isTeamExist = true;
+                        
+                        // break;
+                        return false;
+                    }
+                });
+                
+                // list 배열에 팀이 없으면 팀을 추가
+                if (!isTeamExist) {
+                    list.push({
+                        teamName: memberObj.team,
+                        teamMember: []
+                    });
+                }
+                
+                // 변경 된 list 배열을 돌면서 팀 
+                $.each(list, function (index, team) {
+                    if (team.teamName === thisTeam) {
+                        list[index].teamMember.push(memberObj);
+                        
+                        // break;
+                        return false;
+                    }
+                });
+            });
+                
+            // extract member only
+            var memberListList = (function () {
+                return list.map(function (teamObj, index) {
+                    return teamObj.teamMember;
+                });
+            }());
+            
+            var memberStack = [];
+            $.each(memberListList, function (index, memberList) {
+                memberStack = memberStack.concat(memberList);
+            });
+            
+            // 모든 인원에 대해 루프를 돌며 그룹 index로 해당 배열에 푸시
+            var orderByGroup = [];
+            var i = 0;
+            
+            $.each(memberStack, function (index, member) {
+                if (i == groupCount) {
+                    i = 0;
+                }
+                
+                if (!Array.isArray(orderByGroup[i])) {
+                    orderByGroup[i] = [];
+                }
+                
+                orderByGroup[i].push(member);
+                
+                i += 1;
+            });
+            
+            $wrap.addClass('is_result');
+            modal.open(renderLunch(orderByGroup));
         }
     };
+    
+    // 랜덤 점심용 랜더
+    function renderLunch(data, onegroup) {
+        console.log(data);
+        var html = '';
+        try {
+            data.forEach(function (group, index) {
+                html += '<div class="group item"><div class="group title">' + (index + 1) + '조</div>';
+                
+                $.each(group, function (memberIndex, groupMember) {
+                    html += '<div data-index=' + memberIndex + ' class="member-list member ' + (groupMember.team_eng || '') + '"' +
+                        ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
+                        '<span class="name">' + groupMember.name + '</span>' +
+                        '<span class="team">' + groupMember.team + '</span>' +
+                        '</div>';
+                });
+                
+                html += '</div>';
+            });
+        } catch (e) {
+            console.log(e);
+        }
+        return html;
+    }
         
     // 결과 html 제작
     function renderHtml(data, onegroup) {
         var html = '';
-        data.forEach(function (group) {
-            if (onegroup) {
-                html += '<div class="group item onegroup">';    
-            } else {
-                html += '<div class="group item"><div class="group title">' + group.title + '</div>';
-            }
-            
-            group.member.forEach(function (groupMember, memberIndex) {
-                html += '<div data-index=' + memberIndex + ' class="member-list member ' + groupMember.team_eng + '"' +
-                    ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
-                    '<span class="name">' + groupMember.name + '</span>' +
-                    '<span class="team">' + groupMember.team + '</span>' +
-                    '</div>';
+        try {
+            console.log(data);
+            data.forEach(function (group) {
+                if (onegroup) {
+                    html += '<div class="group item onegroup">';    
+                } else {
+                    html += '<div class="group item"><div class="group title">' + group.title + '</div>';
+                }
+                
+                group.member.forEach(function (groupMember, memberIndex) {
+                    html += '<div data-index=' + memberIndex + ' class="member-list member ' + (groupMember.team_eng || '') + '"' +
+                        ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
+                        '<span class="name">' + groupMember.name + '</span>' +
+                        '<span class="team">' + groupMember.team + '</span>' +
+                        '</div>';
+                });
+                html += '</div>';
             });
-            html += '</div>';
-        });
+        } catch (e) {
+            console.log(e);
+        }
         return html;
     }
 
