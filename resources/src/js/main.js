@@ -143,7 +143,7 @@
     };
         
     // 결과 html 제작
-    function returnResultHtml(data, onegroup) {
+    function renderHtml(data, onegroup) {
         var html = '';
         data.forEach(function (group) {
             if (onegroup) {
@@ -200,7 +200,7 @@
         }
 
         $wrap.addClass('is_result');
-        modal.open(returnResultHtml(resultObj, onegroup));
+        modal.open(renderHtml(resultObj, onegroup));
     }
 
     // 상태 업데이트
