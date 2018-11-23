@@ -125,9 +125,7 @@
                 jo_name_ju: true // 조 이름 주번 이름으로 사용
             };
             
-            console.log(groupCount);
             console.log(data);
-
             result(data);
         },
         // 랜덤점심
@@ -179,70 +177,47 @@
                 });
             });
                 
-            // extract member only
+            // 팀별 리스트에서 멤버만 추출
             var memberListList = (function () {
                 return list.map(function (teamObj, index) {
                     return teamObj.teamMember;
                 });
             }());
             
+            // 멤버만 추출한 배열 직열활
             var memberStack = [];
             $.each(memberListList, function (index, memberList) {
                 memberStack = memberStack.concat(memberList);
             });
             
-            // 모든 인원에 대해 루프를 돌며 그룹 index로 해당 배열에 푸시
+            // 모든 인원 루프를 돌며 해당 index 배열에 푸시
             var orderByGroup = [];
             var i = 0;
-            
             $.each(memberStack, function (index, member) {
                 if (i == groupCount) {
                     i = 0;
                 }
                 
-                if (!Array.isArray(orderByGroup[i])) {
-                    orderByGroup[i] = [];
+                if (!orderByGroup[i]) {
+                    orderByGroup.push({
+                        title: (i + 1) + '조',
+                        member: []
+                    });
                 }
                 
-                orderByGroup[i].push(member);
-                
+                orderByGroup[i].member.push(member);
                 i += 1;
             });
             
             $wrap.addClass('is_result');
-            modal.open(renderLunch(orderByGroup));
+            modal.open(renderHtml(orderByGroup));
         }
     };
     
-    // 랜덤 점심용 랜더
-    function renderLunch(data, onegroup) {
-        console.log(data);
-        var html = '';
-        try {
-            data.forEach(function (group, index) {
-                html += '<div class="group item"><div class="group title">' + (index + 1) + '조</div>';
-                
-                $.each(group, function (memberIndex, groupMember) {
-                    html += '<div data-index=' + memberIndex + ' class="member-list member ' + (groupMember.team_eng || '') + '"' +
-                        ' style="background-color:' + (groupMember.team_color || '#ddd') + '">' +
-                        '<span class="name">' + groupMember.name + '</span>' +
-                        '<span class="team">' + groupMember.team + '</span>' +
-                        '</div>';
-                });
-                
-                html += '</div>';
-            });
-        } catch (e) {
-            console.log(e);
-        }
-        return html;
-    }
-        
     // 결과 html 제작
     function renderHtml(data, onegroup) {
         var html = '';
         try {
-            console.log(data);
             data.forEach(function (group) {
                 if (onegroup) {
                     html += '<div class="group item onegroup">';    
@@ -257,6 +232,7 @@
                         '<span class="team">' + groupMember.team + '</span>' +
                         '</div>';
                 });
+                
                 html += '</div>';
             });
         } catch (e) {
