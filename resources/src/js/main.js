@@ -1,9 +1,12 @@
 (function (window, $, modal) {
     var $wrap = $('.sadari.wrap');
     var sadariType = 'one';
-    var clonebackpacker = window.clonebackpacker || {};
     var tmpbackpacker = [];
-    var originBp;
+    var originbackpacker;
+    var clonebackpacker;
+        
+    // jquery dom member list
+    var $memberList = $('.member-list.body').find('.member-list.member');
     
     // 사다리 종류
     var game = {
@@ -96,7 +99,7 @@
     }
 
     // 구성원 데이터 재구성
-    function filtering() {
+    function filterDisableMember() {
         var remap = clonebackpacker.slice().filter(function (v) {
             if (v.is_disable === true) {
                 return false;
@@ -110,7 +113,7 @@
     }
 
     // 퇴사한 사람, 출근 전 사람 제외
-    function joinMember(arg) {
+    function filterWorkMember(arg) {
         var now = new Date().getTime();
         var date;
         var y;
@@ -331,7 +334,7 @@
 
     // 게임 시작
     function startSadari() {
-        tmpbackpacker = filtering();
+        tmpbackpacker = filterDisableMember();
         
         // 게임 시작
         game[sadariType]();
@@ -356,7 +359,7 @@
     function initData() {
         var backpacker = [];
 
-        $('.member-list.body').find('.member-list.member').each(function (i, e) {
+        $memberList.each(function (i, e) {
             var $member = $(e);
             var member = {
                 name: $member.find('.name').html(),
@@ -368,13 +371,8 @@
             backpacker.push(member);
         });
 
-        // if (localStorage.bp) {
-        //     backpacker = JSON.parse(localStorage.bp);
-        // }
-
-        originBp = backpacker.slice();
-        clonebackpacker = joinMember(backpacker.slice());
-        window.clonebackpacker = clonebackpacker;
+        originbackpacker = backpacker.slice();
+        clonebackpacker = filterWorkMember(backpacker.slice());
     }
 
     // 이벤트 바인딩
