@@ -4,6 +4,8 @@ var store = {
     on: function (evt, fn) {
         this.events[evt] = this.events[evt] || [];
         this.events[evt].push(fn);
+        
+        return this;
     },
     offForceArray: function (eventArray) {
         var self = this;

@@ -353,7 +353,7 @@
         
         // 게임 시작
         game[sadariType]();
-        store.emit('renderTextResult', resultText);
+        store.emit('renderTextResult');
     }
 
     // 게임 선택
