@@ -1,47 +1,61 @@
 (function (window, $, modal) {
-    var $wrap = $('.sadari.wrap');
+    // 사다리 종류
     var sadariType = 'one';
-    var tmpbackpacker = [];
-    var originbackpacker;
-    var clonebackpacker;
+    
+    // 최초 순수 구성원
+    var originbackpackr;
+    
+    // 랜덤 적용 된 구성원
+    var randombackpackr = [];
+    
+    // 필터 적용 된 구성원
+    var filterbackpackr;
         
     // jquery dom member list
     var $memberList = $('.member-list.body').find('.member-list.member');
     
+    // jquery dom 
+    var $wrap = $('.sadari.wrap');
+    
     // 사다리 종류
     var game = {
+        // 카운트 조회
+        getValue: function (selector) {
+            var value = $(selector).val();
+            return value;
+        },
         // 한명 뽑기
         one: function () {
-            var count = $('#onlyOne').val();
+            var count = this.getValue('#onlyOne');
             var groupCount = 1;
             var data = {
                 a: count, // 출력 인원
                 b: groupCount, // 그룹 수
-                c: tmpbackpacker // 선택 되지 않은 인원
+                c: randombackpackr // 선택 되지 않은 인원
             };
 
             console.log(data);
             result(data);
         },
         jo_member: function () {
-            var count = $('#groupMember').val() || 3;
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var count = this.getValue('#groupMember') || 3;
+            var groupCount = Math.ceil(randombackpackr.length / count);
             var data = {
                 a: count, // 한조 인원
                 b: groupCount, // 그룹 수
-                c: tmpbackpacker // 랜덤 값
+                c: randombackpackr // 랜덤 값
             };
             
             console.log(data);
             result(data, true);
         },
         jo_team: function () {
-            var count = $('#groupCount').val() || 3;
-            var groupCount = Math.ceil(tmpbackpacker.length / count);
+            var count = this.getValue('#groupCount') || 3;
+            var groupCount = Math.ceil(randombackpackr.length / count);
             var data = {
                 a: groupCount, // 한조 인원
                 b: count, // 그룹 수
-                c: tmpbackpacker // 랜덤 값
+                c: randombackpackr // 랜덤 값
             };
             
             console.log(data);
@@ -49,11 +63,12 @@
         },
         // 주번
         ju: function () {
+            var count = 1; // 임의값
             var groupCount = ju.length;
             var data = {
-                a: 1, // 조 에서는 기준값 사용 안함
+                a: count,
                 b: groupCount, // 청소 종류
-                c: tmpbackpacker,
+                c: randombackpackr,
                 jo_name_ju: true // 조 이름 주번 이름으로 사용
             };
             
@@ -62,15 +77,15 @@
         },
         // 랜덤점심
         jo_lunch: function () {
-            var groupCount = $('#groupCount').val();
-            var groupMemberCount = Math.ceil(tmpbackpacker.length / groupCount);
+            var groupCount = this.getValue('#groupCount');
+            var groupMemberCount = Math.ceil(randombackpackr.length / groupCount);
             var data = {
                 groupCount: groupCount,
             }
             
             // 유효성 검사
             if (
-                tmpbackpacker.length == 0
+                randombackpackr.length == 0
                 || !groupCount
                 || groupCount == 0
             ) {
@@ -100,7 +115,7 @@
 
     // 구성원 데이터 재구성
     function filterDisableMember() {
-        var remap = clonebackpacker.slice().filter(function (v) {
+        var remap = filterbackpackr.slice().filter(function (v) {
             if (v.is_disable === true) {
                 return false;
             }
@@ -185,7 +200,7 @@
     function resultLunch(data) {
         var list = [];
         // 팀별 직원 정렬
-        $.each(tmpbackpacker, function (index, memberObj) {
+        $.each(randombackpackr, function (index, memberObj) {
             // 팀 존재 유무
             var isTeamExist = false;
             
@@ -298,7 +313,7 @@
 
     // 상태 업데이트
     function updateState(index, state) {
-        clonebackpacker[index].is_disable = state;
+        filterbackpackr[index].is_disable = state;
     }
 
     // 직원 토글
@@ -319,7 +334,7 @@
         }
 
         updateState(idx, state);
-        store.emit('updateMemberCount', clonebackpacker);
+        store.emit('updateMemberCount', filterbackpackr);
     }
 
     // 전체 토글
@@ -329,12 +344,12 @@
         $.each($itemList, function (i, e) {
             updateState(i, state);
         });
-        store.emit('updateMemberCount', clonebackpacker);
+        store.emit('updateMemberCount', filterbackpackr);
     }
 
     // 게임 시작
     function startSadari() {
-        tmpbackpacker = filterDisableMember();
+        randombackpackr = filterDisableMember();
         
         // 게임 시작
         game[sadariType]();
@@ -371,8 +386,8 @@
             backpacker.push(member);
         });
 
-        originbackpacker = backpacker.slice();
-        clonebackpacker = filterWorkMember(backpacker.slice());
+        originbackpackr = backpacker.slice();
+        filterbackpackr = filterWorkMember(backpacker.slice());
     }
 
     // 이벤트 바인딩
@@ -391,7 +406,7 @@
         initData();
         
         $('.sadari-select').find('button:eq(0)').trigger('click');
-        store.emit('updateMemberCount', clonebackpacker);
+        store.emit('updateMemberCount', filterbackpackr);
     }
     
     init();
