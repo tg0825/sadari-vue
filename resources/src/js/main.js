@@ -2,6 +2,9 @@
     // 사다리 종류
     var sadariType = 'one';
     
+    // 현재 선택된 게임 타입
+    var selectedGameType = null;
+    
     // 최초 순수 구성원
     var originbackpackr;
     
@@ -10,12 +13,15 @@
     
     // 필터 적용 된 구성원
     var filterbackpackr;
-        
+    
     // jquery dom member list
     var $memberList = $('.member-list.body').find('.member-list.member');
     
     // jquery dom 
     var $wrap = $('.sadari.wrap');
+    
+    // api 저장
+    var apiCommit = '/game/insert';
     
     // 사다리 종류
     var game = {
@@ -199,6 +205,7 @@
     // 점심 전용 결과 출력
     function resultLunch(data) {
         var list = [];
+        
         // 팀별 직원 정렬
         $.each(randombackpackr, function (index, memberObj) {
             // 팀 존재 유무
@@ -270,6 +277,10 @@
             
         $wrap.addClass('is_result');
         modal.open(renderHtml(orderByGroup));
+        
+        console.log(orderByGroup);
+        
+        _commit();
     }
 
     // 결과 출력
@@ -309,6 +320,8 @@
 
         $wrap.addClass('is_result');
         modal.open(renderHtml(resultObj, onegroup));
+        
+        _commit();
     }
 
     // 상태 업데이트
@@ -360,6 +373,9 @@
     function selectSadari() {
         var idx = $(this).parent().index();
         sadariType = $(this).data('game');
+        selectedGameType = $(this).data('game-id');
+        
+        console.log(selectedGameType);
 
         $('.sadari-select').find('button').removeClass('is_on');
         $(this).addClass('is_on');
@@ -368,6 +384,47 @@
             .hide()
             .eq(idx)
             .show();
+    }
+    
+    // 저장
+    function _commit() {
+        // var param = {
+        //     game_type: 1,
+        //     result_data: [
+        //         {
+        //             user_id: 72,
+        //             group_name: 'test',
+        //         },
+        //         {
+        //             user_id: 73,
+        //             group_name: 'test'
+        //         },
+        //         {
+        //             user_id: 74,
+        //             group_name: 'test'
+        //         }
+        //     ]
+        // };
+        
+        var param = {
+            game_type: selectedGameType,
+            result_data: [
+                {
+                    user_id: 72,
+                    group_name: 'test',
+                },
+                {
+                    user_id: 73,
+                    group_name: 'test'
+                },
+                {
+                    user_id: 74,
+                    group_name: 'test'
+                }
+            ]
+        };
+        
+        $.post(apiCommit, param)
     }
 
     // 데이터 초기화
@@ -379,6 +436,7 @@
             var member = {
                 name: $member.find('.name').html(),
                 team: $member.find('.team').html(),
+                id: $member.data('member-id'),
                 team_eng: $member.data('team-eng'),
                 team_color: $member.data('team-color'),
             };

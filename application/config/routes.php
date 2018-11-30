@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['/'] = '/Game';
+$route['/'] = '/game';
 
 $route['admin'] = 'admin/main';
 
@@ -9,7 +9,6 @@ $route['admin'] = 'admin/main';
 $route['admin/login'] = 'admin/auth/login';
 $route['admin/login-process'] = 'admin/auth/process';
 $route['admin/logout'] = 'admin/auth/logout';
-
 
 // 구성원
 $route['admin/member'] = 'admin/member';
@@ -27,6 +26,12 @@ $route['admin/team/edit/(:num)'] = 'admin/team/edit/$1';
 $route['admin/team/edit/submit'] = 'admin/team/edit_submit';
 $route['admin/team/delete'] = 'admin/team/delete';
 $route['admin/team/update'] = 'admin/team/update';
+
+// 게임
+$route['game/insert'] = 'game/insert';
+
+// 게임 타입 결과
+// $route['game/result/(:any)'];
 
 $route['default_controller'] = 'game';
 $route['404_override'] = '';

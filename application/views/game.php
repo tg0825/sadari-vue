@@ -85,6 +85,7 @@ OneSignal.push(function() {
                         <label
                             class="member-list member <?=$member->team_eng?>"
                             style="background-color:<?=$member->team_color ?? '#ddd'?>"
+                            data-member-id="<?=$member->id?>"
                             data-team-eng="<?=$member->team_eng?>"
                             data-team-color="<?=$member->team_color?>"
                         >
@@ -103,31 +104,51 @@ OneSignal.push(function() {
         <div class="layout-controller">
             <div class="sadari-select">
                 <div>
-                    <button class="btn ta-l" data-game="one">
+                    <button 
+                        class="btn ta-l"
+                        data-game="one"
+                        data-game-id="1"
+                    >
                         <i class="fa fa-users" aria-hidden="true"></i>
                         한명 뽑기 (또는 여러명)
                     </button>
                 </div>
                 <div>
-                    <button class="btn ta-l" data-game="jo_member">
+                    <button
+                        class="btn ta-l"
+                        data-game="jo_member"
+                        data-game-id="2"
+                    >
                         <i class="fa fa-random" aria-hidden="true"></i>
                         랜덤 조 (인원기준)
                     </button>
                 </div>
                 <div>
-                    <button class="btn ta-l" data-game="jo_team">
+                    <button 
+                        class="btn ta-l" 
+                        data-game="jo_team"
+                        data-game-id="3"
+                    >
                         <i class="fa fa-random" aria-hidden="true"></i>
                         랜덤 조 (팀 기준)
                     </button>
                 </div>
                 <div>
-                    <button class="btn ta-l" data-game="jo_lunch">
+                    <button
+                        class="btn ta-l"
+                        data-game="jo_lunch"
+                        data-game-id="4"
+                    >
                         <i class="fa fa-cutlery" aria-hidden="true"></i>
                         랜덤 점심
                     </button>
                 </div>
                 <div>
-                    <button class="btn ta-l" data-game="ju">
+                    <button 
+                        class="btn ta-l"
+                        data-game="ju"
+                        data-game-id="5"
+                    >
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         청소 뽑기
                     </button>
