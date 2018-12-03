@@ -18,4 +18,23 @@ class M_game_result extends CI_Model {
         $result = $this->db->insert_batch('game_result', $result);
         return $result;
     }
+    
+    /**
+     * 게임 아이디로 해당 인원 찾기
+     * @return [type] [description]
+     */
+    public function get_game_id_member($id)
+    {
+        try {
+            $this->load->database();
+            
+            $this->db->select('user_id');
+            $this->db->from('game_result');
+            $this->db->where('game_id', $id);
+            $query = $this->db->get();
+            return $query->result();
+        } catch (Exception $e) {
+            return 'error';
+        }
+    }
 }

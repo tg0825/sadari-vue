@@ -21,4 +21,21 @@ class M_game extends CI_Model {
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+    
+    public function get_last_id($type)
+    {
+        try {
+            $this->load->database();
+            
+            $this->db->select('id');
+            $this->db->from('game');
+            $this->db->where('type', $type);
+            $this->db->order_by('id', 'desc');
+            $query = $this->db->get();
+            
+            return $query->row()->id ?? '';
+        } catch (Exception $e) {
+            return 'error';
+        }
+    }
 }

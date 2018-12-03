@@ -29,6 +29,7 @@ $route['admin/team/update'] = 'admin/team/update';
 
 // 게임
 $route['game/insert'] = 'game/insert';
+$route['game/last_member_list/(:any)'] = 'game/last_member_list/$1';
 
 // 게임 타입 결과
 // $route['game/result/(:any)'];

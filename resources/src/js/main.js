@@ -14,6 +14,8 @@
     // 필터 적용 된 구성원
     var filterbackpackr;
     
+    var temp;
+    
     // jquery dom member list
     var $memberList = $('.member-list.body').find('.member-list.member');
     
@@ -40,7 +42,6 @@
                 c: randombackpackr // 선택 되지 않은 인원
             };
 
-            console.log(data);
             result(data);
         },
         jo_member: function () {
@@ -278,8 +279,6 @@
         $wrap.addClass('is_result');
         modal.open(renderHtml(orderByGroup));
         
-        console.log(orderByGroup);
-        
         _commit();
     }
 
@@ -289,6 +288,8 @@
     // b 그룹 수
     // c 램덤 인원
     function result(data, restGroupType) {
+        temp = $.extend(true, {}, data);
+        
         var i = 0;
         var onegroup = (data.b === 1);
         var resultObj = [];
@@ -325,7 +326,17 @@
     }
 
     // 상태 업데이트
-    function updateState(index, state) {
+    function updateState($item, state) {
+        var index = $item.index();
+        
+        if (state) {
+            $item.addClass('is_disable');
+            state = false;
+        } else {
+            $item.removeClass('is_disable');
+            state = true;
+        }
+
         filterbackpackr[index].is_disable = state;
     }
 
@@ -335,29 +346,21 @@
 
         var $target = $(e.currentTarget);
         var $item = $target.parents('.member-list.member');
-        var idx = $item.index();
         var state = null;
 
-        if ($item.is('.is_disable')) {
-            $item.removeClass('is_disable');
-            state = false;
-        } else {
-            $item.addClass('is_disable');
-            state = true;
-        }
-
-        updateState(idx, state);
+        updateState($item, state);
         store.emit('updateMemberCount', filterbackpackr);
     }
 
     // 전체 토글
     function toggleAllMember(e) {
-        var state = e.currentTarget.checked;
-        var $itemList = $('.member-list.body .member-list.member');
-        $.each($itemList, function (i, e) {
-            updateState(i, state);
+        var state = e.currenttarget.checked;
+        var $itemlist = $('.member-list.body .member-list.member');
+        
+        $.each($itemlist, function (i, e) {
+            updateState($(e), state);
         });
-        store.emit('updateMemberCount', filterbackpackr);
+        store.emit('updatemembercount', filterbackpackr);
     }
 
     // 게임 시작
@@ -384,49 +387,82 @@
             .hide()
             .eq(idx)
             .show();
+        
+        getLastUserList();
     }
     
     // 저장
-    function _commit() {
-        // var param = {
-        //     game_type: 1,
-        //     result_data: [
-        //         {
-        //             user_id: 72,
-        //             group_name: 'test',
-        //         },
-        //         {
-        //             user_id: 73,
-        //             group_name: 'test'
-        //         },
-        //         {
-        //             user_id: 74,
-        //             group_name: 'test'
-        //         }
-        //     ]
-        // };
-        
-        var param = {
-            game_type: selectedGameType,
-            result_data: [
-                {
-                    user_id: 72,
-                    group_name: 'test',
-                },
-                {
-                    user_id: 73,
-                    group_name: 'test'
-                },
-                {
-                    user_id: 74,
-                    group_name: 'test'
-                }
-            ]
-        };
-        
-        $.post(apiCommit, param)
+    function _commit(data) {
+        try {
+            var param = {
+                game_type: selectedGameType,
+                // result_data: [
+                //     {
+                //         user_id: 72,
+                //         group_name: 'test',
+                //     },
+                //     {
+                //         user_id: 73,
+                //         group_name: 'test'
+                //     },
+                //     {
+                //         user_id: 74,
+                //         group_name: 'test'
+                //     }
+                // ]
+                result_data: data.member_list
+            };
+            
+            $.post(apiCommit, param)
+        } catch (e) {
+            console.log(e);
+        }
     }
-
+    
+    // 마지막 유저 가져오기
+    function getLastUserList() {
+        var url = '/game/last_member_list/' + selectedGameType;
+        $.get(url)
+            .done(function (response) {
+                console.log(response);
+                if (!response) {
+                    console.log('error');
+                    return false;
+                }
+                var res = JSON.parse(response);
+                updateUserList(res);
+            });
+    }
+    
+    // 멤버 초기화
+    function resetMemberState(render) {
+        var state = false;
+        var $itemlist = $('.member-list.body .member-list.member');
+        
+        $.each($itemlist, function (i, e) {
+            updateState($(e), state);
+        });
+        
+        if (render) {
+            store.emit('updatemembercount', filterbackpackr);
+        }
+    }
+    
+    // 멤버들 상태 업데이트
+    function updateUserList(res) {
+        resetMemberState();
+        $.each(res, function (index, value) {
+            var userId = value.user_id;
+            var $elm = $('.member-list.body').find('[data-member-id="' + userId + '"]');
+            var state = true;
+            updateState($elm, state);
+        });
+        
+        console.log(res);
+        
+        store.emit('updateMemberCount', filterbackpackr);
+    }
+    
     // 데이터 초기화
     function initData() {
         var backpacker = [];
@@ -436,7 +472,7 @@
             var member = {
                 name: $member.find('.name').html(),
                 team: $member.find('.team').html(),
-                id: $member.data('member-id'),
+                user_id: $member.data('member-id'),
                 team_eng: $member.data('team-eng'),
                 team_color: $member.data('team-color'),
             };

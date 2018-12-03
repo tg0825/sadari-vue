@@ -23,35 +23,55 @@ class Game extends CI_Controller {
     {
         $data = $this->input->post();
         
-        $this->load->database();
-        $this->db->trans_begin();
+        try {
+            $this->load->database();
+            $this->db->trans_begin();
         
+            $this->load->model('m_game');
+            $game_id = $this->m_game->insert($data['game_type']);
+            
+            $this->load->model('m_game_result');
+            $data['game_id'] = $game_id;
+            
+            $i = 0;
+            $result = [];
+            forEach($data['result_data'] as $result_item) {
+                $result[$i]['game_id'] = $game_id;
+                $result[$i]['game_type'] = $data['game_type'];
+                $result[$i]['user_id'] = $result_item['user_id'];
+                $result[$i]['group_name'] = $result_item['group_name'] ?? '';
+                
+                $i += 1;
+            }
+            
+            $result = $this->m_game_result->insert_batch($result);
+            
+            if ($this->db->trans_status() === false) {
+                $this->db->trans_rollback();
+                return false;
+            } else {
+                $this->db->trans_commit();
+                return true;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    
+    /**
+     * 마지막 멤버 리스트
+     * @param int $type 게임 타입
+     * @return string json_encode
+     */
+    public function last_member_list($type)
+    {
         $this->load->model('m_game');
-        $game_id = $this->m_game->insert($data['game_type']);
+        $id = $this->m_game->get_last_id($type);
         
         $this->load->model('m_game_result');
-        $data['game_id'] = $game_id;
+        $member_list = $this->m_game_result->get_game_id_member($id);
         
-        $i = 0;
-        $result = [];
-        forEach($data['result_data'] as $result_item) {
-            $result[$i]['game_id'] = $game_id;
-            $result[$i]['game_type'] = $data['game_type'];
-            $result[$i]['user_id'] = $result_item['user_id'];
-            $result[$i]['group_name'] = $result_item['group_name'];
-            
-            $i += 1;
-        }
-        
-        $result = $this->m_game_result->insert_batch($result);
-        
-        if ($this->db->trans_status() === false) {
-            $this->db->trans_rollback();
-            return false;
-        } else {
-            $this->db->trans_commit();
-            return true;
-        }
+        echo json_encode($member_list);
     }
     
 	public function result($type)
