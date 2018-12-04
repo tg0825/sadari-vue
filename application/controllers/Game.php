@@ -54,7 +54,7 @@ class game extends CI_Controller {
                 echo 'success';
             }
         } catch (Exception $e) {
-            echo 'error';
+            echo $e->getMessage();
         }
     }
     
