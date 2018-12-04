@@ -179,6 +179,7 @@ input:focus {
 
 .member-list.member.is_disable:before {
     content: '제외';
+    font-weight: bold;
     color: #fff;
     position: absolute;
     top: 0;
@@ -188,7 +189,7 @@ input:focus {
     right: 0;
     line-height: 62px;
     text-align: center;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .6);
     border-radius: 5px;
     z-index: 100;
     box-sizing: border-box;

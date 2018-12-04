@@ -183,6 +183,7 @@
     function renderHtml(data, onegroup) {
         var html = '';
         try {
+            // 결과
             console.log(data);
             data.forEach(function (group) {
                 if (onegroup) {
@@ -337,19 +338,30 @@
         }
     }
 
-    // 상태 업데이트
-    function updateState($item, state) {
-        var index = $item.index();
+    /**
+     * 상태 업데이트
+     * @param {jquery dom object} $member 멤버 엘리먼트
+     * @param {Boolean} isDisabled 비활성 유무
+     * @return void;
+     */
+    function updateState($member, isDisabled) {
+        var disableClass = 'is_disable';
         
-        if (state) {
-            $item.addClass('is_disable');
-            state = false;
-        } else {
-            $item.removeClass('is_disable');
-            state = true;
+        try {
+            var index = $member.index();
+            
+            // 제외 시킴
+            if (isDisabled) {
+                $member.addClass(disableClass);
+            // 제외 해제
+            } else {
+                $member.removeClass(disableClass);
+            }
+            
+            filterbackpackr[index].is_disable = isDisabled;
+        } catch (e) {
+            console.log(e);
         }
-
-        filterbackpackr[index].is_disable = state;
     }
 
     // 직원 토글
@@ -358,19 +370,23 @@
 
         var $target = $(e.currentTarget);
         var $item = $target.parents('.member-list.member');
-        var state = null;
-
-        updateState($item, state);
+        var isDisabled = true;
+        
+        if ($item.is('.is_disable')) {
+            isDisabled = false;
+        }
+        
+        updateState($item, isDisabled);
         store.emit('updateMemberCount', filterbackpackr);
     }
 
     // 전체 토글
     function toggleAllMember(e) {
-        var state = e.currentTarget.checked;
+        var isChecked = e.currentTarget.checked;
         var $itemlist = $('.member-list.body .member-list.member');
         
         $.each($itemlist, function (i, e) {
-            updateState($(e), state);
+            updateState($(e), isChecked);
         });
         store.emit('updateMemberCount', filterbackpackr);
     }
@@ -444,7 +460,6 @@
         var url = '/game/last_member_list/' + selectedGameType;
         $.get(url)
             .done(function (response) {
-                console.log(response);
                 if (!response) {
                     console.log('error');
                     return false;
@@ -456,11 +471,10 @@
     
     // 멤버 상태 초기화
     function resetMemberState(render) {
-        var state = false;
         var $itemlist = $('.member-list.body .member-list.member');
         
         $.each($itemlist, function (i, e) {
-            updateState($(e), state);
+            updateState($(e), false);
         });
         
         if (!render) {
@@ -477,8 +491,8 @@
         $.each(res, function (index, value) {
             var userId = value.user_id;
             var $elm = $memberList.find('[data-member-id="' + userId + '"]');
-            var state = true;
-            updateState($elm, state);
+            
+            updateState($elm, true);
         });
         
         store.emit('updateMemberCount', filterbackpackr);
