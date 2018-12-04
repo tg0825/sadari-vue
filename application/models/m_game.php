@@ -39,3 +39,4 @@ class M_game extends CI_Model {
         }
     }
 }
+
