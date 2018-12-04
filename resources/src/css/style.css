@@ -9,6 +9,10 @@ input:focus {
     box-shadow: 0;
 }
 
+.mt10 {
+    margin-top: 10px;
+}
+
 .ta-r {
     text-align: right !important;
 }

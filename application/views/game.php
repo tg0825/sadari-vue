@@ -202,13 +202,14 @@ OneSignal.push(function() {
                             <button type="submit" class="btn-add-mem">추가</button>
                         </div>
                     </div>
-                    <div>
+                    <div class="mt10">
                         <div class="form-block">
                             <button 
                                 type="button"
-                                class="exclude-prev-member"
+                                class="btn btn-s exclude-prev-member"
                             >
-                                저번주 걸린 사람 제외하기
+                                <i class="fa fa-user-times" aria-hidden="true"></i>
+                                저번주 청소자 표시
                             </button>
                         </div>
                     </div>

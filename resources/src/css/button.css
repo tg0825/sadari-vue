@@ -18,3 +18,14 @@
 .btn:focus {
     outline: 0;
 }
+
+.btn-s {
+    font-size: 14px;
+    color: #333;
+    background: #eee;
+    border: 1px solid #bbb;
+    padding: 5px 10px;
+    width: auto;
+    height: 35px;
+    border-radius: 5px;
+}
