@@ -206,10 +206,10 @@ OneSignal.push(function() {
                         <div class="form-block">
                             <button 
                                 type="button"
-                                class="btn btn-s exclude-prev-member"
+                                class="btn btn-s btn-size-w exclude-prev-member"
                             >
                                 <i class="fa fa-user-times" aria-hidden="true"></i>
-                                저번주 청소자 표시
+                                이전 청소자 표시
                             </button>
                         </div>
                     </div>
