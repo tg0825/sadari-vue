@@ -14,7 +14,11 @@
     // 필터 적용 된 구성원
     var filterbackpackr;
     
+    // 결과값 저장 임시 공간
     var temp;
+    
+    // 최종 결과 데이타 (모달 출력 데이터)
+    var lastResult;
     
     // jquery dom member list
     var $memberList = $('.member-list.body').find('.member-list.member');
@@ -79,7 +83,6 @@
                 jo_name_ju: true // 조 이름 주번 이름으로 사용
             };
             
-            console.log(data);
             result(data);
         },
         // 랜덤점심
@@ -180,6 +183,7 @@
     function renderHtml(data, onegroup) {
         var html = '';
         try {
+            console.log(data);
             data.forEach(function (group) {
                 if (onegroup) {
                     html += '<div class="group item onegroup">';    
@@ -293,36 +297,44 @@
         var i = 0;
         var onegroup = (data.b === 1);
         var resultObj = [];
+        var msg;
 
-        if (data.b <= 0 || data.a <= 0) {
-            alert('값을 확인해주세요');
-            return false;
-        }
-        
-        // 그룹 수 만큼 반복
-        while (i < data.b) {
-            var groupData = {
-                title: data.jo_name_ju ? ju[i] : (i + 1) + '조',
-                member: data.jo_name_ju ? [data.c[i]] : data.c.splice(0, data.a)
-            };
-
-            if (restGroupType && groupData.member.length < data.a) {
-                if (confirm('나머지 인원이 있습니다. 다른 조에 포함 시키겠습니까?')) {
-                    groupData.member.forEach(function (v, idx) {
-                        resultObj[idx].member.push(v);
-                    });
-                    break;
+        try {
+            if (data.b <= 0 || data.a <= 0 || data.c.length === 0) {
+                msg = '값을 확인해주세요.';
+                alert(msg);
+                throw new Error(msg);
+            }
+            
+            // 그룹 수 만큼 반복
+            while (i < data.b) {
+                var groupData = {
+                    title: data.jo_name_ju ? ju[i] : (i + 1) + '조',
+                    member: data.jo_name_ju ? [data.c[i]] : data.c.splice(0, data.a)
                 };
+
+                if (restGroupType && groupData.member.length < data.a) {
+                    if (confirm('나머지 인원이 있습니다. 다른 조에 포함 시키겠습니까?')) {
+                        groupData.member.forEach(function (v, idx) {
+                            resultObj[idx].member.push(v);
+                        });
+                        break;
+                    };
+                }
+
+                resultObj.push(groupData);
+                i ++;
             }
 
-            resultObj.push(groupData);
-            i ++;
+            lastResult = $.extend(true, {}, resultObj);
+            
+            $wrap.addClass('is_result');
+            modal.open(renderHtml(resultObj, onegroup));
+            
+            _commit();
+        } catch (e) {
+            console.log(e);
         }
-
-        $wrap.addClass('is_result');
-        modal.open(renderHtml(resultObj, onegroup));
-        
-        _commit();
     }
 
     // 상태 업데이트
@@ -354,13 +366,13 @@
 
     // 전체 토글
     function toggleAllMember(e) {
-        var state = e.currenttarget.checked;
+        var state = e.currentTarget.checked;
         var $itemlist = $('.member-list.body .member-list.member');
         
         $.each($itemlist, function (i, e) {
             updateState($(e), state);
         });
-        store.emit('updatemembercount', filterbackpackr);
+        store.emit('updateMemberCount', filterbackpackr);
     }
 
     // 게임 시작
@@ -377,8 +389,6 @@
         var idx = $(this).parent().index();
         sadariType = $(this).data('game');
         selectedGameType = $(this).data('game-id');
-        
-        console.log(selectedGameType);
 
         $('.sadari-select').find('button').removeClass('is_on');
         $(this).addClass('is_on');
@@ -388,12 +398,33 @@
             .eq(idx)
             .show();
         
-        getLastUserList();
+        if (selectedGameType === 5) {
+            getLastUserList();
+        }
     }
     
     // 저장
-    function _commit(data) {
+    function _commit() {
         try {
+            
+            console.log(lastResult);
+            
+            var data = [];
+            $.each(lastResult, function (index, value) {
+                var title = value.title;
+                
+                $.each(value, function (index, value) {
+                    var member = {
+                        'group_name': title,
+                        user_id: value.user_id
+                    };
+                
+                    data.push(member);
+                });
+            });
+            
+            console.log(data);
+            
             var param = {
                 game_type: selectedGameType,
                 // result_data: [
@@ -434,7 +465,7 @@
             });
     }
     
-    // 멤버 초기화
+    // 멤버 상태 초기화
     function resetMemberState(render) {
         var state = false;
         var $itemlist = $('.member-list.body .member-list.member');
@@ -443,22 +474,23 @@
             updateState($(e), state);
         });
         
-        if (render) {
-            store.emit('updatemembercount', filterbackpackr);
+        if (!render) {
+            store.emit('updateMemberCount', filterbackpackr);
         }
     }
     
     // 멤버들 상태 업데이트
     function updateUserList(res) {
-        resetMemberState();
+        var $memberList = $('.member-list.body');
+        
+        resetMemberState(false);
+        
         $.each(res, function (index, value) {
             var userId = value.user_id;
-            var $elm = $('.member-list.body').find('[data-member-id="' + userId + '"]');
+            var $elm = $memberList.find('[data-member-id="' + userId + '"]');
             var state = true;
             updateState($elm, state);
         });
-        
-        console.log(res);
         
         store.emit('updateMemberCount', filterbackpackr);
     }
