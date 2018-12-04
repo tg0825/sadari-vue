@@ -177,6 +177,10 @@ input:focus {
     /* opacity: 0.1; */
 }
 
+.member-list.member.is_disable:hover:before {
+    opacity: 0.2;
+}
+
 .member-list.member.is_disable:before {
     content: '제외';
     font-weight: bold;
