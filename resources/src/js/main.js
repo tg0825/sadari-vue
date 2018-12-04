@@ -397,10 +397,6 @@
             .hide()
             .eq(idx)
             .show();
-        
-        if (selectedGameType === 5) {
-            getLastUserList();
-        }
     }
     
     // 게임 데이터 기록, 저장
@@ -508,6 +504,13 @@
         originbackpackr = backpacker.slice();
         filterbackpackr = filterWorkMember(backpacker.slice());
     }
+    
+    // 지난주 걸린 사람 제외하기 버튼 클릭 핸들러
+    function _handleClickPrevMember() {
+        if (selectedGameType === 5) {
+            getLastUserList();
+        }
+    }
 
     // 이벤트 바인딩
     function bindEvent() {
@@ -516,6 +519,7 @@
             .on('click', '.js-all-check-master', toggleAllMember)
         $('.sadari-select').on('click', 'button', selectSadari);
         $('.start').on('click', startSadari);
+        $('.exclude-prev-member').on('click', _handleClickPrevMember);
         
         store.on('getGameType', _getGameType);
     }

@@ -202,6 +202,16 @@ OneSignal.push(function() {
                             <button type="submit" class="btn-add-mem">추가</button>
                         </div>
                     </div>
+                    <div>
+                        <div class="form-block">
+                            <button 
+                                type="button"
+                                class="exclude-prev-member"
+                            >
+                                저번주 걸린 사람 제외하기
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
