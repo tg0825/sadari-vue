@@ -283,7 +283,7 @@
         $wrap.addClass('is_result');
         modal.open(renderHtml(orderByGroup));
         
-        _commit();
+        _gameResultCommit();
     }
 
     // 결과 출력
@@ -331,7 +331,7 @@
             $wrap.addClass('is_result');
             modal.open(renderHtml(resultObj, onegroup));
             
-            _commit();
+            _gameResultCommit();
         } catch (e) {
             console.log(e);
         }
@@ -403,17 +403,16 @@
         }
     }
     
-    // 저장
-    function _commit() {
+    // 게임 데이터 기록, 저장
+    function _gameResultCommit() {
         try {
-            
-            console.log(lastResult);
             
             var data = [];
             $.each(lastResult, function (index, value) {
                 var title = value.title;
                 
-                $.each(value, function (index, value) {
+                // loop member
+                $.each(value.member, function (index, value) {
                     var member = {
                         'group_name': title,
                         user_id: value.user_id
@@ -422,8 +421,6 @@
                     data.push(member);
                 });
             });
-            
-            console.log(data);
             
             var param = {
                 game_type: selectedGameType,
@@ -436,12 +433,8 @@
                 //         user_id: 73,
                 //         group_name: 'test'
                 //     },
-                //     {
-                //         user_id: 74,
-                //         group_name: 'test'
-                //     }
                 // ]
-                result_data: data.member_list
+                result_data: data
             };
             
             $.post(apiCommit, param)
