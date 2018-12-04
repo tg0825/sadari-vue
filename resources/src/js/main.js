@@ -2,6 +2,9 @@
     // 사다리 종류
     var sadariType = 'one';
     
+    // 현재 선택된 게임 타입
+    var selectedGameType = null;
+    
     // 최초 순수 구성원
     var originbackpackr;
     
@@ -10,12 +13,21 @@
     
     // 필터 적용 된 구성원
     var filterbackpackr;
-        
+    
+    // 결과값 저장 임시 공간
+    var temp;
+    
+    // 최종 결과 데이타 (모달 출력 데이터)
+    var lastResult;
+    
     // jquery dom member list
     var $memberList = $('.member-list.body').find('.member-list.member');
     
     // jquery dom 
     var $wrap = $('.sadari.wrap');
+    
+    // api 저장
+    var apiCommit = '/game/insert';
     
     // 사다리 종류
     var game = {
@@ -34,7 +46,6 @@
                 c: randombackpackr // 선택 되지 않은 인원
             };
 
-            console.log(data);
             result(data);
         },
         jo_member: function () {
@@ -72,7 +83,6 @@
                 jo_name_ju: true // 조 이름 주번 이름으로 사용
             };
             
-            console.log(data);
             result(data);
         },
         // 랜덤점심
@@ -173,6 +183,8 @@
     function renderHtml(data, onegroup) {
         var html = '';
         try {
+            // 결과
+            console.log(data);
             data.forEach(function (group) {
                 if (onegroup) {
                     html += '<div class="group item onegroup">';    
@@ -199,6 +211,7 @@
     // 점심 전용 결과 출력
     function resultLunch(data) {
         var list = [];
+        
         // 팀별 직원 정렬
         $.each(randombackpackr, function (index, memberObj) {
             // 팀 존재 유무
@@ -270,6 +283,8 @@
             
         $wrap.addClass('is_result');
         modal.open(renderHtml(orderByGroup));
+        
+        _gameResultCommit();
     }
 
     // 결과 출력
@@ -278,42 +293,75 @@
     // b 그룹 수
     // c 램덤 인원
     function result(data, restGroupType) {
+        temp = $.extend(true, {}, data);
+        
         var i = 0;
         var onegroup = (data.b === 1);
         var resultObj = [];
+        var msg;
 
-        if (data.b <= 0 || data.a <= 0) {
-            alert('값을 확인해주세요');
-            return false;
-        }
-        
-        // 그룹 수 만큼 반복
-        while (i < data.b) {
-            var groupData = {
-                title: data.jo_name_ju ? ju[i] : (i + 1) + '조',
-                member: data.jo_name_ju ? [data.c[i]] : data.c.splice(0, data.a)
-            };
-
-            if (restGroupType && groupData.member.length < data.a) {
-                if (confirm('나머지 인원이 있습니다. 다른 조에 포함 시키겠습니까?')) {
-                    groupData.member.forEach(function (v, idx) {
-                        resultObj[idx].member.push(v);
-                    });
-                    break;
+        try {
+            if (data.b <= 0 || data.a <= 0 || data.c.length === 0) {
+                msg = '값을 확인해주세요.';
+                alert(msg);
+                throw new Error(msg);
+            }
+            
+            // 그룹 수 만큼 반복
+            while (i < data.b) {
+                var groupData = {
+                    title: data.jo_name_ju ? ju[i] : (i + 1) + '조',
+                    member: data.jo_name_ju ? [data.c[i]] : data.c.splice(0, data.a)
                 };
+
+                if (restGroupType && groupData.member.length < data.a) {
+                    if (confirm('나머지 인원이 있습니다. 다른 조에 포함 시키겠습니까?')) {
+                        groupData.member.forEach(function (v, idx) {
+                            resultObj[idx].member.push(v);
+                        });
+                        break;
+                    };
+                }
+
+                resultObj.push(groupData);
+                i ++;
             }
 
-            resultObj.push(groupData);
-            i ++;
+            lastResult = $.extend(true, {}, resultObj);
+            
+            $wrap.addClass('is_result');
+            modal.open(renderHtml(resultObj, onegroup));
+            
+            _gameResultCommit();
+        } catch (e) {
+            console.log(e);
         }
-
-        $wrap.addClass('is_result');
-        modal.open(renderHtml(resultObj, onegroup));
     }
 
-    // 상태 업데이트
-    function updateState(index, state) {
-        filterbackpackr[index].is_disable = state;
+    /**
+     * 상태 업데이트
+     * @param {jquery dom object} $member 멤버 엘리먼트
+     * @param {Boolean} isDisabled 비활성 유무
+     * @return void;
+     */
+    function updateState($member, isDisabled) {
+        var disableClass = 'is_disable';
+        
+        try {
+            var index = $member.index();
+            
+            // 제외 시킴
+            if (isDisabled) {
+                $member.addClass(disableClass);
+            // 제외 해제
+            } else {
+                $member.removeClass(disableClass);
+            }
+            
+            filterbackpackr[index].is_disable = isDisabled;
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     // 직원 토글
@@ -322,27 +370,23 @@
 
         var $target = $(e.currentTarget);
         var $item = $target.parents('.member-list.member');
-        var idx = $item.index();
-        var state = null;
-
+        var isDisabled = true;
+        
         if ($item.is('.is_disable')) {
-            $item.removeClass('is_disable');
-            state = false;
-        } else {
-            $item.addClass('is_disable');
-            state = true;
+            isDisabled = false;
         }
-
-        updateState(idx, state);
+        
+        updateState($item, isDisabled);
         store.emit('updateMemberCount', filterbackpackr);
     }
 
     // 전체 토글
     function toggleAllMember(e) {
-        var state = e.currentTarget.checked;
-        var $itemList = $('.member-list.body .member-list.member');
-        $.each($itemList, function (i, e) {
-            updateState(i, state);
+        var isChecked = e.currentTarget.checked;
+        var $itemlist = $('.member-list.body .member-list.member');
+        
+        $.each($itemlist, function (i, e) {
+            updateState($(e), isChecked);
         });
         store.emit('updateMemberCount', filterbackpackr);
     }
@@ -360,6 +404,7 @@
     function selectSadari() {
         var idx = $(this).parent().index();
         sadariType = $(this).data('game');
+        selectedGameType = $(this).data('game-id');
 
         $('.sadari-select').find('button').removeClass('is_on');
         $(this).addClass('is_on');
@@ -369,7 +414,90 @@
             .eq(idx)
             .show();
     }
-
+    
+    // 게임 데이터 기록, 저장
+    function _gameResultCommit() {
+        try {
+            
+            var data = [];
+            $.each(lastResult, function (index, value) {
+                var title = value.title;
+                
+                // loop member
+                $.each(value.member, function (index, value) {
+                    var member = {
+                        'group_name': title,
+                        user_id: value.user_id
+                    };
+                
+                    data.push(member);
+                });
+            });
+            
+            var param = {
+                game_type: selectedGameType,
+                // result_data: [
+                //     {
+                //         user_id: 72,
+                //         group_name: 'test',
+                //     },
+                //     {
+                //         user_id: 73,
+                //         group_name: 'test'
+                //     },
+                // ]
+                result_data: data
+            };
+            
+            $.post(apiCommit, param)
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    
+    // 마지막 유저 가져오기
+    function getLastUserList() {
+        var url = '/game/last_member_list/' + selectedGameType;
+        $.get(url)
+            .done(function (response) {
+                if (!response) {
+                    console.log('error');
+                    return false;
+                }
+                var res = JSON.parse(response);
+                updateUserList(res);
+            });
+    }
+    
+    // 멤버 상태 초기화
+    function resetMemberState(render) {
+        var $itemlist = $('.member-list.body .member-list.member');
+        
+        $.each($itemlist, function (i, e) {
+            updateState($(e), false);
+        });
+        
+        if (!render) {
+            store.emit('updateMemberCount', filterbackpackr);
+        }
+    }
+    
+    // 멤버들 상태 업데이트
+    function updateUserList(res) {
+        var $memberList = $('.member-list.body');
+        
+        resetMemberState(false);
+        
+        $.each(res, function (index, value) {
+            var userId = value.user_id;
+            var $elm = $memberList.find('[data-member-id="' + userId + '"]');
+            
+            updateState($elm, true);
+        });
+        
+        store.emit('updateMemberCount', filterbackpackr);
+    }
+    
     // 데이터 초기화
     function initData() {
         var backpacker = [];
@@ -379,6 +507,7 @@
             var member = {
                 name: $member.find('.name').html(),
                 team: $member.find('.team').html(),
+                user_id: $member.data('member-id'),
                 team_eng: $member.data('team-eng'),
                 team_color: $member.data('team-color'),
             };
@@ -389,6 +518,13 @@
         originbackpackr = backpacker.slice();
         filterbackpackr = filterWorkMember(backpacker.slice());
     }
+    
+    // 지난주 걸린 사람 제외하기 버튼 클릭 핸들러
+    function _handleClickPrevMember() {
+        if (selectedGameType === 5) {
+            getLastUserList();
+        }
+    }
 
     // 이벤트 바인딩
     function bindEvent() {
@@ -397,6 +533,7 @@
             .on('click', '.js-all-check-master', toggleAllMember)
         $('.sadari-select').on('click', 'button', selectSadari);
         $('.start').on('click', startSadari);
+        $('.exclude-prev-member').on('click', _handleClickPrevMember);
         
         store.on('getGameType', _getGameType);
     }

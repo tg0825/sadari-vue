@@ -9,6 +9,10 @@ input:focus {
     box-shadow: 0;
 }
 
+.mt10 {
+    margin-top: 10px;
+}
+
 .ta-r {
     text-align: right !important;
 }
@@ -173,8 +177,13 @@ input:focus {
     /* opacity: 0.1; */
 }
 
+.member-list.member.is_disable:hover:before {
+    opacity: 0.2;
+}
+
 .member-list.member.is_disable:before {
     content: '제외';
+    font-weight: bold;
     color: #fff;
     position: absolute;
     top: 0;
@@ -184,7 +193,7 @@ input:focus {
     right: 0;
     line-height: 62px;
     text-align: center;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .6);
     border-radius: 5px;
     z-index: 100;
     box-sizing: border-box;
