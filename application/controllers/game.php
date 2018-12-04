@@ -48,13 +48,13 @@ class Game extends CI_Controller {
             
             if ($this->db->trans_status() === false) {
                 $this->db->trans_rollback();
-                return false;
+                echo 'failed';
             } else {
                 $this->db->trans_commit();
-                return true;
+                echo 'success';
             }
         } catch (Exception $e) {
-            echo $e->getMessage();
+            echo 'error';
         }
     }
     
