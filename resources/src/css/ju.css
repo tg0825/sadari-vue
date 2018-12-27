@@ -48,6 +48,13 @@
     cursor: pointer;
 }
 
+[data-tab-id="son"] .ju-list li {
+    background-color: #f00;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent)
+}
+
 .ju-list li:hover:after {
     content: 'x';
     position: absolute;

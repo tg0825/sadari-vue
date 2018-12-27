@@ -413,6 +413,12 @@
             .hide()
             .eq(idx)
             .show();
+            
+        var tabId = $('.tab').find('> [class^=tab]').eq(idx).attr('data-tab-id');
+        
+        if (tabId) {
+            ju = store.emit('getJu-' + tabId)[0];
+        }
     }
     
     // 게임 데이터 기록, 저장

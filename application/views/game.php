@@ -146,7 +146,7 @@ OneSignal.push(function() {
                 <div>
                     <button 
                         class="btn ta-l"
-                        data-game="son"
+                        data-game="ju"
                         data-game-id="6"
                     >
                         <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
@@ -201,7 +201,7 @@ OneSignal.push(function() {
                     </div>
                 </div>
                 
-                <div class="tab-item js-tab-ju">
+                <div class="tab-item js-tab-ju" data-tab-id="son">
                     <div class="tab-item-result"></div>
                     <div class="ju-add">
                         <div class="form-block">
@@ -213,7 +213,7 @@ OneSignal.push(function() {
                     </div>
                 </div>
                 
-                <div class="tab-item js-tab-ju">
+                <div class="tab-item js-tab-ju" data-tab-id="juList">
                     <div class="tab-item-result"></div>
                     <div class="ju-add">
                         <div class="form-block">
