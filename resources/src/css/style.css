@@ -305,8 +305,8 @@ input:focus {
 
 .tab {
     clear: both;
-    margin: 30px auto 10px;
-    padding: 20px;
+    margin: 10px auto 10px;
+    padding: 10px;
     background: #f6f6f6;
     border-radius: 5px;
     border: 1px solid #f6f6f6;
