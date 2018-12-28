@@ -9,11 +9,12 @@ $nav_list = [
         'url' => '/admin/team'
     ],
     'result' => [
-        'label' => '기록',
+        'label' => '결과',
         'url' => '/admin/result'
     ]
 ];
 ?>
+
 <div class="row">
     <div class="col-3">
         <div id="mySidenav" class="sidenav">
