@@ -27,6 +27,9 @@ $route['admin/team/edit/submit'] = 'admin/team/edit_submit';
 $route['admin/team/delete'] = 'admin/team/delete';
 $route['admin/team/update'] = 'admin/team/update';
 
+// 결과
+$route['admin/result'] = 'admin/result';
+
 // 게임
 $route['game/insert'] = 'game/insert';
 $route['game/last_member_list/(:any)'] = 'game/last_member_list/$1';

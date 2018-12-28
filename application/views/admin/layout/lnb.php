@@ -1,7 +1,28 @@
+<?php 
+$nav_list = [
+    'member' => [
+        'label' => '구성원',
+        'url' => '/admin/member'
+    ],
+    'team' => [
+        'label' => '팀',
+        'url' => '/admin/team'
+    ],
+    'result' => [
+        'label' => '기록',
+        'url' => '/admin/result'
+    ]
+];
+?>
 <div class="row">
     <div class="col-3">
         <div id="mySidenav" class="sidenav">
-            <a href="/admin/member">구성원</a>
-            <a href="/admin/team">팀</a>
+            <?php 
+                foreach($nav_list as $nav) {
+                ?>
+                    <a href="<?=$nav['url']?>"><?=$nav['label']?></a>
+                <?php
+                }
+            ?>
         </div>
     </div>
