@@ -42,7 +42,8 @@ class result extends CI_Controller {
             
             $result = [
                 'result_list' => $result_list,
-                'filter_type' => $get['filter_type']
+                'game_type' => $filter['game_type'],
+                'filter_type' => $filter['filter_type']
             ];
         }
         

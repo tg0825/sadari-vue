@@ -4,8 +4,21 @@
             <label for="inputEmail3" class="col-sm-2 col-form-label">게임 종류</label>
             <div class="col-sm-10">
                 <select name="game_type"class="custom-select my-1 mr-sm-2">
-                    <option value="6">손(당첨)</option>
-                    <option value="5">청소</option>
+                <?php 
+                $game_type_option_list = [
+                    '6' => '손(당첨)',
+                    '5' => '청소'
+                ];
+                foreach ($game_type_option_list as $key => $label) :
+                    $is_selected = '';
+                    if (isset($game_type)) {
+                        $is_selected = ($key == $game_type) ? 'selected' : '';
+                    }
+                ?>
+                    <option value="<?=$key?>" <?=$is_selected?>><?=$label?></option>
+                <?php
+                endforeach;
+                ?>
                 </select>
             </div>
         </div>
@@ -14,8 +27,21 @@
             <label for="inputEmail3" class="col-sm-2 col-form-label">검색 방법</label>
             <div class="col-sm-10">
                 <select name="filter_type" class="custom-select my-1 mr-sm-2">
-                    <option value="2">많이 걸린(당첨된) 사람 순</option>
-                    <option value="3">적게 걸린(당첨된) 사람 순</option>
+                <?php 
+                $filter_type_option_list = [
+                    '2' => '많이 걸린(당첨된) 사람',
+                    '3' => '적게 걸린(당첨된) 사람'
+                ];
+                foreach ($filter_type_option_list as $key => $label) :
+                    $is_selected = '';
+                    if (isset($filter_type)) {
+                        $is_selected = ($key == $filter_type) ? 'selected' : '';
+                    }
+                ?>
+                    <option value="<?=$key?>" <?=$is_selected?>><?=$label?></option>
+                <?php
+                endforeach;
+                ?>
                 </select>
             </div>
         </div>
