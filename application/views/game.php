@@ -272,7 +272,7 @@ OneSignal.push(function() {
     <script src="./resources/src/js/data.js"></script>
     <script src="./resources/src/js/modal.js"></script>
     <script src="./resources/src/js/clock.js"></script>
-    <script src="./resources/src/js/main.js"></script>
+    <script src="./resources/src/js/game.js"></script>
     <script src="./resources/src/js/ju.js"></script>
     <script src="./resources/src/js/allcheck.js"></script>
     <script type="text/javascript">
