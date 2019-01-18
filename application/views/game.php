@@ -275,7 +275,6 @@ OneSignal.push(function() {
     <script src="./resources/src/js/main.js"></script>
     <script src="./resources/src/js/ju.js"></script>
     <script src="./resources/src/js/allcheck.js"></script>
-    <script src="./resources/src/js/game.js"></script>
     <script type="text/javascript">
      var allCheck = new AllCheck({
          activeClass: 'is_disable',
