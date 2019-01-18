@@ -106,6 +106,21 @@ input:focus {
     border-bottom: 1px solid #ccc;
 }
 
+.member-list.member.size-s {
+    width: auto;
+    height: auto;
+}
+
+.member-list.member.size-s .name {
+    float: left;
+}
+
+.member-list.member.size-s .team {
+    margin-top: 0;
+    float: left;
+    margin-left: 10px;
+}
+
 .member-list.wrap {
     position: relative;
 }
@@ -119,12 +134,15 @@ input:focus {
     margin: -5px 0 0 -5px;
 }
 
-.member-list.number {
-    font-size: 20px;
-    color: #262626;
+.option {
     position: absolute;
     top: 10px;
     right: 0;
+}
+
+.member-list.number {
+    font-size: 20px;
+    color: #262626;
     font-weight: normal;
 }
 

@@ -8,11 +8,11 @@
     // 최초 순수 구성원
     var originbackpackr;
     
-    // 랜덤 적용 된 구성원
-    var randombackpackr = [];
-    
     // 필터 적용 된 구성원
     var filterbackpackr;
+    
+    // 랜덤 적용 된 구성원
+    var randombackpackr = [];
     
     // 결과값 저장 임시 공간
     var temp;
@@ -504,6 +504,11 @@
         store.emit('updateMemberCount', filterbackpackr);
     }
     
+    // 필터된 멤버 데이터 가져오기
+    function _getAllMemberList() {
+       return filterbackpackr;
+    }
+    
     // 데이터 초기화
     function initData() {
         var backpacker = [];
@@ -542,6 +547,7 @@
         $('.exclude-prev-member').on('click', _handleClickPrevMember);
         
         store.on('getGameType', _getGameType);
+        store.on('getAllMemberList', _getAllMemberList);
     }
     
     function init() {

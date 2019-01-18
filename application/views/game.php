@@ -65,10 +65,22 @@ OneSignal.push(function() {
             ?>
         </span>
     </div>
+    
     <div class="layout-wrap sadari wrap js-all-check">
         <h1 class="sadari title">
             SADARI
-            <div class="member-list number"></div>
+            
+            <div class="option">
+                <span class="member-list number"></span>
+                <input class="search" type="text">
+                <div class="search-result">
+                    <!-- <label class="member-list member engineer size- size-ss" style="background-color:#838383" data-member-id="72" data-team-eng="engineer" data-team-color="#838383">
+                        <input type="checkbox" class="js-all-check-item">
+                        <span class="name">김동철</span>
+                        <span class="team">개발팀</span>
+                    </label> -->
+                </div>
+            </div>
         </h1>
 
 
@@ -271,6 +283,7 @@ OneSignal.push(function() {
     <script src="./resources/src/js/game.js"></script>
     <script src="./resources/src/js/ju.js"></script>
     <script src="./resources/src/js/allcheck.js"></script>
+    <script src="./resources/src/js/search.js"></script>
     <script type="text/javascript">
      var allCheck = new AllCheck({
          activeClass: 'is_disable',
