@@ -3,7 +3,7 @@
                 <div class="col text-right">
                     <a
                         class="btn btn-lg btn-primary"
-                        href="/admin/member/edit">구성원 추가</a>
+                        href="/admin/member/detail">구성원 추가</a>
                 </div>
             </div>
 
@@ -62,12 +62,14 @@
                                 <colgroup>
                                     <col>
                                     <col>
+                                    <col>
                                     <col style="width:100px">
                                 </colgroup>
                                 <thead>
                                 <tr>
                                     <th>이름</th>
                                     <th>팀</th>
+                                    <th>직무</th>
                                     <th>옵션</th>
                                 </tr>
                                 </thead>
@@ -84,9 +86,12 @@
                                             >
                                                 <?=$member->team ?? '미정'?>
                                             </td>
+                                            <td>
+                                                <?=$member->position ?? '미정'?>
+                                            </td>
                                             <td class="ta-c" data-member="option">
                                                 <a
-                                                    href="/admin/member/edit/<?=$member->id?>"
+                                                    href="/admin/member/detail/<?=$member->id?>"
                                                     class="btn btn-primary"
                                                 >수정</a>
                                             </td>

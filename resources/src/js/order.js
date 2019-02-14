@@ -9,10 +9,10 @@ function search() {
     var matchData = [];
     
     // jquery dom search input
-    var $search = $('.search');
+    var $sort = $('.sort');
     
     // jquery dom search result
-    var $result = $('.search-result');
+    var $result = $('.sort-list');
     
     function render() {
         var html = '';
@@ -22,8 +22,8 @@ function search() {
         $result.html(html);
     }
     
-    // 매칭되는 맴버 구하기
-    function updateSearchMemberList() {
+    // 매칭되는 맴버 인덱스 구하기
+    function searchMember() {
         matchData = [];
         
         $.each(memberList, function (index, value) {
@@ -31,37 +31,48 @@ function search() {
                 matchData.push(value);
             }
         });
+        
+        render();
     }
     
-    // 결과 삭제
-    function clearList() {
+    function clear() {
         $result.empty();
     }
     
-    // 유저 선택 (클릭) 핸들러
+    // id로 인덱스 구하기
+    function findIndexById(id) {
+        var index = $('.member-list.body')
+            .find('.member-list.member[data-member-id="' + id + '"]')
+            .index();
+            
+        return index;
+    }
+    
+    // 유저 선택
     function _handleChange(e) {
         try {
             var $parent = $(e.currentTarget.parentNode);
             var id = $parent.attr('data-member-id');
-            var index = store.emit('findIndexById', id)[0];
-            
+            var index = findIndexById(id);
             store.emit('selectUser', index);
+            render();
         } catch (e) {
             console.log(e);
         }
     }
     
-    // 유저 선택 (엔터) 핸들러)
+    // 엔터 핸들러
     function _handleEnter(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode == 13) {
             var childLength = $result.children().length;
             var $target = $result.children().eq(0);
             var id = $target.attr('data-member-id');
-            var index = store.emit('findIndexById', id)[0];
+            var index = findIndexById(id);
             
             if (childLength > 1) return false;
             
             store.emit('selectUser', index);
+            render();
         }
     }
     
@@ -69,27 +80,22 @@ function search() {
     function _handleKeyup(e) {
         inputValue = e.target.value;
         
-        if (e.keyCode === 13) {
-            return false;
-        }
-        
         if (!inputValue) {
-            clearList();
+            clear();
             return false;
         }
         
-        updateSearchMemberList();
-        store.emit('renderSearch');
+        searchMember();
+        
     }
     
     // 바인드 이벤트
     function _bindEvent() {
-        $search
-            .on('keyup', _handleKeyup)
-            .on('keypress', _handleEnter);
-        $result
-            .on('change', '.js-all-check-item', _handleChange)
-        store.on('renderSearch', render);
+        // $search
+        //     .on('keyup', _handleKeyup)
+        //     .on('keypress', _handleEnter);
+        // $result
+        //     .on('change', '.js-all-check-item', _handleChange)
     }
     
     // 초기화

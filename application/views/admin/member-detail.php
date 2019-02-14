@@ -6,7 +6,7 @@
             <div class="col">
                 <form
                     id="JSFORM"
-                    action="/admin/member/edit/submit<?=isset($member['id']) ? '/' . $member['id'] : ''?>"
+                    action="/admin/member/detail/submit<?=isset($member['id']) ? '/' . $member['id'] : ''?>"
                     method="post"
                     autocomplete="off"
                 >
@@ -47,6 +47,18 @@
                                 ?>
                             </select>
                         </div>
+                    </div>
+                    
+                    <div class="form-block mt-1">
+                        <input
+                            name="position"
+                            type="text"
+                            placeholder="직무를 입력해주세요"
+                            class="form-control"
+                            maxlength="20"
+                            required
+                            value="<?=$member['position'] ?? ''?>"
+                        >
                     </div>
 
                     <div class="mt-1">

@@ -50,7 +50,7 @@ class member extends CI_Controller {
         echo json_encode($result);
     }
 
-	public function edit($id = null)
+	public function detail($id = null)
     {
         $data = [];
 
@@ -66,17 +66,20 @@ class member extends CI_Controller {
             'username' => $this->username
         ]);
         $this->load->view('admin/layout/lnb.php');
-        $this->load->view('admin/member-add.php', $data);
+        $this->load->view('admin/member-detail.php', $data);
         $this->load->view('admin/layout/footer.php');
     }
 
     // 저장
-    public function edit_submit($id = null)
+    public function detail_submit($id = null)
     {
         $this->load->helper('url');
+        $post = $this->input->post();
+        
         $data = [
-            'name' => $this->input->post('name'),
-            'team_id' => $this->input->post('team_id')
+            'name' => $post['name'],
+            'team_id' => $post['team_id'],
+            'position' => $post['position']
         ];
 
         $this->load->model('m_member');

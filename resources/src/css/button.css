@@ -9,10 +9,12 @@
     font-size: 16px;
     border: 0;
     background: #f6f6f6;
-    color: #a6a6a6;
+    color: #aaa;
     border: 1px solid #f6f6f6;
     transition: all 150ms ease-in-out;
     cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
 }
 
 .btn:hover {
@@ -21,6 +23,22 @@
 
 .btn:focus {
     outline: 0;
+}
+
+.btn.btn-base {
+    border: 1px solid #aaa;
+    background: #fefefe;
+    color: #333;
+}
+
+.btn.btn-base:hover {
+    border: 1px solid #aaa;
+    background: #fefefe;
+}
+
+.btn.btn-base:focus {
+    border: 1px solid #aaa;
+    background: #fefefe;
 }
 
 .btn-s {

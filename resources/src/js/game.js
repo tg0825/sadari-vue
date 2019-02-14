@@ -1,4 +1,7 @@
 (function (window, $, modal) {
+    // api 저장
+    var apiCommit = '/game/insert';
+    
     // 사다리 종류
     var sadariType = 'one';
     
@@ -20,15 +23,15 @@
     // 최종 결과 데이타 (모달 출력 데이터)
     var lastResult;
     
+    // cssClass 유저 제외
+    var disableClass = 'is_disable';
+    
     // jquery dom member list
     var $memberList = $('.member-list.body').find('.member-list.member');
     
     // jquery dom 
     var $wrap = $('.sadari.wrap');
-    
-    // api 저장
-    var apiCommit = '/game/insert';
-    
+        
     // 사다리 종류
     var game = {
         // 카운트 조회
@@ -72,7 +75,7 @@
             console.log(data);
             result(data);
         },
-        // 주번
+        // 주번, 손
         ju: function () {
             var count = 1; // 임의값
             var groupCount = ju.length;
@@ -106,6 +109,15 @@
             resultLunch(data);
         }
     };
+    
+    // id로 멤버 인덱스 구하기
+    function findIndexById(id) {
+        var index = $('.member-list.body')
+            .find('.member-list.member[data-member-id="' + id + '"]')
+            .index();
+            
+        return index;
+    }
     
     // 게임 종류 리턴
     function _getGameType() {
@@ -184,7 +196,6 @@
         var html = '';
         try {
             // 결과
-            console.log(data);
             data.forEach(function (group) {
                 if (onegroup) {
                     html += '<div class="group item onegroup">';    
@@ -288,10 +299,10 @@
     }
 
     // 결과 출력
-    // restGroupType
     // a 한 그룹의 인원
     // b 그룹 수
     // c 램덤 인원
+    // restGroupType
     function result(data, restGroupType) {
         temp = $.extend(true, {}, data);
         
@@ -299,7 +310,12 @@
         var onegroup = (data.b === 1);
         var resultObj = [];
         var msg;
-
+        
+        // 주번(손) 일 경우 onegroup 옵션 사용 안함
+        if (data.jo_name_ju) {
+            onegroup = false;
+        }
+        
         try {
             if (data.b <= 0 || data.a <= 0 || data.c.length === 0) {
                 msg = '값을 확인해주세요.';
@@ -345,12 +361,10 @@
      * @return void;
      */
     function updateState($member, isDisabled) {
-        var disableClass = 'is_disable';
-        
         try {
             var index = $member.index();
             
-            // 제외 시킴
+            // 제외 
             if (isDisabled) {
                 $member.addClass(disableClass);
             // 제외 해제
@@ -364,22 +378,6 @@
         }
     }
 
-    // 직원 토글
-    function toggleMember(e) {
-        e.stopPropagation();
-
-        var $target = $(e.currentTarget);
-        var $item = $target.parents('.member-list.member');
-        var isDisabled = true;
-        
-        if ($item.is('.is_disable')) {
-            isDisabled = false;
-        }
-        
-        updateState($item, isDisabled);
-        store.emit('updateMemberCount', filterbackpackr);
-    }
-
     // 전체 토글
     function toggleAllMember(e) {
         var isChecked = e.currentTarget.checked;
@@ -388,7 +386,10 @@
         $.each($itemlist, function (i, e) {
             updateState($(e), isChecked);
         });
+        
         store.emit('updateMemberCount', filterbackpackr);
+        store.emit('renderSplit');
+        store.emit('renderSearch');
     }
 
     // 게임 시작
@@ -503,7 +504,7 @@
         
         store.emit('updateMemberCount', filterbackpackr);
     }
-    
+            
     // 필터된 멤버 데이터 가져오기
     function _getAllMemberList() {
        return filterbackpackr;
@@ -530,6 +531,31 @@
         filterbackpackr = filterWorkMember(backpacker.slice());
     }
     
+    // 유저 선택, 랜더링
+    function _selectUser(index) {
+        var $item = $memberList.eq(index);
+        var isDisabled = true;
+        
+        if ($item.is('.is_disable')) {
+            isDisabled = false;
+        }
+        
+        updateState($item, isDisabled);
+        store.emit('updateMemberCount', filterbackpackr);
+        store.emit('renderSplit');
+        store.emit('renderSearch');
+    }
+    
+    // 유저 클릭 핸들러
+    function _handleClickMember(e) {
+        e.stopPropagation();
+        
+        var $target = $(e.currentTarget);
+        var index = $target.parents('.member-list.member').index();
+        
+        store.emit('selectUser', index);
+    }
+    
     // 지난주 걸린 사람 제외하기 버튼 클릭 핸들러
     function _handleClickPrevMember() {
         if (selectedGameType === 5) {
@@ -540,14 +566,16 @@
     // 이벤트 바인딩
     function bindEvent() {
         $(document)
-            .on('click', '.member-list.wrap .member-list.member input:checkbox', toggleMember)
+            .on('click', '.member-list.wrap .member-list.member input:checkbox', _handleClickMember)
             .on('click', '.js-all-check-master', toggleAllMember)
         $('.sadari-select').on('click', 'button', selectSadari);
         $('.start').on('click', startSadari);
         $('.exclude-prev-member').on('click', _handleClickPrevMember);
         
+        store.on('selectUser', _selectUser);
         store.on('getGameType', _getGameType);
         store.on('getAllMemberList', _getAllMemberList);
+        store.on('findIndexById', findIndexById);
     }
     
     function init() {

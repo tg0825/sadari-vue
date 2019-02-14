@@ -43,7 +43,7 @@ OneSignal.push(function() {
 </script>
 
 </head>
-<body>
+<body class="js-all-check">
     <div class="gnb">
         <button
             class="resultTextToggle"
@@ -66,13 +66,15 @@ OneSignal.push(function() {
         </span>
     </div>
     
-    <div class="layout-wrap sadari wrap js-all-check">
+    <div class="layout-wrap sadari wrap">
         <h1 class="sadari title">
             SADARI
             
             <div class="option">
                 <span class="member-list number"></span>
-                <input class="search" type="text">
+                <div class="form-block direct-search">
+                    <input class="search" type="text">
+                </div>
                 <div class="search-result">
                     <!-- <label class="member-list member engineer size- size-ss" style="background-color:#838383" data-member-id="72" data-team-eng="engineer" data-team-color="#838383">
                         <input type="checkbox" class="js-all-check-item">
@@ -99,7 +101,7 @@ OneSignal.push(function() {
                         >
                             <input type="checkbox" class="js-all-check-item"/>
                             <span class="name"><?=$member->name?></span>
-                            <span class="team"><?=$member->team ?? '미정'?></span>
+                            <span class="team"><?=$member->position ?? '미정'?></span>
                             <span class="remove">x</span>
                         </label>
                     <?php
@@ -249,15 +251,24 @@ OneSignal.push(function() {
                 <button class="start" type="submit">시작!</button>
             </div>
             
-            <label>
-                <input
-                    type="checkbox"
-                    class="js-all-check-master"
-                    name=""
-                    value=""
-                >
-                전체선택
-            </label>
+            <div class="option-btn-list">
+                <div>
+                    <label class="btn btn-s">
+                        <input
+                            type="checkbox"
+                            class="js-all-check-master"
+                            name=""
+                            value=""
+                        >
+                        전체선택
+                    </label>
+                </div>
+                <div>
+                    <button type="button" class="js-split-view btn btn-s btn-base">
+                        랜덤 대상자 확인
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="result"> </div>
@@ -269,8 +280,31 @@ OneSignal.push(function() {
                 class="result-close"
             type="button"> <i class="fa fa-times" aria-hidden="true"></i> </button>
         </div>
+        
+    </div>
+    
+    <div class="sort">
+        <span>랜덤 대상 (가나다 순)</span>
+        <div class="sort-list member-size-s">
+        </div>
     </div>
 
+    <script>
+    function tmplMember(data) {
+        data.is_disable = data.is_disable ? 'is_disable' : '';
+        
+        var member = `<label 
+            class="member-list member ${data.is_disable}"
+            data-member-id="${data.user_id}"
+            style="background-color:${data.team_color}">
+            <input type="checkbox" class="js-all-check-item">
+                <span class="name">${data.name}</span>
+                <span class="team">${data.team}</span>
+            </label>`;
+        return member;
+    }
+    </script>
+    
     <script src="./resources/src/js/store.js"></script>
     <script src="./resources/src/js/result-text.js"></script>
     <script src="./resources/src/js/slack.js"></script>
@@ -282,14 +316,15 @@ OneSignal.push(function() {
     <script src="./resources/src/js/clock.js"></script>
     <script src="./resources/src/js/game.js"></script>
     <script src="./resources/src/js/ju.js"></script>
-    <script src="./resources/src/js/allcheck.js"></script>
+    <!-- <script src="./resources/src/js/allcheck.js"></script> -->
     <script src="./resources/src/js/search.js"></script>
-    <script type="text/javascript">
+    <script src="./resources/src/js/split-view.js"></script>
+    <!-- <script type="text/javascript">
      var allCheck = new AllCheck({
          activeClass: 'is_disable',
          activeElement: 'label',
          isActiveClass: true
      });
-     </script>
+     </script> -->
 </body>
 </html>
