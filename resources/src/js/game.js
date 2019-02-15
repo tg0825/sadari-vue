@@ -112,14 +112,22 @@
         return sadariType;
     }
     
-    // 배열 랜덤 섞기
+    /**
+     * 랜덤
+     * @param {array} a 직원
+     * @return void
+     */
     function shuffle(a) {
-        var j, x, i;
+        var j; // 임의의 수
+        var x; // 임시 저장 공간
+        var i; // 인원 수 (1씩 감소 됨)
+        
         for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
+            j = Math.floor(Math.random() * i); // 요기가 핵심
+            x = a[i - 1]; // 마지막 직원을 임시 공간에 보냄
+            a[i - 1] = a[j]; // 마지막 직원 자리에 임의의 번호 직원이 대입됨
+            a[j] = x; // 임의의 직원 있던 위치에 마지막 직원이 대입 됨
+            // 직원 수 만큼 반복
         }
     }
 
