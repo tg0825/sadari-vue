@@ -119,22 +119,17 @@
     function _getGameType() {
         return sadariType;
     }
-<<<<<<< HEAD
-    
+
     /**
      * 랜덤
      * @param {array} a 직원
      * @return void
      */
-=======
-
-    // 배열 랜덤 섞기
->>>>>>> backup
     function shuffle(a) {
         var j; // 임의의 수
         var x; // 임시 저장 공간
         var i; // 인원 수 (1씩 감소 됨)
-        
+
         for (i = a.length; i; i--) {
             j = Math.floor(Math.random() * i); // 요기가 핵심
             x = a[i - 1]; // 마지막 직원을 임시 공간에 보냄
