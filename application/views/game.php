@@ -289,22 +289,7 @@ OneSignal.push(function() {
         </div>
     </div>
 
-    <script>
-    function tmplMember(data) {
-        data.is_disable = data.is_disable ? 'is_disable' : '';
-        
-        var member = `<label 
-            class="member-list member ${data.is_disable}"
-            data-member-id="${data.user_id}"
-            style="background-color:${data.team_color}">
-            <input type="checkbox" class="js-all-check-item">
-                <span class="name">${data.name}</span>
-                <span class="team">${data.team}</span>
-            </label>`;
-        return member;
-    }
-    </script>
-    
+    <script src="./resources/src/js/tmpl.js"></script>
     <script src="./resources/src/js/store.js"></script>
     <script src="./resources/src/js/result-text.js"></script>
     <script src="./resources/src/js/slack.js"></script>
