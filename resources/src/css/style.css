@@ -25,7 +25,7 @@ input:focus {
 }
 
 .f-error:before {
-    content: "*";
+    content: '*';
     display: inline-block;
     vertical-align: middle;
     margin: 5px;
@@ -79,7 +79,7 @@ input:focus {
 
 .form-block:after {
     clear: both;
-    content: "";
+    content: '';
     display: block;
 }
 
@@ -98,7 +98,7 @@ input:focus {
 }
 
 .sadari.title {
-    font-family: "Comfortaa", cursive;
+    font-family: 'Comfortaa', cursive;
     font-size: 30px;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -154,8 +154,8 @@ input:focus {
 .member-list.number:before {
     font-size: 20px;
     display: inline-block;
-    font-family: "Font Awesome 5 Free";
-    content: "\f183";
+    font-family: 'Font Awesome 5 Free';
+    content: '\f183';
     vertical-align: baseline;
     margin-right: 4px;
     display: inline-block;
@@ -173,7 +173,7 @@ input:focus {
 .member-list.body:after {
     clear: both;
     display: block;
-    content: "";
+    content: '';
 }
 
 .group.member,
@@ -211,7 +211,7 @@ input:focus {
 }
 
 .member-list.member.is_disable:before {
-    content: "제외";
+    content: '제외';
     font-weight: bold;
     color: #fff;
     position: absolute;
@@ -230,7 +230,7 @@ input:focus {
 
 .member-list.member:after {
     font-size: 18px;
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Font Awesome 5 Free';
     position: absolute;
     top: 10px;
     right: 12px;
@@ -255,6 +255,12 @@ input:focus {
 }
 
 .member-list.member .team {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.member-list.member .position {
     display: inline-block;
     margin-top: 8px;
     font-size: 14px;
@@ -343,7 +349,7 @@ input:focus {
     box-sizing: border-box;
 }
 
-.nab > [class^="tab"] {
+.nab > [class^='tab'] {
     display: none;
 }
 
@@ -386,8 +392,8 @@ input:focus {
     position: fixed;
     top: 20px;
     left: 0;
-    font-family: apple SD gothic neo, Noto Sans KR, "맑은고딕", "malgun gothic",
-        "돋움", dotum, sans-serif;
+    font-family: apple SD gothic neo, Noto Sans KR, '맑은고딕', 'malgun gothic',
+        '돋움', dotum, sans-serif;
 }
 
 .resultText .result-copy {
@@ -443,7 +449,7 @@ input:focus {
 }
 
 .team.root:after {
-    content: "";
+    content: '';
     clear: both;
     display: block;
 }
@@ -472,7 +478,7 @@ input:focus {
 
 .team.item:after {
     font-size: 18px;
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Font Awesome 5 Free';
 }
 
 .team.item input {
@@ -583,7 +589,7 @@ input:focus {
 
     .group.member:before,
     .member-list.member:before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         right: 0;
