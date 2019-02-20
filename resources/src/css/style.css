@@ -256,8 +256,9 @@ input:focus {
 
 .member-list.member .team {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
 }
 
 .member-list.member .position {
