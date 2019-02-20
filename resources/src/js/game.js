@@ -410,6 +410,7 @@
         // 게임 시작
         game[sadariType]();
         store.emit('renderTextResult');
+        store.emit('randomTargetHide');
     }
 
     // 게임 선택

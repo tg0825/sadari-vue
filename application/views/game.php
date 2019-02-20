@@ -269,7 +269,12 @@ OneSignal.push(function() {
     </div>
     
     <div class="sort">
-        <span>랜덤 대상 (가나다 순)</span>
+        <div class="title">
+            랜덤 대상 (가나다 순)
+            <span class="js-split-view">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </span>
+        </div>
         <div class="sort-list member-size-s">
         </div>
     </div>

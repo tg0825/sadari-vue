@@ -530,9 +530,17 @@ input:focus {
     z-index: 100;
 }
 
-.sort > span {
+.sort > .title {
     display: inline-block;
     margin-bottom: 5px;
+}
+
+.sort > .js-split-view {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    padding: 2px;
 }
 
 .sort-list {

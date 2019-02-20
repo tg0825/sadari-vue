@@ -1,7 +1,7 @@
 // 랜덤 대상
 function randomTarget() {
-    var $sort = $('.sort');
-    var $result = $sort.find('.sort-list');
+    var $root = $('.sort');
+    var $result = $root.find('.sort-list');
     var $btn = $('.js-split-view');
 
     // 유저 선택
@@ -55,18 +55,23 @@ function randomTarget() {
     }
 
     function _handleClickBtn(e) {
-        if ($sort.is(':visible')) {
-            $sort.hide();
+        if ($root.is(':visible')) {
+            _hide();
         } else {
-            $sort.show();
+            $root.show();
         }
+    }
+
+    function _hide() {
+        $root.hide();
     }
 
     // 바인드 이벤트
     function _bindEvent() {
         $result.on('change', '.js-all-check-item', _handleChange);
-        store.on('renderSplit', render);
         $btn.on('click', _handleClickBtn);
+        store.on('renderSplit', render);
+        store.on('randomTargetHide', _hide);
     }
 
     // 초기화
