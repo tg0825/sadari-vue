@@ -289,6 +289,8 @@ OneSignal.push(function() {
         </div>
     </div>
 
+    <script src="./resources/src/js/init.js"></script>
+    <script src="./resources/src/js/util.js"></script>
     <script src="./resources/src/js/tmpl.js"></script>
     <script src="./resources/src/js/store.js"></script>
     <script src="./resources/src/js/result-text.js"></script>

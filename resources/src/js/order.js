@@ -17,7 +17,7 @@ function search() {
     function render() {
         var html = '';
         matchData.forEach(function (data) {
-            html += tmplMember(data);
+            html += sadari.tmpl.member(data);
         });
         $result.html(html);
     }

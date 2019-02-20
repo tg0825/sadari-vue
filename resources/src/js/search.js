@@ -17,7 +17,7 @@ function search() {
     function render() {
         var html = "";
         matchData.forEach(function(data) {
-            html += tmplMember(data);
+            html += sadari.tmpl.member(data);
         });
         $result.html(html);
     }
@@ -53,7 +53,7 @@ function search() {
 
     // 유저 선택 (엔터) 핸들러)
     function _handleEnter(e) {
-        if (e.keyCode === 13) {
+        if (e.target.value && e.keyCode === 13) {
             var childLength = $result.children().length;
             var $target = $result.children().eq(0);
             var id = $target.attr("data-member-id");

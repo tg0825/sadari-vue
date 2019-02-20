@@ -44,7 +44,7 @@ function splitView() {
         [enableList, disableList].forEach(function (state, index) {
             state.forEach(function (data) {
                 if (!html[index]) html[index] = '';
-                html[index] += tmplMember(data);
+                html[index] += sadari.tmpl.member(data);
             });
         
             elmList[index].html(html[index]);
