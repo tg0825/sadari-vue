@@ -293,20 +293,19 @@ OneSignal.push(function() {
     </div>
 
     <script src="./resources/src/js/init.js"></script>
+    <script src="./resources/src/js/data.js"></script>
     <script src="./resources/src/js/util.js"></script>
     <script src="./resources/src/js/tmpl.js"></script>
+    <script src="./resources/src/js/storage.js"></script>
     <script src="./resources/src/js/store.js"></script>
     <script src="./resources/src/js/result-text.js"></script>
     <script src="./resources/src/js/slack.js"></script>
     <script src="./resources/src/js/head-count.js"></script>
-    <script src="./resources/src/js/config.js"></script>
-    <script src="./resources/src/js/storage.js"></script>
-    <script src="./resources/src/js/data.js"></script>
     <script src="./resources/src/js/modal.js"></script>
     <script src="./resources/src/js/clock.js"></script>
-    <script src="./resources/src/js/game.js"></script>
     <script src="./resources/src/js/ju.js"></script>
-    <script src="./resources/src/js/search.js"></script>
-    <script src="./resources/src/js/split-view.js"></script>
+    <script src="./resources/src/js/quick-search.js"></script>
+    <script src="./resources/src/js/random-target.js"></script>
+    <script src="./resources/src/js/game.js"></script>
 </body>
 </html>

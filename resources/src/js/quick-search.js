@@ -1,4 +1,5 @@
-function search() {
+// 멤버 빠른 검색
+function quickSearch() {
     // 현재 인풋 값
     var inputValue;
 
@@ -17,7 +18,7 @@ function search() {
     function render() {
         var html = '';
         matchData.forEach(function(data) {
-            html += sadari.tmpl.member(data);
+            html += sd.tmpl.member(data);
         });
         $result.html(html);
     }
@@ -26,9 +27,9 @@ function search() {
     function updateSearchMemberList() {
         matchData = [];
 
-        $.each(memberList, function(index, value) {
-            if (value.name.indexOf(inputValue) > -1) {
-                matchData.push(value);
+        $.each(memberList, function(index, member) {
+            if (member.name.indexOf(inputValue) > -1) {
+                matchData.push(member);
             }
         });
     }
@@ -96,7 +97,3 @@ function search() {
 
     init();
 }
-
-$(function() {
-    search();
-});
