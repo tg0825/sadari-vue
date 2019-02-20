@@ -1,4 +1,7 @@
 // initialize
-(function(sadari) {
-    // init
-})((window.sadari = window.sadari || {}));
+(function(sd) {
+    sd.JQ = {
+        DOC: $(document),
+        BODY: $('body')
+    };
+})((window.sd = window.sd || {}));
