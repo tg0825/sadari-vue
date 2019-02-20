@@ -301,15 +301,7 @@ OneSignal.push(function() {
     <script src="./resources/src/js/clock.js"></script>
     <script src="./resources/src/js/game.js"></script>
     <script src="./resources/src/js/ju.js"></script>
-    <!-- <script src="./resources/src/js/allcheck.js"></script> -->
     <script src="./resources/src/js/search.js"></script>
     <script src="./resources/src/js/split-view.js"></script>
-    <!-- <script type="text/javascript">
-     var allCheck = new AllCheck({
-         activeClass: 'is_disable',
-         activeElement: 'label',
-         isActiveClass: true
-     });
-     </script> -->
 </body>
 </html>
