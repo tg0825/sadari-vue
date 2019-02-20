@@ -102,7 +102,8 @@ OneSignal.push(function() {
                         >
                             <input type="checkbox" class="js-all-check-item"/>
                             <span class="name"><?=$member->name?></span>
-                            <span class="team"><?=$member->position ?? '미정'?></span>
+                            <span class="team"><?=$member->team ?? '미정'?></span>
+                            <span class="position"><?=$member->position ?? '미정'?></span>
                             <span class="remove">x</span>
                         </label>
                     <?php
