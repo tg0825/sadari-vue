@@ -106,16 +106,17 @@ input:focus {
     border-bottom: 1px solid #ccc;
 }
 
-.member-list.member.size-s {
+.member-size-s .member-list.member {
     width: auto;
-    height: auto;
+    height: 40px;
+    border-radius: 0;
 }
 
-.member-list.member.size-s .name {
+.member-size-s .member-list.member .name {
     float: left;
 }
 
-.member-list.member.size-s .team {
+.member-size-s .member-list.member .team {
     margin-top: 0;
     float: left;
     margin-left: 10px;
@@ -136,11 +137,14 @@ input:focus {
 
 .option {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 0;
 }
 
 .member-list.number {
+    margin-top: 8px;
+    margin-right: 10px;
+    float: left;
     font-size: 20px;
     color: #262626;
     font-weight: normal;
@@ -196,7 +200,7 @@ input:focus {
 }
 
 .member-list.member.is_disable:hover:before {
-    opacity: 0.2;
+    opacity: 0.4;
 }
 
 .member-list.member.is_disable:before {
@@ -364,6 +368,7 @@ input:focus {
     right: 0;
     letter-spacing: 1px;
     padding-right: 5px;
+    background: #eee;
 }
 
 .time {
@@ -461,6 +466,7 @@ input:focus {
     font-size: 18px;
     font-family: FontAwesome;
 }
+
 .team.item input {
     position: absolute;
     top: 0;
@@ -470,6 +476,74 @@ input:focus {
     z-index: -1;
     visibility: hidden;
 }
+
+.direct-search {
+    float: left;
+    width: 200px;
+}
+
+.direct-search input {
+    width: 100%;
+}
+
+.search-result {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 200px;
+}
+
+.search-result .member-list.member {
+    display: block;
+    width: auto;
+    float: none;
+    margin-left: 0;
+}
+
+.sort {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 180px;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    border-left: 1px solid #ddd;
+    background: #fff;
+    display: none;
+    z-index: 100;
+}
+
+.sort > span {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.sort-list {
+    border-radius: 10px;
+    overflow: hidden;
+    /* width: 500px;; */
+}
+
+.sort-list .member {
+    display: block;
+    width: auto;
+    float: none;
+    margin: 1px 0 0;
+}
+
+.enable-list {
+    /* float: left; */
+    
+}
+
+.disable-list {
+    display: none;
+    float: left;
+    width: 50%;
+}
+
 @keyframes pop {
     50% {
         transform: scale(1.2);
@@ -571,4 +645,14 @@ input:focus {
     .start-root {
         max-width: none;
     }
+}
+
+.option-btn-list > div:first-child {
+    margin: 0;
+}
+
+.option-btn-list > div {
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
 }

@@ -1,31 +1,8 @@
-# {
-#     "extends": "eslint:recommended",
-#     "globals": {
-#         "jQuery": true,
-#         "$": true,
-#         "node": true,
-#         "window": true,
-#         "document": true,
-#         "Mustache": true
-#     },
-#     "env": {
-#         "browser": true,
-#         "commonjs": true,
-#         "es6": false,
-#         "node": true
-#     },
-#     "rules": {
-#         "skipBlankLines": 0,
-#         "no-param-reassign": 0,
-#         "func-names": ["error", "never"],
-#         "indent": [1, 4],
-#         "semi": [1, "always"],
-#         "space-unary-ops": 2,
-#         "no-console": 0
-#     },
-#     {
-#         "plugins": [
-#             "html"
-#         ]
-#     }
-# }
+{
+  "env": {
+    "es6": true
+  },
+  "rules": {
+    "indent": ["error", 4]
+  }
+}

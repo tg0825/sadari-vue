@@ -12,10 +12,10 @@ $route['admin/logout'] = 'admin/auth/logout';
 
 // 구성원
 $route['admin/member'] = 'admin/member';
-$route['admin/member/edit'] = 'admin/member/edit';
-$route['admin/member/edit/(:num)'] = 'admin/member/edit/$1';
-$route['admin/member/edit/submit'] = 'admin/member/edit_submit';
-$route['admin/member/edit/submit/(:num)'] = 'admin/member/edit_submit/$1';
+$route['admin/member/detail'] = 'admin/member/detail';
+$route['admin/member/detail/(:num)'] = 'admin/member/detail/$1';
+$route['admin/member/detail/submit'] = 'admin/member/detail_submit';
+$route['admin/member/detail/submit/(:num)'] = 'admin/member/detail_submit/$1';
 $route['admin/member/update'] = 'admin/member/update';
 $route['admin/member/delete'] = 'admin/member/delete';
 
@@ -23,7 +23,7 @@ $route['admin/member/delete'] = 'admin/member/delete';
 $route['admin/team'] = 'admin/team';
 $route['admin/team/edit'] = 'admin/team/edit';
 $route['admin/team/edit/(:num)'] = 'admin/team/edit/$1';
-$route['admin/team/edit/submit'] = 'admin/team/edit_submit';
+$route['admin/team/edit/submit'] = 'admin/team/detail_submit';
 $route['admin/team/delete'] = 'admin/team/delete';
 $route['admin/team/update'] = 'admin/team/update';
 

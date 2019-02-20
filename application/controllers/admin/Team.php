@@ -55,7 +55,7 @@ class team extends CI_Controller {
         $this->load->view('admin/layout/footer.php');
     }
 
-    public function edit_submit()
+    public function detail_submit()
     {
         $this->load->helper('url');
 
