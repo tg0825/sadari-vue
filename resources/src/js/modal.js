@@ -1,9 +1,5 @@
 /**
  * modal
- * @param {[type]} window [description]
- * @param {[type]} document [description]
- * @param {[type]} $ [description]
- * @return {[type]} [description]
  */
 var modal = (function(window, document, $) {
     var $modal = $('<div class="modal"></div>');
@@ -38,13 +34,15 @@ var modal = (function(window, document, $) {
         }
     }
 
+    function _handleKeyup(e) {
+        if (sd.JQ.DOC.find('.modal').length && e.which == 27) {
+            close();
+        }
+    }
+
     sd.JQ.DOC.on('click', '.modal-mask, .modal-close', close).on(
         'keyup',
-        function(e) {
-            if (sd.JQ.DOC.find('.modal').length && e.which == 27) {
-                close();
-            }
-        }
+        _handleKeyup
     );
 
     return {
