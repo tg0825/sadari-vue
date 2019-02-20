@@ -34,6 +34,9 @@ $route['admin/result'] = 'admin/result';
 $route['game/insert'] = 'game/insert';
 $route['game/last_member_list/(:any)'] = 'game/last_member_list/$1';
 
+// API 직원 가져오기
+$route['member'] = 'member';
+
 // 게임 타입 결과
 // $route['game/result/(:any)'];
 
