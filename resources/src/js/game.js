@@ -202,7 +202,6 @@
     function renderHtml(data, onegroup) {
         var html = '';
         try {
-            // 결과
             data.forEach(function(group) {
                 if (onegroup) {
                     html += '<div class="group item onegroup">';
@@ -213,23 +212,8 @@
                         '</div>';
                 }
 
-                group.member.forEach(function(groupMember, memberIndex) {
-                    html +=
-                        '<div data-index=' +
-                        memberIndex +
-                        ' class="member-list member ' +
-                        (groupMember.team_eng || '') +
-                        '"' +
-                        ' style="background-color:' +
-                        (groupMember.team_color || '#ddd') +
-                        '">' +
-                        '<span class="name">' +
-                        groupMember.name +
-                        '</span>' +
-                        '<span class="team">' +
-                        groupMember.team +
-                        '</span>' +
-                        '</div>';
+                group.member.forEach(function(member, memberIndex) {
+                    html += sd.tmpl.member(member);
                 });
 
                 html += '</div>';
