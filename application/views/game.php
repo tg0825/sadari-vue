@@ -90,25 +90,7 @@ OneSignal.push(function() {
         <div class="layout-member">
             <div class="member-list wrap">
                 <div class="member-list body">
-                    <?php
-                    foreach($member_list as $member) {
-                    ?>
-                        <label
-                            class="member-list member <?=$member->team_eng?>"
-                            style="background-color:<?=$member->team_color ?? '#ddd'?>"
-                            data-member-id="<?=$member->id?>"
-                            data-team-eng="<?=$member->team_eng?>"
-                            data-team-color="<?=$member->team_color?>"
-                        >
-                            <input type="checkbox" class="js-all-check-item"/>
-                            <span class="name"><?=$member->name?></span>
-                            <span class="team"><?=$member->team ?? '미정'?></span>
-                            <span class="position"><?=$member->position ?? '미정'?></span>
-                            <span class="remove">x</span>
-                        </label>
-                    <?php
-                    }
-                    ?>
+                    <!-- insert tmpl -->
                 </div>
             </div>
         </div>

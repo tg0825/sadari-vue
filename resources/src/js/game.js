@@ -26,8 +26,11 @@
     // cssClass 제외된 유저
     var disableClass = 'is_disable';
 
+    // jquery dom member body
+    var $memberBody = $('.member-list.body');
+
     // jquery dom member list
-    var $memberList = $('.member-list.body').find('.member-list.member');
+    var $memberList;
 
     // jquery dom
     var $wrap = $('.sadari.wrap');
@@ -540,36 +543,21 @@
     }
 
     // 데이터 초기화
-    function initData() {
-        var backpacker = [];
-
-        $memberList.each(function(i, e) {
-            var $member = $(e);
-            var member = {
-                name: $member.find('.name').html(),
-                team: $member.find('.team').html(),
-                user_id: $member.data('member-id'),
-                team_eng: $member.data('team-eng'),
-                team_color: $member.data('team-color')
-            };
-
-            backpacker.push(member);
-        });
-
-        originbackpackr = backpacker.slice();
-        filterbackpackr = filterWorkMember(backpacker.slice());
+    function initData(data) {
+        originbackpackr = data.slice();
+        filterbackpackr = filterWorkMember(data.slice());
     }
 
     // 유저 선택, 랜더링
     function _selectUser(index) {
-        var $item = $memberList.eq(index);
+        var $member = $memberList.eq(index);
         var isDisabled = true;
 
-        if ($item.is('.is_disable')) {
+        if ($member.is('.is_disable')) {
             isDisabled = false;
         }
 
-        updateState($item, isDisabled);
+        updateState($member, isDisabled);
         store.emit('updateMemberCount', filterbackpackr);
         store.emit('renderSplit');
         store.emit('renderSearch');
@@ -592,6 +580,21 @@
         }
     }
 
+    // 멤버 가져오기
+    function getMember() {
+        return $.getJSON('/member').done(function(res) {
+            var html = '';
+            res.forEach(function(member) {
+                html += sd.tmpl.member(member);
+            });
+            $memberBody.html(html);
+        });
+    }
+
+    function _updateMemberList() {
+        $memberList = $memberBody.find('.member-list.member');
+    }
+
     // 이벤트 바인딩
     function bindEvent() {
         $(document)
@@ -611,14 +614,22 @@
         store.on('findIndexById', findIndexById);
     }
 
-    function init() {
+    // 멤버 비동기 호출 후 시작
+    function start(res) {
         bindEvent();
-        initData();
+        _updateMemberList();
+        initData(res);
+        quickSearch();
+        randomTarget();
 
+        store.emit('updateMemberCount', filterbackpackr);
         $('.sadari-select')
             .find('button:eq(0)')
             .trigger('click');
-        store.emit('updateMemberCount', filterbackpackr);
+    }
+
+    function init() {
+        getMember().done(start);
     }
 
     init();
