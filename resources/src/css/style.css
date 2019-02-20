@@ -1,4 +1,5 @@
-body {}
+body {
+}
 
 input {
     box-sizing: border-box;
@@ -24,7 +25,7 @@ input:focus {
 }
 
 .f-error:before {
-    content: '*';
+    content: "*";
     display: inline-block;
     vertical-align: middle;
     margin: 5px;
@@ -78,7 +79,7 @@ input:focus {
 
 .form-block:after {
     clear: both;
-    content: '';
+    content: "";
     display: block;
 }
 
@@ -97,7 +98,7 @@ input:focus {
 }
 
 .sadari.title {
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
     font-size: 30px;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -151,12 +152,18 @@ input:focus {
 }
 
 .member-list.number:before {
-    content: '\f183';
     font-size: 20px;
     display: inline-block;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    content: "\f183";
     vertical-align: baseline;
     margin-right: 4px;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 900; /* regular style/weight */
 }
 
 .member-list-in-db {
@@ -166,7 +173,7 @@ input:focus {
 .member-list.body:after {
     clear: both;
     display: block;
-    content: '';
+    content: "";
 }
 
 .group.member,
@@ -189,7 +196,7 @@ input:focus {
 }
 
 .group.member input,
-.member-list.member input{
+.member-list.member input {
     position: absolute;
     z-index: -1;
     visibility: hidden;
@@ -204,7 +211,7 @@ input:focus {
 }
 
 .member-list.member.is_disable:before {
-    content: '제외';
+    content: "제외";
     font-weight: bold;
     color: #fff;
     position: absolute;
@@ -215,7 +222,7 @@ input:focus {
     right: 0;
     line-height: 62px;
     text-align: center;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 5px;
     z-index: 100;
     box-sizing: border-box;
@@ -223,7 +230,7 @@ input:focus {
 
 .member-list.member:after {
     font-size: 18px;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     position: absolute;
     top: 10px;
     right: 12px;
@@ -256,7 +263,7 @@ input:focus {
 
 .member-list.member.highlight {
     transform: scale(1.4);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 100;
 }
 
@@ -336,7 +343,7 @@ input:focus {
     box-sizing: border-box;
 }
 
-.nab>[class^=tab] {
+.nab > [class^="tab"] {
     display: none;
 }
 
@@ -379,7 +386,8 @@ input:focus {
     position: fixed;
     top: 20px;
     left: 0;
-    font-family: apple SD gothic neo, Noto Sans KR, '맑은고딕', 'malgun gothic', '돋움', dotum, sans-serif;
+    font-family: apple SD gothic neo, Noto Sans KR, "맑은고딕", "malgun gothic",
+        "돋움", dotum, sans-serif;
 }
 
 .resultText .result-copy {
@@ -401,7 +409,6 @@ input:focus {
     height: 35px;
     border: 1px solid #888;
     font-size: 16px;
-
 }
 
 .resultText textarea {
@@ -416,7 +423,8 @@ input:focus {
     margin-bottom: 5px;
 }
 
-.resultText .fa-hand-o-up {}
+.resultText .fa-hand-o-up {
+}
 
 .toggleMenu {
     background: transparent;
@@ -435,7 +443,7 @@ input:focus {
 }
 
 .team.root:after {
-    content: '';
+    content: "";
     clear: both;
     display: block;
 }
@@ -459,12 +467,12 @@ input:focus {
 
 .team.item.is_active {
     transform: scale(1.3);
-    box-shadow: 0 10px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .team.item:after {
     font-size: 18px;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
 }
 
 .team.item input {
@@ -535,7 +543,6 @@ input:focus {
 
 .enable-list {
     /* float: left; */
-    
 }
 
 .disable-list {
@@ -576,13 +583,13 @@ input:focus {
 
     .group.member:before,
     .member-list.member:before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         right: 0;
         left: 0;
         bottom: 0;
-        border: 1px solid rgba(0,0,0,.4);
+        border: 1px solid rgba(0, 0, 0, 0.4);
     }
 
     .member-list.member.is_disable:before {
@@ -622,7 +629,6 @@ input:focus {
         font-size: 12px;
     }
 
-
     .tab {
         border-radius: 0;
         max-width: none;
@@ -631,7 +637,7 @@ input:focus {
     .start-onlyone,
     .start-group,
     .start {
-        border-radius: 0
+        border-radius: 0;
     }
 
     .sadari.title {

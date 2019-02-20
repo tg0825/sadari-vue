@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="/resources/src/css/style.css">
 <link rel="stylesheet" href="/resources/src/css/ju.css">
 <link rel="stylesheet" href="/resources/src/css/modal.css">
-<link rel="stylesheet" href="/resources/src/vendor/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/v4-shims.css">
 <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 
 <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
@@ -239,7 +240,7 @@ OneSignal.push(function() {
                                 type="button"
                                 class="btn btn-s btn-size-w exclude-prev-member"
                             >
-                                <i class="fa fa-user-times" aria-hidden="true"></i>
+                                <i class="fas fa-history"></i>
                                 이전 청소자 표시
                             </button>
                         </div>
