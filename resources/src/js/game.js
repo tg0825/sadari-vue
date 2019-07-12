@@ -452,7 +452,7 @@
                 $.each(value.member, function(index, value) {
                     var member = {
                         group_name: title,
-                        user_id: value.user_id
+                        user_id: value.id
                     };
 
                     data.push(member);
@@ -461,6 +461,8 @@
 
             var param = {
                 game_type: selectedGameType,
+                result_data: data
+                // EXAMPLE result_date
                 // result_data: [
                 //     {
                 //         user_id: 72,
@@ -471,10 +473,11 @@
                 //         group_name: 'test'
                 //     },
                 // ]
-                result_data: data
             };
 
-            $.post(apiCommit, param);
+            $.post(apiCommit, param).done(function(res) {
+                console.log(res);
+            });
         } catch (e) {
             console.log(e);
         }
