@@ -9,7 +9,7 @@
     var selectedGameType = null;
 
     // 최초 순수 구성원
-    var originbackpackr;
+    var _backupInitMember;
 
     // 필터 적용 된 구성원
     var filterbackpackr;
@@ -124,40 +124,36 @@
     }
 
     /**
-     * 랜덤
-     * @param {array} a 직원
-     * @return void
+     * 필터링 적용된 맴버에 한해 랜덤 적용
+     * @return {array}
      */
-    function shuffle(a) {
-        var j; // 임의의 수
-        var x; // 임시 저장 공간
-        var i; // 인원 수 (1씩 감소 됨)
-
-        for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i); // 요기가 핵심
-            x = a[i - 1]; // 마지막 직원을 임시 공간에 보냄
-            a[i - 1] = a[j]; // 마지막 직원 자리에 임의의 번호 직원이 대입됨
-            a[j] = x; // 임의의 직원 있던 위치에 마지막 직원이 대입 됨
-            // 직원 수 만큼 반복
-        }
-    }
-
-    // 구성원 데이터 재구성
-    function filterDisableMember() {
+    function filterEnableMember() {
         var remap = filterbackpackr.slice().filter(function(v) {
-            if (v.is_disable === true) {
+            // 비활성 멤버 제외
+            if (v.is_disable) {
                 return false;
             }
             return true;
         });
 
-        shuffle(remap);
+        var j; // 임의의 수
+        var x; // 임시 저장 공간
+        var i; // 인원 수 (1씩 감소 됨)
 
-        return remap;
+        for (i = remap.length; i; i--) {
+            j = Math.floor(Math.random() * i); // 요기가 핵심
+            x = remap[i - 1]; // 마지막 직원을 임시 공간에 보냄
+            remap[i - 1] = remap[j]; // 마지막 직원 자리에 임의의 번호 직원이 대입됨
+            remap[j] = x; // 임의의 직원 있던 위치에 마지막 직원이 대입 됨
+            // 직원 수 만큼 반복
+        }
+
+        randombackpackr = remap;
+        return true;
     }
 
     // 퇴사한 사람, 출근 전 사람 제외
-    function filterWorkMember(arg) {
+    function filterWorkMember(memberList) {
         var now = new Date().getTime();
         var date;
         var y;
@@ -177,7 +173,7 @@
             return date;
         }
 
-        var re = arg.filter(function(v) {
+        var re = memberList.filter(function(v) {
             if (v.hasOwnProperty('startDate')) {
                 date = check(v.startDate);
 
@@ -371,7 +367,7 @@
      * @param {Boolean} isDisabled 비활성 유무
      * @return void;
      */
-    function updateState($member, isDisabled) {
+    function updateMemberState($member, isDisabled) {
         try {
             var index = $member.index();
 
@@ -395,7 +391,7 @@
         var $itemlist = $('.member-list.body .member-list.member');
 
         $.each($itemlist, function(i, e) {
-            updateState($(e), isChecked);
+            updateMemberState($(e), isChecked);
         });
 
         store.emit('updateMemberCount', filterbackpackr);
@@ -403,11 +399,9 @@
         store.emit('renderSearch');
     }
 
-    // 게임 시작
+    // 사다리 시작
     function startSadari() {
-        randombackpackr = filterDisableMember();
-
-        // 게임 시작
+        filterEnableMember();
         game[sadariType]();
         store.emit('renderTextResult');
         store.emit('randomTargetHide');
@@ -497,7 +491,7 @@
         var $itemlist = $('.member-list.body .member-list.member');
 
         $.each($itemlist, function(i, e) {
-            updateState($(e), false);
+            updateMemberState($(e), false);
         });
 
         if (!render) {
@@ -515,7 +509,7 @@
             var userId = value.user_id;
             var $elm = $memberList.find('[data-member-id="' + userId + '"]');
 
-            updateState($elm, true);
+            updateMemberState($elm, true);
         });
 
         store.emit('updateMemberCount', filterbackpackr);
@@ -528,7 +522,7 @@
 
     // 데이터 초기화
     function initData(data) {
-        originbackpackr = data.slice();
+        _backupInitMember = data.slice();
         filterbackpackr = filterWorkMember(data.slice());
     }
 
@@ -545,7 +539,7 @@
             isDisabled = false;
         }
 
-        updateState($member, isDisabled);
+        updateMemberState($member, isDisabled);
         store.emit('updateMemberCount', filterbackpackr);
         store.emit('renderSplit');
         store.emit('renderSearch');
