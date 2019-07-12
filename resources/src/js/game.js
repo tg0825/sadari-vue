@@ -468,10 +468,6 @@
                 //         user_id: 72,
                 //         group_name: 'test',
                 //     },
-                //     {
-                //         user_id: 73,
-                //         group_name: 'test'
-                //     },
                 // ]
             };
 
@@ -536,7 +532,11 @@
         filterbackpackr = filterWorkMember(data.slice());
     }
 
-    // 유저 선택, 랜더링
+    /**
+     * 유저 선택, 랜더링
+     * @param {int} index 유저 인덱스
+     * @return void;
+     */
     function _selectUser(index) {
         var $member = $memberList.eq(index);
         var isDisabled = true;
@@ -611,6 +611,7 @@
         randomTarget();
 
         store.emit('updateMemberCount', filterbackpackr);
+
         $('.sadari-select')
             .find('button:eq(0)')
             .trigger('click');

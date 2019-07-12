@@ -3,7 +3,7 @@ function quickSearch() {
     // 현재 인풋 값
     var inputValue;
 
-    // 직원들 리스트
+    // 직원 리스트
     var memberList = store.emit('getAllMemberList')[0];
 
     // 매칭된 index 리스트
@@ -15,7 +15,8 @@ function quickSearch() {
     // jquery dom search result
     var $result = $('.search-result');
 
-    function render() {
+    // 결과 랜더링
+    function renderSearch() {
         var html = '';
         matchData.forEach(function(data) {
             html += sd.tmpl.member(data);
@@ -23,7 +24,7 @@ function quickSearch() {
         $result.html(html);
     }
 
-    // 매칭되는 맴버 구하기
+    // 매칭 맴버 데이터 업데이트
     function updateSearchMemberList() {
         matchData = [];
 
@@ -34,8 +35,9 @@ function quickSearch() {
         });
     }
 
-    // 결과 삭제
-    function clearList() {
+    // 결과 초기화
+    function clearResult() {
+        matchData = [];
         $result.empty();
     }
 
@@ -74,8 +76,9 @@ function quickSearch() {
             return false;
         }
 
+        // 값이 비어있을 때 결과 비우기
         if (!inputValue) {
-            clearList();
+            clearResult();
             return false;
         }
 
@@ -87,7 +90,7 @@ function quickSearch() {
     function _bindEvent() {
         $search.on('keyup', _handleKeyup).on('keypress', _handleEnter);
         $result.on('change', '.js-all-check-item', _handleChange);
-        store.on('renderSearch', render);
+        store.on('renderSearch', renderSearch);
     }
 
     // 초기화
