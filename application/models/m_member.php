@@ -41,7 +41,8 @@ class M_member extends CI_Model {
 
         $this->db->insert('member', [
             'name' => $data['name'],
-            'team_id' => $data['team_id']
+            'team_id' => $data['team_id'],
+            'position' => $data['position'],
         ]);
     }
 

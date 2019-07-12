@@ -14,8 +14,8 @@ $route['admin/logout'] = 'admin/auth/logout';
 $route['admin/member'] = 'admin/member';
 $route['admin/member/detail'] = 'admin/member/detail';
 $route['admin/member/detail/(:num)'] = 'admin/member/detail/$1';
-$route['admin/member/detail/submit'] = 'admin/member/detail_submit';
-$route['admin/member/detail/submit/(:num)'] = 'admin/member/detail_submit/$1';
+$route['admin/member/detail/submit'] = 'admin/member/submit';
+$route['admin/member/detail/submit/(:num)'] = 'admin/member/submit/$1';
 $route['admin/member/update'] = 'admin/member/update';
 $route['admin/member/delete'] = 'admin/member/delete';
 

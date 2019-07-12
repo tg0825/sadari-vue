@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class member extends CI_Controller {
-    // 유저 이름
+    // 직원 이름
     private $username;
     
     public function __construct()
@@ -71,7 +71,7 @@ class member extends CI_Controller {
     }
 
     // 저장
-    public function detail_submit($id = null)
+    public function submit($id = null)
     {
         $this->load->helper('url');
         $post = $this->input->post();
