@@ -27,7 +27,6 @@ class M_result extends CI_Model {
             WHERE game_type = ' . $game_type . '
             GROUP BY user_id
             ORDER BY count(user_id) ' . $order_type . '
-            LIMIT 10;
         ');
         return $query->result();
     }
