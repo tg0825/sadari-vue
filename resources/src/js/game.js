@@ -118,16 +118,11 @@
         return index;
     }
 
-    // 게임 종류 리턴
-    function _getGameType() {
-        return sadariType;
-    }
-
     /**
      * 필터링 적용된 맴버에 한해 랜덤 적용
      * @return {array}
      */
-    function filterEnableMember() {
+    function filterDisableMember() {
         var remap = filterbackpackr.slice().filter(function(v) {
             // 비활성 멤버 제외
             if (v.is_disable) {
@@ -299,11 +294,15 @@
         _gameResultCommit();
     }
 
-    // 결과 출력
-    // a 한 그룹의 인원
-    // b 그룹 수
-    // c 램덤 인원
-    // restGroupType
+    /**
+     * 결과 출력
+     * @param {object} data 그룹 데이터
+     * a 한 그룹의 인원
+     * b 그룹 수
+     * c 램덤 인원
+     * @param {bool} restGroupType 남은 그룹 방식
+     * @return void
+     */
     function result(data, restGroupType) {
         temp = $.extend(true, {}, data);
 
@@ -399,14 +398,6 @@
         store.emit('renderSearch');
     }
 
-    // 사다리 시작
-    function startSadari() {
-        filterEnableMember();
-        game[sadariType]();
-        store.emit('renderTextResult');
-        store.emit('randomTargetHide');
-    }
-
     // 게임 선택
     function selectSadari() {
         var idx = $(this)
@@ -433,6 +424,83 @@
         if (tabId) {
             ju = store.emit('getJu-' + tabId)[0];
         }
+    }
+
+    // 마지막에 당첨된 유저 가져오기
+    function getLastWinUserList() {
+        var url = '/game/last_member_list/' + selectedGameType;
+        $.get(url).done(function(res) {
+            if (!res) {
+                console.log('error');
+                return false;
+            }
+            var res = JSON.parse(res);
+            updateUserList(res);
+        });
+    }
+
+    // 멤버 상태 초기화
+    function resetMemberState(render) {
+        var $itemlist = $('.member-list.body .member-list.member');
+
+        $.each($itemlist, function(i, e) {
+            updateMemberState($(e), false);
+        });
+
+        if (!render) {
+            store.emit('updateMemberCount', filterbackpackr);
+        }
+    }
+
+    // 멤버들 상태 업데이트
+    function updateUserList(res) {
+        var $memberList = $('.member-list.body');
+
+        resetMemberState(false);
+
+        $.each(res, function(index, value) {
+            var userId = value.user_id;
+            var $elm = $memberList.find('[data-member-id="' + userId + '"]');
+
+            updateMemberState($elm, true);
+        });
+
+        store.emit('updateMemberCount', filterbackpackr);
+    }
+
+    // 멤버 가져오기
+    function getMember() {
+        return $.getJSON('/member').done(function(res) {
+            var html = '';
+            res.forEach(function(member) {
+                html += sd.tmpl.member(member);
+            });
+            $memberBody.html(html);
+        });
+    }
+
+    // 필터된 멤버 데이터 가져오기
+    function _getAllMemberList() {
+        return filterbackpackr;
+    }
+
+    /**
+     * 유저 선택, 랜더링
+     * @param {int} index 유저 인덱스
+     * @return void;
+     */
+    function _selectUser(index) {
+        var $member = $memberList.eq(index);
+        var isDisabled = true;
+
+        if ($member.is('.is_disable')) {
+            isDisabled = false;
+        }
+
+        updateMemberState($member, isDisabled);
+        store.emit('updateMemberCount', filterbackpackr);
+        store.emit('renderSplit');
+        store.emit('renderSearch');
     }
 
     // 게임 데이터 기록, 저장
@@ -473,76 +541,9 @@
         }
     }
 
-    // 마지막 유저 가져오기
-    function getLastUserList() {
-        var url = '/game/last_member_list/' + selectedGameType;
-        $.get(url).done(function(response) {
-            if (!response) {
-                console.log('error');
-                return false;
-            }
-            var res = JSON.parse(response);
-            updateUserList(res);
-        });
-    }
-
-    // 멤버 상태 초기화
-    function resetMemberState(render) {
-        var $itemlist = $('.member-list.body .member-list.member');
-
-        $.each($itemlist, function(i, e) {
-            updateMemberState($(e), false);
-        });
-
-        if (!render) {
-            store.emit('updateMemberCount', filterbackpackr);
-        }
-    }
-
-    // 멤버들 상태 업데이트
-    function updateUserList(res) {
-        var $memberList = $('.member-list.body');
-
-        resetMemberState(false);
-
-        $.each(res, function(index, value) {
-            var userId = value.user_id;
-            var $elm = $memberList.find('[data-member-id="' + userId + '"]');
-
-            updateMemberState($elm, true);
-        });
-
-        store.emit('updateMemberCount', filterbackpackr);
-    }
-
-    // 필터된 멤버 데이터 가져오기
-    function _getAllMemberList() {
-        return filterbackpackr;
-    }
-
-    // 데이터 초기화
-    function initData(data) {
-        _backupInitMember = data.slice();
-        filterbackpackr = filterWorkMember(data.slice());
-    }
-
-    /**
-     * 유저 선택, 랜더링
-     * @param {int} index 유저 인덱스
-     * @return void;
-     */
-    function _selectUser(index) {
-        var $member = $memberList.eq(index);
-        var isDisabled = true;
-
-        if ($member.is('.is_disable')) {
-            isDisabled = false;
-        }
-
-        updateMemberState($member, isDisabled);
-        store.emit('updateMemberCount', filterbackpackr);
-        store.emit('renderSplit');
-        store.emit('renderSearch');
+    // 게임 종류 리턴
+    function _getGameType() {
+        return sadariType;
     }
 
     // 유저 클릭 핸들러
@@ -558,23 +559,20 @@
     // 지난주 걸린 사람 제외하기 버튼 클릭 핸들러
     function _handleClickPrevMember() {
         if (selectedGameType === 5) {
-            getLastUserList();
+            getLastWinUserList();
         }
-    }
-
-    // 멤버 가져오기
-    function getMember() {
-        return $.getJSON('/member').done(function(res) {
-            var html = '';
-            res.forEach(function(member) {
-                html += sd.tmpl.member(member);
-            });
-            $memberBody.html(html);
-        });
     }
 
     function _updateMemberList() {
         $memberList = $memberBody.find('.member-list.member');
+    }
+
+    // 사다리 시작
+    function startSadari() {
+        filterDisableMember();
+        game[sadariType]();
+        store.emit('renderTextResult');
+        store.emit('randomTargetHide');
     }
 
     // 이벤트 바인딩
@@ -609,6 +607,12 @@
         $('.sadari-select')
             .find('button:eq(0)')
             .trigger('click');
+    }
+
+    // 데이터 초기화
+    function initData(data) {
+        _backupInitMember = data.slice();
+        filterbackpackr = filterWorkMember(data.slice());
     }
 
     function init() {
