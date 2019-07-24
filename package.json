@@ -13,7 +13,7 @@
     "license": "MIT",
     "homepage": "https://bitbucket.org/tg0825/dice#readme",
     "scripts": {
-        "start": "echo foo"
+        "start": "node"
     },
     "dependencies": {
         "font-awesome": "^4.7.0"
