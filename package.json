@@ -13,7 +13,7 @@
     "license": "MIT",
     "homepage": "https://bitbucket.org/tg0825/dice#readme",
     "scripts": {
-        "build": "gulp devSCSS"
+        "start": "gulp bs"
     },
     "dependencies": {
         "font-awesome": "^4.7.0"
