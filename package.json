@@ -1,28 +1,31 @@
 {
-  "devDependencies": {
-    "browser-sync": "^2.18.13",
-    "eslint-plugin-html": "^3.2.2",
-    "gulp": "^3.9.1",
-    "gulp-connect-php": "^1.0.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "jquery": "^1.12.4"
-  },
-  "name": "dice",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://tg0825@bitbucket.org/tg0825/dice.git"
-  },
-  "author": "tg0825 <tg0825@backpack.kr>",
-  "license": "MIT",
-  "dependencies": {
-    "font-awesome": "^4.7.0"
-  },
-  "homepage": "https://bitbucket.org/tg0825/dice#readme",
-  "scripts": {
-    "start": "gulp bs"
-  },
-  "description": ""
+    "name": "dice",
+    "version": "1.0.0",
+    "main": "index.js",
+    "engines": {
+        "node": "10.15.x"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://tg0825@bitbucket.org/tg0825/dice.git"
+    },
+    "author": "tg0825 <tg0825@backpack.kr>",
+    "license": "MIT",
+    "dependencies": {
+        "font-awesome": "^4.7.0"
+    },
+    "homepage": "https://bitbucket.org/tg0825/dice#readme",
+    "scripts": {
+        "start": "gulp bs"
+    },
+    "description": "",
+    "devDependencies": {
+        "browser-sync": "^2.18.13",
+        "eslint-plugin-html": "^3.2.2",
+        "gulp": "^3.9.1",
+        "gulp-connect-php": "^1.0.1",
+        "gulp-sass": "^3.1.0",
+        "gulp-sourcemaps": "^2.6.1",
+        "jquery": "^1.12.4"
+    }
 }
