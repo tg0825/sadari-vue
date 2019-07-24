@@ -11,12 +11,12 @@
     },
     "author": "tg0825 <tg0825@backpack.kr>",
     "license": "MIT",
-    "dependencies": {
-        "font-awesome": "^4.7.0"
-    },
     "homepage": "https://bitbucket.org/tg0825/dice#readme",
     "scripts": {
-        "start": "gulp bs"
+        "build": "gulp devSCSS"
+    },
+    "dependencies": {
+        "font-awesome": "^4.7.0"
     },
     "description": "",
     "devDependencies": {
