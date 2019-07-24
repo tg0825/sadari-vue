@@ -1,5 +1,5 @@
 {
-    "name": "dice",
+    "name": "sadari",
     "version": "1.0.0",
     "main": "index.js",
     "engines": {
@@ -13,7 +13,7 @@
     "license": "MIT",
     "homepage": "https://bitbucket.org/tg0825/dice#readme",
     "scripts": {
-        "start": "gulp bs"
+        "start": ""
     },
     "dependencies": {
         "font-awesome": "^4.7.0"
