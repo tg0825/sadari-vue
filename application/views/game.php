@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
 
-<link rel="icon" href="./resources/src/image/favicon.ico">
+<!-- <link rel="icon" href="./resources/src/image/favicon.ico"> -->
 <link rel="apple-touch-icon" href="./resources/src/image/home-sadari.png">
 <link rel="stylesheet" href="/resources/src/css/reset.css">
 <link rel="stylesheet" href="/resources/src/css/tg-util.css">

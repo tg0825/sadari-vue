@@ -4,20 +4,14 @@
     "engines": {
         "node": "10.15.x"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://tg0825@bitbucket.org/tg0825/dice.git"
-    },
     "author": "tg0825 <tg0825@backpack.kr>",
     "license": "MIT",
-    "homepage": "https://bitbucket.org/tg0825/dice#readme",
     "scripts": {
         "start": "node"
     },
     "dependencies": {
         "font-awesome": "^4.7.0"
     },
-    "description": "",
     "devDependencies": {
         "browser-sync": "^2.18.13",
         "eslint-plugin-html": "^3.2.2",
