@@ -6,17 +6,26 @@
 
 <link rel="icon" href="./resources/src/image/favicon.ico">
 <link rel="apple-touch-icon" href="./resources/src/image/home-sadari.png">
-<link rel="stylesheet" href="/resources/src/css/reset.css">
+
+<!-- DEV -->
+<!-- <link rel="stylesheet" href="/resources/src/css/reset.css">
 <link rel="stylesheet" href="/resources/src/css/tg-util.css">
 <link rel="stylesheet" href="/resources/src/css/layout.css">
 <link rel="stylesheet" href="/resources/src/css/button.css">
-<link rel="stylesheet" href="/resources/src/css/webfont.css">
 <link rel="stylesheet" href="/resources/src/css/style.css">
 <link rel="stylesheet" href="/resources/src/css/ju.css">
-<link rel="stylesheet" href="/resources/src/css/modal.css">
+<link rel="stylesheet" href="/resources/src/css/webfont.css">
+<link rel="stylesheet" href="/resources/src/css/modal.css"> -->
+
+<!-- PRO -->
+<link rel="stylesheet" href="/resources/dist/css/index.css">
+
+<!-- font library -->
+<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+
+<!-- library -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/v4-shims.css">
-<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 
 <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>

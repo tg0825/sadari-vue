@@ -1,0 +1,33 @@
+Invalid address: -d
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54484 [200]: /
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54485 [200]: /resources/src/css/reset.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54492 [200]: /resources/src/css/tg-util.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54494 [200]: /resources/src/css/layout.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54496 [200]: /resources/src/css/button.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54498 [200]: /resources/src/css/webfont.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54500 [200]: /resources/src/css/style.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54502 [200]: /resources/src/css/ju.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54504 [200]: /resources/src/css/modal.css
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54506 [200]: /resources/src/js/init.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54508 [200]: /resources/src/js/data.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54510 [200]: /resources/src/js/util.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54512 [200]: /resources/src/js/tmpl.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54514 [200]: /resources/src/js/storage.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54516 [200]: /resources/src/js/store.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54518 [200]: /resources/src/js/result-text.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54520 [200]: /resources/src/js/slack.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54522 [200]: /resources/src/js/head-count.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54524 [200]: /resources/src/js/modal.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54526 [200]: /resources/src/js/clock.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54528 [200]: /resources/src/js/ju.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54530 [200]: /resources/src/js/quick-search.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54532 [200]: /resources/src/js/random-target.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54534 [200]: /resources/src/js/game.js
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54536 [200]: /resources/src/fonts/NanumGothic-Regular.woff2
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54538 [200]: /resources/src/fonts/NanumGothic-Bold.woff2
+[Wed Jul 24 16:45:49 2019] 127.0.0.1:54541 [200]: /member
+[Wed Jul 24 16:45:50 2019] 127.0.0.1:54549 [200]: /resources/src/image/favicon.ico
+PHP 7.1.23 Development Server started at Wed Jul 24 16:45:41 2019
+Listening on http://0.0.0.0:9091
+Document root is /Users/tg0825/workspace/personal/toy/sadari
+Press Ctrl-C to quit.
