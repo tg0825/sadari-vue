@@ -189,34 +189,75 @@ var php = require('gulp-connect-php');
 // //     gulp.watch(['./**/*.php', './**/*.css', './**/*.js'], bs.reload);
 // // });
 
+const src = './resources/src';
+const dist = './resources/dist';
 const path = {
-    scss: './resources/src/scss/index.scss'
+    entryScss: `${src}/scss/index.scss`,
+    watchScss: `${src}/scss/*.scss`,
+    srcJs: [
+        `${src}/js/init.js`,
+        `${src}/js/data.js`,
+        `${src}/js/util.js`,
+        `${src}/js/tmpl.js`,
+        `${src}/js/storage.js`,
+        `${src}/js/store.js`,
+        `${src}/js/result-text.js`,
+        `${src}/js/slack.js`,
+        `${src}/js/head-count.js`,
+        `${src}/js/modal.js`,
+        `${src}/js/clock.js`,
+        `${src}/js/ju.js`,
+        `${src}/js/quick-search.js`,
+        `${src}/js/random-target.js`,
+        `${src}/js/game.js`
+    ],
+    distScss: `${dist}/css`,
+    distJs: `${dist}/js`,
 }
 
+/**
+ * js 빌드
+ */
+const buildJs = () => {
+    return gulp
+        .src(path.srcJs)
+        .pipe(sourcemaps.init())
+    	.pipe(concat('index.js'))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(path.distJs))
+        .pipe(bs.stream());
+};
+
+/**
+ * css 빌드 
+ */
 const buildCss = () => {
     const scssConfig = {
         outputStyle: 'compressed'
     };
     
     return gulp
-        .src(path.scss)
+        .src(path.entryScss)
         .pipe(sourcemaps.init())
         .pipe(sass(scssConfig).on('error', sass.logError))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./resources/dist/css'));
-};
+        .pipe(gulp.dest(path.distScss))
+        .pipe(bs.stream());
+}
 
 /**
  * watch
  */
 const watch = () => {
-    return gulp.watch(path.scss, buildCss);
+    gulp.watch(path.srcJs, buildJs);
+    gulp.watch(path.watchScss, buildCss);
 };
 
 /**
  * php server
  */
 const phpServer = () => {
+    // return false;
     return php.server({
         port: 8001
     });
@@ -236,8 +277,7 @@ const browserSync = () => {
     });
 };
 
-const devServe = gulp.parallel(phpServer, browserSync);
+var devServe = gulp.parallel(phpServer, browserSync, watch);
 
-gulp.task('buildCss', buildCss);
-gulp.task('watch', watch);
-gulp.task('serve', devServe);
+gulp.task('buildJs', buildJs);
+gulp.task('devServe', devServe);

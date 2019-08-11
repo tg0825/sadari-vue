@@ -8,8 +8,8 @@
     "license": "MIT",
     "scripts": {
         "start": "node",
-        "watch": "gulp watch",
-        "serve": "gulp serve"
+        "buildJs": "gulp buildJs",
+        "devServe": "gulp devServe"
     },
     "dependencies": {
         "font-awesome": "^4.7.0"

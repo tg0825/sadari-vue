@@ -48,10 +48,8 @@ OneSignal.push(function() {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-116893453-1');
 </script>
-
 </head>
 <body class="js-all-check">
     <div class="gnb">
@@ -287,8 +285,9 @@ OneSignal.push(function() {
         <div class="sort-list member-size-s">
         </div>
     </div>
+    <script src="./resources/dist/js/index.js"></script>
 
-    <script src="./resources/src/js/init.js"></script>
+    <!-- <script src="./resources/src/js/init.js"></script>
     <script src="./resources/src/js/data.js"></script>
     <script src="./resources/src/js/util.js"></script>
     <script src="./resources/src/js/tmpl.js"></script>
@@ -302,6 +301,6 @@ OneSignal.push(function() {
     <script src="./resources/src/js/ju.js"></script>
     <script src="./resources/src/js/quick-search.js"></script>
     <script src="./resources/src/js/random-target.js"></script>
-    <script src="./resources/src/js/game.js"></script>
+    <script src="./resources/src/js/game.js"></script> -->
 </body>
 </html>
