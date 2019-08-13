@@ -1,10 +1,10 @@
 <template>
     <div>
         <div>
-            card1
+            card {{index[0]}}
         </div>
         <div>
-            card2
+            card {{index[1]}}
         </div>
     </div>
 </template>
@@ -13,6 +13,10 @@
 export default {
     data () {
         return {
+            index: [
+                1,
+                2
+            ]
         }
     },
 }
