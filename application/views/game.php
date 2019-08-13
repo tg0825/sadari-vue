@@ -303,4 +303,6 @@ OneSignal.push(function() {
     <script src="./resources/src/js/random-target.js"></script>
     <script src="./resources/src/js/game.js"></script> -->
 </body>
+<div id="app"></div>
+<script src="/resources/vue/main.js"></script>
 </html>

@@ -9,19 +9,29 @@
     "scripts": {
         "start": "node",
         "buildJs": "gulp buildJs",
-        "devServe": "gulp devServe"
+        "devServe": "gulp devServe",
+        "webpack": "webpack --mode development"
     },
     "dependencies": {
         "font-awesome": "^4.7.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.5.5",
+        "babel-loader": "^8.0.6",
         "browser-sync": "^2.18.13",
+        "css-loader": "^3.2.0",
         "eslint-plugin-html": "^3.2.2",
         "gulp": "^4.0.2",
         "gulp-concat": "^2.6.1",
         "gulp-connect-php": "^1.0.1",
         "gulp-sass": "^3.1.0",
         "gulp-sourcemaps": "^2.6.1",
-        "jquery": "^1.12.4"
+        "jquery": "^1.12.4",
+        "vue": "^2.6.10",
+        "vue-loader": "^15.7.1",
+        "vue-style-loader": "^4.1.2",
+        "vue-template-compiler": "^2.6.10",
+        "webpack": "^4.39.1",
+        "webpack-cli": "^3.3.6"
     }
 }
