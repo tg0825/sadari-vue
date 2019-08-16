@@ -57,6 +57,7 @@ OneSignal.push(function() {
             class="resultTextToggle"
             data-sadari="result-toggle"
         >텍스트 결과 보기</button>
+        <div class="vue-clock"></div>
         <div class="clock"></div>
         <span>
             <?php
@@ -304,5 +305,5 @@ OneSignal.push(function() {
     <script src="./resources/src/js/game.js"></script> -->
 </body>
 <div id="app"></div>
-<script src="/resources/vue/main.js"></script>
+<script src="/resources/dist/vue/main.js"></script>
 </html>

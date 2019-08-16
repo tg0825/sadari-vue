@@ -1,40 +1,40 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const src = './resources/src';
+const dist = './resources/dist';
+
 module.exports = {
     entry: {
-        main: './vue/main.js'
+        main: `${src}/vue/main.js`
     },
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, 'resources/vue')
+        path: path.resolve(__dirname, `${dist}/vue`),
+        library: 'test'
     },
     module: {
         rules: [
             {
-                test: /\.vue$/,
-                loader: 'vue-loader'
+                test: /\.scss/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             },
-            // this will apply to both plain `.js` files
-            // AND `<script>` blocks in `.vue` files
             {
                 test: /\.js$/,
                 exclude: ['/node_modules'],
                 loader: 'babel-loader'
             },
-            // this will apply to both plain `.css` files
-            // AND `<style>` blocks in `.vue` files
             {
-                test: /\.css$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader'
-                ]
-            }
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
         ]
     },
     plugins: [
-        // make sure to include the plugin!
         new VueLoaderPlugin()
     ]
 }
