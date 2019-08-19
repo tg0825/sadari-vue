@@ -278,6 +278,8 @@ const browserSync = () => {
 };
 
 var devServe = gulp.parallel(phpServer, browserSync, watch);
+var w = gulp.parallel(watch);
 
 gulp.task('buildJs', buildJs);
 gulp.task('devServe', devServe);
+gulp.task('w', w);

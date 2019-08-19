@@ -10,6 +10,7 @@
         "start": "node",
         "buildJs": "gulp buildJs",
         "devServe": "gulp devServe",
+        "w": "gulp w",
         "webpack": "webpack --watch --mode development"
     },
     "dependencies": {

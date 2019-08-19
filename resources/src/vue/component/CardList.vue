@@ -1,8 +1,7 @@
 <template>
-    <div>
-        <!-- <Title message="hi"></Title> -->
+    <div class="member-list body">
         <Card 
-            v-for="card in cardListItem"
+            v-for="card in cardList"
             :card="card"
         />
     </div>
@@ -10,30 +9,30 @@
 
 <script>
 import Card from './Card.vue';
-import Title from './Title.vue';
-
+            
 export default {
     name: 'CardList',
     props: [
-        'cardListItem'
+        'cardList',
     ],
-    data () {
-        return {
-            greeting: 'hello tg',
-        }
-    },
     components: {
         Card,
-        // Title
+    },
+    data() {
+        return {
+            // foo: this.cardList
+        }
+    },
+    mounted() {
+        // console.log(this.$data.foo);
+        // console.log(this.$props);
+        // console.log(this.$root.$data);
+        // console.log(this.$root.$data.setMessageAction('11'));
+        // console.log(this.$root.$data);
+        // console.log(this.$el.$ata);
     }
 }
 </script>
 
 <style lang="scss" scoped>
-  div {
-      h2 {
-        font-size: 40px;
-        color: mediumseagreen;
-      }
-  }
 </style>

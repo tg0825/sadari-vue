@@ -619,5 +619,5 @@
         getMember().done(start);
     }
 
-    init();
+    // init();
 })(window, jQuery, modal);

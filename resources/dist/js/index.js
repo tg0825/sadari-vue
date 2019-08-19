@@ -1307,7 +1307,7 @@ function randomTarget() {
         getMember().done(start);
     }
 
-    init();
+    // init();
 })(window, jQuery, modal);
 
 //# sourceMappingURL=index.js.map
