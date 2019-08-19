@@ -10,18 +10,6 @@ new Vue({
         return h(CardList, {
             props: {
                 cardListItem: [
-                    {
-                        id: id++,
-                        text: 'yoon'
-                    },
-                    {
-                        id: id++,
-                        text: 'kim'
-                    },
-                    {
-                        id: id++,
-                        text: 'pack'
-                    },
                 ]
             }
         });

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Title message="hi"></Title>
+        <!-- <Title message="hi"></Title> -->
         <Card 
             v-for="card in cardListItem"
             :card="card"
@@ -24,7 +24,7 @@ export default {
     },
     components: {
         Card,
-        Title
+        // Title
     }
 }
 </script>
