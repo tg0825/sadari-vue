@@ -5,9 +5,9 @@ import Clock from './component/Clock.vue'
 
 function main() {
     function cardList() {
-        $.get('/member')
-        .done(function(res) {
-            var res = JSON.parse(res);
+        Store.getMember()
+        .then((res) => {
+            var res = res.data;
             new Vue({
                 el: '.member-list.body',
                 data: {

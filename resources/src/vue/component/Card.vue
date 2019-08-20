@@ -5,9 +5,11 @@
         data-member-id="card.id"
         data-team-eng="card.team_eng"
         data-team-color="card.team_color"
-        :key="card.id"
         >
-        <input type="checkbox" class="js-all-check-item"/>
+        <input 
+            @click.capture="_handleClick"
+            type="checkbox" class="js-all-check-item"
+        />
         <span class="name">{{card.name}}</span>
         <span class="team">{{card.team}}</span>
         <span class="position">{{card.position}}</span>
@@ -22,6 +24,12 @@ export default {
     data () {
         return {
             foo: 1
+        }
+    },
+    methods: {
+        _handleClick: function (ev) {
+            console.log(this);
+            console.log(ev);
         }
     },
     mounted() {

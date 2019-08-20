@@ -3,6 +3,7 @@
         <Card 
             v-for="card in cardList"
             :card="card"
+            :key="card.id"
         />
     </div>
 </template>

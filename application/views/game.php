@@ -32,7 +32,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
 
-<title>game SADARI</title>
+<title>랜덤 사다리</title>
 
 <script>
 var OneSignal = window.OneSignal || [];
