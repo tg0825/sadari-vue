@@ -629,6 +629,18 @@ eval("var g; // This works in non-strict mode\n\ng = function () {\n  return thi
 
 /***/ }),
 
+/***/ "./resources/src/vue/api.js":
+/*!**********************************!*\
+  !*** ./resources/src/vue/api.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  getMember: function getMember(payload) {\n    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/member').then(function (res) {\n      return res.data;\n    });\n  }\n});\n\n//# sourceURL=webpack://test/./resources/src/vue/api.js?");
+
+/***/ }),
+
 /***/ "./resources/src/vue/component/Card.vue":
 /*!**********************************************!*\
   !*** ./resources/src/vue/component/Card.vue ***!
@@ -781,7 +793,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue_
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ \"./node_modules/vuex/dist/vuex.esm.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use(vuex__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\nvar vStore = new vuex__WEBPACK_IMPORTED_MODULE_1__[\"default\"].Store({\n  state: {\n    message: '1',\n    member: []\n  },\n  mutations: {\n    updateMessage: function updateMessage(state, payload) {\n      return state.message = payload;\n    },\n    getMember: function getMember(state, payload) {\n      // console.log(data);\n      state.member = payload;\n    }\n  },\n  actions: {\n    getMember: function getMember(context) {\n      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/member').then(function (res) {\n        var result = res.data; // state.member = result;\n\n        context.commit('getMember', result);\n      });\n    }\n  }\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (vStore);\n\n//# sourceURL=webpack://test/./resources/src/vue/vue-store.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ \"./node_modules/vuex/dist/vuex.esm.js\");\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./api */ \"./resources/src/vue/api.js\");\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use(vuex__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\nvar vStore = new vuex__WEBPACK_IMPORTED_MODULE_1__[\"default\"].Store({\n  state: {\n    message: '1',\n    member: []\n  },\n  mutations: {\n    updateMessage: function updateMessage(state, payload) {\n      return state.message = payload;\n    },\n    getMember: function getMember(state, payload) {\n      // console.log(data);\n      state.member = payload;\n    }\n  },\n  actions: {\n    getMember: function getMember(context) {\n      return _api__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getMember().then(function (res) {\n        context.commit('getMember', res);\n      });\n    }\n  }\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (vStore);\n\n//# sourceURL=webpack://test/./resources/src/vue/vue-store.js?");
 
 /***/ })
 

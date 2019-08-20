@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios';
+import api from './api';
 
 Vue.use(Vuex);
 
@@ -20,10 +20,8 @@ const vStore = new Vuex.Store({
     },
     actions: {
         getMember(context) {
-            return axios.get('/member').then((res) => {
-                var result = res.data;
-                // state.member = result;
-                context.commit('getMember', result);
+            return api.getMember().then((res) => {
+                context.commit('getMember', res);
             });
         }
     }
