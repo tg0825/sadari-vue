@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <!-- {{greeting}} -->
+    <div @click="updateMsg">
+         click
+         <!-- {{greeting}} -->
     </div>
 </template>
 
 <script>
 export default {
-    data () {
-        return {
-            greeting: 'hello tg'
+    methods: {
+        updateMsg() {
+            this.$store.commit('updateMessage', '123');
         }
     },
 }

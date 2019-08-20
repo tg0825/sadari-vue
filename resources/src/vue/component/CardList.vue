@@ -1,5 +1,6 @@
 <template>
     <div class="member-list body">
+        {{message}}
         <Card 
             v-for="card in cardList"
             :card="card"
@@ -10,27 +11,26 @@
 
 <script>
 import Card from './Card.vue';
-            
+
 export default {
-    name: 'CardList',
-    props: [
-        'cardList',
-    ],
     components: {
         Card,
     },
-    data() {
-        return {
-            // foo: this.cardList
+    computed: {
+        message() {
+            return this.$store.state.message;
+        },
+        cardList() {
+            return this.$store.state.member;
+        }
+    },
+    methods: {
+        getMember() {
+            this.$store.dispatch('getMember');
         }
     },
     mounted() {
-        // console.log(this.$data.foo);
-        // console.log(this.$props);
-        // console.log(this.$root.$data);
-        // console.log(this.$root.$data.setMessageAction('11'));
-        // console.log(this.$root.$data);
-        // console.log(this.$el.$ata);
+        this.getMember();
     }
 }
 </script>

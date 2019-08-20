@@ -1,22 +1,32 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios';
-const store = {
-    debug: true,
-    state: {
-        message: 'Hello!',
-        // 직원 리스트
-        member: []
-    },
-    setMessageAction (newValue) {
-        if (this.debug) console.log('setMessageAction triggered with', newValue);
-        this.state.message = newValue;
-    },
-    clearMessageAction () {
-        if (this.debug) console.log('clearMessageAction triggered');
-        this.state.message = '';
-    },
-    getMember() {
-        return axios.get('/member');
-    }
-}
 
-export default store;
+Vue.use(Vuex);
+
+const vStore = new Vuex.Store({
+    state: {
+        message: '1',
+        member: [],
+    },
+    mutations: {
+        updateMessage(state, payload) {
+            return state.message = payload;
+        },
+        getMember(state, payload) {
+            // console.log(data);
+            state.member = payload;
+        }
+    },
+    actions: {
+        getMember(context) {
+            return axios.get('/member').then((res) => {
+                var result = res.data;
+                // state.member = result;
+                context.commit('getMember', result);
+            });
+        }
+    }
+});
+
+export default vStore;

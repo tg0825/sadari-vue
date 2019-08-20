@@ -1,44 +1,31 @@
 import Vue from 'vue'
-import Store from './vue-store.js'
+import store from './vue-store.js'
 import CardList from './component/CardList.vue'
 import Clock from './component/Clock.vue'
 
+Vue.config.productionTip = false
+
 function main() {
     function cardList() {
-        Store.getMember()
-        .then((res) => {
-            var res = res.data;
-            new Vue({
-                el: '.member-list.body',
-                data: {
-                    privateState: {},
-                    sharedState: Store.state,
-                },
-                render: function (h) {
-                    return h(CardList, {
-                        props: {
-                            cardList: res,
-                        }
-                    });
-                }
-            })
-        });
+        new Vue({
+            el: '.member-list.body',
+            data: {
+                privateState: {},
+                sharedState: store.state,
+            },
+            store,
+            render: function (h) {
+                return h(CardList);
+            }
+        })
     }
     
     function clock() {
         new Vue({
             el: '.vue-clock',
-            data: {
-                privateState: {},
-                sharedState: Store.state
-            },
+            store,
             render: function (h) {
-                return h(Clock, {
-                    props: {
-                        hour: 1,
-                        seconds: 2
-                    }
-                });
+                return h(Clock);
             }
         })
     }
