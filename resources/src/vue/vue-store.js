@@ -13,7 +13,7 @@ const vStore = new Vuex.Store({
         updateMessage(state, payload) {
             return state.message = payload;
         },
-        getMember(state, payload) {
+        getMemberList(state, payload) {
             // console.log(data);
             state.memberList = payload;
         },
@@ -22,13 +22,13 @@ const vStore = new Vuex.Store({
         }
     },
     actions: {
-        getMember(context) {
-            return api.getMember().then((res) => {
+        getMemberList(context) {
+            return api.getMemberList().then((res) => {
                 res = res.map(item => {
                     item.isDisabled = false;
                     return item;
                 });
-                context.commit('getMember', res);
+                context.commit('getMemberList', res);
             });
         },
         updateMember({commit, state}, mId) {

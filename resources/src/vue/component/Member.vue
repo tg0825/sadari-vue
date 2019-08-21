@@ -1,25 +1,25 @@
 <template>
     <label
         :class="labelClass"
-        :style="{backgroundColor:card.team_color}"
-        data-team-eng="card.team_eng"
-        data-team-color="card.team_color"
+        :style="{backgroundColor:member.team_color}"
+        data-team-eng="member.team_eng"
+        data-team-color="member.team_color"
         >
         <input 
             @click="_handleClick"
             type="checkbox" class="js-all-check-item"
         />
-        <span class="name">{{card.name}}</span>
-        <span class="team">{{card.team}}</span>
-        <span class="position">{{card.position}}</span>
+        <span class="name">{{member.name}}</span>
+        <span class="team">{{member.team}}</span>
+        <span class="position">{{member.position}}</span>
     </label>
 </template>
 
 <script>
 export default {
-    name: 'card',
+    name: 'member',
     props: {
-        card: {
+        member: {
             type: Object,
             required: true
         }
@@ -29,13 +29,13 @@ export default {
             return {
                 'member-list': true,
                 'member': true,
-                is_disable: this.card.isDisabled
+                is_disable: this.member.isDisabled
             }
         }
     },
     methods: {
         _handleClick: function (evt) {
-            const mId = this.card.id;
+            const mId = this.member.id;
             this.$store.dispatch('updateMember', mId);
         }
     },
@@ -43,8 +43,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .card {
-        float:left;
-        border: 1px solid #f00;
-    }
 </style>
