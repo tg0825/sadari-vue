@@ -1,36 +1,34 @@
 <template>
     <div class="member-list body">
-        {{message}}
-        <Card 
-            v-for="card in cardList"
-            :card="card"
-            :key="card.id"
+        <Member 
+            v-for="member in memberList"
+            :member="member"
         />
     </div>
 </template>
 
 <script>
-import Card from './Card.vue';
+import Member from './Member.vue';
 
 export default {
     components: {
-        Card,
+        Member,
     },
     computed: {
         message() {
             return this.$store.state.message;
         },
-        cardList() {
-            return this.$store.state.member;
+        memberList() {
+            return this.$store.state.memberList;
         }
     },
     methods: {
-        getMember() {
-            this.$store.dispatch('getMember');
+        getMemberList() {
+            this.$store.dispatch('getMemberList');
         }
     },
     mounted() {
-        this.getMember();
+        this.getMemberList();
     }
 }
 </script>

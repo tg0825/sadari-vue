@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import store from './vue-store.js'
-import CardList from './component/CardList.vue'
+import MemberList from './component/MemberList.vue'
 import Clock from './component/Clock.vue'
 
 Vue.config.productionTip = false
@@ -15,7 +15,7 @@ function main() {
             },
             store,
             render: function (h) {
-                return h(CardList);
+                return h(MemberList);
             }
         })
     }
