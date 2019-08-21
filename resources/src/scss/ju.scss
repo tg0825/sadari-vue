@@ -1,0 +1,74 @@
+/* 주번관련 */
+.ju-add .form-block {
+    position: relative;
+}
+
+.ju-add .input-text {
+    margin-right: 80px;
+}
+
+.ju-add .input-text input {}
+
+.ju-add .btn-add-mem,
+#frm .btn-add-mem {
+    width: 75px;
+    height: 40px;
+    background: #eb4949;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.ju-add {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.ju-list {
+    text-align: left;
+    overflow: auto;
+    max-height: 300px;
+}
+
+.ju-list li {
+    vertical-align: middle;
+    background: #9f9f9f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 1px;
+    position: relative;
+    z-index: 10;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+[data-tab-id="son"] .ju-list li {
+    background-color: #f00;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent)
+}
+
+.ju-list li:hover:after {
+    content: 'x';
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    border-radius: 50px;
+    background: #333;
+    color: #fff;
+    width: 22px;
+    padding: 2px;
+    line-height: 20px;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 20;
+    text-align: center;
+}

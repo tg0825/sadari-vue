@@ -1,0 +1,53 @@
+.btn-size-w {
+    width: 100% !important;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+    border: 0;
+    background: #f6f6f6;
+    color: #aaa;
+    border: 1px solid #f6f6f6;
+    transition: all 150ms ease-in-out;
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background: #eee;
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+.btn.btn-base {
+    border: 1px solid #aaa;
+    background: #fefefe;
+    color: #333;
+}
+
+.btn.btn-base:hover {
+    border: 1px solid #aaa;
+    background: #fefefe;
+}
+
+.btn.btn-base:focus {
+    border: 1px solid #aaa;
+    background: #fefefe;
+}
+
+.btn-s {
+    font-size: 14px;
+    color: #333;
+    background: #eee;
+    border: 1px solid #bbb;
+    padding: 5px 10px;
+    width: auto;
+    height: 35px;
+    border-radius: 5px;
+}
