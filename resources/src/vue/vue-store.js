@@ -6,8 +6,8 @@ Vue.use(Vuex);
 
 const vStore = new Vuex.Store({
     state: {
-        message: '1',
-        member: [],
+        // 직원 목록
+        memberList: [],
     },
     mutations: {
         updateMessage(state, payload) {
@@ -15,13 +15,32 @@ const vStore = new Vuex.Store({
         },
         getMember(state, payload) {
             // console.log(data);
-            state.member = payload;
+            state.memberList = payload;
+        },
+        updateMember({memberList}, payload) {
+            memberList[payload.index].isDisabled = true;
         }
     },
     actions: {
         getMember(context) {
             return api.getMember().then((res) => {
+                res = res.map(item => {
+                    item.isDisabled = false;
+                    return item;
+                });
                 context.commit('getMember', res);
+            });
+        },
+        updateMember({commit, state}, mId) {
+            let index = null;
+            state.memberList.some((member, i) => {
+                if (member.id === mId) {
+                    index = i;
+                    return true;
+                }
+            });
+            return commit('updateMember', {
+                index
             });
         }
     }

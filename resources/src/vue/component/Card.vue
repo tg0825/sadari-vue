@@ -1,13 +1,12 @@
 <template>
     <label
-        class="member-list member"
+        :class="labelClass"
         :style="{backgroundColor:card.team_color}"
-        data-member-id="card.id"
         data-team-eng="card.team_eng"
         data-team-color="card.team_color"
         >
         <input 
-            @click.capture="_handleClick"
+            @click="_handleClick"
             type="checkbox" class="js-all-check-item"
         />
         <span class="name">{{card.name}}</span>
@@ -19,23 +18,27 @@
 <script>
 export default {
     name: 'card',
-    props: [
-        'card'
-    ],
-    data () {
-        return {
-            foo: 1
+    props: {
+        card: {
+            type: Object,
+            required: true
+        }
+    },
+    computed: {
+        labelClass() {
+            return {
+                'member-list': true,
+                'member': true,
+                is_disable: this.card.isDisabled
+            }
         }
     },
     methods: {
-        _handleClick: function (ev) {
-            console.log(this);
-            console.log(ev);
+        _handleClick: function (evt) {
+            const mId = this.card.id;
+            this.$store.dispatch('updateMember', mId);
         }
     },
-    mounted() {
-        // console.log('mounted!')
-    }
 }
 </script>
 

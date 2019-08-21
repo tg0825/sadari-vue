@@ -1,10 +1,8 @@
 <template>
     <div class="member-list body">
-        {{message}}
         <Card 
             v-for="card in cardList"
             :card="card"
-            :key="card.id"
         />
     </div>
 </template>
@@ -21,7 +19,7 @@ export default {
             return this.$store.state.message;
         },
         cardList() {
-            return this.$store.state.member;
+            return this.$store.state.memberList;
         }
     },
     methods: {
