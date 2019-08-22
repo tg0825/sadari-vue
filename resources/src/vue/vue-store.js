@@ -9,6 +9,20 @@ const vStore = new Vuex.Store({
         // 직원 목록
         memberList: [],
     },
+    getters: {
+        activeMemberCount: function (state) {
+            var memberList = state.memberList;
+            var max = memberList.length;
+            var disable = memberList.filter(function (v) {
+                if (v.isDisabled === true) {
+                    return true;
+                }
+                return false;
+            });
+            
+            return max - disable.length;
+        }
+    },
     mutations: {
         updateMessage(state, payload) {
             return state.message = payload;
