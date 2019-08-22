@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import store from './vue-store.js'
-import MemberList from './component/MemberList.vue'
-import MemberCount from './component/MemberCount.vue'
-import Clock from './component/Clock.vue'
+import MemberList from 'Component/MemberList.vue'
+import MemberCount from 'Component/MemberCount.vue'
+import Clock from 'Component/Clock.vue'
 
 Vue.config.productionTip = false
 

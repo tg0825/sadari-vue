@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Member from './Member.vue';
+import Member from 'Component/Member.vue';
 
 export default {
     components: {
