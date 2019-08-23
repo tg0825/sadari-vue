@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import store from '@/vue/vue-store.js'
+import GameType from 'Component/GameType.vue'
 import MemberList from 'Component/MemberList.vue'
 import MemberCount from 'Component/MemberCount.vue'
 import Clock from 'Component/Clock.vue'
@@ -19,6 +20,15 @@ function main() {
         store,
         render: function (h) {
             return h(MemberList);
+        }
+    })
+    
+    // 우측 게임 선택 영역
+    new Vue({
+        el: '.sadari-select',
+        store,
+        render: function (h) {
+            return h(GameType);
         }
     })
     
