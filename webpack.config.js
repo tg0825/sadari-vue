@@ -7,7 +7,7 @@ const dist = path.resolve(__dirname, 'resources/dist');
 
 module.exports = {
     entry: {
-        main: `${src}/vue/main.js`
+        main: `./main.js`
     },
     output: {
         filename: 'main.js',
@@ -19,11 +19,18 @@ module.exports = {
             {
                 test: /\.scss/,
                 use: [
-                    process.env.NODE_ENV !== 'production'
-                    ? 'vue-style-loader'
-                    : MiniCssExtractPlugin.loader,
+                    // process.env.NODE_ENV !== 'production'
+                    // ? 'vue-style-loader'
+                    // : MiniCssExtractPlugin.loader,
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     'sass-loader'
+                ]
+            },
+            {
+                test: /\.css/,
+                use: [
+                    'css-loader',
                 ]
             },
             {
@@ -40,7 +47,8 @@ module.exports = {
     resolve: {
         alias: {
             // vue component
-            Component: `${src}/vue/component/`
+            Component: `${src}/vue/component/`,
+            '@': `${src}`
         }
     },
     plugins: [

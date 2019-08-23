@@ -19,6 +19,7 @@
 
 <!-- PRO -->
 <link rel="stylesheet" href="/resources/dist/css/index.css">
+<link rel="stylesheet" href="/resources/dist/vue/style.css">
 
 <!-- font library -->
 <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
@@ -105,66 +106,7 @@ OneSignal.push(function() {
 
         <div class="layout-controller">
             <div class="sadari-select">
-                <div>
-                    <button 
-                        class="btn ta-l"
-                        data-game="one"
-                        data-game-id="1"
-                    >
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        한명 뽑기 (또는 여러명)
-                    </button>
-                </div>
-                <div>
-                    <button
-                        class="btn ta-l"
-                        data-game="jo_member"
-                        data-game-id="2"
-                    >
-                        <i class="fa fa-random" aria-hidden="true"></i>
-                        랜덤 조 (인원기준)
-                    </button>
-                </div>
-                <div>
-                    <button 
-                        class="btn ta-l" 
-                        data-game="jo_team"
-                        data-game-id="3"
-                    >
-                        <i class="fa fa-random" aria-hidden="true"></i>
-                        랜덤 조 (팀 기준)
-                    </button>
-                </div>
-                <div>
-                    <button
-                        class="btn ta-l"
-                        data-game="jo_lunch"
-                        data-game-id="4"
-                    >
-                        <i class="fa fa-cutlery" aria-hidden="true"></i>
-                        랜덤 점심
-                    </button>
-                </div>
-                <div>
-                    <button 
-                        class="btn ta-l"
-                        data-game="ju"
-                        data-game-id="6"
-                    >
-                        <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-                        손
-                    </button>
-                </div>
-                <div>
-                    <button 
-                        class="btn ta-l"
-                        data-game="ju"
-                        data-game-id="5"
-                    >
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        청소 뽑기
-                    </button>
-                </div>
+                <!-- game -->
             </div>
 
             <div class="tab">
