@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  // div {
-  //     border: 1px solid #f00;
-  // }
+  div {
+      border: 1px solid #f00;
+  }
 </style>

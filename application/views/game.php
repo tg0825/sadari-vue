@@ -19,6 +19,7 @@
 
 <!-- PRO -->
 <link rel="stylesheet" href="/resources/dist/css/index.css">
+<link rel="stylesheet" href="/resources/dist/vue/style.css">
 
 <!-- font library -->
 <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">

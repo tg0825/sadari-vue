@@ -1,8 +1,11 @@
 import Vue from 'vue'
-import store from './vue-store.js'
+import store from '@/vue/vue-store.js'
 import MemberList from 'Component/MemberList.vue'
 import MemberCount from 'Component/MemberCount.vue'
 import Clock from 'Component/Clock.vue'
+
+// import './resources/dist/vue/style.css';
+// require('./resources/dist/vue/style.css');
 
 Vue.config.productionTip = false
 
