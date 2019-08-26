@@ -5,6 +5,9 @@
         >
             <button
                 class="btn ta-l"
+                :class="{
+                    is_on: selectedId == game.id
+                }"
                 :game="game.idName"
                 :id="game.id"
                 @click="_handleClick"
@@ -30,13 +33,15 @@ export default {
     },
     data() {
         return {
-            gameData
+            gameData,
+            selectedId: null
         }
     },
     methods: {
         _handleClick(evt) {
             var typeId = evt.currentTarget.id;
             this.$store.dispatch('selectedGame', typeId);
+            this.selectedId = typeId;
         }
     },
     mounted() {
