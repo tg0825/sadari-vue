@@ -3,4 +3,4 @@ tests
 
 node_modules
 /vendor
-/dist
+resources/dist

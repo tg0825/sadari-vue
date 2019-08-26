@@ -34,7 +34,7 @@ export default {
         }
     },
     methods: {
-        _handleClick: function (evt) {
+        _handleClick(evt) {
             const mId = this.member.id;
             this.$store.dispatch('updateMember', mId);
         }

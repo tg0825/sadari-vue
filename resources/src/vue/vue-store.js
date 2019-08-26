@@ -8,6 +8,7 @@ const vStore = new Vuex.Store({
     state: {
         // 직원 목록
         memberList: [],
+        selectedGameId: null,
     },
     getters: {
         activeMemberCount: function (state) {
@@ -33,6 +34,9 @@ const vStore = new Vuex.Store({
         },
         updateMember({memberList}, payload) {
             memberList[payload.index].isDisabled = true;
+        },
+        selectedGame(state, payload) {
+            return state.selectedGameId = payload;
         }
     },
     actions: {
@@ -56,6 +60,9 @@ const vStore = new Vuex.Store({
             return commit('updateMember', {
                 index
             });
+        },
+        selectedGame({commit}, typeId) {
+            return commit('selectedGame', typeId);
         }
     }
 });

@@ -1,6 +1,5 @@
 <template>
     <div @click="updateMsg">
-         click
          <!-- {{greeting}} -->
     </div>
 </template>
@@ -16,7 +15,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div {
-      border: 1px solid #f00;
-  }
 </style>
