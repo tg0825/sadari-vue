@@ -110,7 +110,7 @@ OneSignal.push(function() {
             </div>
 
             <div class="tab">
-                <div class="tab-item">
+                <!-- <div class="tab-item">
                     <div class="form-block">
                         딱!
                         <input class="ta-r" id="onlyOne" name="onlyOne" type="number" value="1">
@@ -178,7 +178,7 @@ OneSignal.push(function() {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="start-root">

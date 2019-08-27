@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div
+        class="sadari-select"
+    >
         <div 
             v-for="game in gameData"
         >
@@ -45,7 +47,7 @@ export default {
         }
     },
     mounted() {
-        // this.getMemberList();
+        this.selectedId = 1;
     }
 }
 </script>
