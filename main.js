@@ -5,6 +5,7 @@ import GameController from 'Component/GameController.vue'
 import MemberList from 'Component/MemberList.vue'
 import MemberCount from 'Component/MemberCount.vue'
 import Clock from 'Component/Clock.vue'
+import Modal from 'Component/Modal.vue'
 
 // import './resources/dist/vue/style.css';
 // require('./resources/dist/vue/style.css');
@@ -55,6 +56,15 @@ function main() {
         store,
         render: function (h) {
             return h(GameController);
+        }
+    })
+    
+    // 결과 모달
+    new Vue({
+        el: '.modal',
+        store,
+        render: function (h) {
+            return h(Modal);
         }
     })
 }

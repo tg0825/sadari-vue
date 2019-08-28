@@ -85,6 +85,10 @@
                 </div>
             </div>
         </div>
+        
+        <div @click="showModal">
+            open modal
+        </div>
     </div>
 </template>
 
@@ -99,6 +103,9 @@ export default {
         }
     },
     methods: {
+        showModal() {
+            console.log(1);
+        },
         _handleClick(evt) {
             // var typeId = evt.currentTarget.id;
             // this.$store.dispatch('selectedGame', typeId);
