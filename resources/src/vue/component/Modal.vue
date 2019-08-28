@@ -1,35 +1,26 @@
 <template>
-    <div>
-        <div 
-            @click="open"
-        >open</div>
-        <div 
-            v-if="showModal"
-            @click="close"
-        >
-            modal
-        </div>
+    <div 
+        v-show="isShowModal"
+        @click="_handleClickClose"
+    >
+        modal
     </div>
 </template>
 
 <script>
 export default {
-    name: 'member',
-    props: {
-    },
-    data() {
-        return {
-            showModal: false
+    name: 'modal-game-result',
+    computed: {
+        isShowModal() {
+            return this.$store.state.modal.gameResult
         }
     },
-    computed: {
-    },
     methods: {
-        open() {
-            this.showModal = true;
-        },
-        close() {
-            this.showModal = false;
+        _handleClickClose() {
+            this.$store.dispatch('modalSwitch', {
+                name: 'gameResult',
+                isShow: false
+            });
         }
     },
 }

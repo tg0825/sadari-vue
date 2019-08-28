@@ -94,9 +94,6 @@
 
 <script>
 export default {
-    components: {
-        // Member,
-    },
     computed: {
         selectedGameId() {
             return this.$store.state.selectedGameId
@@ -104,17 +101,12 @@ export default {
     },
     methods: {
         showModal() {
-            console.log(1);
+            this.$store.dispatch('modalSwitch', {
+                name: 'gameResult',
+                isShow: true
+            });
         },
-        _handleClick(evt) {
-            // var typeId = evt.currentTarget.id;
-            // this.$store.dispatch('selectedGame', typeId);
-            // this.selectedId = typeId;
-        }
     },
-    mounted() {
-        // this.getMemberList();
-    }
 }
 </script>
 

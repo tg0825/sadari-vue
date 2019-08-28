@@ -9,6 +9,10 @@ const vStore = new Vuex.Store({
         // 직원 목록
         memberList: [],
         selectedGameId: 0,
+        modal: {
+            // 게임 결과 모달
+            gameResult: false
+        }
     },
     getters: {
         activeMemberCount: function (state) {
@@ -37,6 +41,9 @@ const vStore = new Vuex.Store({
         },
         selectedGame(state, payload) {
             return state.selectedGameId = payload;
+        },
+        modalSwitch(state, {name, isShow}) {
+            return state.modal[name] = isShow;
         }
     },
     actions: {
@@ -63,6 +70,9 @@ const vStore = new Vuex.Store({
         },
         selectedGame({commit}, typeId) {
             return commit('selectedGame', typeId);
+        },
+        modalSwitch({commit}, payload) {
+            return commit('modalSwitch', payload);
         }
     }
 });
