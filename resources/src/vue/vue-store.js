@@ -8,7 +8,7 @@ const vStore = new Vuex.Store({
     state: {
         // 직원 목록
         memberList: [],
-        selectedGameId: null,
+        selectedGameId: 0,
     },
     getters: {
         activeMemberCount: function (state) {
