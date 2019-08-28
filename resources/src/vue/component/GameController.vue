@@ -85,29 +85,28 @@
                 </div>
             </div>
         </div>
+        
+        <div @click="showModal">
+            open modal
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    components: {
-        // Member,
-    },
     computed: {
         selectedGameId() {
             return this.$store.state.selectedGameId
         }
     },
     methods: {
-        _handleClick(evt) {
-            // var typeId = evt.currentTarget.id;
-            // this.$store.dispatch('selectedGame', typeId);
-            // this.selectedId = typeId;
-        }
+        showModal() {
+            this.$store.dispatch('modalSwitch', {
+                name: 'gameResult',
+                isShow: true
+            });
+        },
     },
-    mounted() {
-        // this.getMemberList();
-    }
 }
 </script>
 

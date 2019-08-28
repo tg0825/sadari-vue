@@ -245,6 +245,7 @@ OneSignal.push(function() {
     <script src="./resources/src/js/quick-search.js"></script>
     <script src="./resources/src/js/random-target.js"></script>
     <script src="./resources/src/js/game.js"></script> -->
+    <div class="modal"></div>
 </body>
 <div id="app"></div>
 <script src="/resources/dist/vue/main.js"></script>
