@@ -361,10 +361,10 @@ var modal = (function(window, document, $) {
         }
     }
 
-    sd.JQ.DOC.on('click', '.modal-mask, .modal-close', close).on(
-        'keyup',
-        _handleKeyup
-    );
+    // sd.JQ.DOC.on('click', '.modal-mask, .modal-close', close).on(
+    //     'keyup',
+    //     _handleKeyup
+    // );
 
     return {
         open: open,

@@ -46,9 +46,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            // vue component
+            '@': `${src}`,
+            Layout: `${src}/vue/layout/`,
             Component: `${src}/vue/component/`,
-            '@': `${src}`
         }
     },
     plugins: [

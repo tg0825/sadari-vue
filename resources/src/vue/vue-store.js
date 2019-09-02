@@ -8,7 +8,7 @@ const vStore = new Vuex.Store({
     state: {
         // 직원 목록
         memberList: [],
-        selectedGameId: 0,
+        selectedGameId: 1,
         modal: {
             // 게임 결과 모달
             gameResult: false

@@ -3,12 +3,12 @@
         class="sadari-select"
     >
         <div 
-            v-for="game in gameData"
+            v-for="game in gameTypeData"
         >
             <button
                 class="btn ta-l"
                 :class="{
-                    is_on: selectedId == game.id
+                    is_on: computedSelectedGameId == game.id
                 }"
                 :game="game.idName"
                 :id="game.id"
@@ -22,21 +22,21 @@
 </template>
 
 <script>
-import gameData from '@/vue/gameData.js';
+import gameTypeData from '@/vue/gameTypeData.js';
 
 export default {
     components: {
         // Member,
     },
     computed: {
-        selectedGameId() {
+        computedSelectedGameId() {
             return this.$store.state.selectedGameId;
         },
     },
     data() {
         return {
-            gameData,
-            selectedId: null
+            gameTypeData,
+            selectedGameId: this.$store.state.selectedGameId
         }
     },
     methods: {
@@ -47,7 +47,8 @@ export default {
         }
     },
     mounted() {
-        this.selectedId = 1;
+        // this.selectedGameId = this.$store.state.selectedGameId;
+        // this.selectedId = 1;
     }
 }
 </script>
