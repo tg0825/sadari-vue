@@ -3,7 +3,7 @@
         class="tab"
     >
         <div 
-            v-show="selectedGameId == 0"
+            v-show="selectedGameId == 1"
             class="tab-item">
             <div class="form-block">
                 딱!
@@ -13,7 +13,7 @@
         </div>
 
         <div 
-            v-show="selectedGameId == 1"
+            v-show="selectedGameId == 2"
             class="tab-item">
             <div class="form-block">
                 <label for=""></label>
@@ -24,7 +24,7 @@
         </div>
 
         <div 
-            v-show="selectedGameId == 2"
+            v-show="selectedGameId == 3"
             class="tab-item">
             <div class="form-block">
                 <label for=""></label>
@@ -35,7 +35,7 @@
         </div>
         
         <div 
-            v-show="selectedGameId == 3"
+            v-show="selectedGameId == 4"
             class="tab-item">
             <div class="form-block">
                 <label for=""></label>
@@ -46,7 +46,7 @@
         </div>
         
         <div 
-            v-show="selectedGameId == 4"
+            v-show="selectedGameId == 5"
             class="tab-item js-tab-ju" 
             data-tab-id="son">
             <div class="tab-item-result"></div>
@@ -61,7 +61,7 @@
         </div>
         
         <div 
-            v-show="selectedGameId == 5"
+            v-show="selectedGameId == 6"
             class="tab-item js-tab-ju" 
             data-tab-id="juList">
             <div class="tab-item-result"></div>
@@ -85,10 +85,6 @@
                 </div>
             </div>
         </div>
-        
-        <div @click="showModal">
-            open modal
-        </div>
     </div>
 </template>
 
@@ -98,14 +94,6 @@ export default {
         selectedGameId() {
             return this.$store.state.selectedGameId
         }
-    },
-    methods: {
-        showModal() {
-            this.$store.dispatch('modalSwitch', {
-                name: 'gameResult',
-                isShow: true
-            });
-        },
     },
 }
 </script>
