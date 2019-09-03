@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import gameTypeList from 'Component/GameTypeList.vue';
-import gameController from 'Component/GameController.vue';
-import gameStart from 'Component/GameStart.vue';
-import gameOption from 'Component/GameOption.vue';
+import gameTypeList from 'Component/GameTypeList';
+import gameController from 'Component/GameController';
+import gameStart from 'Component/GameStart';
+import gameOption from 'Component/GameOption';
 
 export default {
     components: {

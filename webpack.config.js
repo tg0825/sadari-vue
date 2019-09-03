@@ -13,7 +13,7 @@ module.exports = {
     output: {
         filename: 'main.js',
         path: `${dist}/vue`,
-        library: 'test'
+        library: 'vue'
     },
     module: {
         rules: [
@@ -50,7 +50,8 @@ module.exports = {
             '@': `${src}`,
             Layout: `${src}/vue/layout/`,
             Component: `${src}/vue/component/`,
-        }
+        },
+        extensions: ['.js', '.vue']
     },
     plugins: [
         new BundleAnalyzerPlugin({

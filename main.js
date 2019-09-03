@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import store from '@/vue/vue-store.js'
-import LayoutController from 'Layout/LayoutController.vue'
-import MemberList from 'Component/MemberList.vue'
-import MemberCount from 'Component/MemberCount.vue'
-import Clock from 'Component/Clock.vue'
-import Modal from 'Component/Modal.vue'
+import store from '@/vue/vue-store'
+import LayoutController from 'Layout/LayoutController'
+import MemberList from 'Component/MemberList'
+import MemberCount from 'Component/MemberCount'
+import Clock from 'Component/Clock'
+import Modal from 'Component/Modal'
 
 Vue.config.productionTip = false
 
