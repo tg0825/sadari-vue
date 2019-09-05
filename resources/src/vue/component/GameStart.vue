@@ -1,7 +1,7 @@
 <template>
     <div class="start-root">
         <button 
-            @click="showModal"
+            @click="startGame"
             class="start" type="submit"
         >시작!</button>
     </div>
@@ -19,7 +19,8 @@ export default {
         }
     },
     methods: {
-        showModal() {
+        startGame() {
+            this.$store.dispatch('startShuffle', 1);
             this.$store.dispatch('modalSwitch', {
                 name: 'gameResult',
                 isShow: true

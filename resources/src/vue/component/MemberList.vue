@@ -15,9 +15,6 @@ export default {
         Member,
     },
     computed: {
-        message() {
-            return this.$store.state.message;
-        },
         memberList() {
             return this.$store.state.memberList;
         }

@@ -6,9 +6,32 @@ Vue.use(Vuex);
 
 const vStore = new Vuex.Store({
     state: {
+        selectedGameId: 1,
         // 직원 목록
         memberList: [],
-        selectedGameId: 1,
+        // 결과 목록
+        groupList: [
+            [
+                {
+                    name: '11',
+                    team: '22'
+                },
+                {
+                    name: '11',
+                    team: '22'
+                }
+            ],
+            [
+                {
+                    name: '33',
+                    team: '22'
+                },
+                {
+                    name: '44',
+                    team: '22'
+                }
+            ]
+        ],
         modal: {
             // 게임 결과 모달
             gameResult: false
@@ -47,6 +70,33 @@ const vStore = new Vuex.Store({
         }
     },
     actions: {
+        startShuffle({commit, state}, payload) {
+            function shuffle(memberList) {
+                var remap = memberList.slice().filter(function(v) {
+                    // 비활성 멤버 제외
+                    if (v.is_disable) {
+                        return false;
+                    }
+                    return true;
+                });
+
+                var j; // 임의의 수
+                var x; // 임시 저장 공간
+                var i; // 인원 수 (1씩 감소 됨)
+
+                for (i = remap.length; i; i--) {
+                    j = Math.floor(Math.random() * i); // 요기가 핵심
+                    x = remap[i - 1]; // 마지막 직원을 임시 공간에 보냄
+                    remap[i - 1] = remap[j]; // 마지막 직원 자리에 임의의 번호 직원이 대입됨
+                    remap[j] = x; // 임의의 직원 있던 위치에 마지막 직원이 대입 됨
+                    // 직원 수 만큼 반복
+                }
+
+                return remap;
+            }
+            
+            const result = shuffle(state.memberList);
+        },
         getMemberList(context) {
             return api.getMemberList().then((res) => {
                 res = res.map(item => {
