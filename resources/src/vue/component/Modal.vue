@@ -6,7 +6,9 @@
         <div class="modal-mask"></div>
         <div class="modal-box">
             <div class="modal-head">head</div>
-            <div class="modal-body">body</div>
+            <div class="modal-body">
+                <GroupList/>
+            </div>
             <button 
                 class="modal-close" 
                 type="button"
@@ -18,8 +20,13 @@
 </template>
 
 <script>
+import GroupList from 'Component/GroupList';
+
 export default {
     name: 'modal-game-result',
+    components: {
+        GroupList
+    },
     computed: {
         isShowModal() {
             return this.$store.state.modal.gameResult
