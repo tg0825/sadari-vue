@@ -8,22 +8,20 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Member from 'Component/Member';
 
 export default {
     components: {
         Member,
     },
-    computed: {
-        memberList() {
-            return this.$store.state.memberList;
-        }
-    },
-    methods: {
-        getMemberList() {
-            this.$store.dispatch('getMemberList');
-        }
-    },
+    computed: mapState(['memberList']),
+    // computed: {
+    //     memberList() {
+    //         return this.$store.state.memberList;
+    //     }
+    // },
+    methods: mapActions(['getMemberList']),
     mounted() {
         this.getMemberList();
     }
