@@ -38,7 +38,10 @@ const vStore = new Vuex.Store({
         }
     },
     getters: {
-        activeMemberCount: function (state) {
+        memberCount(state) {
+            return state.memberList.length;
+        },
+        activeMemberCount(state) {
             var memberList = state.memberList;
             var max = memberList.length;
             var disable = memberList.filter(function (v) {

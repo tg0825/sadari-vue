@@ -3,7 +3,7 @@
     <span class="member-list number">
         {{activeMemberCount}}
         /
-        {{maxCount}}
+        {{memberCount}}
     </span>
 </template>
 
@@ -12,14 +12,16 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: 'memberCount',
-    computed: {
-        ...mapGetters([
-            'activeMemberCount'
-        ]),
-        maxCount() {
-            return this.$store.state.memberList.length;
-        },
-    }
+    computed: mapGetters(['activeMemberCount', 'memberCount'])
+    // computed: {
+    //     ...mapGetters([
+    //         'activeMemberCount',
+    //         'memberCount'
+    //     ]),
+        // maxCount() {
+        //     return this.$store.state.memberList.length;
+        // },
+    // }
 }
 </script>
 
