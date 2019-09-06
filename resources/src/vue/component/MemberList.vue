@@ -16,11 +16,6 @@ export default {
         Member,
     },
     computed: mapState(['memberList']),
-    // computed: {
-    //     memberList() {
-    //         return this.$store.state.memberList;
-    //     }
-    // },
     methods: mapActions(['getMemberList']),
     mounted() {
         this.getMemberList();

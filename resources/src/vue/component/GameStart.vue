@@ -2,7 +2,8 @@
     <div class="start-root">
         <button 
             @click="startGame"
-            class="start" type="submit"
+            class="start" 
+            type="submit"
         >시작!</button>
     </div>
 </template>
