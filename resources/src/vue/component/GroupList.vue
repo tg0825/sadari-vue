@@ -2,9 +2,10 @@
     <div>
         <div 
             v-for="group in groupList"
-            class="group item">
+            class="group item"
+        >
             <Member 
-                v-for="member in group"
+                v-for="member in group.member"
                 :member="member"
             />
         </div>
@@ -12,25 +13,14 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 import Member from 'Component/Member';
 
 export default {
     components: {
         Member,
     },
-    computed: {
-        groupList() {
-            return this.$store.state.groupList;
-        }
-    },
-    methods: {
-        // getMemberList() {
-        //     this.$store.dispatch('getMemberList');
-        // }
-    },
-    mounted() {
-        // this.getMemberList();
-    }
+    computed: mapState(['groupList']),
 }
 </script>
 
