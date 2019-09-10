@@ -4,6 +4,9 @@
             v-for="group in groupList"
             class="group item"
         >
+            <div class="group title">
+                {{group.title}}
+            </div>
             <Member 
                 v-for="member in group.member"
                 :member="member"

@@ -1,5 +1,4 @@
 <template>
-    
     <span class="member-list number">
         {{activeMemberCount}}
         /
