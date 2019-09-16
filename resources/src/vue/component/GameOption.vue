@@ -3,6 +3,7 @@
         <div>
             <label class="btn btn-s btn-base">
                 <input
+                    @click="_handleClick"
                     type="checkbox"
                     class="js-all-check-master"
                     name=""
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
     components: {
         // Member,
@@ -32,7 +34,13 @@ export default {
         }
     },
     methods: {
+        ...mapActions([
+            'updateAllMember'
+        ]),
         _handleClick(evt) {
+            const target = evt.currentTarget;
+            const checked = target.checked;
+            this.updateAllMember(checked);
         }
     },
 }

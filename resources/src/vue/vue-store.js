@@ -120,6 +120,12 @@ const vStore = new Vuex.Store({
         },
         setGroupList(state, payload) {
             state.groupList = payload;
+        },
+        updateAllMember(state, payload) {
+            const flag = payload;
+            state.memberList.forEach(m => {
+                m.isDisabled = flag;
+            });
         }
     },
     actions: {
@@ -170,6 +176,10 @@ const vStore = new Vuex.Store({
                 });
                 context.commit('getMemberList', res);
             });
+        },
+        updateAllMember({commit, state}, payload) {
+            const flag = payload;
+            return commit('updateAllMember', flag);
         },
         updateMember({commit, state}, mId) {
             let index = null;
